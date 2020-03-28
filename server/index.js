@@ -1,6 +1,28 @@
-// const express = require('express');
+if (process.env.NODE_ENV !== 'production'){
+  require('dotenv').parse()
+}
+const express = require('express')
 // const cors = require('cors');
-// const app = express();
+const app = express()
+const expressLayouts = require('express-ejs-layouts')
+
+const indexRouter = require('./routes/index')
+
+app.set('view engine', 'ejs')
+app.set('views', __dirname + '/views')
+app.set('layout','layouts/layout')
+app.use(expressLayouts)
+app.use(express.static('public'))
+
+const mongoose = require('mongoose')
+mongoose.connect(process.env.MONGO_URL, {useUnifiedTopology: true})
+const db = mongoose.connection
+db.on('error', error => console.error(error))
+db.once('open', error => console.log('Connected to Mongoose'))
+
+app.use('/', indexRouter)
+
+app.listen(process.env.PORT || 3000)
 // const MongoClient = require('mongodb').MongoClient;
 // const path = require('path');
 // const dotenv = require('dotenv');
@@ -26,13 +48,30 @@
 const MongoClient = require('mongodb').MongoClient;
 const url = process.env.MONGO_URL;
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  const dbo = db.db("wyniczek");
-  dbo.createCollection("users",function(err,res) {
-    if (err) throw err;
-    console.log('Collection created');
-    db.close
-  })
-  db.close();
-});
+// MongoClient.connect(url, function(err, db) {
+//   if (err) throw err;
+//   const dbo = db.db("wyniczek");
+//   dbo.createCollection("users",function(err,res) {
+//     if (err) throw err;
+//     console.log('Collection created');
+//     db.close
+//   })
+//   db.close();
+// });
+// MongoClient.connect(url, { useUnifiedTopology: true }, function(err,db) {
+//   if(err) throw err;
+//   const dbo = db.db('wyniczek');
+//   const myobj = { name: "Wojtek" };
+//   dbo.collection("users").insertOne(myobj, function(err,res) {
+//     if (err) throw err;
+//     console.log('Dodano 1 użytkownika');
+//     db.close(); 
+//   });
+// });
+// MongoClient.connect(url, {useUnifiedTopology: true}, function(err,db) {
+//   const dbo = db.db('wyniczek');
+//   dbo.collection("users").find({}, {projection:{ _id:0,name:1}}).toArray(function(err,res){
+//     console.log(res);
+//     db.close();
+//   });
+// });
