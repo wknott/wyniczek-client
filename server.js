@@ -1,26 +1,19 @@
+const express = require('express')
+const cors = require('cors');
+const app = express()
+app.use(cors());
+app.use(express.json());
 if (process.env.NODE_ENV !== 'production'){
   require('dotenv')
 }
-const express = require('express')
-// const cors = require('cors');
-const app = express()
-const expressLayouts = require('express-ejs-layouts')
-
-const indexRouter = require('./routes/index')
-
-app.set('view engine', 'ejs')
-app.set('views', __dirname + '/views')
-app.set('layout','layouts/layout')
-app.use(expressLayouts)
-app.use(express.static('public'))
-
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URL, {useUnifiedTopology: true, useNewUrlParser: true})
+mongoose.connect(process.env.MONGO_URL, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', error => console.log('Connected to Mongoose'))
-
+const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
+app.use(express.static('public'));
 
 app.listen(process.env.PORT || 3000)
 // const MongoClient = require('mongodb').MongoClient;
@@ -45,8 +38,8 @@ app.listen(process.env.PORT || 3000)
 // // const server = app.listen(port, () =>{
 // //   console.log(`Server is running on port: ${port}`);
 // // });
-const MongoClient = require('mongodb').MongoClient;
-const url = process.env.MONGO_URL;
+// const MongoClient = require('mongodb').MongoClient;
+// const url = process.env.MONGO_URL;
 
 // MongoClient.connect(url, function(err, db) {
 //   if (err) throw err;
