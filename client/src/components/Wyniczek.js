@@ -7,9 +7,10 @@ function Wyniczek(){
     .then(res => res.json())
     .then(data => setUsers(data))
   }, [])
+  console.log(users)
   return(
     <div>
-      <p>{users}</p>
+      <p>{users['name']}</p>
       <NewUserForm/>
     </div>
   )
