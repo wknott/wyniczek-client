@@ -9,6 +9,7 @@ function Navigation() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/create" href="#">Stwórz Wynik</Nav.Link>
+          <Nav.Link as={Link} to="/users">Użytkownicy</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
