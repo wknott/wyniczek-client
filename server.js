@@ -12,7 +12,7 @@ app.use(cors())
 
 app.use(express.static(path.join(__dirname, 'client/build')))
 const usersRouter = require('./routes/users')
-app.use("/api/users", usersRouter)
+app.use('/api/users', usersRouter)
 
 app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'))
