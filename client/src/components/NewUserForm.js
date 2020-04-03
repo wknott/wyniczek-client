@@ -3,7 +3,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 function NewUserForm() {
   const [name,setName] = useState('')
-  async function onSubmit(){
+  async function onSubmit(e){
+    e.preventDefault()
     const newUser = {name}
     try {
       const res = await fetch('/api/users', {
@@ -15,6 +16,7 @@ function NewUserForm() {
         body: JSON.stringify(newUser) 
       })
       const data = await res.json()
+      setName('')
       return data
     } catch (err) {
       return err
