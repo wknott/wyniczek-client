@@ -2,23 +2,31 @@ import React, {useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 function NewUserForm() {
-  const [user,setUser] = useState({})
-  function onSubmit(e){
-    e.preventDefault();
-    const newUser = { name: user.name}
-    fetch('/api/users', {
-      method: 'POST',
-      body: JSON.stringify(newUser),
-      headers: { 'Content-type':'application/json'}
-    })
+  const [name,setName] = useState('')
+  async function onSubmit(){
+    const newUser = {name}
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser) 
+      })
+      const data = await res.json()
+      return data
+    } catch (err) {
+      return err
+    }
   }
   return(
   <Form onSubmit={onSubmit}>
     <Form.Group controlId="formNewUserName">
-      <Form.Control type="text" placeholder="Podaj nazwę" required value={user.name} onChange={setUser}/>
+      <Form.Control type="text" placeholder="Podaj nazwę" required value={name} onChange={e => setName(e.target.value)}/>
     </Form.Group>
     <Button variant="primary" type="submit" >
-      Submit
+      Dodaj
     </Button>
   </Form>
   )

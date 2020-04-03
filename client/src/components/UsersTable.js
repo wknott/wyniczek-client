@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from 'react'
 function UsersTable(){
   const [users,setUsers] = useState([])
-  function loadUsers(){
-    fetch('/api/users')
-    .then(res=>res.json())
-    .then(users=>{setUsers(users)})
+  async function loadUsers(){
+    try {
+      const res = await fetch('/api/users')
+      const users = await res.json()
+      setUsers(users)
+    } catch (err) {
+      return err
+    }
   }
   useEffect(()=>{
     loadUsers()
   },[])
   return(
     <div>
-    {users !== []?
-    users.map((user,index) => (<p key={index}>{user.name}</p>))
-    :<></> 
-    }
+      {users !== [] ? users.map((user,index) => (<p key={index}>{user.name}</p>)):<></> }
     </div>
-    
   )
 }
 
