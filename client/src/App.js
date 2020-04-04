@@ -5,6 +5,7 @@ import Wyniczek from "./components/Wyniczek"
 import CreateResult from "./components/CreateResult"
 import Navigation from "./components/Navigation"
 import Users from "./components/Users"
+import Games from "./components/Games"
 function App() {
   return (
       <Router>
@@ -12,6 +13,7 @@ function App() {
           <Navigation/>
           <Route path="/" exact component={Wyniczek}/>
           <Route path="/create" component={CreateResult}/>
+          <Route path="/games" component={Games}/>
           <Route path="/users" component={Users}/>
         </div>
       </Router>
