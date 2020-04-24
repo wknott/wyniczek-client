@@ -9,8 +9,10 @@ function NewGameForm() {
   async function onSubmit(e){
     e.preventDefault()
     if(pointFields === [])
-      pointFields[0] = 'Suma'
+      setPointFields(['Suma'])
+    console.log(pointFields)
     const newGame = {name,minPlayers,maxPlayers,pointFields}
+    console.log(newGame)
     try {
       const res = await fetch('/api/games', {
         method: 'POST',
