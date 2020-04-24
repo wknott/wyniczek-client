@@ -6,11 +6,16 @@ function NewGameForm() {
   const [minPlayers, setMinPlayers] = useState(2)
   const [maxPlayers, setMaxPlayers] = useState(4)
   const [pointFields, setPointFields] = useState([])
+  
+  const addField = () => {
+    setPointFields([...pointFields,''])
+  }
+  const deleteField = () => {
+    setPointFields(pointFields.filter((item,index) => index !== pointFields.length-1))
+  }
+
   async function onSubmit(e){
     e.preventDefault()
-    if(pointFields === [])
-      setPointFields(['Suma'])
-    console.log(pointFields)
     const newGame = {name,minPlayers,maxPlayers,pointFields}
     console.log(newGame)
     try {
@@ -35,13 +40,25 @@ function NewGameForm() {
   return(
   <Form onSubmit={onSubmit}>
     <Form.Group controlId="name">
+      <Form.Label>Nazwa</Form.Label>
       <Form.Control type="text" placeholder="Podaj nazwę" required value={name} onChange={e => setName(e.target.value)}/>
     </Form.Group>
     <Form.Group controlId="minPlayers">
+      <Form.Label>Minimalna liczba graczy</Form.Label>
       <Form.Control type="number" required value={minPlayers} onChange={e => setMinPlayers(e.target.value)}/>
     </Form.Group>
     <Form.Group controlId="maxPlayers">
+      <Form.Label>Maksymalna liczba graczy</Form.Label>
       <Form.Control type="number" required value={maxPlayers} onChange={e => setMaxPlayers(e.target.value)}/>
+    </Form.Group>
+    <Form.Group controlId="pointFields">
+      <Form.Label>Kategorie punktów</Form.Label>
+      {pointFields.map( (field,key) => (
+        <Form.Control key={key} type="text" required value={field} 
+        onChange={e => setPointFields(pointFields.map((name, index) => index === key ? e.target.value : name))}/>
+      ))}
+      <Button variant="primary" onClick = {addField} >Dodaj kategorie</Button>
+      <Button variant="danger" onClick = {deleteField} >Usuń kategorie</Button>
     </Form.Group>
     <Button variant="primary" type="submit" >
       Dodaj

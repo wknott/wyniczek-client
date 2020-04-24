@@ -1,6 +1,23 @@
-import React, {useState, useEffect} from 'react'
-function GamesTable() {
-  const [games,setGames] = useState([])
+import React, {useEffect, useState} from 'react'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
+import GameDeleteModal from './GameDeleteModal'
+function GamesTable(){
+  const [games, setGames] = useState([])
+  const [show, setShow] = useState(false)
+  const [gameId, setGameId] = useState('')
+  async function deleteGame(gameId) {
+    try {
+      const res = await fetch('/api/games/' + gameId, {
+        method: 'DELETE'
+      })
+      setShow(false)
+      await loadGames()
+      return res
+    } catch (err) {
+      return err
+    }
+  }
   async function loadGames(){
     try {
       const res = await fetch('/api/games')
@@ -10,18 +27,36 @@ function GamesTable() {
       return err
     }
   }
-
+  function handleClick(gameId){
+    setShow(true)
+    setGameId(gameId)
+  }
   useEffect(()=>{
     loadGames()
   },[])
-  return (
+  return(
     <div>
-      {games !== [] ? games.map(
+      <Table>
+        <thead>
+          <tr>
+            <td>#</td>
+            <td>Nazwa</td>
+          </tr>
+        </thead>
+        <tbody>
+          {games !== [] ? games.map(
             (game,index) => (
-              <p key={index}>
-                 {game.name}
-              </p>
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{game.name}</td>
+                <td>
+                  <Button size="sm" variant="danger" onClick={() => handleClick(game._id)}>X</Button>
+                </td>
+              </tr>
               )):<></> }
+        </tbody>
+      </Table>
+      <GameDeleteModal show={show} handleClose={() => setShow(false)} deleteGame={deleteGame} gameId={gameId}/>
     </div>
   )
 }

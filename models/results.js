@@ -11,7 +11,7 @@ const resultSchema = new Schema({
     scores: { 
         type: [{
         user:{ type:Schema.Types.ObjectId, ref: 'User'},
-        points:{ type: [{ type: String }]}
+        points:{ type: [{ type: Number }]}
         }],
         required: true
     },
