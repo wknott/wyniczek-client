@@ -41,6 +41,9 @@ function GamesTable(){
           <tr>
             <td>#</td>
             <td>Nazwa</td>
+            <td>Liczba graczy</td>
+            <td>Kategorie punktów</td>
+            <td></td>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +52,12 @@ function GamesTable(){
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{game.name}</td>
+                <td>{game.minPlayers} - {game.maxPlayers}</td>
+                <td>{game.pointFields.map(
+                  (field,index) => (
+                   <p key={index}>{field}</p>
+                    ))}
+                    </td>
                 <td>
                   <Button size="sm" variant="danger" onClick={() => handleClick(game._id)}>X</Button>
                 </td>

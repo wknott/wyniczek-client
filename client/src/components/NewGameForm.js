@@ -57,11 +57,11 @@ function NewGameForm() {
         <Form.Control key={key} type="text" required value={field} 
         onChange={e => setPointFields(pointFields.map((name, index) => index === key ? e.target.value : name))}/>
       ))}
-      <Button variant="primary" onClick = {addField} >Dodaj kategorie</Button>
-      <Button variant="danger" onClick = {deleteField} >Usuń kategorie</Button>
+      <Button variant="primary" onClick = {addField} >Dodaj kategorię</Button>
+      <Button variant="danger" onClick = {deleteField} >Usuń kategorię</Button>
     </Form.Group>
     <Button variant="primary" type="submit" >
-      Dodaj
+      Dodaj grę
     </Button>
   </Form>
   )

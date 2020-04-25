@@ -25,10 +25,11 @@ function NewUserForm() {
   return(
   <Form onSubmit={onSubmit}>
     <Form.Group controlId="formNewUserName">
+      <Form.Label>Nazwa</Form.Label>
       <Form.Control type="text" placeholder="Podaj nazwę" required value={name} onChange={e => setName(e.target.value)}/>
     </Form.Group>
     <Button variant="primary" type="submit" >
-      Dodaj
+      Dodaj użytkownika
     </Button>
   </Form>
   )
