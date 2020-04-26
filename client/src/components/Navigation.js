@@ -10,6 +10,7 @@ function Navigation() {
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/games" href="#">Gry</Nav.Link>
           <Nav.Link as={Link} to="/users" href="#">Użytkownicy</Nav.Link>
+          <Nav.Link as={Link} to="/createresult" href="#">Stwórz wynik</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

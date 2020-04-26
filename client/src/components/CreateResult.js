@@ -1,9 +1,10 @@
 import React from 'react';
-function StworzWynik() {
+import NewResultForm from './NewResultForm'
+function CreateResult() {
   return(
     <div>
-      <p>Komponent Stwórz Wynik</p>
+      <NewResultForm/>
     </div>
   )
 }
-export default StworzWynik;
+export default CreateResult;
