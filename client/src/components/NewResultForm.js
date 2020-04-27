@@ -5,12 +5,7 @@ import NewResultTable from './NewResultTable'
 function NewResultForm() {
   const [games,setGames] = useState([])
   const [selectedGame, setSelectedGame] = useState()
-  function onSelectGame(e){
-    //console.log(e.target.value)
-    //console.log(games.find(game => game._id === e.target.value ))
-    setSelectedGame(games.find(game => game._id === e.target.value ))
-    //console.log(selectedGame)
-  }
+  const [finalResults, setFinalResults] = useState([])
   async function loadGames(){
     try {
       const res = await fetch('/api/games')
@@ -42,11 +37,14 @@ function NewResultForm() {
   //     return err
   //   }
   // }
+  function onSubmit(){
+    console.log(finalResults)
+  }
   return(
-  <Form >
+  <Form onSubmit={onSubmit}>
     <Form.Group controlId="formNewResultName">
       <Form.Label>Wybierz grę</Form.Label>
-      <Form.Control value={selectedGame !== undefined ? selectedGame._id : ''} onChange={e => onSelectGame(e)} as="select" custom>
+      <Form.Control value={selectedGame !== undefined ? selectedGame._id : ''} onChange={e =>     setSelectedGame(games.find(game => game._id === e.target.value ))} as="select" custom>
         <option value=''></option>
         {games.map( game => (
         <option key={game._id} value={game._id}>{game.name}</option>
@@ -54,9 +52,9 @@ function NewResultForm() {
       </Form.Control>
     </Form.Group>
     
-      {selectedGame !== undefined ? <NewResultTable selectedGame={selectedGame} />: <></>}
+      {selectedGame !== undefined ? <NewResultTable selectedGame={selectedGame} setFinalResults={setFinalResults}/>: <></>}
       <Button variant="primary" type="submit" >
-      Dodaj użytkownika
+      Dodaj wynik
       </Button>
     </Form>
 

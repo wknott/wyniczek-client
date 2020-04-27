@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import UserSelect from './UserSelect'
 function NewResultTable(props){
-  const {selectedGame} = props
+  const {selectedGame,setFinalResults} = props
   const [users, setUsers] = useState([])
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [scores, setScores] = useState([])
@@ -16,28 +16,28 @@ function NewResultTable(props){
       return err
     }
   }
-  function loadScores(length){
-    const emptyScores = Array.from( {length}, () => ({
+  function loadScores(){
+    const emptyScores = Array.from( {length: numberOfPlayers}, () => ({
       user: null,
       points: []
     }));
-    const newScores = scores.concat(emptyScores).slice(0, length);
-    setScores(newScores)
     setScores(emptyScores)
   }
   function addUser(){
     if (numberOfPlayers + 1 <= selectedGame.maxPlayers){
-      loadScores(numberOfPlayers+1)
+      const emptyScore = { user: '', points: [] }
+      setScores([...scores,emptyScore])
       setNumberOfPlayers(numberOfPlayers+1)
   }}
   function deleteUser(){
     if (numberOfPlayers - 1 >= selectedGame.minPlayers){
-      loadScores(numberOfPlayers-1)
+      const newScores = scores.slice(0,numberOfPlayers - 1)
+      setScores(newScores)
       setNumberOfPlayers(numberOfPlayers-1)
   }}
   useEffect(()=>{
     loadUsers()
-    loadScores(numberOfPlayers)
+    loadScores()
   },[])
   
   return(
@@ -47,7 +47,7 @@ function NewResultTable(props){
           <tr>
             <td><Button variant="primary" onClick={addUser}>Dodaj gracza</Button></td>
             {scores.map((score,index) => (<td key={index}>
-              <UserSelect users={users} score={score}/>
+              <UserSelect users={users} score={score} scores={scores} setScores={setScores}/>
             </td>))}
             <td><Button variant="danger" onClick={deleteUser}>Usuń gracza</Button></td>
           </tr>
@@ -56,8 +56,9 @@ function NewResultTable(props){
           {selectedGame.pointFields.map((kategory,index) => (
             <tr key={index}>
               <td>{kategory}</td>
-              <td></td>
-              <td></td>
+              {scores.map((score,index) => <td key={index}>
+                <input type="number" value={score.points[index]}/>
+              </td>)}
               </tr>
           ))}
         </tbody>
