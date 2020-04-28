@@ -3,26 +3,10 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import UserSelect from './UserSelect'
 function NewResultTable(props){
-  const {selectedGame,setFinalResults} = props
+  const {selectedGame} = props
   const [users, setUsers] = useState([])
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [scores, setScores] = useState([])
-  async function loadUsers(){
-    try {
-      const res = await fetch('/api/users')
-      const users = await res.json()
-      setUsers(users)
-    } catch (err) {
-      return err
-    }
-  }
-  function loadScores(){
-    const emptyScores = Array.from( {length: numberOfPlayers}, () => ({
-      user: null,
-      points: []
-    }));
-    setScores(emptyScores)
-  }
   function addUser(){
     if (numberOfPlayers + 1 <= selectedGame.maxPlayers){
       const emptyScore = { user: '', points: [] }
@@ -36,8 +20,29 @@ function NewResultTable(props){
       setNumberOfPlayers(numberOfPlayers-1)
   }}
   useEffect(()=>{
-    loadUsers()
+    async function loadUsers(){
+      try {
+        const res = await fetch('/api/users')
+        const users = await res.json()
+        setUsers(users)
+      } catch (err) {
+        return err
+      }
+    }
+    async function loadScores(){
+      try{
+        const emptyScores = Array.from( {length: 2}, () => ({
+          user: null,
+          points: []
+        }));
+        setScores(emptyScores)
+      }
+      catch (err) {
+        return err
+      }
+    }
     loadScores()
+    loadUsers()
   },[])
   
   return(

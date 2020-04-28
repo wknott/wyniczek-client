@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 function UserSelect(props){
   const {users,score,scores,setScores} = props
   function onChangeScore(e){
