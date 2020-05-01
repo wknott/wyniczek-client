@@ -2,15 +2,15 @@ import React, {useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-function NewUserForm() {
+function LoginForm() {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
   async function onSubmit(e){
     e.preventDefault()
-    const newUser = { name: name, password: password }
+    const newUser = { username: name, password: password }
     try {
-      const res = await fetch('/api/users/register', {
+      const res = await fetch('/api/users/authenticate', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -21,7 +21,10 @@ function NewUserForm() {
       
       const data = await res.json()
       
-      setName('')
+      //TODO: nie zapisywać jeżeli nie udało się uwierzytelnić
+      localStorage.setItem('user', JSON.stringify(data));
+
+      //setName('')
       return data
     } catch (err) {
       return err
@@ -36,10 +39,13 @@ function NewUserForm() {
     </Form.Group>
     <Form.Group controlId="formNewUserPassword">
       <Form.Label>Hasło</Form.Label>
-      <Form.Control type="password" placeholder="Podaj hasło" required value={password} onChange={e => setPassword(e.target.value)}/>
+      <Form.Control type="password" placeholder="Podaj hasło" value={password} onChange={e => setPassword(e.target.value)}/>
     </Form.Group>
     <Button variant="primary" type="submit" >
-      Dodaj użytkownika
+      Zaloguj
+    </Button>
+    <Button variant="secondary" onClick={handleWyloguj}>
+      Wyloguj
     </Button>
   </Form>
   )
@@ -48,4 +54,4 @@ function NewUserForm() {
   async function handleWyloguj(e){
     localStorage.removeItem('user');
   }
-export default NewUserForm
+export default LoginForm

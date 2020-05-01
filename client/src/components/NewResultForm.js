@@ -9,6 +9,8 @@ import UserSelect from './UserSelect'
 import addButton from '../add-user-button.png';
 import deleteButton from '../delete-user-button.png';
 
+import { authHeader } from '../helpers/auth-header';
+
 function NewResultForm() {
   const [games,setGames] = useState([])
   const [users,setUsers] = useState([])
@@ -21,7 +23,9 @@ function NewResultForm() {
 
   async function loadGames(){
     try {
-      const res = await fetch('/api/games')
+      const res = await fetch('/api/games', {
+        headers: authHeader()
+      })
       const games = await res.json()
       setGames(games)
     } catch (err) {
@@ -30,7 +34,9 @@ function NewResultForm() {
   }
   async function loadUsers(){
     try {
-      const res = await fetch('/api/users')
+      const res = await fetch('/api/users', {
+        headers: authHeader()
+      })
       const users = await res.json()
       setUsers(users)
     } catch (err) {
@@ -88,9 +94,7 @@ function NewResultForm() {
       <GameSelect selectedGame={selectedGame} setSelectedGame={setSelectedGame} games={games}/>
     </Form.Group>
       {selectedGame !== undefined ?
-      <div style={{overflow: 'auto',
-        display: 'block',
-        tableLayout: 'auto'}}> 
+      <div> 
         <Form.Row>
           <Col xs={4}>
             <Button variant="primary" 

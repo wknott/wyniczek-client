@@ -6,8 +6,14 @@ import Navigation from "./components/Navigation"
 import Users from "./components/Users"
 import Games from "./components/Games"
 import NewResultForm from './components/NewResultForm'
+import LoginForm from './components/LoginForm'
+
 function App() {
   return (
+    <div className="container">
+      {alert.message &&
+          <div className={`alert ${alert.type}`}>{alert.message}</div>
+      }
       <Router>
         <div className="container">
           <Navigation/>
@@ -15,8 +21,11 @@ function App() {
           <Route path="/createresult" component={NewResultForm}/>
           <Route path="/games" component={Games}/>
           <Route path="/users" component={Users}/>
+          <Route path="/signup" component={LoginForm}/>
         </div>
       </Router>
+    </div>
+      
   );
 }
 

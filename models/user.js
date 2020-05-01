@@ -5,7 +5,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true
-  }
+  },
+  hash: { 
+    type: String,
+    required: true
+  },
 })
+
+userSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+      delete ret._id;
+      delete ret.hash;
+  }
+});
 
 module.exports = mongoose.model('User', userSchema)

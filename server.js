@@ -4,18 +4,24 @@ const mongoose = require('mongoose')
 const app = express()
 const path = require('path')
 const dotenv = require('dotenv')
-dotenv.config()
+const jwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
 
 dotenv.config()
 app.use(express.json())
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'client/build')))
+
+app.use(jwt());
+
 const usersRouter = require('./routes/users')
 const gamesRouter = require('./routes/games')
 const resultsRouter = require('./routes/results')
 app.use('/api/users', usersRouter)
 app.use('/api/games', gamesRouter)
 app.use('/api/results', resultsRouter)
+
+app.use(errorHandler);
 
 app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'))

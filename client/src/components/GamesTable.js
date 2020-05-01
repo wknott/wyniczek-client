@@ -2,14 +2,30 @@ import React, {useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import GameDeleteModal from './GameDeleteModal'
+import { authHeader } from '../helpers/auth-header';
+
 function GamesTable(){
   const [games, setGames] = useState([])
   const [show, setShow] = useState(false)
   const [gameId, setGameId] = useState('')
+
+  async function loadGames(){
+    try {
+      const res = await fetch('/api/games', {
+        headers: authHeader()
+      })
+      const games = await res.json()
+      setGames(games)
+    } catch (err) {
+      return err
+    }
+  }
+  
   async function deleteGame(gameId) {
     try {
       const res = await fetch('/api/games/' + gameId, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: authHeader()
       })
       setShow(false)
       await loadGames()
@@ -18,15 +34,7 @@ function GamesTable(){
       return err
     }
   }
-  async function loadGames(){
-    try {
-      const res = await fetch('/api/games')
-      const games = await res.json()
-      setGames(games)
-    } catch (err) {
-      return err
-    }
-  }
+
   function handleClick(gameId){
     setShow(true)
     setGameId(gameId)
