@@ -9,8 +9,6 @@ module.exports = {
 };
 
 async function authenticate({ username, password }) {
-  console.log(username)
-  console.log(password)
   const user = await User.findOne({ name: username });
   if (user && bcrypt.compareSync(password, user.hash)) {
     const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET);
@@ -26,7 +24,6 @@ async function create(userParam) {
     throw 'Username "' + userParam.name + '" is already taken';
   }
 
-  console.log(userParam.name + ' ' + userParam.password)
   const user = new User(userParam);
 
   if (userParam.password) {
