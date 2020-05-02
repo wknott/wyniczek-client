@@ -1,14 +1,20 @@
 import React, {useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import { useHistory } from 'react-router-dom';
 
 function LoginForm() {
+  const history = useHistory();
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
   async function onSubmit(e){
     e.preventDefault()
     const newUser = { username: name, password: password }
+
     try {
       const res = await fetch('/api/users/authenticate', {
         method: 'POST',
@@ -23,33 +29,36 @@ function LoginForm() {
       
       //TODO: nie zapisywać jeżeli nie udało się uwierzytelnić
       localStorage.setItem('user', JSON.stringify(data));
-
-      //setName('')
-      return data
     } catch (err) {
       return err
     }
-
+    history.push('/')
   }
   return(
-  <Form onSubmit={onSubmit}>
-    <Form.Group controlId="formNewUserName">
-      <Form.Label>Nazwa</Form.Label>
-      <Form.Control type="text" placeholder="Podaj nazwę" required value={name} onChange={e => setName(e.target.value)}/>
-    </Form.Group>
-    <Form.Group controlId="formNewUserPassword">
-      <Form.Label>Hasło</Form.Label>
-      <Form.Control type="password" placeholder="Podaj hasło" value={password} onChange={e => setPassword(e.target.value)}/>
-    </Form.Group>
-    <Button variant="primary" type="submit" >
-      Zaloguj
-    </Button>
-    <Button variant="secondary" onClick={handleWyloguj}>
-      Wyloguj
-    </Button>
-  </Form>
-  )
-  }
+  <Container>
+    <Row>
+      <Col xs lg="4">
+      <h3>Logowanie</h3>
+        <Form onSubmit={onSubmit}>
+          <Form.Group controlId="formNewUserName">
+            <Form.Label>Nazwa</Form.Label>
+            <Form.Control type="text" placeholder="Podaj nazwę" required value={name} onChange={e => setName(e.target.value)}/>
+          </Form.Group>
+          <Form.Group controlId="formNewUserPassword">
+            <Form.Label>Hasło</Form.Label>
+            <Form.Control type="password" placeholder="Podaj hasło" value={password} onChange={e => setPassword(e.target.value)}/>
+          </Form.Group>
+          <Button variant="primary" type="submit" >
+            Zaloguj
+          </Button>
+          <Button variant="secondary" onClick={handleWyloguj}>
+            Wyloguj
+          </Button>
+        </Form>
+      </Col>
+    </Row>
+  </Container>
+  )}
 
   async function handleWyloguj(e){
     localStorage.removeItem('user');

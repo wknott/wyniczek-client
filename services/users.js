@@ -5,6 +5,7 @@ const User = require('../models/user')
 module.exports = {
   authenticate,
   create,
+  getAll,
   getById,
 };
 
@@ -21,7 +22,7 @@ async function authenticate({ username, password }) {
 
 async function create(userParam) {
   if (await User.findOne({ name: userParam.name })) {
-    throw 'Username "' + userParam.name + '" is already taken';
+    throw 'Użytkownik o nazwie "' + userParam.name + '" już istnieje.';
   }
 
   const user = new User(userParam);
@@ -33,30 +34,13 @@ async function create(userParam) {
   await user.save();
 }
 
-// async function getAll() {
-//     return await User.find();
-// }
+async function getAll() {
+  return await User.find();
+}
 
 async function getById(id) {
     return await User.findById(id);
 }
-
-// async function create(userParam) {
-//     // validate
-//     if (await User.findOne({ username: userParam.username })) {
-//         throw 'Username "' + userParam.username + '" is already taken';
-//     }
-
-//     const user = new User(userParam);
-
-//     // hash password
-//     if (userParam.password) {
-//         user.hash = bcrypt.hashSync(userParam.password, 10);
-//     }
-
-//     // save user
-//     await user.save();
-// }
 
 // async function update(id, userParam) {
 //     const user = await User.findById(id);

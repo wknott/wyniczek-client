@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Navbar, Nav} from 'react-bootstrap';
+
 function Navigation() {
   return(
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
@@ -9,12 +10,15 @@ function Navigation() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/games" href="#">Gry</Nav.Link>
-          <Nav.Link as={Link} to="/users" href="#">Użytkownicy</Nav.Link>
-          <Nav.Link as={Link} to="/createresult" href="#">Stwórz wynik</Nav.Link>
-          <Nav.Link as={Link} to="/signup" href="#">Zaloguj</Nav.Link>
+          <Nav.Link as={Link} to="/createresult" href="#">Nowy wynik</Nav.Link>
+        </Nav>
+        <Nav className="ml-auto">
+          <Nav.Link as={Link} to="/users" href="#">Nowy użytkownik</Nav.Link>
+          <Nav.Link as={Link} to="/signup" href="#">Logowanie</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
   )
 }
+
 export default Navigation;

@@ -7,25 +7,22 @@ import Users from "./components/Users"
 import Games from "./components/Games"
 import NewResultForm from './components/NewResultForm'
 import LoginForm from './components/LoginForm'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
     <div className="container">
-      {alert.message &&
-          <div className={`alert ${alert.type}`}>{alert.message}</div>
-      }
       <Router>
         <div className="container">
           <Navigation/>
-          <Route path="/" exact component={Wyniczek}/>
-          <Route path="/createresult" component={NewResultForm}/>
-          <Route path="/games" component={Games}/>
+          <PrivateRoute exact path="/" component={Wyniczek} />
+          <PrivateRoute path="/createresult" component={NewResultForm}/>
+          <PrivateRoute path="/games" component={Games}/>
           <Route path="/users" component={Users}/>
           <Route path="/signup" component={LoginForm}/>
         </div>
       </Router>
-    </div>
-      
+    </div> 
   );
 }
 
