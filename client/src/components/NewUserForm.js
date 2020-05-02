@@ -42,10 +42,6 @@ function NewUserForm() {
       Dodaj użytkownika
     </Button>
   </Form>
-  )
-  }
-
-  async function handleWyloguj(e){
-    localStorage.removeItem('user');
-  }
+  )}
+  
 export default NewUserForm
