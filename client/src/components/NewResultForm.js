@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
-import Col from 'react-bootstrap/Col'
+import Table from 'react-bootstrap/Table'
 
 import GameSelect from './GameSelect'
 import UserSelect from './UserSelect'
@@ -94,45 +94,52 @@ function NewResultForm() {
       <GameSelect selectedGame={selectedGame} setSelectedGame={setSelectedGame} games={games}/>
     </Form.Group>
       {selectedGame !== undefined ?
-      <div> 
-        <Form.Row>
-          <Col xs={4}>
-            <Button variant="primary" 
-              onClick={() => setNumberOfPlayers(numberOfPlayers+1)}
-              disabled={numberOfPlayers===selectedGame.maxPlayers}>
-              <Image src={addButton} width="auto" height="24" alt="" />
-            </Button>
-            <Button variant="danger" 
-              onClick={() => setNumberOfPlayers(numberOfPlayers-1)}
-              disabled={numberOfPlayers===selectedGame.minPlayers}>
-              <Image src={deleteButton} width="auto" height="24" alt="" />
-            </Button>
-          </Col>
-          {scores.map((score,index) => (
-                <UserSelect  key={index} users={users} score={score} scores={scores} setScores={setScores}/>
-          ))}
-        </Form.Row>
-
-        {selectedGame.pointFields.map((field,index) => (
-          <Form.Row key={index}>
-            <Col xs={4}>
-              {field}
-            </Col>
+      <Table responsive> 
+        <thead>
+          <tr>
+            <th>
+              <Button variant="primary" 
+                onClick={() => setNumberOfPlayers(numberOfPlayers+1)}
+                disabled={numberOfPlayers===selectedGame.maxPlayers}>
+                <Image src={addButton} width="auto" height="20" alt="" />
+              </Button>
+              <Button variant="danger" 
+                onClick={() => setNumberOfPlayers(numberOfPlayers-1)}
+                disabled={numberOfPlayers===selectedGame.minPlayers}>
+                <Image src={deleteButton} width="auto" height="20" alt="" />
+              </Button>
+            </th>
             {scores.map((score,index) => (
-              <Form.Group key={index} as={Col} controlId="formScoreInput">
-                <Form.Control style={{minWidth:'50px'}} type="number" value={score.points[index]} key={index}/>
-              </Form.Group>
+              <th key={index}>
+              <UserSelect   users={users} score={score} scores={scores} setScores={setScores}/>
+              </th>
             ))}
-          </Form.Row>
-        ))}
-      </div> 
+          </tr>
+        </thead>
+        <tbody>
+          {selectedGame.pointFields.map((field,index) => (
+            <tr key={index}>
+              <td style={{fontSize: '12px'}}>
+                {field}
+              </td>
+              {scores.map((score,index) => (
+                <td key={index}>
+                  <Form.Group controlId="formScoreInput">
+                    <Form.Control style={{minWidth:'50px'}} type="number" value={score.points[index]} key={index}/>
+                  </Form.Group>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </Table> 
       : <></>}
     <Form.Group controlId="formNewResultName">
       <Form.Label>Wybierz pierwszego gracza</Form.Label>
       <Form.Control value={firstPlayer !== undefined ? firstPlayer._id : ''} onChange={e => setFirstPlayer(users.find(user => user._id === e.target.value ))} as="select" custom>
         <option value=''></option>
-        {users.map( user => (
-        <option key={user._id} value={user._id}>{user.name}</option>
+        {users.map( (user,index) => (
+        <option key={index} value={user._id}>{user.name}</option>
         ))}
       </Form.Control>
     </Form.Group>
@@ -140,8 +147,8 @@ function NewResultForm() {
       <Form.Label>Wybierz autora wyniku</Form.Label>
       <Form.Control value={author !== undefined ? author._id : ''} onChange={e => setAuthor(users.find(user => user._id === e.target.value ))} as="select" custom>
         <option value=''></option>
-        {users.map( user => (
-        <option key={user._id} value={user._id}>{user.name}</option>
+        {users.map( (user,index) => (
+        <option key={index} value={user._id}>{user.name}</option>
         ))}
       </Form.Control>
     </Form.Group>
