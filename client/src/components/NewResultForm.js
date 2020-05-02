@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Table from 'react-bootstrap/Table'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import GameSelect from './GameSelect'
 import UserSelect from './UserSelect'
@@ -93,46 +95,51 @@ function NewResultForm() {
       <Form.Label>Wybierz grę</Form.Label>
       <GameSelect selectedGame={selectedGame} setSelectedGame={setSelectedGame} games={games}/>
     </Form.Group>
-      {selectedGame !== undefined ?
-      <Table responsive> 
-        <thead>
-          <tr>
-            <th>
-              <Button variant="primary" 
-                onClick={() => setNumberOfPlayers(numberOfPlayers+1)}
-                disabled={numberOfPlayers===selectedGame.maxPlayers}>
-                <Image src={addButton} width="auto" height="20" alt="" />
-              </Button>
-              <Button variant="danger" 
-                onClick={() => setNumberOfPlayers(numberOfPlayers-1)}
-                disabled={numberOfPlayers===selectedGame.minPlayers}>
-                <Image src={deleteButton} width="auto" height="20" alt="" />
-              </Button>
-            </th>
-            {scores.map((score,index) => (
-              <th key={index}>
-              <UserSelect   users={users} score={score} scores={scores} setScores={setScores}/>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {selectedGame.pointFields.map((field,index) => (
-            <tr key={index}>
-              <td style={{fontSize: '12px'}}>
-                {field}
-              </td>
+    {selectedGame !== undefined ?
+      <Row>
+        <Col>
+          <Button variant="primary" block
+            onClick={() => setNumberOfPlayers(numberOfPlayers+1)}
+            disabled={numberOfPlayers===selectedGame.maxPlayers}>
+            <Image src={addButton} width="auto" height="20" alt="" />
+         </Button>
+        </Col>
+        <Col>
+          <Button variant="danger" block
+            onClick={() => setNumberOfPlayers(numberOfPlayers-1)}
+            disabled={numberOfPlayers===selectedGame.minPlayers}>
+            <Image src={deleteButton} width="auto" height="20" alt="" />
+          </Button>
+        </Col>
+        <Table responsive style={{padding: '0px'}}> 
+          <thead>
+            <tr>
+              <th>Kategoria</th>
               {scores.map((score,index) => (
-                <td key={index}>
-                  <Form.Group controlId="formScoreInput">
-                    <Form.Control style={{minWidth:'50px'}} type="number" value={score.points[index]} key={index}/>
-                  </Form.Group>
-                </td>
+                <th key={index}>
+                <UserSelect   users={users} score={score} scores={scores} setScores={setScores}/>
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </Table> 
+          </thead>
+          <tbody>
+            {selectedGame.pointFields.map((field,index) => (
+              <tr key={index}>
+                <td style={{fontSize: '12px'}}>
+                  {field}
+                </td>
+                {scores.map((score,index) => (
+                  <td key={index}>
+                    <Form.Group controlId="formScoreInput">
+                      <Form.Control style={{minWidth:'50px'}} type="number" value={score.points[index]} key={index}/>
+                    </Form.Group>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </Table> 
+      </Row>
       : <></>}
     <Form.Group controlId="formNewResultName">
       <Form.Label>Wybierz pierwszego gracza</Form.Label>
@@ -156,7 +163,7 @@ function NewResultForm() {
       Dodaj wynik
       </Button>
     </Form>
-
+    
     
   )}
 export default NewResultForm

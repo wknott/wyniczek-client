@@ -5,8 +5,10 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useHistory } from 'react-router-dom';
+import { useAppContext } from "../libs/contextLib";
 
 function LoginForm() {
+  const { userHasAuthenticated } = useAppContext();
   const history = useHistory();
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
@@ -27,9 +29,10 @@ function LoginForm() {
       
       const data = await res.json()
       
-      if (data.token != null)
+      if (data.token != null){
         localStorage.setItem('user', JSON.stringify(data));
-      
+        userHasAuthenticated(true);
+      }
       history.push('/')
     } catch (err) {
       return err

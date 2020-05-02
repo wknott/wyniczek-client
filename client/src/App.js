@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { AppContext } from "./libs/contextLib";
 import { BrowserRouter as Router, Route} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Wyniczek from "./components/Wyniczek"
@@ -10,19 +11,25 @@ import LoginForm from './components/LoginForm'
 import PrivateRoute from './components/PrivateRoute'
 
 function App() {
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  function handleLogout() {
+    userHasAuthenticated(false);
+  }
   return (
-    <div className="container">
-      <Router>
-        <div className="container">
-          <Navigation/>
-          <PrivateRoute exact path="/" component={Wyniczek} />
-          <PrivateRoute path="/createresult" component={NewResultForm}/>
-          <PrivateRoute path="/games" component={Games}/>
-          <Route path="/users" component={Users}/>
-          <Route path="/signup" component={LoginForm}/>
-        </div>
-      </Router>
-    </div> 
+    <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+      <div className="container">
+        <Router>
+          <div className="container">
+            <Navigation isAuthenticated={isAuthenticated} handleLogout={handleLogout}/>
+            <PrivateRoute exact path="/" component={Wyniczek} />
+            <PrivateRoute path="/createresult" component={NewResultForm}/>
+            <PrivateRoute path="/games" component={Games}/>
+            <Route path="/users" component={Users}/>
+            <Route path="/signup" component={LoginForm}/>
+          </div>
+        </Router>
+      </div> 
+    </AppContext.Provider>
   );
 }
 

@@ -9,7 +9,7 @@ function UserSelect(props){
     setScores(newScores)
   }
   return(
-    <Form.Control style={{minWidth:'50px'}} value={score.user === null? '': score.user._id} onChange={e => onChangeScore(e)} as="select">
+    <Form.Control style={{minWidth:'80px'}} value={score.user === null? '': score.user._id} onChange={e => onChangeScore(e)} as="select">
         <option value=''></option>
         {users.map((user,index) => (<option key={index} value={user._id}>{user.name}</option>))}
     </Form.Control>
