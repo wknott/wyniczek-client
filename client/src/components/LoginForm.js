@@ -27,12 +27,13 @@ function LoginForm() {
       
       const data = await res.json()
       
-      //TODO: nie zapisywać jeżeli nie udało się uwierzytelnić
-      localStorage.setItem('user', JSON.stringify(data));
+      if (data.token != null)
+        localStorage.setItem('user', JSON.stringify(data));
+      
+      history.push('/')
     } catch (err) {
       return err
     }
-    history.push('/')
   }
   return(
   <Container>
