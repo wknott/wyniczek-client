@@ -14,6 +14,7 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   function handleLogout() {
     userHasAuthenticated(false);
+    localStorage.removeItem("user")
   }
   return (
     <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
