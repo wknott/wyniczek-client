@@ -12,6 +12,7 @@ import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+  
   function handleLogout() {
     userHasAuthenticated(false);
     localStorage.removeItem("user")
