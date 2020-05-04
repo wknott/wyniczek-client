@@ -1,25 +1,22 @@
 {
-  "name": "server",
+  "name": "wyniczek",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./server.js",
-    "devstart": "nodemon ./server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "postinstall": "npm install --prefix client && npm install --prefix server",
+    "build": "npm run build --prefix client",
+    "start": "node server/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wknott/wyniczek.git"
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.9.6",
-    "bcryptjs": "^2.4.3",
-    "express-jwt": "^5.3.3",
-    "jsonwebtoken": "^8.5.1"
+  "bugs": {
+    "url": "https://github.com/wknott/wyniczek/issues"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+  "homepage": "https://github.com/wknott/wyniczek#readme"
 }
