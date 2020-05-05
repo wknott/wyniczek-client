@@ -9,7 +9,7 @@ import Games from "./components/Games"
 import NewResultForm from './components/NewResultForm'
 import LoginForm from './components/LoginForm'
 import PrivateRoute from './components/PrivateRoute'
-
+import './App.css'
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   

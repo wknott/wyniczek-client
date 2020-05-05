@@ -3,8 +3,6 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Table from 'react-bootstrap/Table'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import GameSelect from './GameSelect'
 import UserSelect from './UserSelect'
@@ -20,8 +18,6 @@ function NewResultForm() {
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [scores, setScores] = useState([])
   const [finalResults, setFinalResults] = useState([])
-  const [firstPlayer, setFirstPlayer] = useState()
-  const [author, setAuthor] = useState()
 
   async function loadGames(){
     try {
@@ -50,6 +46,15 @@ function NewResultForm() {
     loadGames()
     loadUsers()
   },[])
+  // function onChangePoints (){
+  //   // const newValue = parseInt(e.target.value, 10) || null;
+  //   // const newScores = scores.map((score, i) =>
+  //   //   i === index
+  //   //     ? { ...score, points: { ...score.points, [index]: newValue } }
+  //   //     : score
+  //   // )
+  //   // setScores(newScores)
+  // };
   useEffect(()=>{
     console.log(numberOfPlayers)
     const emptyScores = Array.from( {length: numberOfPlayers}, () => ({
@@ -67,103 +72,98 @@ function NewResultForm() {
     setScores(emptyScores)
     setNumberOfPlayers(2)
   },[selectedGame])
-  // async function onSubmit(e){
-  //   e.preventDefault()
-  //   const newResult = {name}
-  //   try {
-  //     const res = await fetch('/api/results', {
-  //       method: 'POST',
-  //       headers: {
-  //         Accept: 'application/json',
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(newResult) 
-  //     })
-  //     const data = await res.json()
-  //     setName('')
-  //     return data
-  //   } catch (err) {
-  //     return err
-  //   }
-  // }
-  function onSubmit(){
-    console.log(finalResults)
+  async function onSubmit(e){
+    setFinalResults(scores)
+
+    // e.preventDefault()
+    // const newResult = {name}
+    // try {
+    //   const res = await fetch('/api/results', {
+    //     method: 'POST',
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(newResult) 
+    //   })
+    //   const data = await res.json()
+    //   setName('')
+    //   return data
+    // } catch (err) {
+    //   return err
+    // }
   }
   return(
   <Form onSubmit={onSubmit}>
     <Form.Group controlId="formGameSelect">
-      <Form.Label>Wybierz grę</Form.Label>
       <GameSelect selectedGame={selectedGame} setSelectedGame={setSelectedGame} games={games}/>
     </Form.Group>
     {selectedGame !== undefined ?
-      <Row>
-        <Col>
-          <Button variant="primary" block
-            onClick={() => setNumberOfPlayers(numberOfPlayers+1)}
-            disabled={numberOfPlayers===selectedGame.maxPlayers}>
-            <Image src={addButton} width="auto" height="20" alt="" />
-         </Button>
-        </Col>
-        <Col>
-          <Button variant="danger" block
-            onClick={() => setNumberOfPlayers(numberOfPlayers-1)}
-            disabled={numberOfPlayers===selectedGame.minPlayers}>
-            <Image src={deleteButton} width="auto" height="20" alt="" />
-          </Button>
-        </Col>
-        <Table responsive style={{padding: '0px'}}> 
+        <Table responsive> 
           <thead>
             <tr>
-              <th>Kategoria</th>
+              <th>
+                <Button variant="primary" block
+                  onClick={() => setNumberOfPlayers(numberOfPlayers+1)}
+                  disabled={numberOfPlayers===selectedGame.maxPlayers}>
+                  <Image src={addButton} width="auto" height="15" alt="" />
+                </Button>
+              </th>
               {scores.map((score,index) => (
                 <th key={index}>
-                <UserSelect   users={users} score={score} scores={scores} setScores={setScores}/>
+                <UserSelect index={index} users={users} score={score} scores={scores} setScores={setScores}/>
                 </th>
               ))}
+              <th>
+                <Button variant="danger" block
+                  onClick={() => setNumberOfPlayers(numberOfPlayers-1)}
+                  disabled={numberOfPlayers===selectedGame.minPlayers}>
+                  <Image src={deleteButton} width="auto" height="15" alt="" />
+                </Button>
+              </th>
             </tr>
           </thead>
           <tbody>
             {selectedGame.pointFields.map((field,index) => (
               <tr key={index}>
-                <td style={{fontSize: '12px'}}>
+                <td>
                   {field}
                 </td>
                 {scores.map((score,index) => (
                   <td key={index}>
                     <Form.Group controlId="formScoreInput">
-                      <Form.Control style={{minWidth:'50px'}} type="number" value={score.points[index]} key={index}/>
+                      <Form.Control style={{minWidth:'50px'}} 
+                      type="number" value={score.points[index]} key={index}/>
                     </Form.Group>
                   </td>
-                ))}
+                ))} 
               </tr>
             ))}
+            {selectedGame.pointFields.length === 0? 
+            <tr>
+            <td>Wynik</td>
+            {scores.map((score,index) => (
+              <td key={index}>
+                <Form.Group controlId="formScoreInput">
+                  <Form.Control style={{minWidth:'50px'}} type="number" value={score.points[index]} key={index}/>
+                </Form.Group>
+              </td>
+            ))} 
+          </tr>
+          :<tr>
+          <td>Wynik</td>
+          {scores.map((score,index) => (
+            <td key={index}>
+            {Object.values(score.points).reduce((x, y) => x + y, 0)}
+          </td>
+          ))} 
+        </tr>}
           </tbody>
-        </Table> 
-      </Row>
+        </Table>
       : <></>}
-    <Form.Group controlId="formNewResultName">
-      <Form.Label>Wybierz pierwszego gracza</Form.Label>
-      <Form.Control value={firstPlayer !== undefined ? firstPlayer._id : ''} onChange={e => setFirstPlayer(users.find(user => user._id === e.target.value ))} as="select" custom>
-        <option value=''></option>
-        {users.map( (user,index) => (
-        <option key={index} value={user._id}>{user.name}</option>
-        ))}
-      </Form.Control>
-    </Form.Group>
-    <Form.Group controlId="formNewResultName">
-      <Form.Label>Wybierz autora wyniku</Form.Label>
-      <Form.Control value={author !== undefined ? author._id : ''} onChange={e => setAuthor(users.find(user => user._id === e.target.value ))} as="select" custom>
-        <option value=''></option>
-        {users.map( (user,index) => (
-        <option key={index} value={user._id}>{user.name}</option>
-        ))}
-      </Form.Control>
-    </Form.Group>
       <Button variant="primary" type="submit" >
       Dodaj wynik
       </Button>
     </Form>
-    
-    
   )}
 export default NewResultForm
