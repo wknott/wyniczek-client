@@ -1,16 +1,17 @@
 import React, {useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-function NewGameForm() {
+function NewGameForm(){
   const [name,setName] = useState('')
   const [minPlayers, setMinPlayers] = useState(2)
   const [maxPlayers, setMaxPlayers] = useState(4)
   const [pointFields, setPointFields] = useState([])
   
-  const addField = () => {
+  function addField(){
     setPointFields([...pointFields,''])
   }
-  const deleteField = () => {
+
+  function deleteField(){
     setPointFields(pointFields.filter((item,index) => index !== pointFields.length-1))
   }
 

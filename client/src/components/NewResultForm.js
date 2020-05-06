@@ -17,7 +17,6 @@ function NewResultForm() {
   const [selectedGame, setSelectedGame] = useState()
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [scores, setScores] = useState([])
-  const [finalResults, setFinalResults] = useState([])
 
   async function loadGames(){
     try {
@@ -46,24 +45,41 @@ function NewResultForm() {
     loadGames()
     loadUsers()
   },[])
-  // function onChangePoints (){
-  //   // const newValue = parseInt(e.target.value, 10) || null;
-  //   // const newScores = scores.map((score, i) =>
-  //   //   i === index
-  //   //     ? { ...score, points: { ...score.points, [index]: newValue } }
-  //   //     : score
-  //   // )
-  //   // setScores(newScores)
-  // };
-  useEffect(()=>{
-    console.log(numberOfPlayers)
-    const emptyScores = Array.from( {length: numberOfPlayers}, () => ({
+  function onChangePoints (e, index){
+    console.log(index)
+    const newValue = parseInt(e.target.value, 10) || null;
+    console.log(newValue)
+    const newScores = scores.map((score, i) =>
+      i === index
+        ? { ...score, points: { ...score.points, [index]: newValue } }
+        : score
+    )
+    console.log(newScores)
+    setScores(newScores)
+  };
+  // const emptyScores = Array.from( {length: numberOfPlayers}, () => ({
+  //   user: null,
+  //   points: []
+  // }));
+  // setScores(scores.concat(emptyScores).slice(0,numberOfPlayers))
+
+  function addPlayer(){
+    const emptyScores = Array.from( {length: numberOfPlayers+1}, () => ({
       user: null,
       points: []
     }));
-    console.log(scores.concat(emptyScores).slice(0,numberOfPlayers))
-    setScores(scores.concat(emptyScores).slice(0,numberOfPlayers))
-  },[numberOfPlayers])
+    setScores(scores.concat(emptyScores).slice(0,numberOfPlayers+1))
+    setNumberOfPlayers(numberOfPlayers+1)
+  }
+  function deletePlayer(){
+    const emptyScores = Array.from( {length: numberOfPlayers-1}, () => ({
+      user: null,
+      points: []
+    }));
+    setScores(scores.concat(emptyScores).slice(0,numberOfPlayers-1))
+    setNumberOfPlayers(numberOfPlayers-1)
+  }
+  
   useEffect(()=>{
     const emptyScores = Array.from( {length: 2}, () => ({
       user: null,
@@ -72,29 +88,28 @@ function NewResultForm() {
     setScores(emptyScores)
     setNumberOfPlayers(2)
   },[selectedGame])
-  async function onSubmit(e){
-    setFinalResults(scores)
-
-    // e.preventDefault()
-    // const newResult = {name}
-    // try {
-    //   const res = await fetch('/api/results', {
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(newResult) 
-    //   })
-    //   const data = await res.json()
-    //   setName('')
-    //   return data
-    // } catch (err) {
-    //   return err
-    // }
-  }
+  // //async function onSubmit(e){
+  //   // setFinalResults(scores)
+  //   // e.preventDefault()
+  //   // const newResult = {name}
+  //   // try {
+  //   //   const res = await fetch('/api/results', {
+  //   //     method: 'POST',
+  //   //     headers: {
+  //   //       Accept: 'application/json',
+  //   //       'Content-Type': 'application/json'
+  //   //     },
+  //   //     body: JSON.stringify(newResult) 
+  //   //   })
+  //   //   const data = await res.json()
+  //   //   setName('')
+  //   //   return data
+  //   // } catch (err) {
+  //   //   return err
+  //   // }
+  // //}
   return(
-  <Form onSubmit={onSubmit}>
+  <Form onSubmit={() => console.log('submit')}>
     <Form.Group controlId="formGameSelect">
       <GameSelect selectedGame={selectedGame} setSelectedGame={setSelectedGame} games={games}/>
     </Form.Group>
@@ -104,7 +119,7 @@ function NewResultForm() {
             <tr>
               <th>
                 <Button variant="primary" block
-                  onClick={() => setNumberOfPlayers(numberOfPlayers+1)}
+                  onClick={() => addPlayer()}
                   disabled={numberOfPlayers===selectedGame.maxPlayers}>
                   <Image src={addButton} width="auto" height="15" alt="" />
                 </Button>
@@ -116,7 +131,7 @@ function NewResultForm() {
               ))}
               <th>
                 <Button variant="danger" block
-                  onClick={() => setNumberOfPlayers(numberOfPlayers-1)}
+                  onClick={() => deletePlayer()}
                   disabled={numberOfPlayers===selectedGame.minPlayers}>
                   <Image src={deleteButton} width="auto" height="15" alt="" />
                 </Button>
@@ -133,7 +148,8 @@ function NewResultForm() {
                   <td key={index}>
                     <Form.Group controlId="formScoreInput">
                       <Form.Control style={{minWidth:'50px'}} 
-                      type="number" value={score.points[index]} key={index}/>
+                      type="number" value={score.points[index]} key={index}
+                      onChange={e => onChangePoints(e,index)}/>
                     </Form.Group>
                   </td>
                 ))} 
@@ -145,7 +161,9 @@ function NewResultForm() {
             {scores.map((score,index) => (
               <td key={index}>
                 <Form.Group controlId="formScoreInput">
-                  <Form.Control style={{minWidth:'50px'}} type="number" value={score.points[index]} key={index}/>
+                  <Form.Control style={{minWidth:'50px'}} 
+                  type="number" value={score.points[index]} key={index}
+                  onChange={e => console.log(e.target.value)} />
                 </Form.Group>
               </td>
             ))} 
