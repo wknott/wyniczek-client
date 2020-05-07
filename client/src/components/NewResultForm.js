@@ -40,53 +40,51 @@ function NewResultForm() {
       return err
     }
   }
-
+  function initiateScores(numberOfScores,numberOfFields){
+    const emptyScores = Array.from( {length: numberOfScores}, () => ({
+      user: null,
+      points: Array.from({length: numberOfFields}, () => (null))
+    }));
+    setScores(scores.concat(emptyScores).slice(0,numberOfScores))
+  }
+  
+  function selectGame(e){
+    const newSelectedGame = games.find(game => game._id === e.target.value)
+    setSelectedGame(newSelectedGame)
+    initiateScores(2,newSelectedGame.pointFields.length)
+    setNumberOfPlayers(2)
+  }
   useEffect(()=>{
     loadGames()
     loadUsers()
   },[])
-  function onChangePoints (e, index){
-    console.log(index)
+
+  function onChangePoints (e, index, selectedScore){
     const newValue = parseInt(e.target.value, 10) || null;
-    console.log(newValue)
-    const newScores = scores.map((score, i) =>
-      i === index
-        ? { ...score, points: { ...score.points, [index]: newValue } }
-        : score
-    )
-    console.log(newScores)
+    const newPoints = selectedScore.points.map((s,i)=>(i===index) ? newValue : s)
+    const newScore = {user:selectedScore.user, points:newPoints}
+    const newScores = scores.map(s => (s === selectedScore)? newScore : s)
     setScores(newScores)
   };
-  // const emptyScores = Array.from( {length: numberOfPlayers}, () => ({
-  //   user: null,
-  //   points: []
-  // }));
-  // setScores(scores.concat(emptyScores).slice(0,numberOfPlayers))
+
+  function onChangeResult (e,selectedScore){
+    const newValue = parseInt(e.target.value, 10) || null;
+    const newScore = {user:selectedScore.user, points:[newValue]}
+    const newScores = scores.map(s => (s === selectedScore)? newScore : s)
+    setScores(newScores)
+  };
 
   function addPlayer(){
-    const emptyScores = Array.from( {length: numberOfPlayers+1}, () => ({
-      user: null,
-      points: []
-    }));
-    setScores(scores.concat(emptyScores).slice(0,numberOfPlayers+1))
+    initiateScores(numberOfPlayers+1,selectedGame.pointFields.length)
     setNumberOfPlayers(numberOfPlayers+1)
   }
   function deletePlayer(){
-    const emptyScores = Array.from( {length: numberOfPlayers-1}, () => ({
-      user: null,
-      points: []
-    }));
-    setScores(scores.concat(emptyScores).slice(0,numberOfPlayers-1))
+    initiateScores(numberOfPlayers-1,selectedGame.pointFields.length)
     setNumberOfPlayers(numberOfPlayers-1)
   }
   
   useEffect(()=>{
-    const emptyScores = Array.from( {length: 2}, () => ({
-      user: null,
-      points: []
-    }));
-    setScores(emptyScores)
-    setNumberOfPlayers(2)
+    
   },[selectedGame])
   // //async function onSubmit(e){
   //   // setFinalResults(scores)
@@ -111,7 +109,7 @@ function NewResultForm() {
   return(
   <Form onSubmit={() => console.log('submit')}>
     <Form.Group controlId="formGameSelect">
-      <GameSelect selectedGame={selectedGame} setSelectedGame={setSelectedGame} games={games}/>
+      <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games}/>
     </Form.Group>
     {selectedGame !== undefined ?
         <Table responsive> 
@@ -139,8 +137,8 @@ function NewResultForm() {
             </tr>
           </thead>
           <tbody>
-            {selectedGame.pointFields.map((field,index) => (
-              <tr key={index}>
+            {selectedGame.pointFields.map((field,pointFieldIndex) => (
+              <tr key={pointFieldIndex}>
                 <td>
                   {field}
                 </td>
@@ -148,8 +146,8 @@ function NewResultForm() {
                   <td key={index}>
                     <Form.Group controlId="formScoreInput">
                       <Form.Control style={{minWidth:'50px'}} 
-                      type="number" value={score.points[index]} key={index}
-                      onChange={e => onChangePoints(e,index)}/>
+                      type="number" value={score.points[pointFieldIndex] || ''}
+                      onChange={e => onChangePoints(e,pointFieldIndex,score)}/>
                     </Form.Group>
                   </td>
                 ))} 
@@ -162,8 +160,8 @@ function NewResultForm() {
               <td key={index}>
                 <Form.Group controlId="formScoreInput">
                   <Form.Control style={{minWidth:'50px'}} 
-                  type="number" value={score.points[index]} key={index}
-                  onChange={e => console.log(e.target.value)} />
+                  type="number" value={score.points[0] || ''} key={index}
+                  onChange={e => onChangeResult(e,score)} />
                 </Form.Group>
               </td>
             ))} 
