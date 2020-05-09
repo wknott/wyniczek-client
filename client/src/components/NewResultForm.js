@@ -29,6 +29,7 @@ function NewResultForm() {
       return err
     }
   }
+  
   async function loadUsers(){
     try {
       const res = await fetch('/api/users', {
@@ -40,7 +41,13 @@ function NewResultForm() {
       return err
     }
   }
-  function initiateScores(numberOfScores,numberOfFields){
+
+  useEffect(()=>{
+    loadGames()
+    loadUsers()
+  },[])
+
+  function createScores(numberOfScores,numberOfFields){
     const emptyScores = Array.from( {length: numberOfScores}, () => ({
       user: null,
       points: Array.from({length: numberOfFields}, () => (null))
@@ -51,13 +58,10 @@ function NewResultForm() {
   function selectGame(e){
     const newSelectedGame = games.find(game => game._id === e.target.value)
     setSelectedGame(newSelectedGame)
-    initiateScores(2,newSelectedGame.pointFields.length)
+    newSelectedGame !== undefined ? createScores(2,newSelectedGame.pointFields.length) :
     setNumberOfPlayers(2)
   }
-  useEffect(()=>{
-    loadGames()
-    loadUsers()
-  },[])
+  
 
   function onChangePoints (e, index, selectedScore){
     const newValue = parseInt(e.target.value, 10) || null;
@@ -75,39 +79,43 @@ function NewResultForm() {
   };
 
   function addPlayer(){
-    initiateScores(numberOfPlayers+1,selectedGame.pointFields.length)
+    createScores(numberOfPlayers+1,selectedGame.pointFields.length)
     setNumberOfPlayers(numberOfPlayers+1)
   }
   function deletePlayer(){
-    initiateScores(numberOfPlayers-1,selectedGame.pointFields.length)
+    createScores(numberOfPlayers-1,selectedGame.pointFields.length)
     setNumberOfPlayers(numberOfPlayers-1)
   }
   
   useEffect(()=>{
     
   },[selectedGame])
-  // //async function onSubmit(e){
-  //   // setFinalResults(scores)
-  //   // e.preventDefault()
-  //   // const newResult = {name}
-  //   // try {
-  //   //   const res = await fetch('/api/results', {
-  //   //     method: 'POST',
-  //   //     headers: {
-  //   //       Accept: 'application/json',
-  //   //       'Content-Type': 'application/json'
-  //   //     },
-  //   //     body: JSON.stringify(newResult) 
-  //   //   })
-  //   //   const data = await res.json()
-  //   //   setName('')
-  //   //   return data
-  //   // } catch (err) {
-  //   //   return err
-  //   // }
-  // //}
+  async function onSubmit(e){
+    e.preventDefault()
+    const firstPlayer = users.find(user => user.name === scores.find((score, index) => index === 0).user)
+    const newResult = {
+      game: selectedGame._id,
+      scores: scores,
+      author: JSON.parse(localStorage.user).id,
+      firstPlayer: firstPlayer.id
+    }
+    try {
+      const res = await fetch('/api/results', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newResult) 
+      })
+      const data = await res.json()
+      return data
+    } catch (err) {
+      return err
+    }
+  }
   return(
-  <Form onSubmit={() => console.log('submit')}>
+  <Form onSubmit={e => onSubmit(e)}>
     <Form.Group controlId="formGameSelect">
       <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games}/>
     </Form.Group>
