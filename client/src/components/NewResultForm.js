@@ -92,19 +92,22 @@ function NewResultForm() {
   },[selectedGame])
   async function onSubmit(e){
     e.preventDefault()
+    const authToken = authHeader()['Authorization']
     const firstPlayer = users.find(user => user.name === scores.find((score, index) => index === 0).user)
     const newResult = {
       game: selectedGame._id,
       scores: scores,
       author: JSON.parse(localStorage.user).id,
-      firstPlayer: firstPlayer.id
+      firstPlayer: firstPlayer
     }
+    console.log(newResult)
     try {
       const res = await fetch('/api/results', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': authToken
         },
         body: JSON.stringify(newResult) 
       })
