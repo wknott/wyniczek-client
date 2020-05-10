@@ -4,15 +4,20 @@ const Results = require('../models/results')
 
 router.get('/', async (req, res) => {
   try {
-    const results = await Results.find()
+    const results = await Results.find().populate('game').populate({path: 'scores.user'})
     res.json(results)
   } catch (err) {
     res.status(500).json({message: err.message})
   } 
 })
 
-router.get('/:id', getResults, (req, res) => {
-  res.json(res.results)
+router.get('/:id', async (req, res) => {
+  try {
+    const results = await Results.findById(req.params.id).populate('game').populate({path: 'scores.user'})
+    res.json(results)
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  } 
 })
 
 router.post('/', async (req,res) => {
