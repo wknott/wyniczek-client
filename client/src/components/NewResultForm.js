@@ -93,12 +93,10 @@ function NewResultForm() {
   async function onSubmit(e){
     e.preventDefault()
     const authToken = authHeader()['Authorization']
-    const firstPlayer = users.find(user => user.name === scores.find((score, index) => index === 0).user)
     const newResult = {
       game: selectedGame._id,
       scores: scores,
       author: JSON.parse(localStorage.user).id,
-      firstPlayer: firstPlayer
     }
     console.log(newResult)
     try {

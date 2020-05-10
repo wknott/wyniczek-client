@@ -20,11 +20,6 @@ const resultSchema = new Schema({
       required: true,
       ref: 'User'
     },
-    firstPlayer: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'User'
-    },
     date: { type: Date }
 });
 const Result = mongoose.model('Result', resultSchema);

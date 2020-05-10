@@ -20,7 +20,6 @@ router.post('/', async (req,res) => {
     game: req.body.game,
     scores: req.body.scores,
     author: req.body.author,
-    firstPlayer: req.body.firstPlayer,
     date: req.body.date
   })
   try {
@@ -40,9 +39,6 @@ router.patch('/:id', getResults, async (req, res) => {
   }
   if (req.body.author != null) {
     res.results.author = req.body.author
-  }
-  if (req.body.firstPlayer != null) {
-    res.results.firstPlayer = req.body.firstPlayer
   }
   if (req.body.date != null) {
     res.results.date = req.body.date
