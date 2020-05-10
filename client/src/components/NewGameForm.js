@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { authHeader } from '../helpers/auth-header';
+
 function NewGameForm(){
   const [name,setName] = useState('')
   const [minPlayers, setMinPlayers] = useState(2)
@@ -18,17 +20,21 @@ function NewGameForm(){
   async function onSubmit(e){
     e.preventDefault()
     const newGame = {name,minPlayers,maxPlayers,pointFields}
+    const authToken = authHeader()['Authorization']
+
     console.log(newGame)
     try {
       const res = await fetch('/api/games', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': authToken,
         },
         body: JSON.stringify(newGame) 
       })
       const data = await res.json()
+      console.log(data)
       setName('')
       setMinPlayers(2)
       setMaxPlayers(4)
