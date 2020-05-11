@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { authHeader } from '../helpers/auth-header';
+import {formatDateStringShort} from '../logic/utilities.js'
 function ResultsTable(){
   const [results, setResults] = useState([])
   const [show, setShow] = useState(false)
@@ -37,27 +38,28 @@ function ResultsTable(){
   },[])
   return(
     <div>
-      {<Button onClick={() => handleClick()}>aaa</Button>
-      /* <Table>
+      <Table>
         <thead>
           <tr>
             <td>#</td>
-            <td>Nazwa</td>
+            <td>Gra</td>
+            <td>Data</td>
           </tr>
         </thead>
         <tbody>
-          {results !== [] ? results.map(
+          {results.map(
             (result,index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{result.name}</td>
+                <td>{result.game.name}</td>
+                <td>{formatDateStringShort(result.date)}</td>
                 <td>
-                  <Button size="sm" variant="danger" onClick={() => handleClick(result._id)}>X</Button>
+                  <Button size="sm" disabled variant="danger" onClick={() => console.log(results)}>X</Button>
                 </td>
               </tr>
-              )):<></> }
+              ))}
         </tbody>
-      </Table> */}
+      </Table>
     </div>
   )
 }

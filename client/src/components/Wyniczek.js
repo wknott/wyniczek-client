@@ -1,10 +1,9 @@
 import React from 'react'
+import ResultsTable from './ResultsTable'
 function Wyniczek(){
   return(
     <div>
-      <h1>
-        Wyniczek!
-      </h1>
+        <ResultsTable/>
     </div>
   )
 }
