@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
+import Accordion from 'react-bootstrap/Accordion'
 import GameDeleteModal from './GameDeleteModal'
 import { authHeader } from '../helpers/auth-header';
 
@@ -60,14 +61,26 @@ function GamesTable(){
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{game.name}</td>
-                <td>{game.minPlayers} - {game.maxPlayers}</td>
-                <td>{game.pointFields.map(
-                  (field,index) => (
-                   <p key={index}>{field}</p>
-                    ))}
-                    </td>
+                {game.minPlayers === game.maxPlayers?
+                <td>{game.minPlayers}</td>
+                : <td>{game.minPlayers} - {game.maxPlayers}</td>}
                 <td>
-                  <Button size="sm" variant="danger" onClick={() => handleClick(game._id)}>X</Button>
+                  {game.pointFields.length > 0 ?
+                    <Accordion>
+                    <Accordion.Toggle as={Button} size='sm' variant="primary" eventKey="0">
+                      Zobacz kategorie
+                    </Accordion.Toggle>
+                      {game.pointFields.map(
+                        (field,index) => (<Accordion.Collapse key={index} eventKey="0">
+                        <p >{field}</p>
+                        </Accordion.Collapse>
+                          ))}
+                  </Accordion> : <></>
+                }
+                  
+                </td>
+                <td>
+                  <Button disabled size="sm" variant="danger" onClick={() => handleClick(game._id)}>X</Button>
                 </td>
               </tr>
               )):<></> }
