@@ -25,7 +25,7 @@ router.post('/', async (req,res) => {
     game: req.body.game,
     scores: req.body.scores,
     author: req.body.author,
-    date: req.body.date
+    date: new Date()
   })
   try {
     const newResults = await results.save()
