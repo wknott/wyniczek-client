@@ -9,6 +9,7 @@ import Games from "./components/Games"
 import NewResultForm from './components/NewResultForm'
 import LoginForm from './components/LoginForm'
 import PrivateRoute from './components/PrivateRoute'
+import ResultsTable from './components/ResultsTable'
 import './App.css'
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -26,6 +27,7 @@ function App() {
             <PrivateRoute exact path="/" component={Wyniczek} />
             <PrivateRoute path="/createresult" component={NewResultForm}/>
             <PrivateRoute path="/games" component={Games}/>
+            <PrivateRoute path="/results" component={ResultsTable}/>
             <Route path="/users" component={Users}/>
             <Route path="/signup" component={LoginForm}/>
           </div>
