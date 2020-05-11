@@ -41,7 +41,7 @@ function LoginForm() {
   return(
   <Container>
     <Row>
-      <Col xs lg="4">
+      <Col lg={4}>
       <h3>Logowanie</h3>
         <Form onSubmit={onSubmit}>
           <Form.Group controlId="formNewUserName">
@@ -55,16 +55,10 @@ function LoginForm() {
           <Button variant="primary" type="submit" >
             Zaloguj
           </Button>
-          <Button variant="secondary" onClick={handleWyloguj}>
-            Wyloguj
-          </Button>
         </Form>
       </Col>
     </Row>
   </Container>
   )}
 
-  async function handleWyloguj(e){
-    localStorage.removeItem('user');
-  }
 export default LoginForm
