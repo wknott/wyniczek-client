@@ -110,6 +110,7 @@ function NewResultForm() {
         body: JSON.stringify(newResult) 
       })
       const data = await res.json()
+      window.location.reload(false);
       return data
     } catch (err) {
       return err
