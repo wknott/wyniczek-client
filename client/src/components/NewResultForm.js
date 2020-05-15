@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Table from 'react-bootstrap/Table'
-
+import { useHistory } from 'react-router-dom';
 import GameSelect from './GameSelect'
 import UserSelect from './UserSelect'
 import addButton from '../add-user-button.png';
@@ -17,7 +17,7 @@ function NewResultForm() {
   const [selectedGame, setSelectedGame] = useState()
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [scores, setScores] = useState([])
-
+  const history = useHistory();
   async function loadGames(){
     try {
       const res = await fetch('/api/games', {
@@ -110,7 +110,7 @@ function NewResultForm() {
         body: JSON.stringify(newResult) 
       })
       const data = await res.json()
-      window.location.reload(false);
+      history.push('/');
       return data
     } catch (err) {
       return err
