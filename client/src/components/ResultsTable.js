@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
+import DeleteModal from './DeleteModal'
 import { authHeader } from '../helpers/auth-header';
 import {formatDateStringShort} from '../logic/utilities.js'
 function ResultsTable(){
@@ -10,7 +11,8 @@ function ResultsTable(){
   async function deleteResult(resultId) {
     try {
       const res = await fetch('/api/results/' + resultId, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: authHeader()
       })
       setShow(false)
       await loadResults()
@@ -41,8 +43,9 @@ function ResultsTable(){
       return err
     }
   }
-  function handleClick(){
-    console.log(results)
+  function handleClick(gameId){
+    setShow(true)
+    setResultId(gameId)
   }
   useEffect(()=>{
     loadResults()
@@ -67,12 +70,19 @@ function ResultsTable(){
                 <td>{result.scores.find((score,index) => index === 0).user.name}</td>
                 <td>{formatDateStringShort(result.date)}</td>
                 <td>
-                  <Button size="sm" disabled variant="danger" onClick={() => console.log(results)}>X</Button>
+                  <Button size="sm" disabled variant="danger" onClick={() => handleClick(result._id)}>X</Button>
                 </td>
               </tr>
               ))}
         </tbody>
       </Table>
+      <DeleteModal 
+      show={show} 
+      handleClose={() => setShow(false)} 
+      handleDelete={deleteResult} 
+      id={resultId}
+      warningText={'Czy chcesz usunąć ten wynik?'}
+      />
     </div>
   )
 }

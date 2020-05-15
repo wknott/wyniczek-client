@@ -1,15 +1,15 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-function GameDeleteModal(props){
-  const {show, handleClose, deleteGame, gameId} = props
+function DeleteModal(props){
+  const {show, handleClose, handleDelete, id, warningText} = props
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
       </Modal.Header>
-      <Modal.Body>Czy chcesz usunąć tą grę?</Modal.Body>
+      <Modal.Body>{warningText}</Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={() => deleteGame(gameId)}>
+        <Button variant="danger" onClick={() => handleDelete(id)}>
           Tak
         </Button>
         <Button variant="primary" onClick={handleClose}>
@@ -20,4 +20,4 @@ function GameDeleteModal(props){
   )
 }
 
-export default GameDeleteModal
+export default DeleteModal

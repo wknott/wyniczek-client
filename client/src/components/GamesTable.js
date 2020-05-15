@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion'
-import GameDeleteModal from './GameDeleteModal'
+import DeleteModal from './DeleteModal'
 import { authHeader } from '../helpers/auth-header';
 
 function GamesTable(){
@@ -86,7 +86,13 @@ function GamesTable(){
               )):<></> }
         </tbody>
       </Table>
-      <GameDeleteModal show={show} handleClose={() => setShow(false)} deleteGame={deleteGame} gameId={gameId}/>
+      <DeleteModal 
+      show={show} 
+      handleClose={() => setShow(false)} 
+      handleDelete={deleteGame} 
+      id={gameId}
+      warningText={'Czy chcesz usunąć tą grę?'}
+      />
     </div>
   )
 }

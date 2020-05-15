@@ -56,8 +56,14 @@ function UsersTable(){
               )):<></> }
         </tbody>
       </Table>
-      <UserDeleteModal show={show} handleClose={() => setShow(false)} deleteUser={deleteUser} userId={userId}/>
-    </div>
+      <DeleteModal 
+      show={show} 
+      handleClose={() => setShow(false)} 
+      handleDelete={deleteUser} 
+      id={userId}
+      warningText={'Czy chcesz usunąć tego użytkownika?'}
+      />
+      </div>
   )
 }
 
