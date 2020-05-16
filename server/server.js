@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 app.use(express.static(path.join(__dirname, '../client/build')))
 
-app.use(jwt());
+app.use('/api', jwt());
 
 const usersRouter = require('./routes/users')
 const gamesRouter = require('./routes/games')
@@ -23,8 +23,12 @@ app.use('/api/results', resultsRouter)
 
 app.use(errorHandler);
 
-app.get('*', (req,res) => {
-  res.sendFile(path.join(__dirname+'../client/build/index.html'))
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname+'../client/build/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
 })
 mongoose.connect(process.env.URL, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
 const db = mongoose.connection
