@@ -50,13 +50,13 @@ function ResultsTable(){
     loadResults()
   },[])
   return(
-    <div>
-      <Table>
+    <div style={{"padding":'0px 10px'}}>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <td>#</td>
             <td>Gra</td>
-            <td>Pierwszy gracz</td>
+            <td>1. Gracz</td>
             <td>Zwycięzca</td>
             <td onClick={() => sortDate()}>Data</td>
           </tr>
@@ -70,9 +70,9 @@ function ResultsTable(){
                 <td>{result.scores.find((score,index) => index === 0).user.name}</td>
                 <td>{winners[index]}</td>
                 <td>{formatDateStringShort(result.date)}</td>
-                <td>
+                {0?<td>
                   <Button size="sm" disabled variant="danger" onClick={() => handleClick(result._id)}>X</Button>
-                </td>
+                </td>:<></>}
               </tr>
               ))}
         </tbody>

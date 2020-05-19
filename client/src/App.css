@@ -6,17 +6,23 @@
   .scores {
     white-space: nowrap;
   }
-
-  .table td,
-  .table th { 
-    padding: 0.1rem;
-    font-size: 10px;
+  thead{
+    font-weight: bold;
+  }
+  .table th,
+  .table td { 
+    padding: 0.5rem 0.1rem;
+    font-size: 1rem;
   }
   .select{
     -webkit-appearance: none;
   }
   .form-group {
     margin-bottom: 0;
+  }
+  .container{
+    padding-right: 0;
+    padding-left: 0;
   }
   /*
   .tr{
