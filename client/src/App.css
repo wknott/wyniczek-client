@@ -13,6 +13,7 @@
   .table td { 
     padding: 0.5rem 0.1rem;
     font-size: 1rem;
+    white-space: nowrap;
   }
   .select{
     -webkit-appearance: none;
@@ -23,6 +24,9 @@
   .container{
     padding-right: 0;
     padding-left: 0;
+  }
+  .hidden-sm {
+    display: none;
   }
   /*
   .tr{
@@ -35,7 +39,11 @@
    */
   
 }
-
+@media (min-width: 575.98px) {
+  .hidden-lg {
+    display: none;
+  }
+}
 .App {
   text-align: center;
   background-color: #282c34;

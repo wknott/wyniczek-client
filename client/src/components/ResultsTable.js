@@ -50,8 +50,8 @@ function ResultsTable(){
     loadResults()
   },[])
   return(
-    <div style={{"padding":'0px 10px'}}>
-      <Table striped bordered hover>
+    <div>
+      <Table responsive striped bordered hover>
         <thead>
           <tr>
             <td>#</td>
@@ -66,7 +66,8 @@ function ResultsTable(){
             (result,index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{result.game.name}</td>
+                <td className="hidden-lg">{result.game.name.length > 10? result.game.name.substring(0, 9) + '...': result.game.name}</td>
+                <td className="hidden-sm">{result.game.name}</td>
                 <td>{result.scores.find((score,index) => index === 0).user.name}</td>
                 <td>{winners[index]}</td>
                 <td>{formatDateStringShort(result.date)}</td>
