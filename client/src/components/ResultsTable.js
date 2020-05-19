@@ -3,12 +3,13 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import DeleteModal from './DeleteModal'
 import { authHeader } from '../helpers/auth-header';
-import {formatDateStringShort,calculateWinner} from '../logic/utilities.js'
+import {formatDateStringShort,calculateWinner,compareObjects} from '../logic/utilities.js'
 function ResultsTable(){
   const [results, setResults] = useState([])
   const [show, setShow] = useState(false)
   const [resultId, setResultId] = useState('')
   const [winners, setWinners] = useState([])
+  const [sortFlag, setSortFlag] = useState(true)
   async function deleteResult(resultId) {
     try {
       const res = await fetch('/api/results/' + resultId, {
@@ -28,8 +29,9 @@ function ResultsTable(){
         headers: authHeader()
       })
       const results = await res.json()
-      setWinners(calculateWinner(results))
-      setResults(results)
+      const sortedResults = results.sort(compareObjects('date','desc'))
+      setWinners(calculateWinner(sortedResults))
+      setResults(sortedResults)
     } catch (err) {
       return err
     }
@@ -37,6 +39,12 @@ function ResultsTable(){
   function handleClick(gameId){
     setShow(true)
     setResultId(gameId)
+  }
+  function sortDate(){
+      const sortedResults = results.sort(compareObjects('date',sortFlag?'asc':'desc'))
+      setWinners(calculateWinner(sortedResults))
+      setResults(sortedResults)
+      setSortFlag(!sortFlag)
   }
   useEffect(()=>{
     loadResults()
@@ -50,7 +58,7 @@ function ResultsTable(){
             <td>Gra</td>
             <td>Pierwszy gracz</td>
             <td>Zwycięzca</td>
-            <td>Data</td>
+            <td onClick={() => sortDate()}>Data</td>
           </tr>
         </thead>
         <tbody>
