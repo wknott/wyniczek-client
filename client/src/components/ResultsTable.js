@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import DeleteModal from './DeleteModal'
+import ResultModal from './ResultModal'
 import { authHeader } from '../helpers/auth-header';
 import {formatDateStringShort,calculateWinner,compareObjects} from '../logic/utilities.js'
 function ResultsTable(){
   const [results, setResults] = useState([])
-  const [show, setShow] = useState(false)
-  const [resultId, setResultId] = useState('')
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showResultModal, setShowResultModal] = useState(false)
+  const [selectedResult, setSelectedResult] = useState({})
   const [winners, setWinners] = useState([])
   const [sortFlag, setSortFlag] = useState(true)
   async function deleteResult(resultId) {
@@ -16,7 +18,7 @@ function ResultsTable(){
         method: 'DELETE',
         headers: authHeader()
       })
-      setShow(false)
+      setShowDeleteModal(false)
       await loadResults()
       return res
     } catch (err) {
@@ -36,9 +38,13 @@ function ResultsTable(){
       return err
     }
   }
-  function handleClick(gameId){
-    setShow(true)
-    setResultId(gameId)
+  function handleShowDeleteModal(result){
+    setShowDeleteModal(true)
+    setSelectedResult(result)
+  }
+  function handleShowResultModal(result){
+    setSelectedResult(result)
+    setShowResultModal(true)
   }
   function sortDate(){
       const sortedResults = results.sort(compareObjects('date',sortFlag?'asc':'desc'))
@@ -64,7 +70,7 @@ function ResultsTable(){
         <tbody>
           {results.map(
             (result,index) => (
-              <tr key={index}>
+              <tr key={index} onClick={() => handleShowResultModal(result)}>
                 <td>{index + 1}</td>
                 <td className="hidden-lg">{result.game.name.length > 10? result.game.name.substring(0, 9) + '...': result.game.name}</td>
                 <td className="hidden-sm">{result.game.name}</td>
@@ -72,17 +78,22 @@ function ResultsTable(){
                 <td>{winners[index]}</td>
                 <td>{formatDateStringShort(result.date)}</td>
                 {0?<td>
-                  <Button size="sm" disabled variant="danger" onClick={() => handleClick(result._id)}>X</Button>
+                  <Button size="sm" disabled variant="danger" onClick={() => handleShowDeleteModal(result)}>X</Button>
                 </td>:<></>}
               </tr>
               ))}
         </tbody>
       </Table>
+      <ResultModal
+      show={showResultModal}
+      handleClose={() => setShowResultModal(false)} 
+      result={selectedResult}
+      />
       <DeleteModal 
-      show={show} 
-      handleClose={() => setShow(false)} 
+      show={showDeleteModal} 
+      handleClose={() => setShowDeleteModal(false)} 
       handleDelete={deleteResult} 
-      id={resultId}
+      id={selectedResult._id}
       warningText={'Czy chcesz usunąć ten wynik?'}
       />
     </div>

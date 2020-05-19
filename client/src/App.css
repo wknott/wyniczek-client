@@ -83,3 +83,7 @@
     transform: rotate(360deg);
   }
 }
+
+.bold {
+  font-weight: bold;
+}
