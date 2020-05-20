@@ -119,6 +119,7 @@ function NewResultForm() {
   return(
   <Form onSubmit={e => onSubmit(e)}>
     <Form.Group controlId="formGameSelect">
+      <Form.Label>Wybierz grę</Form.Label>
       <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games}/>
     </Form.Group>
     {selectedGame !== undefined ?

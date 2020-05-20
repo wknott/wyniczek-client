@@ -31,8 +31,8 @@ function App() {
     <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
       <div className="container">
         <Router>
-          <div className="container">
-            <Navigation isAuthenticated={isAuthenticated} handleLogout={handleLogout}/>
+          <Navigation isAuthenticated={isAuthenticated} handleLogout={handleLogout}/>
+          <div className="container" style={{padding:"16px 8px"}}>
             <PrivateRoute exact path="/" component={Wyniczek} />
             <PrivateRoute path="/createresult" component={NewResultForm}/>
             <PrivateRoute path="/games" component={Games}/>
