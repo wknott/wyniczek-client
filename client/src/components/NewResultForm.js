@@ -8,6 +8,7 @@ import GameSelect from './GameSelect'
 import UserSelect from './UserSelect'
 import addButton from '../add-user-button.png';
 import deleteButton from '../delete-user-button.png';
+import {compareObjects} from '../logic/utilities.js'
 
 import { authHeader } from '../helpers/auth-header';
 
@@ -18,13 +19,15 @@ function NewResultForm() {
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [scores, setScores] = useState([])
   const history = useHistory();
+  
   async function loadGames(){
     try {
       const res = await fetch('/api/games', {
         headers: authHeader()
       })
       const games = await res.json()
-      setGames(games)
+      const sortedGames = games.sort(compareObjects('name'))
+      setGames(sortedGames)
     } catch (err) {
       return err
     }
@@ -36,7 +39,8 @@ function NewResultForm() {
         headers: authHeader()
       })
       const users = await res.json()
-      setUsers(users)
+      const sortedUsers = users.sort(compareObjects('name'))
+      setUsers(sortedUsers)
     } catch (err) {
       return err
     }
