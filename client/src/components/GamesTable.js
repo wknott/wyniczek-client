@@ -45,7 +45,7 @@ function GamesTable(){
   },[])
   return(
     <div>
-      <Table>
+      <Table responsive>
         <thead>
           <tr>
             <td>#</td>
@@ -80,7 +80,9 @@ function GamesTable(){
                   
                 </td>
                 <td>
+                {0?<td>
                   <Button disabled size="sm" variant="danger" onClick={() => handleClick(game._id)}>X</Button>
+                </td>:<></>}
                 </td>
               </tr>
               )):<></> }

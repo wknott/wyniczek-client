@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { authHeader } from '../helpers/auth-header';
+import { ButtonGroup } from 'react-bootstrap';
 
 function NewGameForm(){
   const [name,setName] = useState('')
@@ -60,12 +61,14 @@ function NewGameForm(){
     </Form.Group>
     <Form.Group controlId="pointFields">
       <Form.Label>Kategorie punktów</Form.Label>
+      <ButtonGroup>
+        <Button variant="primary" onClick = {addField} >Dodaj kategorię</Button>
+        <Button variant="danger" onClick = {deleteField} >Usuń kategorię</Button>
+      </ButtonGroup>
       {pointFields.map( (field,key) => (
         <Form.Control key={key} type="text" required value={field} 
         onChange={e => setPointFields(pointFields.map((name, index) => index === key ? e.target.value : name))}/>
       ))}
-      <Button variant="primary" onClick = {addField} >Dodaj kategorię</Button>
-      <Button variant="danger" onClick = {deleteField} >Usuń kategorię</Button>
     </Form.Group>
     <Button variant="primary" type="submit" >
       Dodaj grę
