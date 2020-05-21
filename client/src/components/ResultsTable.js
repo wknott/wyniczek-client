@@ -14,7 +14,6 @@ function ResultsTable(){
   const [showResultModal, setShowResultModal] = useState(false)
   const [selectedResult, setSelectedResult] = useState({})
   const [selectedGame, setSelectedGame] = useState()
-  const [winners, setWinners] = useState([])
   const [sortFlag, setSortFlag] = useState(true)
   async function deleteResult(resultId) {
     try {
@@ -36,8 +35,11 @@ function ResultsTable(){
       })
       const results = await res.json()
       const sortedResults = results.sort(compareObjects('date','desc'))
-      setWinners(calculateWinner(sortedResults))
-      setResults(sortedResults)
+      const winners = calculateWinner(sortedResults)
+      const resultsWithWinners = sortedResults.map(
+        (result,index) =>(
+          {...result,winner: (winners[index])}))
+      setResults(resultsWithWinners)
     } catch (err) {
       return err
     }
@@ -71,7 +73,6 @@ function ResultsTable(){
   }
   function sortDate(){
       const sortedResults = results.sort(compareObjects('date',sortFlag?'asc':'desc'))
-      setWinners(calculateWinner(sortedResults))
       setResults(sortedResults)
       setSortFlag(!sortFlag)
   }
@@ -104,7 +105,7 @@ function ResultsTable(){
                 <td className="hidden-lg">{result.game.name.length > 10? result.game.name.substring(0, 9) + '...': result.game.name}</td>
                 <td className="hidden-sm">{result.game.name}</td>
                 <td>{result.scores.find((score,index) => index === 0).user.name}</td>
-                <td>{winners[index]}</td>
+                <td>{result.winner}</td>
                 <td>{formatDateStringShort(result.date)}</td>
                 {0?<td>
                   <Button size="sm" disabled variant="danger" onClick={() => handleShowDeleteModal(result)}>X</Button>
