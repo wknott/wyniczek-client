@@ -3,13 +3,17 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import DeleteModal from './DeleteModal'
 import ResultModal from './ResultModal'
+import GameSelect from './GameSelect'
 import { authHeader } from '../helpers/auth-header';
 import {formatDateStringShort,calculateWinner,compareObjects} from '../logic/utilities.js'
+import Form from 'react-bootstrap/Form'
 function ResultsTable(){
   const [results, setResults] = useState([])
+  const [games, setGames] = useState([])
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showResultModal, setShowResultModal] = useState(false)
   const [selectedResult, setSelectedResult] = useState({})
+  const [selectedGame, setSelectedGame] = useState()
   const [winners, setWinners] = useState([])
   const [sortFlag, setSortFlag] = useState(true)
   async function deleteResult(resultId) {
@@ -38,6 +42,25 @@ function ResultsTable(){
       return err
     }
   }
+
+  async function loadGames(){
+    try {
+      const res = await fetch('/api/games', {
+        headers: authHeader()
+      })
+      const games = await res.json()
+      const sortedGames = games.sort(compareObjects('name'))
+      setGames(sortedGames)
+    } catch (err) {
+      return err
+    }
+  }
+
+  function selectGame(e){
+    const newSelectedGame = games.find(game => game._id === e.target.value)
+    setSelectedGame(newSelectedGame)
+  }
+  
   function handleShowDeleteModal(result){
     setShowDeleteModal(true)
     setSelectedResult(result)
@@ -54,9 +77,15 @@ function ResultsTable(){
   }
   useEffect(()=>{
     loadResults()
+    loadGames()
   },[])
   return(
     <div>
+      <Form>
+        <Form.Group>
+          <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games}/>
+        </Form.Group>
+      </Form>
       <Table responsive striped bordered hover>
         <thead>
           <tr>
@@ -68,7 +97,7 @@ function ResultsTable(){
           </tr>
         </thead>
         <tbody>
-          {results.map(
+          {results.filter( result => selectedGame === undefined? 1 :result.game._id === selectedGame._id).map(
             (result,index) => (
               <tr key={index} onClick={() => handleShowResultModal(result)}>
                 <td>{index + 1}</td>
