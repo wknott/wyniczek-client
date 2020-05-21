@@ -4,7 +4,22 @@ const Results = require('../models/results')
 
 router.get('/', async (req, res) => {
   try {
-    const results = await Results.find().populate('game').populate({path: 'scores.user'})
+    const gameId = req.query.gameId
+    const onlyLast = req.query.last
+    
+    let query
+
+    if (gameId === undefined)
+      query = Results.find()
+    else
+    {
+      if (onlyLast === 'true')
+        query = Results.findOne({game: gameId}).sort({ date: -1 })
+      else
+        query = Results.find({game: gameId})
+    }
+    
+    const results = await query.populate('game').populate({path: 'scores.user'})
     res.json(results)
   } catch (err) {
     res.status(500).json({message: err.message})

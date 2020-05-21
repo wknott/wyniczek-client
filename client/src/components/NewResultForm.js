@@ -59,9 +59,23 @@ function NewResultForm() {
     setScores(scores.concat(emptyScores).slice(0,numberOfScores))
   }
   
-  function selectGame(e){
+  async function getLastResults(gameId) {
+    const res = await fetch(`/api/results?gameId=${gameId}&last=true`, {
+      headers: authHeader(),
+    })
+    return res !== null ? await res.json() : null
+  }
+
+  async function selectGame(e){
     const newSelectedGame = games.find(game => game._id === e.target.value)
     setSelectedGame(newSelectedGame)
+
+    if (newSelectedGame !== undefined)
+    {
+      const r = await getLastResults(newSelectedGame._id)
+      console.log(r)
+    }
+
     newSelectedGame !== undefined ? createScores(2,newSelectedGame.pointFields.length) :
     setNumberOfPlayers(2)
   }
