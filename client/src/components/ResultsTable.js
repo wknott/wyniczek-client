@@ -90,7 +90,6 @@ function ResultsTable(){
       <Table responsive striped bordered hover>
         <thead>
           <tr>
-            <td>#</td>
             <td>Gra</td>
             <td>1. Gracz</td>
             <td>Zwycięzca</td>
@@ -101,7 +100,6 @@ function ResultsTable(){
           {results.filter( result => selectedGame === undefined? 1 :result.game._id === selectedGame._id).map(
             (result,index) => (
               <tr key={index} onClick={() => handleShowResultModal(result)}>
-                <td>{index + 1}</td>
                 <td className="hidden-lg">{result.game.name.length > 10? result.game.name.substring(0, 9) + '...': result.game.name}</td>
                 <td className="hidden-sm">{result.game.name}</td>
                 <td>{result.scores.find((score,index) => index === 0).user.name}</td>
