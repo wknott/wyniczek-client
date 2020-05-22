@@ -21,7 +21,6 @@ export function calculateWinner(results){
 export function compareObjects(key,order='asc') {
   return function innerSort(a,b) {
     if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-      console.log('abrakadabra')
       return 0
     }
     const varA = (typeof a[key]=== 'string') ? a[key].toUpperCase() : a[key]

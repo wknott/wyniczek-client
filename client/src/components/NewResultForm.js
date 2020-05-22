@@ -16,6 +16,7 @@ function NewResultForm() {
   const [games,setGames] = useState([])
   const [users,setUsers] = useState([])
   const [selectedGame, setSelectedGame] = useState()
+  const [lastUsers, setLastUsers] = useState()
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [scores, setScores] = useState([])
   const history = useHistory();
@@ -69,14 +70,16 @@ function NewResultForm() {
   async function selectGame(e){
     const newSelectedGame = games.find(game => game._id === e.target.value)
     setSelectedGame(newSelectedGame)
-
     if (newSelectedGame !== undefined)
     {
-      const r = await getLastResults(newSelectedGame._id)
-      console.log(r)
+      const lastResult = await getLastResults(newSelectedGame._id)
+      if(lastResult !== null){
+        const lastResultUsers = lastResult.scores.map(score=>score.user)
+        const revertedUsers = lastResultUsers.slice().reverse()
+        setLastUsers(revertedUsers)
+      }
+      createScores(2,newSelectedGame.pointFields.length)
     }
-
-    newSelectedGame !== undefined ? createScores(2,newSelectedGame.pointFields.length) :
     setNumberOfPlayers(2)
   }
   
@@ -105,9 +108,6 @@ function NewResultForm() {
     setNumberOfPlayers(numberOfPlayers-1)
   }
   
-  useEffect(()=>{
-    
-  },[selectedGame])
   async function onSubmit(e){
     e.preventDefault()
     const authToken = authHeader()['Authorization']
@@ -153,7 +153,7 @@ function NewResultForm() {
               </th>
               {scores.map((score,index) => (
                 <th key={index}>
-                <UserSelect index={index} users={users} score={score} scores={scores} setScores={setScores}/>
+                <UserSelect index={index} users={users} score={score} scores={scores} setScores={setScores} lastUsers={lastUsers}/>
                 </th>
               ))}
               <th>
