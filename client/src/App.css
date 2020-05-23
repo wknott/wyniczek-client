@@ -9,9 +9,12 @@
   thead{
     font-weight: bold;
   }
+  .scores-form-group {
+    margin-bottom: 0;
+  }
   .table th,
   .table td { 
-    padding: 0.5rem 0.1rem;
+    padding: 0.5rem 0.3rem;
     font-size: 1rem;
   }
   thead{
@@ -20,9 +23,7 @@
   .select{
     -webkit-appearance: none;
   }
-  .form-group {
-    margin-bottom: 0;
-  }
+  
   .container{
     padding-right: 0;
     padding-left: 0;

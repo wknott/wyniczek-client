@@ -172,8 +172,8 @@ function NewResultForm() {
                   {field}
                 </td>
                 {scores.map((score,index) => (
-                  <td key={index}>
-                    <Form.Group controlId="formScoreInput">
+                  <td className='scores-form-group' key={index}>
+                    <Form.Group controlId="formScoreInput" className='scores-form-group'>
                       <Form.Control style={{minWidth:'50px'}} 
                       type="number" value={score.points[pointFieldIndex] || ''}
                       onChange={e => onChangePoints(e,pointFieldIndex,score)}/>
