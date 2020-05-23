@@ -52,12 +52,17 @@ function NewResultForm() {
     loadUsers()
   },[])
 
-  function createScores(numberOfScores,numberOfFields){
-    const emptyScores = Array.from( {length: numberOfScores}, () => ({
-      user: null,
+  function createScores(numberOfScores,numberOfFields,reversedUsers){
+    const emptyScores = Array.from( {length: numberOfScores}, (x,index) => ({
+      user: reversedUsers !==undefined? reversedUsers.length>index?reversedUsers[index].id:null:null,
       points: Array.from({length: numberOfFields}, () => (null))
     }));
-    setScores(scores.concat(emptyScores).slice(0,numberOfScores))
+    if(reversedUsers ===undefined || reversedUsers.length<2){
+      setScores(scores.concat(emptyScores).slice(0,numberOfScores))
+    }
+    else{
+      setScores(emptyScores.slice(0,numberOfScores))
+    }
   }
   
   async function getLastResults(gameId) {
@@ -75,10 +80,13 @@ function NewResultForm() {
       const lastResult = await getLastResults(newSelectedGame._id)
       if(lastResult !== null){
         const lastResultUsers = lastResult.scores.map(score=>score.user)
-        const revertedUsers = lastResultUsers.slice().reverse()
-        setLastUsers(revertedUsers)
+        const reversedUsers = lastResultUsers.slice().reverse()
+        setLastUsers(reversedUsers)
+        createScores(2,newSelectedGame.pointFields.length,reversedUsers)
       }
-      createScores(2,newSelectedGame.pointFields.length)
+      else{
+        createScores(2,newSelectedGame.pointFields.length)
+      }
     }
     setNumberOfPlayers(2)
   }
@@ -100,11 +108,14 @@ function NewResultForm() {
   };
 
   function addPlayer(){
-    createScores(numberOfPlayers+1,selectedGame.pointFields.length)
+    if(lastUsers.length>numberOfPlayers)
+      createScores(numberOfPlayers+1,selectedGame.pointFields.length,[lastUsers[numberOfPlayers]])
+    else
+      createScores(numberOfPlayers+1,selectedGame.pointFields.length)
     setNumberOfPlayers(numberOfPlayers+1)
   }
   function deletePlayer(){
-    createScores(numberOfPlayers-1,selectedGame.pointFields.length)
+    setScores(scores.slice(0,numberOfPlayers-1))
     setNumberOfPlayers(numberOfPlayers-1)
   }
   
@@ -153,7 +164,7 @@ function NewResultForm() {
               </th>
               {scores.map((score,index) => (
                 <th key={index}>
-                <UserSelect index={index} users={users} score={score} scores={scores} setScores={setScores} lastUsers={lastUsers}/>
+                <UserSelect index={index} users={users} score={score} scores={scores} setScores={setScores}/>
                 </th>
               ))}
               <th>
