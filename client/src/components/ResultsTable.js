@@ -92,8 +92,8 @@ function ResultsTable(){
           <tr>
             <td>Gra</td>
             <td>1. Gracz</td>
-            <td>Zwycięzca</td>
             <td onClick={() => sortDate()}>Data</td>
+            <td>Zwycięzca</td>
           </tr>
         </thead>
         <tbody>
@@ -103,8 +103,8 @@ function ResultsTable(){
                 <td className="hidden-lg">{result.game.name.length > 10? result.game.name.substring(0, 9) + '...': result.game.name}</td>
                 <td className="hidden-sm">{result.game.name}</td>
                 <td>{result.scores.find((score,index) => index === 0).user.name}</td>
-                <td>{result.winner}</td>
                 <td>{formatDateStringShort(result.date)}</td>
+                <td>{result.winner}</td>
                 {0?<td>
                   <Button size="sm" disabled variant="danger" onClick={() => handleShowDeleteModal(result)}>X</Button>
                 </td>:<></>}
