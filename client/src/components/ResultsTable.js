@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
 import DeleteModal from './DeleteModal'
 import ResultModal from './ResultModal'
 import GameSelect from './GameSelect'
@@ -15,6 +18,7 @@ function ResultsTable(){
   const [selectedResult, setSelectedResult] = useState({})
   const [selectedGame, setSelectedGame] = useState()
   const [sortFlag, setSortFlag] = useState(true)
+  const [numberOfResults, setNumberOfResults] = useState(15)
   async function deleteResult(resultId) {
     try {
       const res = await fetch('/api/results/' + resultId, {
@@ -82,11 +86,29 @@ function ResultsTable(){
   },[])
   return(
     <div>
+      <Container>
       <Form>
-        <Form.Group>
-          <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games} firstOption={'Wszystkie gry'}/>
-        </Form.Group>
+        <Row>
+          <Col xs={7}>
+            <Form.Group>
+              <Form.Label>
+                Kategoria
+              </Form.Label>
+              <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games} firstOption={'Wszystkie gry'}/>
+            </Form.Group>
+          </Col>
+          <Col xs={5}>
+            <Form.Group>
+              <Form.Label>
+                Liczba wyników
+              </Form.Label>
+              <Form.Control type='number' value={numberOfResults} onChange={e=> setNumberOfResults(e.target.value)}/>
+            </Form.Group>
+          </Col>
+        </Row>
       </Form>
+      </Container>
+      
       <Table responsive striped bordered hover>
         <thead>
           <tr>
@@ -97,7 +119,7 @@ function ResultsTable(){
           </tr>
         </thead>
         <tbody>
-          {results.filter( result => selectedGame === undefined? 1 :result.game._id === selectedGame._id).map(
+          {results.filter( result => selectedGame === undefined? 1 :result.game._id === selectedGame._id).slice(0,numberOfResults).map(
             (result,index) => (
               <tr key={index} onClick={() => handleShowResultModal(result)}>
                 <td className="hidden-lg">{result.game.name.length > 10? result.game.name.substring(0, 9) + '...': result.game.name}</td>

@@ -3,6 +3,10 @@
   .hidden-xs {
     display: none;
   }
+  .row{
+        margin-right: 0;
+        margin-left: 0;
+  }
   .scores {
     white-space: nowrap;
   }
