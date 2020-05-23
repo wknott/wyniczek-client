@@ -84,7 +84,7 @@ function ResultsTable(){
     <div>
       <Form>
         <Form.Group>
-          <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games}/>
+          <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games} firstOption={'Wszystkie gry'}/>
         </Form.Group>
       </Form>
       <Table responsive striped bordered hover>

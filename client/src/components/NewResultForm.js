@@ -138,7 +138,7 @@ function NewResultForm() {
   <Form onSubmit={e => onSubmit(e)}>
     <Form.Group controlId="formGameSelect">
       <Form.Label>Wybierz grę</Form.Label>
-      <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games}/>
+      <GameSelect selectedGame={selectedGame} selectGame={selectGame} games={games} firstOption={'Wybierz grę'}/>
     </Form.Group>
     {selectedGame !== undefined ?
         <Table responsive> 
