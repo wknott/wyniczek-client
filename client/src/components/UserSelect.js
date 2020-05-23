@@ -9,10 +9,11 @@ function UserSelect(props){
     const newScores = scores.map(s => (s === score)? newScore : s)
     setScores(newScores)
   }
+  const defaultUser = lastUsers === undefined || index >= lastUsers.length?'':lastUsers[index]
   return(
     <Form.Control style={{minWidth:'80px'}} value={score.user === null? '': score.user._id} onChange={e => onChangeScore(e)} as="select">
-        <option value={lastUsers === undefined?'':lastUsers[index]._id}>{lastUsers === undefined?'':lastUsers[index].name}</option>
-        {users.map((user,index) => (<option key={index} value={user._id}>{user.name}</option>))}
+      <option value={defaultUser._id}>{defaultUser.name}</option>
+      {users.map((user,index) => (<option key={index} value={user._id}>{user.name}</option>))}
     </Form.Control>
   )
 }
