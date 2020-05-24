@@ -11,6 +11,7 @@ function UserSelect(props){
       setScores(newScores)
     }
   }
+
   return(
     <Form.Control style={{minWidth:'80px'}} 
     value={score.user !== null? users.find(user => user.id === score.user).name:''} 
