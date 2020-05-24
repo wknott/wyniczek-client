@@ -118,7 +118,15 @@ function NewResultForm() {
     setScores(scores.slice(0,numberOfPlayers-1))
     setNumberOfPlayers(numberOfPlayers-1)
   }
-  
+  function isValid(){
+    const users = scores.map(score=>score.user)
+    return(
+      users.length>0 &&
+      JSON.stringify(users)===JSON.stringify([...new Set(users)]) &&
+      scores.every(score => score.user)&&
+      !scores.every(score => Object.values(score.points).reduce((x, y) => x + y, 0)===0)
+    )
+  }
   async function onSubmit(e){
     e.preventDefault()
     const authToken = authHeader()['Authorization']
@@ -217,7 +225,7 @@ function NewResultForm() {
           </tbody>
         </Table>
       : <></>}
-      <Button variant="primary" type="submit" >
+      <Button disabled={!isValid()} variant="primary" type="submit" >
       Dodaj wynik
       </Button>
     </Form>
