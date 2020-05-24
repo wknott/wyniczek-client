@@ -7,15 +7,16 @@ export function formatDateStringShort(dateString){
   });
 };
 
-export function calculateWinner(results){
-  const sumOfPoints = results.map(result => 
-    Math.max(...(result.scores.map(score => 
+export function calculateWinners(result){
+  const sumOfPoints = Math.max(...(result.scores.map(score => 
       Object.values(score.points).reduce((x, y) => x + y, 0))
-    )))
-  const winners = results.map((result,index) =>
-    result.scores.find(score =>
-      Object.values(score.points).reduce((x, y) => x + y, 0) === sumOfPoints[index]).user.name)
-  return winners
+    ))
+    console.log(sumOfPoints)
+  const winners = result.scores.filter(score => 
+    Object.values(score.points)
+    .reduce((x, y) => x + y, 0) === sumOfPoints)
+    .map(score => score.user.name)
+    return winners
 }
 
 export function compareObjects(key,order='asc') {

@@ -8,7 +8,7 @@ import DeleteModal from './DeleteModal'
 import ResultModal from './ResultModal'
 import GameSelect from './GameSelect'
 import { authHeader } from '../helpers/auth-header';
-import {formatDateStringShort,calculateWinner,compareObjects} from '../logic/utilities.js'
+import {formatDateStringShort,calculateWinners,compareObjects} from '../logic/utilities.js'
 import Form from 'react-bootstrap/Form'
 function ResultsTable(){
   const [results, setResults] = useState([])
@@ -39,10 +39,10 @@ function ResultsTable(){
       })
       const results = await res.json()
       const sortedResults = results.sort(compareObjects('date','desc'))
-      const winners = calculateWinner(sortedResults)
       const resultsWithWinners = sortedResults.map(
-        (result,index) =>(
-          {...result,winner: (winners[index])}))
+        result =>{ console.log(calculateWinners(result))
+          return (
+          {...result,winners: calculateWinners(result) }) })
       setResults(resultsWithWinners)
     } catch (err) {
       return err
@@ -126,7 +126,7 @@ function ResultsTable(){
                 <td className="hidden-sm">{result.game.name}</td>
                 <td>{result.scores.find((score,index) => index === 0).user.name}</td>
                 <td>{formatDateStringShort(result.date)}</td>
-                <td>{result.winner}</td>
+                <td>{result.winners.map(winner=> winner + ' ')}</td>
                 {0?<td>
                   <Button size="sm" disabled variant="danger" onClick={() => handleShowDeleteModal(result)}>X</Button>
                 </td>:<></>}
