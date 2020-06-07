@@ -6,10 +6,10 @@ function Games() {
   return(
     <div>
       <NewGameForm/>
-      <h2 class="gamesHeader">Spis dodanych gier</h2>
+      <h2 className="gamesHeader">Spis dodanych gier</h2>
       <GamesTable/>
-      <h2 class="gamesHeader">Tabela przedstawiająca ile dni minęło od ostatniej rozgrywki</h2>
-      <LastResultTable/>
+      <h2 className="gamesHeader" id={"ostatnieWyniki"}>Liczba dni od ostatniej rozgrywki</h2>
+      <LastResultTable />
     </div>
   )
 }

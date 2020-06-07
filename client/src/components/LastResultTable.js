@@ -22,7 +22,8 @@ export default function LastResultTable() {
     const differenceInDays = Math.round(
       (today.getTime() - lastDate.getTime()) / (1000 * 3600 * 24)
     );
-    return differenceInDays;
+
+    return differenceInDays === 0 ? 0.5 : differenceInDays;
   }
   async function loadGames() {
     try {
@@ -69,29 +70,33 @@ export default function LastResultTable() {
   }
   return (
     <Table className={"table"} responsive>
-      <tr>
-        <th className={"tableHeader"}>#</th>
-        <th className={"tableHeader"}>Nazwa</th>
-        <th className={"tableHeader"}>Ostatni wynik</th>
-      </tr>
-      {games !== [] ? (
-        games.map((game, index) => (
-          <tr key={index} className={tableRowClasses(game)}>
-            <th className={"tableHeader"}>{index + 1}</th>
-            <td>{game.name}</td>
-            <td>
-              {game.lastResultDate}{" "}
-              {game.lastResultDate === "brak"
-                ? "wyników"
-                : game.lastResultDate > 1
-                ? "dni temu"
-                : "dzień temu"}
-            </td>
-          </tr>
-        ))
-      ) : (
-        <></>
-      )}
+      <thead>
+        <tr>
+          <th className={"tableHeader"}>#</th>
+          <th className={"tableHeader"}>Nazwa</th>
+          <th className={"tableHeader"}>Ostatni wynik</th>
+        </tr>
+      </thead>
+      <tbody>
+        {games !== [] ? (
+          games.map((game, index) => (
+            <tr key={index} className={tableRowClasses(game)}>
+              <th className={"tableHeader"}>{index + 1}</th>
+              <td>{game.name}</td>
+              <td>
+                {game.lastResultDate === 0.5 ? "dzisiaj" : game.lastResultDate}{" "}
+                {game.lastResultDate === "brak"
+                  ? "wyników"
+                  : game.lastResultDate > 1
+                  ? "dni temu"
+                  : game.lastResultDate === 0.5? "" : "dzień temu"}
+              </td>
+            </tr>
+          ))
+        ) : (
+          <></>
+        )}
+      </tbody>
     </Table>
   );
 }
