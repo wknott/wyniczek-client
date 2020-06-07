@@ -1,12 +1,37 @@
 const express = require('express')
 const router = express.Router()
 const Game = require('../models/game')
+const Results = require('../models/results')
 
 router.get('/', async (req,res) => {
   try {
     const games = await Game.find()
     res.json(games)
   } catch (err) {
+    res.status(500).json({message: err.message})
+  }
+})
+
+router.get('/last', async (req, res) => {
+  try {
+    console.log("GET /results/last")
+    const query = Results
+    .aggregate(
+      [
+        { $sort: { game: 1, date: 1 } },
+        {
+          $group:
+            {
+              _id: "$game",
+              lastGameDate: { $last: "$date" },
+            }
+        }
+      ]
+    )
+    const results = await query
+    res.json(results)
+  }
+  catch (err) {
     res.status(500).json({message: err.message})
   }
 })

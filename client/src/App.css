@@ -94,3 +94,36 @@
 .bold {
   font-weight: bold;
 }
+
+
+.tableRowGreen{
+  background-color: green;
+  color: #eee;
+}
+.tableRowLightGreen{
+  background-color: rgb(2, 224, 2);
+  color: #222;
+}
+.tableRowYellow{
+  background-color: yellow;
+  color: #222;
+}
+.tableRowOrange{
+  background-color: orange;
+  color: #222;
+}
+.tableRowRed{
+  background-color: crimson;
+  color: #eee;
+}
+.tableHeader{
+  background-color: #007bff;
+  color: #eee;
+}
+.table{
+  text-align: center;
+}
+.gamesHeader{
+  text-align: center;
+  padding: 10px;
+}

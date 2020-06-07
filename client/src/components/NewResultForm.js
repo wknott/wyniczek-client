@@ -16,7 +16,7 @@ function NewResultForm() {
   const [games,setGames] = useState([])
   const [users,setUsers] = useState([])
   const [selectedGame, setSelectedGame] = useState()
-  const [lastUsers, setLastUsers] = useState()
+  const [lastUsers, setLastUsers] = useState([])
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [scores, setScores] = useState([])
   const history = useHistory();
@@ -65,7 +65,7 @@ function NewResultForm() {
     }
   }
   
-  async function getLastResults(gameId) {
+  async function getLastResult(gameId) {
     const res = await fetch(`/api/results?gameId=${gameId}&last=true`, {
       headers: authHeader(),
     })
@@ -77,7 +77,7 @@ function NewResultForm() {
     setSelectedGame(newSelectedGame)
     if (newSelectedGame !== undefined)
     {
-      const lastResult = await getLastResults(newSelectedGame._id)
+      const lastResult = await getLastResult(newSelectedGame._id)
       if(lastResult !== null){
         const lastResultUsers = lastResult.scores.map(score=>score.user)
         const reversedUsers = lastResultUsers.slice().reverse()
