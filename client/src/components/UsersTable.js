@@ -16,8 +16,14 @@ function UsersTable() {
       });
       const results = await resResults.json();
       const usersWithNumberOfResults = users.map((user) => {
-        return { ...user, numberOfResults: getNumberOfResults(user, results) };
+        const numberOfResults = getNumberOfResults(
+          user,
+          results
+        );
+
+        return { ...user, numberOfResults:numberOfResults[0], numberOfWins:numberOfResults[1] };
       });
+      console.log(usersWithNumberOfResults)
       const sortedUsers = usersWithNumberOfResults.sort(
         compareObjects("numberOfResults", "desc")
       );
@@ -40,6 +46,7 @@ function UsersTable() {
             <td>#</td>
             <td>Nazwa</td>
             <td>Liczba wyników</td>
+            <td>Liczba zwycięstw</td>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +56,7 @@ function UsersTable() {
                 <td>{index + 1}</td>
                 <td>{user.name}</td>
                 <td>{user.numberOfResults}</td>
+                <td>{user.numberOfWins}</td>
               </tr>
             ))
           ) : (

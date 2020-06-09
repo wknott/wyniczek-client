@@ -11,6 +11,7 @@ function Navigation({isAuthenticated, handleLogout}) {
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/games" href="#">Gry</Nav.Link>
           <Nav.Link as={Link} to="/createresult" href="#">Nowy wynik</Nav.Link>
+          <Nav.Link as={Link} to="/tabela-uzytkownikow" href="#">Użytkownicy</Nav.Link>
         </Nav>
         <Nav className="ml-auto">
           {isAuthenticated

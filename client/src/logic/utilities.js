@@ -41,10 +41,15 @@ export function compareObjects(key, order = "asc") {
 
 export function getNumberOfResults(user, results) {
   let numberOfResults = 0;
-  results.map((result) =>
+  let numberOfWins = 0;
+  results.map((result) => {
+    calculateWinners(result).map((winner) =>
+      winner === user.name ? numberOfWins++ : {}
+    );
     result.scores.map((score) =>
       score.user.name === user.name ? numberOfResults++ : {}
-    )
-  );
-  return numberOfResults;
+    );
+  });
+  console.log(numberOfResults, numberOfWins)
+  return [numberOfResults, numberOfWins];
 }
