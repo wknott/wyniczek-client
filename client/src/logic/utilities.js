@@ -50,6 +50,14 @@ export function getNumberOfResults(user, results) {
       score.user.name === user.name ? numberOfResults++ : {}
     );
   });
-  console.log(numberOfResults, numberOfWins)
+  console.log(numberOfResults, numberOfWins);
   return [numberOfResults, numberOfWins];
+}
+
+export function getNumberOfGameResults(game, results) {
+  let numberOfResults = 0;
+  results.map((result) =>
+    result.game.name === game.name ? numberOfResults++ : {}
+  );
+  return numberOfResults;
 }

@@ -14,7 +14,6 @@ router.get('/', async (req,res) => {
 
 router.get('/last', async (req, res) => {
   try {
-    console.log("GET /results/last")
     const query = Results
     .aggregate(
       [
