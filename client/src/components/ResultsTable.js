@@ -40,9 +40,7 @@ function ResultsTable(){
       const results = await res.json()
       const sortedResults = results.sort(compareObjects('date','desc'))
       const resultsWithWinners = sortedResults.map(
-        result =>{ console.log(calculateWinners(result))
-          return (
-          {...result,winners: calculateWinners(result) }) })
+        result =>({...result,winners: calculateWinners(result) }) )
       setResults(resultsWithWinners)
     } catch (err) {
       return err

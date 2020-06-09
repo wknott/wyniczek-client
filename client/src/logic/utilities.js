@@ -13,7 +13,6 @@ export function calculateWinners(result) {
       Object.values(score.points).reduce((x, y) => x + y, 0)
     )
   );
-  console.log(sumOfPoints);
   const winners = result.scores
     .filter(
       (score) =>
