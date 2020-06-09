@@ -1,70 +1,63 @@
-import React, {useEffect, useState} from 'react'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
-import UserDeleteModal from './UserDeleteModal'
-function UsersTable(){
-  const [users, setUsers] = useState([])
-  const [show, setShow] = useState(false)
-  const [userId, setUserId] = useState('')
-  async function deleteUser(userId) {
+import React, { useEffect, useState } from "react";
+import Table from "react-bootstrap/Table";
+// import DeleteModal from './DeleteModal'
+import { authHeader } from "../helpers/auth-header";
+import { getNumberOfResults, compareObjects } from "../logic/utilities";
+function UsersTable() {
+  const [users, setUsers] = useState([]);
+  async function loadUsers() {
     try {
-      const res = await fetch('/api/users/' + userId, {
-        method: 'DELETE'
-      })
-      setShow(false)
-      await loadUsers()
-      return res
+      const res = await fetch("/api/users", {
+        headers: authHeader(),
+      });
+      const users = await res.json();
+      const resResults = await fetch("/api/results", {
+        headers: authHeader(),
+      });
+      const results = await resResults.json();
+      const usersWithNumberOfResults = users.map((user) => {
+        return { ...user, numberOfResults: getNumberOfResults(user, results) };
+      });
+      const sortedUsers = usersWithNumberOfResults.sort(
+        compareObjects("numberOfResults", "desc")
+      );
+      setUsers(sortedUsers);
     } catch (err) {
-      return err
+      return err;
     }
   }
-  async function loadUsers(){
-    try {
-      const res = await fetch('/api/users')
-      const users = await res.json()
-      setUsers(users)
-    } catch (err) {
-      return err
-    }
-  }
-  function handleClick(userId){
-    setShow(true)
-    setUserId(userId)
-  }
-  useEffect(()=>{
-    loadUsers()
-  },[])
-  return(
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  return (
     <div>
+      <h3>Tabela użytkowników</h3>
       <Table>
         <thead>
           <tr>
             <td>#</td>
             <td>Nazwa</td>
+            <td>Liczba wyników</td>
           </tr>
         </thead>
         <tbody>
-          {users !== [] ? users.map(
-            (user,index) => (
+          {users !== [] ? (
+            users.map((user, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{user.name}</td>
-                <td>
-                  <Button size="sm" variant="danger" onClick={() => handleClick(user._id)}>X</Button>
-                </td>
+                <td>{user.numberOfResults}</td>
               </tr>
-              )):<></> }
+            ))
+          ) : (
+            <></>
+          )}
         </tbody>
       </Table>
-      <DeleteModal 
-      show={show} 
-      handleClose={() => setShow(false)} 
-      handleDelete={deleteUser} 
-      id={userId}
-      warningText={'Czy chcesz usunąć tego użytkownika?'}
-      />
-      </div>
-  )
+    </div>
+  );
 }
 
-export default UsersTable
+export default UsersTable;

@@ -9,6 +9,7 @@ import NewResultForm from "./components/NewResultForm";
 import LoginForm from "./components/LoginForm";
 import PrivateRoute from "./components/PrivateRoute";
 import ResultsTable from "./components/ResultsTable";
+import UsersTable from "./components/UsersTable";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -39,6 +40,7 @@ function App() {
             <PrivateRoute path="/createresult" component={NewResultForm} />
             <PrivateRoute path="/games" component={Games} />
             <PrivateRoute path="/results" component={ResultsTable} />
+            <PrivateRoute path="/tabela-uzytkownikow" component={UsersTable} />
             <Route path="/users" component={Users} />
             <Route path="/signup" component={LoginForm} />
         </Router>
