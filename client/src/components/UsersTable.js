@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-// import DeleteModal from './DeleteModal'
-import { authHeader } from "../helpers/auth-header";
+
 import { getNumberOfResults, compareObjects } from "../logic/utilities";
-function UsersTable() {
-  const [users, setUsers] = useState([]);
-  async function loadUsers() {
+function UsersTable({users,results}) {
+  const [usersToDisplay, setUsersToDisplay] = useState([]);
+  async function addResultsAndWins() {
     try {
-      const res = await fetch("/api/users", {
-        headers: authHeader(),
-      });
-      const users = await res.json();
-      const resResults = await fetch("/api/results", {
-        headers: authHeader(),
-      });
-      const results = await resResults.json();
       const usersWithNumberOfResults = users.map((user) => {
         const numberOfResults = getNumberOfResults(
           user,
@@ -27,15 +18,15 @@ function UsersTable() {
       const sortedUsers = usersWithNumberOfResults.sort(
         compareObjects("numberOfResults", "desc")
       );
-      setUsers(sortedUsers);
+      setUsersToDisplay(sortedUsers);
     } catch (err) {
       return err;
     }
   }
 
   useEffect(() => {
-    loadUsers();
-  }, []);
+    addResultsAndWins();
+  }, [users,results]);
 
   return (
     <div>
@@ -50,8 +41,8 @@ function UsersTable() {
           </tr>
         </thead>
         <tbody>
-          {users !== [] ? (
-            users.map((user, index) => (
+          {usersToDisplay !== [] ? (
+            usersToDisplay.map((user, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{user.name}</td>
