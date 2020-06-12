@@ -43,15 +43,17 @@ export default function Stats() {
     }
   }
   function selectGame(e) {
-    const newSelectedGame = games.find((game) => game._id === e.target.value);
-    const numberOfGameResults = getNumberOfGameResults(
-      newSelectedGame,
-      results
-    );
-    setSelectedGame({
-      ...newSelectedGame,
-      numberOfResults: numberOfGameResults,
-    });
+    if (e.target.value) {
+      const newSelectedGame = games.find((game) => game._id === e.target.value);
+      const numberOfGameResults = getNumberOfGameResults(
+        newSelectedGame,
+        results
+      );
+      setSelectedGame({
+        ...newSelectedGame,
+        numberOfResults: numberOfGameResults,
+      });
+    }
   }
   useEffect(() => {
     loadGames();
@@ -67,7 +69,7 @@ export default function Stats() {
         games={games}
         firstOption={"Wybierz grę"}
       />
-      {selectedGame !== undefined ? (
+      {selectedGame !== undefined && selectGame !== "" ? (
         <div>
           <h4>{selectedGame.name}</h4>
           <p>Liczba gier: {selectedGame.numberOfResults}</p>
