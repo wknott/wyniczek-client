@@ -1,10 +1,6 @@
-import React from 'react'
-import ResultsTable from './ResultsTable'
-function Wyniczek(){
-  return(
-    <div>
-        <ResultsTable/>
-    </div>
-  )
+import React from "react";
+import ResultsTable from "./ResultsTable";
+function Wyniczek() {
+  return <ResultsTable />;
 }
-export default Wyniczek
+export default Wyniczek;
