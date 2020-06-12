@@ -31,22 +31,25 @@ function App() {
 
   return (
     <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-      <div className="container">
-        <Router>
-          <Navigation
-            isAuthenticated={isAuthenticated}
-            handleLogout={handleLogout}
-          />
+      <Router>
+        <Navigation
+          isAuthenticated={isAuthenticated}
+          handleLogout={handleLogout}
+        />
+        <div className="appContainer">
           <PrivateRoute exact path="/" component={Wyniczek} />
           <PrivateRoute path="/createresult" component={NewResultForm} />
           <PrivateRoute path="/games" component={Games} />
           <PrivateRoute path="/results" component={ResultsTable} />
-          <PrivateRoute path="/statystyki-uzytkownikow" component={UsersStats} />
+          <PrivateRoute
+            path="/statystyki-uzytkownikow"
+            component={UsersStats}
+          />
           <PrivateRoute path="/statystyki" component={Stats} />
           <Route path="/users" component={Users} />
           <Route path="/signup" component={LoginForm} />
-        </Router>
-      </div>
+        </div>
+      </Router>
     </AppContext.Provider>
   );
 }

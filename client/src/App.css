@@ -28,10 +28,6 @@
     -webkit-appearance: none;
   }
   
-  .container{
-    padding-right: 0;
-    padding-left: 0;
-  }
   .hidden-sm {
     display: none;
   }
@@ -129,4 +125,10 @@
 }
 .tableContainer{
   overflow-x: auto;
+}
+
+.appContainer{
+  padding: 10px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
