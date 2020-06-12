@@ -29,21 +29,21 @@ function UsersTable({users,results}) {
 
   return (
     <div>
-      <h3>Tabela użytkowników</h3>
-      <Table>
+      <h3 className="centeredHeader">Tabela użytkowników</h3>
+      <Table className={"table"} responsive striped bordered hover >
         <thead>
           <tr>
-            <td>#</td>
-            <td>Nazwa</td>
-            <td>Liczba wyników</td>
-            <td>Liczba zwycięstw</td>
+            <th className={"tableHeader"}>#</th>
+            <th className={"tableHeader"}>Nazwa</th>
+            <th className={"tableHeader"}>Liczba wyników</th>
+            <th className={"tableHeader"}>Liczba zwycięstw</th>
           </tr>
         </thead>
         <tbody>
           {usersToDisplay !== [] ? (
             usersToDisplay.map((user, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
+                <th className={"tableHeader"}>{index + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.numberOfResults}</td>
                 <td>{user.numberOfWins}</td>
