@@ -43,7 +43,6 @@ export default function GameLastResultTable() {
       const sortedGames = gamesWithLastResults.sort(
         compareObjects("lastResultDate")
       );
-      console.log(sortedGames);
       setGames(sortedGames);
     } catch (err) {
       return err;

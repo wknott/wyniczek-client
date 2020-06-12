@@ -14,7 +14,6 @@ function UsersTable({users,results}) {
 
         return { ...user, numberOfResults:numberOfResults[0], numberOfWins:numberOfResults[1] };
       });
-      console.log(usersWithNumberOfResults)
       const sortedUsers = usersWithNumberOfResults.sort(
         compareObjects("numberOfResults", "desc")
       );

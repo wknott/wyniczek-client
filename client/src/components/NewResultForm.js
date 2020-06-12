@@ -135,7 +135,6 @@ function NewResultForm() {
       scores: scores,
       author: JSON.parse(localStorage.user).id,
     }
-    console.log(newResult)
     try {
       const res = await fetch('/api/results', {
         method: 'POST',

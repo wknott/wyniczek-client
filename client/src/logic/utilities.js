@@ -50,7 +50,6 @@ export function getNumberOfResults(user, results) {
       score.user.name === user.name ? numberOfResults++ : {}
     );
   });
-  console.log(numberOfResults, numberOfWins);
   return [numberOfResults, numberOfWins];
 }
 

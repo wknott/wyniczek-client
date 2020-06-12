@@ -23,7 +23,6 @@ function NewGameForm(){
     const newGame = {name,minPlayers,maxPlayers,pointFields}
     const authToken = authHeader()['Authorization']
 
-    console.log(newGame)
     try {
       const res = await fetch('/api/games', {
         method: 'POST',
@@ -35,7 +34,6 @@ function NewGameForm(){
         body: JSON.stringify(newGame) 
       })
       const data = await res.json()
-      console.log(data)
       setName('')
       setMinPlayers(2)
       setMaxPlayers(4)
