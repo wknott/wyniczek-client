@@ -127,3 +127,6 @@
   text-align: center;
   padding: 10px;
 }
+.tableContainer{
+  overflow-x: auto;
+}

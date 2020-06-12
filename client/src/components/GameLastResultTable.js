@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { authHeader } from "../helpers/auth-header";
 import Table from "react-bootstrap/Table";
 import { compareObjects } from "../logic/utilities.js";
-export default function LastResultTable() {
+export default function GameLastResultTable() {
   const [games, setGames] = useState([]);
 
   async function getLastResults() {
@@ -69,34 +69,40 @@ export default function LastResultTable() {
     }
   }
   return (
-    <Table className={"table"} responsive>
-      <thead>
-        <tr>
-          <th className={"tableHeader"}>#</th>
-          <th className={"tableHeader"}>Nazwa</th>
-          <th className={"tableHeader"}>Ostatni wynik</th>
-        </tr>
-      </thead>
-      <tbody>
-        {games !== [] ? (
-          games.map((game, index) => (
-            <tr key={index} className={tableRowClasses(game)}>
-              <th className={"tableHeader"}>{index + 1}</th>
-              <td>{game.name}</td>
-              <td>
-                {game.lastResultDate === 0.5 ? "dzisiaj" : game.lastResultDate}{" "}
-                {game.lastResultDate === "brak"
-                  ? "wyników"
-                  : game.lastResultDate > 1
-                  ? "dni temu"
-                  : game.lastResultDate === 0.5? "" : "dzień temu"}
-              </td>
-            </tr>
-          ))
-        ) : (
-          <></>
-        )}
-      </tbody>
-    </Table>
+    <div className="tableContainer">
+      <Table className={"table"} responsive>
+        <thead>
+          <tr>
+            <th className={"tableHeader"}>#</th>
+            <th className={"tableHeader"}>Nazwa</th>
+            <th className={"tableHeader"}>Ostatni wynik</th>
+          </tr>
+        </thead>
+        <tbody>
+          {games !== [] ? (
+            games.map((game, index) => (
+              <tr key={index} className={tableRowClasses(game)}>
+                <th className={"tableHeader"}>{index + 1}</th>
+                <td>{game.name}</td>
+                <td>
+                  {game.lastResultDate === 0.5
+                    ? "dzisiaj"
+                    : game.lastResultDate}{" "}
+                  {game.lastResultDate === "brak"
+                    ? "wyników"
+                    : game.lastResultDate > 1
+                    ? "dni temu"
+                    : game.lastResultDate === 0.5
+                    ? ""
+                    : "dzień temu"}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <></>
+          )}
+        </tbody>
+      </Table>
+    </div>
   );
 }
