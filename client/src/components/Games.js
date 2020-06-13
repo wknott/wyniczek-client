@@ -1,9 +1,10 @@
 import React from "react";
 import GamesTable from "./GamesTable";
 import GameLastResultTable from "./GameLastResultTable";
-import NewGameModal from "./NewGameModal";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import NewGameForm from "./NewGameForm";
+
 function Games() {
   return (
     <div>
@@ -13,15 +14,12 @@ function Games() {
           <GamesTable />
         </Tab>
         <Tab eventKey="lastResults" title="Ostatnie wyniki">
-          <h2 className="gamesHeader">Liczba dni od ostatniej rozgrywki</h2>
+          <h2 className="gamesHeader">Liczba dni od ostatniego wyniku</h2>
           <GameLastResultTable />
         </Tab>
-        <Tab eventKey="newGame" title="Dodaj grę">
+        <Tab eventKey="newGame" title="Nowa gra">
           <h2 className="gamesHeader">Nowa gra</h2>
-          <p>
-            Jeśli chcesz dodać nową grę, kliknij poniżej:
-          </p>
-          <NewGameModal />
+          <NewGameForm />
         </Tab>
       </Tabs>
     </div>
