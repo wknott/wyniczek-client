@@ -1,12 +1,11 @@
-import React from 'react'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-function DeleteModal(props){
-  const {show, handleClose, handleDelete, id, warningText} = props
+import React from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+function DeleteModal(props) {
+  const { show, handleClose, handleDelete, id, warningText } = props;
   return (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-      </Modal.Header>
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>{warningText}</Modal.Body>
       <Modal.Footer>
         <Button variant="danger" onClick={() => handleDelete(id)}>
@@ -17,7 +16,7 @@ function DeleteModal(props){
         </Button>
       </Modal.Footer>
     </Modal>
-  )
+  );
 }
 
-export default DeleteModal
+export default DeleteModal;

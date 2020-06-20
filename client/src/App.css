@@ -1,33 +1,32 @@
-
 @media (max-width: 575.98px) {
   .hidden-xs {
     display: none;
   }
-  .row{
-        margin-right: 0;
-        margin-left: 0;
+  .row {
+    margin-right: 0;
+    margin-left: 0;
   }
   .scores {
     white-space: nowrap;
   }
-  thead{
+  thead {
     font-weight: bold;
   }
   .scores-form-group {
     margin-bottom: 0;
   }
   .table th,
-  .table td { 
+  .table td {
     padding: 0.5rem 0.3rem;
     font-size: 1rem;
   }
-  thead{
+  thead {
     white-space: nowrap;
   }
-  .select{
+  .select {
     -webkit-appearance: none;
   }
-  
+
   .hidden-sm {
     display: none;
   }
@@ -40,7 +39,6 @@
     border-spacing: 0;
   }   
    */
-  
 }
 @media (min-width: 575.98px) {
   .hidden-lg {
@@ -91,47 +89,46 @@
   font-weight: bold;
 }
 
-
-.tableRowGreen{
+.tableRowGreen {
   background-color: green;
   color: #eee;
 }
-.tableRowLightGreen{
+.tableRowLightGreen {
   background-color: rgb(2, 224, 2);
   color: #222;
 }
-.tableRowYellow{
+.tableRowYellow {
   background-color: yellow;
   color: #222;
 }
-.tableRowOrange{
+.tableRowOrange {
   background-color: orange;
   color: #222;
 }
-.tableRowRed{
+.tableRowRed {
   background-color: crimson;
   color: #eee;
 }
-.tableHeader{
+.tableHeader {
   background-color: #007bff;
   color: #eee;
 }
-.table{
+.table {
   text-align: center;
 }
-.gamesHeader{
+.gamesHeader {
   text-align: center;
   padding: 10px;
 }
-.tableContainer{
+.tableContainer {
   overflow-x: auto;
 }
 
-.appContainer{
+.appContainer {
   padding: 10px;
   max-width: 1000px;
   margin: 0 auto;
 }
-.centeredHeader{
+.centeredHeader {
   text-align: center;
 }

@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 
 import { getNumberOfResults, compareObjects } from "../logic/utilities";
-function UsersTable({users,results}) {
+function UsersTable({ users, results }) {
   const [usersToDisplay, setUsersToDisplay] = useState([]);
   async function addResultsAndWins() {
     try {
       const usersWithNumberOfResults = users.map((user) => {
-        const numberOfResults = getNumberOfResults(
-          user,
-          results
-        );
+        const numberOfResults = getNumberOfResults(user, results);
 
-        return { ...user, numberOfResults:numberOfResults[0], numberOfWins:numberOfResults[1] };
+        return {
+          ...user,
+          numberOfResults: numberOfResults[0],
+          numberOfWins: numberOfResults[1],
+        };
       });
       const sortedUsers = usersWithNumberOfResults.sort(
         compareObjects("numberOfResults", "desc")
@@ -25,12 +26,12 @@ function UsersTable({users,results}) {
 
   useEffect(() => {
     addResultsAndWins();
-  }, [users,results]);
+  }, [users, results]);
 
   return (
     <div>
       <h3 className="centeredHeader">Tabela użytkowników</h3>
-      <Table className={"table"} responsive striped bordered hover >
+      <Table className={"table"} responsive striped bordered hover>
         <thead>
           <tr>
             <th className={"tableHeader"}>#</th>
