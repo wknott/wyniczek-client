@@ -28,7 +28,7 @@ function App() {
     userHasAuthenticated(false);
     localStorage.removeItem("user");
   }
-  console.log('test');
+
   return (
     <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
       <Router>
