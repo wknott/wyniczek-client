@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -12,6 +12,11 @@ function LoginForm() {
   const history = useHistory();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const inputRef = useRef();
+  
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -52,6 +57,7 @@ function LoginForm() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                ref={inputRef}
               />
             </Form.Group>
             <Form.Group controlId="formNewUserPassword">
