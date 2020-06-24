@@ -18,19 +18,6 @@ export default function GameWinnersPieChart({ results, users }) {
       const sortedUsers = usersWithNumberOfResults.sort(
         compareObjects("numberOfResults", "desc")
       );
-      console.log(
-        [["Task", "Hours per Day"]].concat(
-          sortedUsers.map((user) => [user.name, user.numberOfWins])
-        )
-      );
-      console.log([
-        ["Task", "Hours per Day"],
-        ["Work", 11],
-        ["Eat", 2],
-        ["Commute", 2],
-        ["Watch TV", 2],
-        ["Sleep", 7],
-      ]);
       setUsersToDisplay(sortedUsers);
     } catch (err) {
       return err;
@@ -42,7 +29,7 @@ export default function GameWinnersPieChart({ results, users }) {
   }, [users, results]);
   return (
     <Chart
-      width={"300px"}
+      maxWidth={"500px"}
       height={"300px"}
       chartType="PieChart"
       loader={<div>Wczytywanie wykresu</div>}
@@ -52,7 +39,8 @@ export default function GameWinnersPieChart({ results, users }) {
           .map((user) => [user.name, user.numberOfWins])
       )}
       options={{
-        title: "My Daily Activities",
+        title: "Procent wygranych gier",
+        is3D: true,
       }}
       rootProps={{ "data-testid": "1" }}
     />
