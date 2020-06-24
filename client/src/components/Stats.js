@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GameSelect from "./GameSelect";
 import { authHeader } from "../helpers/auth-header";
-import { getNumberOfGameResults } from "../logic/utilities";
+import { getNumberOfGameResults, compareObjects } from "../logic/utilities";
 import UsersTable from "./UsersTable";
 import GameWinnersPieChart from "./GameWinnersPieChart";
 
@@ -16,7 +16,8 @@ export default function Stats() {
         headers: authHeader(),
       });
       const games = await res.json();
-      setGames(games);
+      const sortedGames = games.sort(compareObjects("name"));
+      setGames(sortedGames);
     } catch (err) {
       return err;
     }
