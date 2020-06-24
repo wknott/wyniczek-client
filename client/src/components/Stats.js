@@ -3,6 +3,7 @@ import GameSelect from "./GameSelect";
 import { authHeader } from "../helpers/auth-header";
 import { getNumberOfGameResults } from "../logic/utilities";
 import UsersTable from "./UsersTable";
+import GameWinnersPieChart from "./GameWinnersPieChart";
 
 export default function Stats() {
   const [selectedGame, setSelectedGame] = useState();
@@ -73,6 +74,12 @@ export default function Stats() {
         <div>
           <h4>{selectedGame.name}</h4>
           <p>Liczba gier: {selectedGame.numberOfResults}</p>
+          <GameWinnersPieChart
+            users={users}
+            results={results.filter(
+              (result) => result.game.name === selectedGame.name
+            )}
+          />
           <UsersTable
             users={users}
             results={results.filter(
