@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { authHeader } from "../helpers/auth-header";
 import { ButtonGroup } from "react-bootstrap";
 
-function NewGameForm() {
+function NewGameForm(props) {
   const [name, setName] = useState("");
   const [minPlayers, setMinPlayers] = useState(2);
   const [maxPlayers, setMaxPlayers] = useState(4);
   const [pointFields, setPointFields] = useState([]);
+  const isActive = props.isActive;
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [isActive]);
 
   function addField() {
     setPointFields([...pointFields, ""]);
@@ -55,6 +61,7 @@ function NewGameForm() {
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
+          ref={inputRef}
         />
       </Form.Group>
       <Form.Group controlId="minPlayers">
