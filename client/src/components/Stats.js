@@ -16,7 +16,8 @@ export default function Stats() {
         headers: authHeader(),
       });
       const games = await res.json();
-      setGames(games);
+      const sortedGames = games.sort(compareObjects("name"));
+      setGames(sortedGames);
     } catch (err) {
       return err;
     }
