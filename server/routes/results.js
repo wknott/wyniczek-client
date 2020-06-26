@@ -6,13 +6,16 @@ router.get('/', async (req, res) => {
   try {
     const gameId = req.query.gameId
     const onlyLast = req.query.last
+    const userIds = req.query.users
     
     let query
 
-    if (gameId === undefined)
+    if (gameId === undefined){
       query = Results.find()
-    else
-    {
+      if (userIds !== undefined)
+        query.elemMatch("scores", {"user": { $in: userIds } })
+    }
+    else {
       if (onlyLast === 'true')
         query = Results.findOne({game: gameId}).sort({ date: -1 })
       else
