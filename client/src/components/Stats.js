@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import GameSelect from "./GameSelect";
-import { authHeader } from "../helpers/auth-header";
+import { authHeader, getCurrentUserId } from "../helpers/auth-header";
 import { getNumberOfGameResults } from "../logic/utilities";
 import UsersTable from "./UsersTable";
 import GameWinnersPieChart from "./GameWinnersPieChart";
+import { compareObjects } from "../logic/utilities.js";
 
 export default function Stats() {
   const [selectedGame, setSelectedGame] = useState();
@@ -24,7 +25,7 @@ export default function Stats() {
   }
   async function loadResults() {
     try {
-      const res = await fetch("/api/results", {
+      const res = await fetch("/api/results?users=" + getCurrentUserId(), {
         headers: authHeader(),
       });
       const results = await res.json();
