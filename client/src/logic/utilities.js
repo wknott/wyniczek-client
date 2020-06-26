@@ -16,7 +16,9 @@ export function calculateWinners(result) {
   const winners = result.scores
     .filter(
       (score) =>
-        Object.values(score.points).reduce((x, y) => x + y, 0) === sumOfPoints
+        Object.values(score.points).reduce((x, y) => x + y, 0) ===
+          sumOfPoints &&
+        Object.values(score.points).reduce((x, y) => x + y, 0) > 0
     )
     .map((score) => score.user.name);
   return winners;
