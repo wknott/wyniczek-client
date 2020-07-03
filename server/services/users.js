@@ -11,11 +11,21 @@ module.exports = {
 
 async function authenticate({ username, password }) {
   const user = await User.findOne({ name: username });
-  if (user && bcrypt.compareSync(password, user.hash)) {
+  if (user) {
+    if (!user.hash && password) {
+      user.hash = bcrypt.hashSync(password, 10);
+      await user.save();
+    }
+    else {
+      if (!bcrypt.compareSync(password, user.hash)) {
+        return;
+      }
+    }
+          
     const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET);
     return {
-        ...user.toJSON(),
-        token
+      ...user.toJSON(),
+      token
     };
   }
 }
@@ -46,10 +56,13 @@ async function getById(id) {
 //     const user = await User.findById(id);
 
 //     // validate
-//     if (!user) throw 'User not found';
-//     if (user.username !== userParam.username && await User.findOne({ username: userParam.username })) {
-//         throw 'Username "' + userParam.username + '" is already taken';
-//     }
+//     if (!user) throw 'Nie znaleziono użytkownika o podanym identyfikatorze.';
+//     // if (user.username !== userParam.username && await User.findOne({ username: userParam.username })) {
+//     //     throw 'Username "' + userParam.username + '" is already taken';
+//     // }
+
+//     if (user.username !== userParam.username)
+//       throw 'Nie można zmieniać nazwy użytkownika.'
 
 //     // hash password if it was entered
 //     if (userParam.password) {

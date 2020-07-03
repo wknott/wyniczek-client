@@ -6,6 +6,7 @@ router.post('/authenticate', authenticate);
 router.post('/register', register);
 router.get('/', getAll);
 router.get('/:id', getById);
+//router.put('/:id', update);
 
 function authenticate(req, res, next) {
   userService.authenticate(req.body)
@@ -18,6 +19,12 @@ function register(req, res, next) {
     .then(() => res.json({}))
     .catch(err => next(err));
 }
+
+// function update(req, res, next) {
+//   userService.update(req.params.id, req.body)
+//       .then(() => res.json({}))
+//       .catch(err => next(err));
+// }
 
 function getAll(req, res, next) {
   userService.getAll()
