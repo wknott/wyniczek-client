@@ -15,5 +15,5 @@ export function getCurrentUser() {
 
 export function getCurrentUserId() {
   const user = getCurrentUser()
-  return user !== undefined ? user.id : null
+  return user ? user.id : null
 }

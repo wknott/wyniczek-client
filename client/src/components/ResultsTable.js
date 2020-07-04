@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import DeleteModal from "./DeleteModal";
 import ResultModal from "./ResultModal";
 import GameSelect from "./GameSelect";
-import { authHeader, getCurrentUserId, getCurrentUser } from "../helpers/auth-header";
+import { authHeader, getCurrentUserId } from "../helpers/auth-header";
 import {
   formatDateStringShort,
   calculateWinners,
@@ -38,7 +38,9 @@ function ResultsTable() {
   }
   async function loadResults() {
     try {
-      const res = await fetch("/api/results?users=" + getCurrentUserId(), {
+      const currentUserId = getCurrentUserId()
+      const url = `/api/results${currentUserId ? '?users=' + currentUserId : ''}`
+      const res = await fetch(url, {
         headers: authHeader(),
       });
       const results = await res.json();

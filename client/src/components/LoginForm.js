@@ -37,8 +37,12 @@ function LoginForm() {
       if (data.token != null) {
         localStorage.setItem("user", JSON.stringify(data));
         userHasAuthenticated(true);
+        history.push("/");
       }
-      history.push("/");
+      else {
+        setName('')
+        setPassword('')
+      }
     } catch (err) {
       return err;
     }

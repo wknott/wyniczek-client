@@ -37,7 +37,7 @@ function App() {
           handleLogout={handleLogout}
         />
         <div className="appContainer">
-          <PrivateRoute exact path="/" component={Wyniczek} />
+          <Route exact path="/" component={Wyniczek} />
           <PrivateRoute path="/createresult" component={NewResultForm} />
           <PrivateRoute path="/games" component={Games} />
           <PrivateRoute path="/results" component={ResultsTable} />
@@ -45,7 +45,7 @@ function App() {
             path="/statystyki-uzytkownikow"
             component={UsersStats}
           />
-          <PrivateRoute path="/statystyki" component={Stats} />
+          <Route path="/statystyki" component={Stats} />
           <Route path="/users" component={Users} />
           <Route path="/signup" component={LoginForm} />
         </div>

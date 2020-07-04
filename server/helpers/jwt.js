@@ -10,6 +10,9 @@ function jwt() {
             // public routes that don't require authentication
             '/api/users/authenticate',
             '/api/users/register',
+            { url: '/api/games', methods: ['GET']  },
+            { url: '/api/results', methods: ['GET']  },
+            { url: '/api/users', methods: ['GET']  },
         ]
     });
 }

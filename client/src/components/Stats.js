@@ -24,7 +24,9 @@ export default function Stats() {
   }
   async function loadResults() {
     try {
-      const res = await fetch("/api/results?users=" + getCurrentUserId(), {
+      const currentUserId = getCurrentUserId()
+      const url = `/api/results${currentUserId ? '?users=' + currentUserId : ''}`
+      const res = await fetch(url, {
         headers: authHeader(),
       });
       const results = await res.json();
