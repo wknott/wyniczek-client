@@ -18,7 +18,8 @@ function UsersTable({ users, results }) {
       const sortedUsers = usersWithNumberOfResults.sort(
         compareObjects("numberOfResults", "desc")
       );
-      setUsersToDisplay(sortedUsers);
+      const filteredUsers = sortedUsers.filter(user => user.numberOfResults)
+      setUsersToDisplay(filteredUsers);
     } catch (err) {
       return err;
     }
@@ -51,8 +52,8 @@ function UsersTable({ users, results }) {
               </tr>
             ))
           ) : (
-            <></>
-          )}
+              <></>
+            )}
         </tbody>
       </Table>
     </div>
