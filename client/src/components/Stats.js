@@ -70,7 +70,10 @@ export default function Stats() {
       <GameSelect
         selectedGame={selectedGame}
         selectGame={selectGame}
-        games={games}
+        games={games.filter(game => getNumberOfGameResults(
+          game,
+          results
+        ))}
         firstOption={"Wybierz grę"}
       />
       {selectedGame !== undefined && selectGame !== "" ? (
@@ -91,8 +94,8 @@ export default function Stats() {
           />
         </div>
       ) : (
-        <></>
-      )}
+          <></>
+        )}
     </div>
   );
 }
