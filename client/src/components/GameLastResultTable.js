@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { authHeader } from "../helpers/auth-header";
 import Table from "react-bootstrap/Table";
 import { compareObjects } from "../logic/utilities.js";
+import { getAllSortedGames } from "../proxy/databaseConnection";
 export default function GameLastResultTable() {
   const [games, setGames] = useState([]);
 
@@ -25,28 +26,21 @@ export default function GameLastResultTable() {
 
     return differenceInDays === 0 ? 0.5 : differenceInDays;
   }
-  async function loadGames() {
-    try {
-      const res = await fetch("/api/games", {
-        headers: authHeader(),
-      });
-      const games = await res.json();
-      const lastResults = await getLastResults();
-      const gamesWithLastResults = games.map((game) => ({
-        ...game,
-        lastResultDate:
-          lastResults
-            .filter((result) => result._id === game._id)
-            .map((result) => calculateDaysDifference(result.lastGameDate))[0] ||
-          "brak",
-      }));
-      const sortedGames = gamesWithLastResults.sort(
-        compareObjects("lastResultDate")
-      );
-      setGames(sortedGames);
-    } catch (err) {
-      return err;
-    }
+  const loadGames = async () => {
+    const games = await getAllSortedGames();
+    const lastResults = await getLastResults();
+    const gamesWithLastResults = games.map((game) => ({
+      ...game,
+      lastResultDate:
+        lastResults
+          .filter((result) => result._id === game._id)
+          .map((result) => calculateDaysDifference(result.lastGameDate))[0] ||
+        "brak",
+    }));
+    const sortedGames = gamesWithLastResults.sort(
+      compareObjects("lastResultDate")
+    );
+    setGames(sortedGames);
   }
 
   useEffect(() => {
@@ -90,16 +84,16 @@ export default function GameLastResultTable() {
                   {game.lastResultDate === "brak"
                     ? "wyników"
                     : game.lastResultDate > 1
-                    ? "dni temu"
-                    : game.lastResultDate === 0.5
-                    ? ""
-                    : "dzień temu"}
+                      ? "dni temu"
+                      : game.lastResultDate === 0.5
+                        ? ""
+                        : "dzień temu"}
                 </td>
               </tr>
             ))
           ) : (
-            <></>
-          )}
+              <></>
+            )}
         </tbody>
       </Table>
     </div>

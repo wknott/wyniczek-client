@@ -4,23 +4,11 @@ import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import DeleteModal from "./DeleteModal";
 import { authHeader } from "../helpers/auth-header";
-
+import { getAllSortedGames } from "../proxy/databaseConnection";
 function GamesTable() {
   const [games, setGames] = useState([]);
   const [show, setShow] = useState(false);
   const [gameId, setGameId] = useState("");
-
-  async function loadGames() {
-    try {
-      const res = await fetch("/api/games", {
-        headers: authHeader(),
-      });
-      const games = await res.json();
-      setGames(games);
-    } catch (err) {
-      return err;
-    }
-  }
 
   async function deleteGame(gameId) {
     try {
@@ -29,7 +17,7 @@ function GamesTable() {
         headers: authHeader(),
       });
       setShow(false);
-      await loadGames();
+      setGames(await getAllSortedGames());
       return res;
     } catch (err) {
       return err;
@@ -41,7 +29,9 @@ function GamesTable() {
     setGameId(gameId);
   }
   useEffect(() => {
-    loadGames();
+    (async () => {
+      setGames(await getAllSortedGames())
+    })();
   }, []);
   return (
     <div>
@@ -64,10 +54,10 @@ function GamesTable() {
                 {game.minPlayers === game.maxPlayers ? (
                   <td>{game.minPlayers}</td>
                 ) : (
-                  <td>
-                    {game.minPlayers} - {game.maxPlayers}
-                  </td>
-                )}
+                    <td>
+                      {game.minPlayers} - {game.maxPlayers}
+                    </td>
+                  )}
                 <td>
                   {game.pointFields.length > 0 ? (
                     <Accordion>
@@ -86,8 +76,8 @@ function GamesTable() {
                       ))}
                     </Accordion>
                   ) : (
-                    <></>
-                  )}
+                      <></>
+                    )}
                 </td>
                 <td>
                   {0 ? (
@@ -102,14 +92,14 @@ function GamesTable() {
                       </Button>
                     </td>
                   ) : (
-                    <></>
-                  )}
+                      <></>
+                    )}
                 </td>
               </tr>
             ))
           ) : (
-            <></>
-          )}
+              <></>
+            )}
         </tbody>
       </Table>
       <DeleteModal

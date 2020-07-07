@@ -9,7 +9,7 @@ import UserSelect from "./UserSelect";
 import addButton from "../add-user-button.png";
 import deleteButton from "../delete-user-button.png";
 import { compareObjects } from "../logic/utilities.js";
-
+import { getAllSortedGames } from "../proxy/databaseConnection";
 import { authHeader } from "../helpers/auth-header";
 
 function NewResultForm() {
@@ -20,19 +20,6 @@ function NewResultForm() {
   const [numberOfPlayers, setNumberOfPlayers] = useState(2);
   const [scores, setScores] = useState([]);
   const history = useHistory();
-
-  async function loadGames() {
-    try {
-      const res = await fetch("/api/games", {
-        headers: authHeader(),
-      });
-      const games = await res.json();
-      const sortedGames = games.sort(compareObjects("name"));
-      setGames(sortedGames);
-    } catch (err) {
-      return err;
-    }
-  }
 
   async function loadUsers() {
     try {
@@ -48,8 +35,10 @@ function NewResultForm() {
   }
 
   useEffect(() => {
-    loadGames();
-    loadUsers();
+    (async () => {
+      setGames(await getAllSortedGames());
+      loadUsers();
+    })();
   }, []);
 
   function createScores(numberOfScores, numberOfFields, reversedUsers) {
@@ -247,20 +236,20 @@ function NewResultForm() {
                 ))}
               </tr>
             ) : (
-              <tr>
-                <td>Wynik</td>
-                {scores.map((score, index) => (
-                  <td key={index}>
-                    {Object.values(score.points).reduce((x, y) => x + y, 0)}
-                  </td>
-                ))}
-              </tr>
-            )}
+                <tr>
+                  <td>Wynik</td>
+                  {scores.map((score, index) => (
+                    <td key={index}>
+                      {Object.values(score.points).reduce((x, y) => x + y, 0)}
+                    </td>
+                  ))}
+                </tr>
+              )}
           </tbody>
         </Table>
       ) : (
-        <></>
-      )}
+          <></>
+        )}
       <Button disabled={!isValid()} variant="primary" type="submit">
         Dodaj wynik
       </Button>

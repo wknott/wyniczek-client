@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
 import DeleteModal from "./DeleteModal";
 import ResultModal from "./ResultModal";
 import GameSelect from "./GameSelect";
@@ -13,6 +10,7 @@ import {
   calculateWinners,
   compareObjects,
 } from "../logic/utilities.js";
+import { getAllSortedGames } from "../proxy/databaseConnection"
 import Form from "react-bootstrap/Form";
 function ResultsTable() {
   const [results, setResults] = useState([]);
@@ -55,19 +53,6 @@ function ResultsTable() {
     }
   }
 
-  async function loadGames() {
-    try {
-      const res = await fetch("/api/games", {
-        headers: authHeader(),
-      });
-      const games = await res.json();
-      const sortedGames = games.sort(compareObjects("name"));
-      setGames(sortedGames);
-    } catch (err) {
-      return err;
-    }
-  }
-
   function selectGame(e) {
     const newSelectedGame = games.find((game) => game._id === e.target.value);
     setSelectedGame(newSelectedGame);
@@ -89,8 +74,10 @@ function ResultsTable() {
     setSortFlag(!sortFlag);
   }
   useEffect(() => {
-    loadResults();
-    loadGames();
+    (async () => {
+      setGames(await getAllSortedGames());
+      loadResults();
+    })();
   }, []);
   return (
     <div>
@@ -156,8 +143,8 @@ function ResultsTable() {
                     </Button>
                   </td>
                 ) : (
-                  <></>
-                )}
+                    <></>
+                  )}
               </tr>
             ))}
         </tbody>
