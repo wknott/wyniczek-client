@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AppContext } from "./libs/contextLib";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import Users from "./components/Users";
+import NewUserForm from "./components/NewUserForm";
 import Games from "./components/Games";
 import NewResultForm from "./components/NewResultForm";
 import LoginForm from "./components/LoginForm";
@@ -45,7 +45,7 @@ function App() {
             component={UsersStats}
           />
           <Route path="/statystyki" component={Stats} />
-          <Route path="/users" component={Users} />
+          <Route path="/users" component={NewUserForm} />
           <Route path="/signup" component={LoginForm} />
         </div>
       </Router>
