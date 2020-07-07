@@ -26,7 +26,7 @@ function ResultModal(props) {
               <tr key={indexk}>
                 <td>{kategory}</td>
                 {result.scores.map((score, index) => (
-                  <td key={index}>{score.points[indexk]}</td>
+                  <td key={index}>{score.points[indexk] || "0"}</td>
                 ))}
               </tr>
             ))}
@@ -43,7 +43,7 @@ function ResultModal(props) {
       </Modal.Body>
     </Modal>
   ) : (
-    <></>
-  );
+      <></>
+    );
 }
 export default ResultModal;
