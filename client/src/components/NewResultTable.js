@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import UserSelect from "./UserSelect";
+import { getAllSortedUsers } from "../proxy/api";
 function NewResultTable(props) {
   const { selectedGame } = props;
   const [users, setUsers] = useState([]);
@@ -22,15 +23,6 @@ function NewResultTable(props) {
     }
   }
   useEffect(() => {
-    async function getAllSortedUsers() {
-      try {
-        const res = await fetch("/api/users");
-        const users = await res.json();
-        setUsers(users);
-      } catch (err) {
-        return err;
-      }
-    }
     async function loadScores() {
       try {
         const emptyScores = Array.from({ length: 2 }, () => ({
@@ -42,8 +34,10 @@ function NewResultTable(props) {
         return err;
       }
     }
-    loadScores();
-    getAllSortedUsers();
+    (async () => {
+      loadScores();
+      setUsers(await getAllSortedUsers());
+    })();
   }, []);
 
   return (

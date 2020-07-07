@@ -11,14 +11,12 @@ export const getAllSortedGames = async () => {
   }
 }
 
-async function getAllSortedUsers() {
+export const getAllSortedUsers = async () => {
   try {
-    const res = await fetch("/api/users", {
-      headers: authHeader(),
-    });
+    const res = await fetch("/api/users");
     const users = await res.json();
     const sortedUsers = users.sort(compareObjects("name"));
-    setUsers(sortedUsers);
+    return sortedUsers;
   } catch (err) {
     return err;
   }

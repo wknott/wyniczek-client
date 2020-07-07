@@ -8,8 +8,7 @@ import GameSelect from "./GameSelect";
 import UserSelect from "./UserSelect";
 import addButton from "../add-user-button.png";
 import deleteButton from "../delete-user-button.png";
-import { compareObjects } from "../logic/utilities.js";
-import { getAllSortedGames } from "../proxy/api";
+import { getAllSortedGames, getAllSortedUsers } from "../proxy/api";
 import { authHeader } from "../helpers/auth-header";
 
 function NewResultForm() {
@@ -21,23 +20,10 @@ function NewResultForm() {
   const [scores, setScores] = useState([]);
   const history = useHistory();
 
-  async function getAllSortedUsers() {
-    try {
-      const res = await fetch("/api/users", {
-        headers: authHeader(),
-      });
-      const users = await res.json();
-      const sortedUsers = users.sort(compareObjects("name"));
-      setUsers(sortedUsers);
-    } catch (err) {
-      return err;
-    }
-  }
-
   useEffect(() => {
     (async () => {
       setGames(await getAllSortedGames());
-      getAllSortedUsers();
+      setUsers(await getAllSortedUsers());
     })();
   }, []);
 
