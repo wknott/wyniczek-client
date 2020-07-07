@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import DeleteModal from "./DeleteModal";
 import { authHeader } from "../helpers/auth-header";
-import { getAllSortedGames } from "../proxy/databaseConnection";
+import { getAllSortedGames } from "../proxy/api";
 function GamesTable() {
   const [games, setGames] = useState([]);
   const [show, setShow] = useState(false);

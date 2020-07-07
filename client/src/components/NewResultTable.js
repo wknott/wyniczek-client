@@ -22,7 +22,7 @@ function NewResultTable(props) {
     }
   }
   useEffect(() => {
-    async function loadUsers() {
+    async function getAllSortedUsers() {
       try {
         const res = await fetch("/api/users");
         const users = await res.json();
@@ -43,7 +43,7 @@ function NewResultTable(props) {
       }
     }
     loadScores();
-    loadUsers();
+    getAllSortedUsers();
   }, []);
 
   return (

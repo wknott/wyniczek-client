@@ -4,7 +4,7 @@ import { authHeader } from "../helpers/auth-header";
 export default function UsersStats() {
   const [users, setUsers] = useState([]);
   const [results, setResults] = useState([]);
-  async function loadUsersAndResults() {
+  async function getAllSortedUsersAndResults() {
     const res = await fetch("/api/users", {
       headers: authHeader(),
     });
@@ -17,7 +17,7 @@ export default function UsersStats() {
     setResults(results);
   }
   useEffect(() => {
-    loadUsersAndResults();
+    getAllSortedUsersAndResults();
   }, []);
   return <UsersTable results={results} users={users} />;
 }

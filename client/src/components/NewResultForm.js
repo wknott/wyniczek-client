@@ -9,7 +9,7 @@ import UserSelect from "./UserSelect";
 import addButton from "../add-user-button.png";
 import deleteButton from "../delete-user-button.png";
 import { compareObjects } from "../logic/utilities.js";
-import { getAllSortedGames } from "../proxy/databaseConnection";
+import { getAllSortedGames } from "../proxy/api";
 import { authHeader } from "../helpers/auth-header";
 
 function NewResultForm() {
@@ -21,7 +21,7 @@ function NewResultForm() {
   const [scores, setScores] = useState([]);
   const history = useHistory();
 
-  async function loadUsers() {
+  async function getAllSortedUsers() {
     try {
       const res = await fetch("/api/users", {
         headers: authHeader(),
@@ -37,7 +37,7 @@ function NewResultForm() {
   useEffect(() => {
     (async () => {
       setGames(await getAllSortedGames());
-      loadUsers();
+      getAllSortedUsers();
     })();
   }, []);
 

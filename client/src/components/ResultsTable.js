@@ -10,7 +10,7 @@ import {
   calculateWinners,
   compareObjects,
 } from "../logic/utilities.js";
-import { getAllSortedGames } from "../proxy/databaseConnection"
+import { getAllSortedGames } from "../proxy/api"
 import Form from "react-bootstrap/Form";
 function ResultsTable() {
   const [results, setResults] = useState([]);
