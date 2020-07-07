@@ -1,4 +1,5 @@
 import { compareObjects } from "../logic/utilities";
+import { getCurrentUserId } from "../helpers/auth-header";
 
 export const getAllSortedGames = async () => {
   try {
@@ -22,3 +23,14 @@ export const getAllSortedUsers = async () => {
   }
 }
 
+export const getResults = async () => {
+  try {
+    const currentUserId = getCurrentUserId()
+    const url = `/api/results${currentUserId ? '?users=' + currentUserId : ''}`
+    const res = await fetch(url);
+    const results = await res.json();
+    return results;
+  } catch (err) {
+    return err;
+  }
+}

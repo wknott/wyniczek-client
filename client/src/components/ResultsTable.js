@@ -4,13 +4,13 @@ import Button from "react-bootstrap/Button";
 import DeleteModal from "./DeleteModal";
 import ResultModal from "./ResultModal";
 import GameSelect from "./GameSelect";
-import { authHeader, getCurrentUserId } from "../helpers/auth-header";
+import { authHeader } from "../helpers/auth-header";
 import {
   formatDateStringShort,
   calculateWinners,
   compareObjects,
 } from "../logic/utilities.js";
-import { getAllSortedGames } from "../proxy/api"
+import { getAllSortedGames, getResults } from "../proxy/api"
 import Form from "react-bootstrap/Form";
 function ResultsTable() {
   const [results, setResults] = useState([]);
@@ -36,12 +36,7 @@ function ResultsTable() {
   }
   async function loadResults() {
     try {
-      const currentUserId = getCurrentUserId()
-      const url = `/api/results${currentUserId ? '?users=' + currentUserId : ''}`
-      const res = await fetch(url, {
-        headers: authHeader(),
-      });
-      const results = await res.json();
+      const results = await getResults();
       const sortedResults = results.sort(compareObjects("date", "desc"));
       const resultsWithWinners = sortedResults.map((result) => ({
         ...result,

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GameSelect from "./GameSelect";
 import { getNumberOfGameResults } from "../logic/utilities";
-import { authHeader, getCurrentUserId } from "../helpers/auth-header";
-import { getAllSortedGames, getAllSortedUsers } from "../proxy/api";
+import { getAllSortedGames, getAllSortedUsers, getResults } from "../proxy/api";
 import UsersTable from "./UsersTable";
 import GameWinnersPieChart from "./GameWinnersPieChart";
 
@@ -11,20 +10,6 @@ export default function Stats() {
   const [games, setGames] = useState([]);
   const [results, setResults] = useState([]);
   const [users, setUsers] = useState([]);
-
-  async function loadResults() {
-    try {
-      const currentUserId = getCurrentUserId()
-      const url = `/api/results${currentUserId ? '?users=' + currentUserId : ''}`
-      const res = await fetch(url, {
-        headers: authHeader(),
-      });
-      const results = await res.json();
-      setResults(results);
-    } catch (err) {
-      return err;
-    }
-  }
 
   function selectGame(e) {
     if (e.target.value) {
@@ -42,7 +27,7 @@ export default function Stats() {
   useEffect(() => {
     (async () => {
       setGames(await getAllSortedGames());
-      loadResults();
+      setResults(await getResults());
       setUsers(await getAllSortedUsers());
     })();
   }, []);
