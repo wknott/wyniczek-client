@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AppContext } from "./libs/contextLib";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Wyniczek from "./components/Wyniczek";
 import Navigation from "./components/Navigation";
 import Users from "./components/Users";
 import Games from "./components/Games";
@@ -37,7 +36,7 @@ function App() {
           handleLogout={handleLogout}
         />
         <div className="appContainer">
-          <Route exact path="/" component={Wyniczek} />
+          <Route exact path="/" component={ResultsTable} />
           <PrivateRoute path="/createresult" component={NewResultForm} />
           <PrivateRoute path="/games" component={Games} />
           <PrivateRoute path="/results" component={ResultsTable} />
