@@ -34,3 +34,13 @@ export const getResults = async () => {
     return err;
   }
 }
+
+export const getLastResults = async () => {
+  try {
+    const res = await fetch("/api/games/last");
+    const lastResults = await res.json();
+    return lastResults;
+  } catch (err) {
+    return err;
+  }
+}
