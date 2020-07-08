@@ -3,25 +3,14 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { authHeader } from "../../helpers/auth-header";
-import { getAllSortedGames } from "../../proxy/api";
+import { getAllSortedGames, deleteGame } from "../../proxy/api";
 function GamesTable() {
   const [games, setGames] = useState([]);
   const [show, setShow] = useState(false);
   const [gameId, setGameId] = useState("");
-
-  async function deleteGame(gameId) {
-    try {
-      const res = await fetch("/api/games/" + gameId, {
-        method: "DELETE",
-        headers: authHeader(),
-      });
-      setShow(false);
-      setGames(await getAllSortedGames());
-      return res;
-    } catch (err) {
-      return err;
-    }
+  const handleDeleteGame = async () => {
+    await deleteGame(gameId);
+    setShow(false);
   }
 
   function handleClick(gameId) {
@@ -81,16 +70,14 @@ function GamesTable() {
                 </td>
                 <td>
                   {0 ? (
-                    <td>
-                      <Button
-                        disabled
-                        size="sm"
-                        variant="danger"
-                        onClick={() => handleClick(game._id)}
-                      >
-                        X
-                      </Button>
-                    </td>
+                    <Button
+                      disabled
+                      size="sm"
+                      variant="danger"
+                      onClick={() => handleClick(game._id)}
+                    >
+                      X
+                    </Button>
                   ) : (
                       <></>
                     )}
@@ -105,7 +92,7 @@ function GamesTable() {
       <DeleteModal
         show={show}
         handleClose={() => setShow(false)}
-        handleDelete={deleteGame}
+        handleDelete={handleDeleteGame}
         id={gameId}
         warningText={"Czy chcesz usunąć tą grę?"}
       />

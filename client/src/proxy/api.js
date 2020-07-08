@@ -1,5 +1,5 @@
 import { compareObjects } from "../logic/utilities";
-import { getCurrentUserId } from "../helpers/auth-header";
+import { authHeader, getCurrentUserId } from "../helpers/auth-header";
 
 export const getAllSortedGames = async () => {
   try {
@@ -7,6 +7,18 @@ export const getAllSortedGames = async () => {
     const games = await res.json();
     const sortedGames = await games.sort(compareObjects("name"));
     return sortedGames;
+  } catch (err) {
+    return err;
+  }
+}
+
+export const deleteGame = async (gameId) => {
+  try {
+    const res = await fetch("/api/games/" + gameId, {
+      method: "DELETE",
+      headers: authHeader(),
+    });
+    return res;
   } catch (err) {
     return err;
   }
@@ -37,10 +49,13 @@ export const getResults = async () => {
 
 export const getLastResults = async () => {
   try {
-    const res = await fetch("/api/games/last");
+    const res = await fetch("/api/games/last", {
+      headers: authHeader(),
+    });
     const lastResults = await res.json();
     return lastResults;
   } catch (err) {
     return err;
   }
 }
+
