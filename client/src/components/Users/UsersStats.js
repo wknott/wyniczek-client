@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UsersTable from "./UsersTable";
-import { getAllSortedUsers, getResults } from "../proxy/api";
+import { getAllSortedUsers, getResults } from "../../proxy/api";
 export default function UsersStats() {
   const [users, setUsers] = useState([]);
   const [results, setResults] = useState([]);

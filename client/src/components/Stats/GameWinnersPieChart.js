@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-google-charts";
-import { getNumberOfResults, compareObjects } from "../logic/utilities";
+import { getNumberOfResults, compareObjects } from "../../logic/utilities";
 
 export default function GameWinnersPieChart({ results, users }) {
   const [usersToDisplay, setUsersToDisplay] = useState([]);

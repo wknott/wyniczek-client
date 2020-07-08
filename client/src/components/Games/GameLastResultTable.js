@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { authHeader } from "../helpers/auth-header";
+import { authHeader } from "../../helpers/auth-header";
 import Table from "react-bootstrap/Table";
-import { compareObjects } from "../logic/utilities.js";
-import { getAllSortedGames } from "../proxy/api";
+import { compareObjects } from "../../logic/utilities.js";
+import { getAllSortedGames } from "../../proxy/api";
 export default function GameLastResultTable() {
   const [games, setGames] = useState([]);
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import GameSelect from "./GameSelect";
-import { getNumberOfGameResults } from "../logic/utilities";
-import { getAllSortedGames, getAllSortedUsers, getResults } from "../proxy/api";
-import UsersTable from "./UsersTable";
+import GameSelect from "../Games/GameSelect";
+import { getNumberOfGameResults } from "../../logic/utilities";
+import { getAllSortedGames, getAllSortedUsers, getResults } from "../../proxy/api";
+import UsersTable from "../Users/UsersTable";
 import GameWinnersPieChart from "./GameWinnersPieChart";
 
 export default function Stats() {

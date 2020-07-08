@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { AppContext } from "./libs/contextLib";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Navigation from "./components/Navigation";
-import NewUserForm from "./components/NewUserForm";
-import Games from "./components/Games";
-import NewResultForm from "./components/NewResultForm";
-import LoginForm from "./components/LoginForm";
-import PrivateRoute from "./components/PrivateRoute";
-import ResultsTable from "./components/ResultsTable";
-import UsersStats from "./components/UsersStats";
-import Stats from "./components/Stats";
+import Navigation from "./components/Navigation/Navigation";
+import NewUserForm from "./components/Users/NewUserForm";
+import Games from "./components/Games/Games";
+import NewResultForm from "./components/Results/NewResultForm";
+import LoginForm from "./components/LoginForm/LoginForm";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import ResultsTable from "./components/Results/ResultsTable";
+import UsersStats from "./components/Users/UsersStats";
+import Stats from "./components/Stats/Stats";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 

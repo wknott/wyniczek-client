@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
-import { useAppContext } from "../libs/contextLib";
+import { useAppContext } from "../../libs/contextLib";
 
 function LoginForm() {
   const { userHasAuthenticated } = useAppContext();
@@ -13,7 +13,7 @@ function LoginForm() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const inputRef = useRef();
-  
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);

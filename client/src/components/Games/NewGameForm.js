@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { authHeader } from "../helpers/auth-header";
+import { authHeader } from "../../helpers/auth-header";
 import { ButtonGroup } from "react-bootstrap";
 
 function NewGameForm(props) {

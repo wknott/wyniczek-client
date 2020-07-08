@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import DeleteModal from "./DeleteModal";
+import DeleteModal from "../DeleteModal/DeleteModal";
 import ResultModal from "./ResultModal";
-import GameSelect from "./GameSelect";
-import { authHeader } from "../helpers/auth-header";
+import GameSelect from "../Games/GameSelect";
+import { authHeader } from "../../helpers/auth-header";
 import {
   formatDateStringShort,
   calculateWinners,
   compareObjects,
-} from "../logic/utilities.js";
-import { getAllSortedGames, getResults } from "../proxy/api"
+} from "../../logic/utilities.js";
+import { getAllSortedGames, getResults } from "../../proxy/api"
 import Form from "react-bootstrap/Form";
 function ResultsTable() {
   const [results, setResults] = useState([]);

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
-import DeleteModal from "./DeleteModal";
-import { authHeader } from "../helpers/auth-header";
-import { getAllSortedGames } from "../proxy/api";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { authHeader } from "../../helpers/auth-header";
+import { getAllSortedGames } from "../../proxy/api";
 function GamesTable() {
   const [games, setGames] = useState([]);
   const [show, setShow] = useState(false);

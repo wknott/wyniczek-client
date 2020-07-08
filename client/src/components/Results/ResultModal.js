@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
-import { formatDateStringShort } from "../logic/utilities.js";
+import { formatDateStringShort } from "../../logic/utilities.js";
 function ResultModal(props) {
   const { show, handleClose, result } = props;
   return result.game !== undefined ? (

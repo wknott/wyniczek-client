@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 
-import { getNumberOfResults, compareObjects } from "../logic/utilities";
+import { getNumberOfResults, compareObjects } from "../../logic/utilities";
 function UsersTable({ users, results }) {
   const [usersToDisplay, setUsersToDisplay] = useState([]);
   async function addResultsAndWins() {
