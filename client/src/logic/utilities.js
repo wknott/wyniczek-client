@@ -7,6 +7,15 @@ export function formatDateStringShort(dateString) {
   });
 }
 
+export function formatDateString(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("pl-pl", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+}
+
 export function calculateWinners(result) {
   const sumOfPoints = Math.max(
     ...result.scores.map((score) =>
@@ -17,7 +26,7 @@ export function calculateWinners(result) {
     .filter(
       (score) =>
         Object.values(score.points).reduce((x, y) => x + y, 0) ===
-          sumOfPoints &&
+        sumOfPoints &&
         Object.values(score.points).reduce((x, y) => x + y, 0) > 0
     )
     .map((score) => score.user.name);

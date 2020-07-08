@@ -1,14 +1,14 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
-import { formatDateStringShort } from "../../logic/utilities.js";
+import { formatDateString } from "../../logic/utilities.js";
 function ResultModal(props) {
   const { show, handleClose, result } = props;
   return result.game !== undefined ? (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <h2>
-          {result.game.name}, {formatDateStringShort(result.date)}
+          {result.game.name}, {formatDateString(result.date)}
         </h2>
       </Modal.Header>
       <Modal.Body>
