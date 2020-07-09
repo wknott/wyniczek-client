@@ -35,6 +35,17 @@ export const getAllSortedUsers = async () => {
   }
 }
 
+export const getUser = async (userId) => {
+  try {
+    const res = await fetch("/api/users");
+    const users = await res.json();
+    const user = users.filter(({ id }) => id === userId)[0];
+    return user;
+  } catch (err) {
+    return err;
+  }
+}
+
 export const getResults = async () => {
   try {
     const currentUserId = getCurrentUserId()
