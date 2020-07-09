@@ -8,7 +8,7 @@ import NewResultForm from "./components/Results/NewResultForm";
 import LoginForm from "./components/LoginForm/LoginForm";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ResultsTable from "./components/Results/ResultsTable";
-import UsersStats from "./components/Users/UsersStats";
+import AllUsersTable from "./components/Users/AllUsersTable";
 import Stats from "./components/Stats/Stats";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -42,7 +42,7 @@ function App() {
           <PrivateRoute path="/results" component={ResultsTable} />
           <PrivateRoute
             path="/statystyki-uzytkownikow"
-            component={UsersStats}
+            component={AllUsersTable}
           />
           <Route path="/statystyki" component={Stats} />
           <Route path="/users" component={NewUserForm} />
