@@ -11,32 +11,35 @@ function Navigation({ isAuthenticated, handleLogout }) {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/games" href="#">
-            Gry
-          </Nav.Link>
-          <Nav.Link as={Link} to="/createresult" href="#">
-            Nowy wynik
-          </Nav.Link>
-          <Nav.Link as={Link} to="/statystyki-uzytkownikow" href="#">
-            Użytkownicy
-          </Nav.Link>
-          <Nav.Link as={Link} to="/statystyki" href="#">
-            Statystyki
+          {isAuthenticated ?
+            <>
+              <Nav.Link as={Link} to="/gry" href="#">
+                Gry
+              </Nav.Link>
+              <Nav.Link as={Link} to="/nowy-wynik" href="#">
+                Nowy wynik
+              </Nav.Link>
+              <Nav.Link as={Link} to="/uzytkownicy" href="#">
+                Użytkownicy
+              </Nav.Link>
+            </> : <></>}
+          <Nav.Link as={Link} to="/statystyki-gier" href="#">
+            Statystyki gier
           </Nav.Link>
         </Nav>
         <Nav className="ml-auto">
           {isAuthenticated ? (
             <Nav.Link onClick={handleLogout}>Wyloguj</Nav.Link>
           ) : (
-            <>
-              <Nav.Link as={Link} to="/users" href="#">
-                Nowy użytkownik
+              <>
+                <Nav.Link as={Link} to="/rejestracja" href="#">
+                  Rejestracja
               </Nav.Link>
-              <Nav.Link as={Link} to="/signup" href="#">
-                Logowanie
+                <Nav.Link as={Link} to="/logowanie" href="#">
+                  Logowanie
               </Nav.Link>
-            </>
-          )}
+              </>
+            )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

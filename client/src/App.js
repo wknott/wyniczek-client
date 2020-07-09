@@ -37,16 +37,15 @@ function App() {
         />
         <div className="appContainer">
           <Route exact path="/" component={ResultsTable} />
-          <PrivateRoute path="/createresult" component={NewResultForm} />
-          <PrivateRoute path="/games" component={Games} />
-          <PrivateRoute path="/results" component={ResultsTable} />
+          <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
+          <PrivateRoute path="/gry" component={Games} />
           <PrivateRoute
-            path="/statystyki-uzytkownikow"
+            path="/uzytkownicy"
             component={AllUsersTable}
           />
-          <Route path="/statystyki" component={Stats} />
-          <Route path="/users" component={NewUserForm} />
-          <Route path="/signup" component={LoginForm} />
+          <Route path="/statystyki-gier" component={Stats} />
+          <Route path="/rejestracja" component={NewUserForm} />
+          <Route path="/logowanie" component={LoginForm} />
         </div>
       </Router>
     </AppContext.Provider>
