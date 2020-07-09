@@ -10,6 +10,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ResultsTable from "./components/Results/ResultsTable";
 import AllUsersTable from "./components/Users/AllUsersTable";
 import Stats from "./components/Stats/Stats";
+import UserStats from "./components/Users/UserStats";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -44,6 +45,7 @@ function App() {
             component={AllUsersTable}
           />
           <Route path="/statystyki-gier" component={Stats} />
+          <Route path="/moje-statystyki" component={UserStats} />
           <Route path="/rejestracja" component={NewUserForm} />
           <Route path="/logowanie" component={LoginForm} />
         </div>

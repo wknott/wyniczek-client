@@ -22,6 +22,9 @@ function Navigation({ isAuthenticated, handleLogout }) {
               <Nav.Link as={Link} to="/uzytkownicy" href="#">
                 Użytkownicy
               </Nav.Link>
+              <Nav.Link as={Link} to="/moje-statystyki" href="#">
+                Moje statystyki
+              </Nav.Link>
             </> : <></>}
           <Nav.Link as={Link} to="/statystyki-gier" href="#">
             Statystyki gier
