@@ -30,7 +30,8 @@ app.get('*', function (req, res) {
     }
   })
 })
-mongoose.connect(process.env.URL, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
+const dbUrl = "mongodb://localhost:27017/wyniczek" || process.env.MONGO_URL;
+mongoose.connect(dbUrl, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', error => console.log('Connected to Mongoose'))
