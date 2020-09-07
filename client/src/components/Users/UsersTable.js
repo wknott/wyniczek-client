@@ -4,28 +4,28 @@ import Table from "react-bootstrap/Table";
 import { getNumberOfResults, compareObjects } from "../../logic/utilities";
 function UsersTable({ users, results }) {
   const [usersToDisplay, setUsersToDisplay] = useState([]);
-  async function addResultsAndWins() {
-    try {
-      const usersWithNumberOfResults = users.map((user) => {
-        const numberOfResults = getNumberOfResults(user, results);
-
-        return {
-          ...user,
-          numberOfResults: numberOfResults[0],
-          numberOfWins: numberOfResults[1],
-        };
-      });
-      const sortedUsers = usersWithNumberOfResults.sort(
-        compareObjects("numberOfResults", "desc")
-      );
-      const filteredUsers = sortedUsers.filter(user => user.numberOfResults)
-      setUsersToDisplay(filteredUsers);
-    } catch (err) {
-      return err;
-    }
-  }
 
   useEffect(() => {
+    async function addResultsAndWins() {
+      try {
+        const usersWithNumberOfResults = users.map((user) => {
+          const numberOfResults = getNumberOfResults(user, results);
+
+          return {
+            ...user,
+            numberOfResults: numberOfResults[0],
+            numberOfWins: numberOfResults[1],
+          };
+        });
+        const sortedUsers = usersWithNumberOfResults.sort(
+          compareObjects("numberOfResults", "desc")
+        );
+        const filteredUsers = sortedUsers.filter(user => user.numberOfResults)
+        setUsersToDisplay(filteredUsers);
+      } catch (err) {
+        return err;
+      }
+    }
     addResultsAndWins();
   }, [users, results]);
 

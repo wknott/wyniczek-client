@@ -27,27 +27,27 @@ const UserStats = () => {
     return unique;
   }
 
-  const loadUsersAndResults = async () => {
-    const user = await getUser(getCurrentUserId());
-    const results = await getResults();
-    setResults(results);
-    const numberOfResults = await getNumberOfResults(user, results);
-    const games = getGameIds(results);
-    setGames(games);
-    setPlotData(getResultsOfGame(games[numberOfGame]._id, results, getCurrentUserId()));
-    setUser({
-      ...user,
-      numberOfResults: numberOfResults[0],
-      numberOfWins: numberOfResults[1],
-    });
-  }
-
   useEffect(() => {
+    const loadUsersAndResults = async () => {
+      const user = await getUser(getCurrentUserId());
+      const results = await getResults();
+      setResults(results);
+      const numberOfResults = await getNumberOfResults(user, results);
+      const games = getGameIds(results);
+      setGames(games);
+      setPlotData(getResultsOfGame(games[numberOfGame]._id, results, getCurrentUserId()));
+      setUser({
+        ...user,
+        numberOfResults: numberOfResults[0],
+        numberOfWins: numberOfResults[1],
+      });
+    }
+
     (async () => {
       await loadUsersAndResults();
       setLoading(false);
     })();
-  }, []);
+  }, [numberOfGame]);
 
   return (
     <div>

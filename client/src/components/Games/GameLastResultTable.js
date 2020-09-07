@@ -14,24 +14,25 @@ export default function GameLastResultTable() {
 
     return differenceInDays === 0 ? 0.5 : differenceInDays;
   }
-  const loadGames = async () => {
-    const games = await getAllSortedGames();
-    const lastResults = await getLastResults();
-    const gamesWithLastResults = games.map((game) => ({
-      ...game,
-      lastResultDate:
-        lastResults
-          .filter((result) => result._id === game._id)
-          .map((result) => calculateDaysDifference(result.lastGameDate))[0] ||
-        "brak",
-    }));
-    const sortedGames = gamesWithLastResults.sort(
-      compareObjects("lastResultDate")
-    );
-    setGames(sortedGames);
-  }
 
   useEffect(() => {
+    const loadGames = async () => {
+      const games = await getAllSortedGames();
+      const lastResults = await getLastResults();
+      const gamesWithLastResults = games.map((game) => ({
+        ...game,
+        lastResultDate:
+          lastResults
+            .filter((result) => result._id === game._id)
+            .map((result) => calculateDaysDifference(result.lastGameDate))[0] ||
+          "brak",
+      }));
+      const sortedGames = gamesWithLastResults.sort(
+        compareObjects("lastResultDate")
+      );
+      setGames(sortedGames);
+    }
+
     loadGames();
   }, []);
   function tableRowClasses(game) {

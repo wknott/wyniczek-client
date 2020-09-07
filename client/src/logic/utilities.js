@@ -60,7 +60,9 @@ export function getNumberOfResults(user, results) {
     result.scores.map((score) =>
       score.user.name === user.name ? numberOfResults++ : {}
     );
-  });
+    return result;
+  }
+  );
   return [numberOfResults, numberOfWins];
 }
 
