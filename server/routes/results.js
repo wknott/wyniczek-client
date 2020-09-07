@@ -7,38 +7,38 @@ router.get('/', async (req, res) => {
     const gameId = req.query.gameId
     const onlyLast = req.query.last
     const userIds = req.query.users
-    
+
     let query
 
-    if (gameId === undefined){
+    if (gameId === undefined) {
       query = Results.find()
       if (userIds !== undefined)
-        query.elemMatch("scores", {"user": { $in: userIds } })
+        query.elemMatch("scores", { "user": { $in: userIds } })
     }
     else {
       if (onlyLast === 'true')
-        query = Results.findOne({game: gameId}).sort({ date: -1 })
+        query = Results.findOne({ game: gameId }).sort({ date: -1 })
       else
-        query = Results.find({game: gameId})
+        query = Results.find({ game: gameId })
     }
-    
-    const results = await query.populate('game').populate({path: 'scores.user'})
+
+    const results = await query.populate('game').populate({ path: 'scores.user' })
     res.json(results)
   } catch (err) {
-    res.status(500).json({message: err.message})
-  } 
+    res.status(500).json({ message: err.message })
+  }
 })
 
 router.get('/:id', async (req, res) => {
   try {
-    const results = await Results.findById(req.params.id).populate('game').populate({path: 'scores.user'})
+    const results = await Results.findById(req.params.id).populate('game').populate({ path: 'scores.user' })
     res.json(results)
   } catch (err) {
-    res.status(500).json({message: err.message})
-  } 
+    res.status(500).json({ message: err.message })
+  }
 })
 
-router.post('/', async (req,res) => {
+router.post('/', async (req, res) => {
   const results = new Results({
     game: req.body.game,
     scores: req.body.scores,
@@ -49,7 +49,7 @@ router.post('/', async (req,res) => {
     const newResults = await results.save()
     res.status(201).json(newResults)
   } catch (err) {
-    res.status(400).json({message: err.message})
+    res.status(400).json({ message: err.message })
   }
 })
 
@@ -70,16 +70,16 @@ router.patch('/:id', getResults, async (req, res) => {
     const updatedResults = await res.results.save()
     res.json(updatedResults)
   } catch (err) {
-    res.status(400).json({message: err.message})
+    res.status(400).json({ message: err.message })
   }
 })
 
 router.delete('/:id', getResults, async (req, res) => {
   try {
     await res.results.remove()
-    res.json({message: 'Deleted results'})
+    res.json({ message: 'Deleted results' })
   } catch (err) {
-    res.json(500).json({message: err.message})
+    res.json(500).json({ message: err.message })
   }
 })
 
@@ -88,10 +88,10 @@ async function getResults(req, res, next) {
   try {
     results = await Results.findById(req.params.id)
     if (results == null) {
-       return res.status(404).json('Cannot find results')
+      return res.status(404).json('Cannot find results')
     }
   } catch (err) {
-    return res.status(500).json({message: err.message})
+    return res.status(500).json({ message: err.message })
   }
   res.results = results
   next()

@@ -23,14 +23,14 @@ app.use('/api/results', resultsRouter)
 
 app.use(errorHandler);
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'), function(err) {
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'), function (err) {
     if (err) {
       res.status(500).send(err)
     }
   })
 })
-mongoose.connect(process.env.URL, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
+mongoose.connect(process.env.URL, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', error => console.log('Connected to Mongoose'))

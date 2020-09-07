@@ -21,7 +21,7 @@ async function authenticate({ username, password }) {
         return;
       }
     }
-          
+
     const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET);
     return {
       ...user.toJSON(),
@@ -49,7 +49,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-    return await User.findById(id);
+  return await User.findById(id);
 }
 
 // async function update(id, userParam) {
