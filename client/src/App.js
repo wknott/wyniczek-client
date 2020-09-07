@@ -40,12 +40,9 @@ function App() {
           <Route exact path="/" component={ResultsTable} />
           <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
           <PrivateRoute path="/gry" component={Games} />
-          <PrivateRoute
-            path="/uzytkownicy"
-            component={AllUsersTable}
-          />
+          <PrivateRoute path="/uzytkownicy" component={AllUsersTable} />
+          <PrivateRoute path="/moje-statystyki" component={UserStats} />
           <Route path="/statystyki-gier" component={Stats} />
-          <Route path="/moje-statystyki" component={UserStats} />
           <Route path="/rejestracja" component={NewUserForm} />
           <Route path="/logowanie" component={LoginForm} />
         </div>
