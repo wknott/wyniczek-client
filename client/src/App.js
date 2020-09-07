@@ -39,8 +39,8 @@ function App() {
         <div className="appContainer">
           <Route exact path="/" component={ResultsTable} />
           <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
-          <PrivateRoute path="/gry" component={Games} />
-          <PrivateRoute path="/uzytkownicy" component={AllUsersTable} />
+          <Route path="/gry" component={Games} />
+          <Route path="/uzytkownicy" component={AllUsersTable} />
           <PrivateRoute path="/moje-statystyki" component={UserStats} />
           <Route path="/statystyki-gier" component={Stats} />
           <Route path="/rejestracja" component={NewUserForm} />

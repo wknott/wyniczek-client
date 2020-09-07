@@ -9,13 +9,13 @@ function PrivateRoute({ component: Component, ...rest }) {
         localStorage.getItem("user") ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to={{
-              pathname: "/signup",
-              state: { from: props.location, alert: "Wymagane logowanie." },
-            }}
-          />
-        )
+            <Redirect
+              to={{
+                pathname: "/rejestracja",
+                state: { from: props.location, alert: "Wymagane logowanie." },
+              }}
+            />
+          )
       }
     />
   );

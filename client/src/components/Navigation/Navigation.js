@@ -12,20 +12,16 @@ function Navigation({ isAuthenticated, handleLogout }) {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           {isAuthenticated ?
-            <>
-              <Nav.Link as={Link} to="/gry" href="#">
-                Gry
+            <Nav.Link as={Link} to="/nowy-wynik" href="#">
+              Nowy wynik
               </Nav.Link>
-              <Nav.Link as={Link} to="/nowy-wynik" href="#">
-                Nowy wynik
+            : <></>}
+          <Nav.Link as={Link} to="/gry" href="#">
+            Gry
               </Nav.Link>
-              <Nav.Link as={Link} to="/uzytkownicy" href="#">
-                Użytkownicy
+          <Nav.Link as={Link} to="/uzytkownicy" href="#">
+            Użytkownicy
               </Nav.Link>
-              <Nav.Link as={Link} to="/moje-statystyki" href="#">
-                Moje statystyki
-              </Nav.Link>
-            </> : <></>}
           <Nav.Link as={Link} to="/statystyki-gier" href="#">
             Statystyki gier
           </Nav.Link>
@@ -35,12 +31,9 @@ function Navigation({ isAuthenticated, handleLogout }) {
             <Nav.Link onClick={handleLogout}>Wyloguj</Nav.Link>
           ) : (
               <>
-                <Nav.Link as={Link} to="/rejestracja" href="#">
-                  Rejestracja
-              </Nav.Link>
                 <Nav.Link as={Link} to="/logowanie" href="#">
                   Logowanie
-              </Nav.Link>
+                </Nav.Link>
               </>
             )}
         </Nav>

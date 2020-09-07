@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GamesTable from "./GamesTable";
 import GameLastResultTable from "./GameLastResultTable";
 import Tabs from "react-bootstrap/Tabs";
@@ -7,6 +7,12 @@ import NewGameForm from "./NewGameForm";
 
 function Games() {
   const [newGameTabIsActive, setNewGameTabIsActive] = useState(false);
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const isUserInLocalStorage = localStorage.getItem("user") !== null;
+    userHasAuthenticated(isUserInLocalStorage);
+  }, []);
 
   function handleSelect(key) {
     setNewGameTabIsActive(key === "newGame")
@@ -23,10 +29,10 @@ function Games() {
           <h2 className="gamesHeader">Liczba dni od ostatniego wyniku</h2>
           <GameLastResultTable />
         </Tab>
-        <Tab eventKey="newGame" title="Nowa gra">
+        {isAuthenticated && <Tab eventKey="newGame" title="Nowa gra">
           <h2 className="gamesHeader">Nowa gra</h2>
           <NewGameForm isActive={newGameTabIsActive} />
-        </Tab>
+        </Tab>}
       </Tabs>
     </div>
   );
