@@ -15,8 +15,6 @@ import Container from "./components/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-export const AuthContext = React.createContext();
-
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
 
@@ -39,13 +37,13 @@ function App() {
         />
         <Container>
           <Route exact path="/" component={ResultsTable} />
-          <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
           <Route path="/gry" component={Games} />
           <Route path="/uzytkownicy" component={AllUsersTable} />
-          <PrivateRoute path="/moje-statystyki" component={UserStats} />
           <Route path="/statystyki-gier" component={Stats} />
           <Route path="/rejestracja" component={NewUserForm} />
           <Route path="/logowanie" component={LoginForm} />
+          <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
+          <PrivateRoute path="/moje-statystyki" component={UserStats} />
         </Container>
       </Router>
     </AppContext.Provider>
