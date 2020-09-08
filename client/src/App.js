@@ -11,6 +11,7 @@ import ResultsTable from "./components/Results/ResultsTable";
 import AllUsersTable from "./components/Users/AllUsersTable";
 import Stats from "./components/Stats/Stats";
 import UserStats from "./components/Users/UserStats";
+import Container from "./components/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -36,7 +37,7 @@ function App() {
           isAuthenticated={isAuthenticated}
           handleLogout={handleLogout}
         />
-        <div className="appContainer">
+        <Container>
           <Route exact path="/" component={ResultsTable} />
           <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
           <Route path="/gry" component={Games} />
@@ -45,7 +46,7 @@ function App() {
           <Route path="/statystyki-gier" component={Stats} />
           <Route path="/rejestracja" component={NewUserForm} />
           <Route path="/logowanie" component={LoginForm} />
-        </div>
+        </Container>
       </Router>
     </AppContext.Provider>
   );
