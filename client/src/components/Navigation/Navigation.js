@@ -1,8 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { selectAuth, handleLogout } from "../../authSlice";
 import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 
-function Navigation({ isAuthenticated, handleLogout }) {
+const Navigation = () => {
+  const { isAuthenticated } = useSelector(selectAuth);
+  const dispatch = useDispatch();
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
       <Navbar.Brand as={Link} to="/" href="#">
@@ -28,7 +34,7 @@ function Navigation({ isAuthenticated, handleLogout }) {
         </Nav>
         <Nav className="ml-auto">
           {isAuthenticated ? (
-            <Nav.Link onClick={handleLogout}>Wyloguj</Nav.Link>
+            <Nav.Link onClick={() => dispatch(handleLogout())}>Wyloguj</Nav.Link>
           ) : (
               <>
                 <Nav.Link as={Link} to="/logowanie" href="#">

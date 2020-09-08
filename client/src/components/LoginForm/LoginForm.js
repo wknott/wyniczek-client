@@ -5,10 +5,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
-import { useAppContext } from "../../libs/contextLib";
+import { useDispatch } from "react-redux";
+import { handleLogin } from "../../authSlice";
 
 function LoginForm() {
-  const { userHasAuthenticated } = useAppContext();
+  const dispatch = useDispatch();
   const history = useHistory();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +37,7 @@ function LoginForm() {
 
       if (data.token != null) {
         localStorage.setItem("user", JSON.stringify(data));
-        userHasAuthenticated(true);
+        dispatch(handleLogin());
         history.push("/");
       }
       else {

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { AppContext } from "./libs/contextLib";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import NewUserForm from "./components/Users/NewUserForm";
@@ -15,39 +14,20 @@ import Container from "./components/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-function App() {
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const isUserInLocalStorage = localStorage.getItem("user") !== null;
-    userHasAuthenticated(isUserInLocalStorage);
-  }, []);
-
-  function handleLogout() {
-    userHasAuthenticated(false);
-    localStorage.removeItem("user");
-  }
-
-  return (
-    <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-      <Router>
-        <Navigation
-          isAuthenticated={isAuthenticated}
-          handleLogout={handleLogout}
-        />
-        <Container>
-          <Route exact path="/" component={ResultsTable} />
-          <Route path="/gry" component={Games} />
-          <Route path="/uzytkownicy" component={AllUsersTable} />
-          <Route path="/statystyki-gier" component={Stats} />
-          <Route path="/rejestracja" component={NewUserForm} />
-          <Route path="/logowanie" component={LoginForm} />
-          <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
-          <PrivateRoute path="/moje-statystyki" component={UserStats} />
-        </Container>
-      </Router>
-    </AppContext.Provider>
-  );
-}
+const App = () => (
+  <Router>
+    <Navigation />
+    <Container>
+      <Route exact path="/" component={ResultsTable} />
+      <Route path="/gry" component={Games} />
+      <Route path="/uzytkownicy" component={AllUsersTable} />
+      <Route path="/statystyki-gier" component={Stats} />
+      <Route path="/rejestracja" component={NewUserForm} />
+      <Route path="/logowanie" component={LoginForm} />
+      <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
+      <PrivateRoute path="/moje-statystyki" component={UserStats} />
+    </Container>
+  </Router>
+);
 
 export default App;
