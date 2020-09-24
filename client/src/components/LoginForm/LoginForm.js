@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { handleLogin } from "../../authSlice";
+import { toResults } from "../../routes";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function LoginForm() {
       if (data.token != null) {
         localStorage.setItem("user", JSON.stringify(data));
         dispatch(handleLogin());
-        history.push("/");
+        history.push(toResults());
       }
       else {
         setName('')

@@ -10,6 +10,7 @@ import addButton from "../../images/add-user-button.png";
 import deleteButton from "../../images/delete-user-button.png";
 import { getAllSortedGames, getAllSortedUsers } from "../../proxy/api";
 import { authHeader } from "../../helpers/auth-header";
+import { toResults } from "../../routes";
 
 function NewResultForm() {
   const [games, setGames] = useState([]);
@@ -127,7 +128,7 @@ function NewResultForm() {
         body: JSON.stringify(newResult),
       });
       const data = await res.json();
-      history.push("/");
+      history.push(toResults());
       return data;
     } catch (err) {
       return err;

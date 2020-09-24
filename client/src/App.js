@@ -1,7 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
-import NewUserForm from "./components/Users/NewUserForm";
 import Games from "./components/Games/Games";
 import NewResultForm from "./components/Results/NewResultForm";
 import LoginForm from "./components/LoginForm/LoginForm";
@@ -13,21 +12,36 @@ import UserStats from "./components/Users/UserStats";
 import Container from "./components/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { toNewResult, toUserStats, toResults, toGames, toUsers, toStats, toLogin } from "./routes";
 
 const App = () => (
-  <Router>
+  <BrowserRouter>
     <Navigation />
     <Container>
-      <Route exact path="/" component={ResultsTable} />
-      <Route path="/gry" component={Games} />
-      <Route path="/uzytkownicy" component={AllUsersTable} />
-      <Route path="/statystyki-gier" component={Stats} />
-      <Route path="/rejestracja" component={NewUserForm} />
-      <Route path="/logowanie" component={LoginForm} />
-      <PrivateRoute path="/nowy-wynik" component={NewResultForm} />
-      <PrivateRoute path="/moje-statystyki" component={UserStats} />
+      <Switch>
+        <Route exact path={toResults()} >
+          <ResultsTable />
+        </Route>
+        <Route path={toGames()}>
+          <Games />
+        </Route>
+        <Route path={toUsers()}>
+          <AllUsersTable />
+        </Route>
+        <Route path={toStats()}>
+          <Stats />
+        </Route>
+        <Route path={toLogin()}>
+          <LoginForm />
+        </Route>
+        <PrivateRoute path={toNewResult()} component={NewResultForm} />
+        <PrivateRoute path={toUserStats()} component={UserStats} />
+        <Route>
+          <Redirect to={toResults()} />
+        </Route>
+      </Switch>
     </Container>
-  </Router>
+  </BrowserRouter >
 );
 
 export default App;

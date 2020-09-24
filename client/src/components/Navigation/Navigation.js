@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { selectAuth, handleLogout } from "../../authSlice";
 import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
+import { toResults, toNewResult, toGames, toUsers, toStats, toLogin } from "../../routes";
 
 const Navigation = () => {
   const { isAuthenticated } = useSelector(selectAuth);
@@ -11,24 +12,24 @@ const Navigation = () => {
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-      <Navbar.Brand as={Link} to="/" href="#">
+      <Navbar.Brand as={Link} to={toResults()} href="#">
         Wyniczek
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           {isAuthenticated ?
-            <Nav.Link as={Link} to="/nowy-wynik" href="#">
+            <Nav.Link as={Link} to={toNewResult()} href="#">
               Nowy wynik
               </Nav.Link>
             : <></>}
-          <Nav.Link as={Link} to="/gry" href="#">
+          <Nav.Link as={Link} to={toGames()} href="#">
             Gry
               </Nav.Link>
-          <Nav.Link as={Link} to="/uzytkownicy" href="#">
+          <Nav.Link as={Link} to={toUsers()} href="#">
             Użytkownicy
               </Nav.Link>
-          <Nav.Link as={Link} to="/statystyki-gier" href="#">
+          <Nav.Link as={Link} to={toStats()} href="#">
             Statystyki gier
           </Nav.Link>
         </Nav>
@@ -37,7 +38,7 @@ const Navigation = () => {
             <Nav.Link onClick={() => dispatch(handleLogout())}>Wyloguj</Nav.Link>
           ) : (
               <>
-                <Nav.Link as={Link} to="/logowanie" href="#">
+                <Nav.Link as={Link} to={toLogin()} href="#">
                   Logowanie
                 </Nav.Link>
               </>
