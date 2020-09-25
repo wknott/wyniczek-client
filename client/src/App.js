@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./components/Navigation";
 import Games from "./components/Games/Games";
 import NewResultForm from "./components/Results/NewResultForm";
 import LoginForm from "./components/LoginForm/LoginForm";

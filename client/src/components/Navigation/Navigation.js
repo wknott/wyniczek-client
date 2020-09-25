@@ -1,17 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { selectAuth, handleLogout } from "../../authSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
+import { selectAuth, handleLogout } from "../../authSlice";
 import { toResults, toNewResult, toGames, toUsers, toStats, toLogin } from "../../routes";
+import { StyledNavigation } from "./styled";
 
-const Navigation = () => {
+const Navigationnn = () => {
   const { isAuthenticated } = useSelector(selectAuth);
   const dispatch = useDispatch();
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+    <StyledNavigation collapseOnSelect expand="lg" variant="dark">
       <Navbar.Brand as={Link} to={toResults()} href="#">
         Wyniczek
       </Navbar.Brand>
@@ -25,10 +25,10 @@ const Navigation = () => {
             : <></>}
           <Nav.Link as={Link} to={toGames()} href="#">
             Gry
-              </Nav.Link>
+          </Nav.Link>
           <Nav.Link as={Link} to={toUsers()} href="#">
             Użytkownicy
-              </Nav.Link>
+          </Nav.Link>
           <Nav.Link as={Link} to={toStats()} href="#">
             Statystyki gier
           </Nav.Link>
@@ -45,8 +45,8 @@ const Navigation = () => {
             )}
         </Nav>
       </Navbar.Collapse>
-    </Navbar>
+    </StyledNavigation>
   );
 }
 
-export default Navigation;
+export default Navigationnn;
