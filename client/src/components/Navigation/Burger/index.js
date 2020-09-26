@@ -1,12 +1,19 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleClose, handleOpen, selectOpen } from "../navSlice";
 import { StyledBurger } from "./styled";
 
-const Burger = ({ open, setOpen }) => (
-  <StyledBurger open={open} onClick={() => setOpen(open => !open)}>
-    <div />
-    <div />
-    <div />
-  </StyledBurger >
-);
+const Burger = () => {
+  const open = useSelector(selectOpen);
+  const dispatch = useDispatch();
+
+  return (
+    <StyledBurger open={open} onClick={() => dispatch(open ? handleClose() : handleOpen())}>
+      <div />
+      <div />
+      <div />
+    </StyledBurger >
+  );
+}
 
 export default Burger;
