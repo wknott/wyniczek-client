@@ -36,9 +36,6 @@ const App = () => (
         </Route>
         <PrivateRoute path={toNewResult()} component={NewResultForm} />
         <PrivateRoute path={toUserStats()} component={UserStats} />
-        <Route>
-          <Redirect to={toResults()} />
-        </Route>
       </Switch>
     </Container>
   </BrowserRouter >
