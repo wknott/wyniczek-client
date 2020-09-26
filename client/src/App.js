@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import Navigation from "./features/navigation/Navigation"
 import Games from "./components/Games/Games";
 import NewResultForm from "./components/Results/NewResultForm";
@@ -18,25 +18,26 @@ const App = () => (
   <BrowserRouter>
     <Navigation />
     <Container>
-      <Switch>
-        <Route exact path={toResults()} >
-          <ResultsTable />
-        </Route>
-        <Route path={toGames()}>
-          <Games />
-        </Route>
-        <Route path={toUsers()}>
-          <AllUsersTable />
-        </Route>
-        <Route path={toStats()}>
-          <Stats />
-        </Route>
-        <Route path={toLogin()}>
-          <LoginForm />
-        </Route>
-        <PrivateRoute path={toNewResult()} component={NewResultForm} />
-        <PrivateRoute path={toUserStats()} component={UserStats} />
-      </Switch>
+      <Route path={toResults()} >
+        <ResultsTable />
+      </Route>
+      <Route path={toGames()}>
+        <Games />
+      </Route>
+      <Route path={toUsers()}>
+        <AllUsersTable />
+      </Route>
+      <Route path={toStats()}>
+        <Stats />
+      </Route>
+      <Route path={toLogin()}>
+        <LoginForm />
+      </Route>
+      <PrivateRoute path={toNewResult()} component={NewResultForm} />
+      <PrivateRoute path={toUserStats()} component={UserStats} />
+      <Route>
+        <Redirect to={toResults()} />
+      </Route>
     </Container>
   </BrowserRouter >
 );
