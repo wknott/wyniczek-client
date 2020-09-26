@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { selectAuth, handleLogout } from "../../authSlice";
-import { toResults, toNewResult, toGames, toUsers, toStats, toLogin } from "../../routes";
+import { selectAuth, handleLogout } from "../../../authSlice";
+import { toResults, toNewResult, toGames, toUsers, toStats, toLogin } from "../../../routes";
 import {
   StyledNavigation,
   StyledList,
