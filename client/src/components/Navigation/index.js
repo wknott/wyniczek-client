@@ -2,9 +2,14 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAuth, handleLogout } from "../../authSlice";
 import { toResults, toNewResult, toGames, toUsers, toStats, toLogin } from "../../routes";
-import { StyledNavigation, StyledList, Item, StyledLink, LeftAlignItem, HamburgerItem, MobileList } from "./styled";
+import {
+  StyledNavigation, StyledList, Item, StyledLink,
+  LeftAlignItem, HamburgerItem, MobileList, Image
+} from "./styled";
 import Burger from "./Burger";
 import { selectOpen, handleClose } from "./navSlice";
+import logo from "./logo2.png";
+import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
   const open = useSelector(selectOpen);
@@ -13,13 +18,16 @@ const Navigation = () => {
 
   const Menu = (
     <>
-      {isAuthenticated ?
-        <Item onClick={() => dispatch(handleClose())}>
-          <StyledLink to={toNewResult()}>
-            Nowy wynik
-          </StyledLink>
-        </Item>
-        : <></>}
+      <Item onClick={() => dispatch(handleClose())}>
+        <StyledLink to={toResults()}>
+          Wyniki
+        </StyledLink>
+      </Item>
+      <Item onClick={() => dispatch(handleClose())}>
+        <StyledLink to={toNewResult()}>
+          Nowy wynik
+        </StyledLink>
+      </Item>
       <Item onClick={() => dispatch(handleClose())}>
         <StyledLink to={toGames()}>
           Gry
@@ -54,11 +62,11 @@ const Navigation = () => {
 
   return (
     <StyledNavigation>
-      <Item>
-        <StyledLink to={toResults()}>
-          Wyniki
-        </StyledLink>
-      </Item>
+      <div>
+        <NavLink to={toResults()}>
+          <Image src={logo} alt="Logo" />
+        </NavLink>
+      </div>
       <StyledList>
         {Menu}
       </StyledList>

@@ -70,3 +70,12 @@ export const StyledLink = styled(NavLink).attrs(() => ({ activeClassName }))`
     border-bottom: 1px solid;
   }
 `;
+
+export const Image = styled.img`
+  margin: 0px 20px;
+  height: 80px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
+    height: 52px;
+  }
+`;
