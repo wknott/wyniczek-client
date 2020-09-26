@@ -73,7 +73,7 @@ export const StyledLink = styled(NavLink).attrs(() => ({ activeClassName }))`
 
 export const Image = styled.img`
   margin: 0px 20px;
-  height: 80px;
+  height: 62px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     height: 52px;

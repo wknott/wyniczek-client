@@ -1,15 +1,21 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { selectAuth, handleLogout } from "../../authSlice";
 import { toResults, toNewResult, toGames, toUsers, toStats, toLogin } from "../../routes";
 import {
-  StyledNavigation, StyledList, Item, StyledLink,
-  LeftAlignItem, HamburgerItem, MobileList, Image
+  StyledNavigation,
+  StyledList,
+  Item,
+  StyledLink,
+  LeftAlignItem,
+  HamburgerItem,
+  MobileList,
+  Image,
 } from "./styled";
 import Burger from "./Burger";
 import { selectOpen, handleClose } from "./navSlice";
-import logo from "./logo2.png";
-import { NavLink } from "react-router-dom";
+import logo from "./logo.png";
 
 const Navigation = () => {
   const open = useSelector(selectOpen);
