@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { selectAuth, handleLogout } from "../../../authSlice";
-import { toResults, toNewResult, toGames, toUsers, toStats, toLogin } from "../../../routes";
+import { toResults, toNewResult, toGames, toUsers, toStats, toLogin, toHomePage } from "../../../routes";
 import {
   StyledNavigation,
   StyledList,
@@ -29,11 +29,13 @@ const Navigation = () => {
           Wyniki
         </StyledLink>
       </Item>
-      <Item onClick={() => dispatch(handleClose())}>
-        <StyledLink to={toNewResult()}>
-          Nowy wynik
+      {isAuthenticated &&
+        <Item onClick={() => dispatch(handleClose())}>
+          <StyledLink to={toNewResult()}>
+            Nowy wynik
         </StyledLink>
-      </Item>
+        </Item>
+      }
       <Item onClick={() => dispatch(handleClose())}>
         <StyledLink to={toGames()}>
           Gry
@@ -69,7 +71,7 @@ const Navigation = () => {
   return (
     <StyledNavigation>
       <div>
-        <NavLink to={toResults()}>
+        <NavLink to={toHomePage()}>
           <Image src={logo} alt="Logo" />
         </NavLink>
       </div>
