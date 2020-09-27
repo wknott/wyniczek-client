@@ -4,13 +4,13 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import { useHistory } from "react-router-dom";
-import GameSelect from "../Games/GameSelect";
-import UserSelect from "../Users/UserSelect";
-import addButton from "../../images/add-user-button.png";
-import deleteButton from "../../images/delete-user-button.png";
-import { getAllSortedGames, getAllSortedUsers } from "../../proxy/api";
-import { authHeader } from "../../helpers/auth-header";
-import { toResults } from "../../routes";
+import GameSelect from "../../../components/Games/GameSelect";
+import UserSelect from "../../../components/Users/UserSelect";
+import addButton from "../../../images/add-user-button.png";
+import deleteButton from "../../../images/delete-user-button.png";
+import { getAllSortedGames, getAllSortedUsers } from "../../../proxy/api";
+import { authHeader } from "../../../helpers/auth-header";
+import { toResults } from "../../../routes";
 
 function NewResultForm() {
   const [games, setGames] = useState([]);

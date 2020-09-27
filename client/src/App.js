@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Navigation from "./features/navigation/Navigation"
 import Games from "./components/Games/Games";
-import NewResultForm from "./components/Results/NewResultForm";
+import NewResultForm from "./features/results/NewResultPage/NewResultForm";
 import LoginForm from "./components/LoginForm/LoginForm";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ResultsTable from "./components/Results/ResultsTable";
