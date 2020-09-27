@@ -30,4 +30,9 @@ export const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.lightText};
   display: block;
 
+  &:hover {
+    color: ${({ theme }) => theme.colors.lightText};
+    text-decoration: none;
+    filter: brightness(110%);
+  }
 `;
