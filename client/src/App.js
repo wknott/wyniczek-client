@@ -12,7 +12,8 @@ import UserStats from "./components/Users/UserStats";
 import Container from "./components/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { toNewResult, toUserStats, toResults, toGames, toUsers, toStats, toLogin } from "./routes";
+import { toNewResult, toUserStats, toResults, toGames, toUsers, toStats, toLogin, toHomePage } from "./routes";
+import HomePage from "./features/homepage/HomePage";
 
 const App = () => (
   <BrowserRouter>
@@ -36,8 +37,11 @@ const App = () => (
         </Route>
         <PrivateRoute path={toNewResult()} component={NewResultForm} />
         <PrivateRoute path={toUserStats()} component={UserStats} />
+        <Route exact path={toHomePage()}>
+          <HomePage />
+        </Route>
         <Route>
-          <Redirect to={toResults()} />
+          <Redirect to={toHomePage()} />
         </Route>
       </Switch>
     </Container>

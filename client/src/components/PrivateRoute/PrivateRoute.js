@@ -11,7 +11,7 @@ function PrivateRoute({ component: Component, ...rest }) {
         ) : (
             <Redirect
               to={{
-                pathname: "/rejestracja",
+                pathname: "/",
                 state: { from: props.location, alert: "Wymagane logowanie." },
               }}
             />
