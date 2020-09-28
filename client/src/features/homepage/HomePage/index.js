@@ -1,8 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Section, SectionHeader, StyledLink } from "./styled";
+import { StyledLink } from "./styled";
 import { toNewResult, toResults, toStats } from "../../../routes"
 import { selectAuth } from "../../../authSlice";
+import Section from "../../../common/Section";
 
 const HomePage = () => {
   const { isAuthenticated } = useSelector(selectAuth);
@@ -10,19 +11,16 @@ const HomePage = () => {
   return (
     <>
       {isAuthenticated &&
-        <Section>
-          <SectionHeader>Nowy wynik</SectionHeader>
+        <Section sectionHeader="Nowy wynik">
           <p>Właśnie rozegrałeś kolejną partię w ulubioną planszówkę?</p>
           <StyledLink to={toNewResult()}>Dodaj nowy wynik</StyledLink>
         </Section>
       }
-      <Section>
-        <SectionHeader>Wyniki</SectionHeader>
+      <Section sectionHeader="Wyniki">
         <p>Zobacz wyniki gier planszowych:</p>
         <StyledLink to={toResults()}>Przejdź do historii wyników</StyledLink>
       </Section>
-      <Section>
-        <SectionHeader>Statystyki</SectionHeader>
+      <Section sectionHeader="Statystyki">
         <p>Chcesz wiedzieć kto ma najwięcej zwycięstw?</p>
         <StyledLink to={toStats()}>Zobacz statystyki</StyledLink>
       </Section>
