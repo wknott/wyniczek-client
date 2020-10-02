@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { toNewResult, toUserStats, toResults, toGames, toUsers, toStats, toLogin, toHomePage } from "./routes";
 import HomePage from "./features/homepage/HomePage";
+import ResultsPage from "./features/results/ResultsPage";
 
 const App = () => (
   <BrowserRouter>
@@ -21,7 +22,7 @@ const App = () => (
     <Container>
       <Switch>
         <Route path={toResults()} >
-          <ResultsTable />
+          <ResultsPage />
         </Route>
         <Route path={toGames()}>
           <Games />
