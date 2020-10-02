@@ -1,5 +1,16 @@
+import axios from "axios";
 import { compareObjects } from "../logic/utilities";
 import { authHeader, getCurrentUserId } from "../helpers/auth-header";
+
+export const getGames = async () => {
+  try {
+    const response = await axios.get("/api/games");
+    return await response.data;
+  }
+  catch (err) {
+    return err;
+  }
+};
 
 export const getAllSortedGames = async () => {
   try {
