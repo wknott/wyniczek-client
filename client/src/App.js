@@ -5,7 +5,6 @@ import Games from "./components/Games/Games";
 import NewResultForm from "./features/results/NewResultPage/NewResultForm";
 import LoginForm from "./components/LoginForm/LoginForm";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import ResultsTable from "./components/Results/ResultsTable";
 import AllUsersTable from "./components/Users/AllUsersTable";
 import Stats from "./components/Stats/Stats";
 import UserStats from "./components/Users/UserStats";

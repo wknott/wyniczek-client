@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import Select from "../../../../common/Select";
@@ -21,7 +21,7 @@ const ResultsTableSettingsForm = ({
 
   useEffect(() => {
     dispatch(fetchGames());
-  }, []);
+  }, [dispatch]);
 
   const onChange = (selectedGameId) => {
     setSelectedGame(games.find((game) => game._id === selectedGameId));
@@ -42,14 +42,16 @@ const ResultsTableSettingsForm = ({
             />
           </label>
         </p>
-        <label>
-          Liczba wyników:
-          <Input
-            type="number"
-            value={numberOfResults}
-            onChange={({ target }) => setNumberOfResults(target.value)}
-          />
-        </label>
+        <p>
+          <label>
+            Liczba wyników:
+            <Input
+              type="number"
+              value={numberOfResults}
+              onChange={({ target }) => setNumberOfResults(target.value)}
+            />
+          </label>
+        </p>
       </form>
   );
 };

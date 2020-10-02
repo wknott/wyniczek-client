@@ -1,4 +1,4 @@
-import { takeLatest, call, put, delay, takeEvery, select } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 import { getGames } from "../../proxy/api";
 import { fetchGames, fetchGamesError, fetchGamesSuccess } from "./gamesSlice";
 
