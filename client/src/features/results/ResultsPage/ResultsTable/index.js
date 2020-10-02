@@ -1,39 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import DeleteModal from "../DeleteModal/DeleteModal";
 import ResultModal from "./ResultModal";
-import GameSelect from "../Games/GameSelect";
-import { authHeader } from "../../helpers/auth-header";
 import {
   formatDateStringShort,
   calculateWinners,
   compareObjects,
-} from "../../logic/utilities.js";
-import { getAllSortedGames, getResults } from "../../proxy/api"
-import Form from "react-bootstrap/Form";
-function ResultsTable() {
+} from "../../../../logic/utilities.js";
+import { getAllSortedGames, getResults } from "../../../../proxy/api"
+
+const ResultsTable = ({ selectedGame, numberOfResults }) => {
   const [results, setResults] = useState([]);
-  const [games, setGames] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showResultModal, setShowResultModal] = useState(false);
   const [selectedResult, setSelectedResult] = useState({});
-  const [selectedGame, setSelectedGame] = useState();
-  const [sortFlag, setSortFlag] = useState(true);
-  const [numberOfResults, setNumberOfResults] = useState(15);
-  async function deleteResult(resultId) {
-    try {
-      const res = await fetch("/api/results/" + resultId, {
-        method: "DELETE",
-        headers: authHeader(),
-      });
-      setShowDeleteModal(false);
-      await loadResults();
-      return res;
-    } catch (err) {
-      return err;
-    }
-  }
+
   async function loadResults() {
     try {
       const results = await getResults();
@@ -48,26 +28,11 @@ function ResultsTable() {
     }
   }
 
-  function selectGame(e) {
-    const newSelectedGame = games.find((game) => game._id === e.target.value);
-    setSelectedGame(newSelectedGame);
-  }
-
-  function handleShowDeleteModal(result) {
-    setShowDeleteModal(true);
-    setSelectedResult(result);
-  }
   function handleShowResultModal(result) {
     setSelectedResult(result);
     setShowResultModal(true);
   }
-  function sortDate() {
-    const sortedResults = results.sort(
-      compareObjects("date", sortFlag ? "asc" : "desc")
-    );
-    setResults(sortedResults);
-    setSortFlag(!sortFlag);
-  }
+
   useEffect(() => {
     (async () => {
       setGames(await getAllSortedGames());
@@ -75,33 +40,13 @@ function ResultsTable() {
     })();
   }, []);
   return (
-    <div>
-      <Form>
-        <Form.Group>
-          <Form.Label>Kategoria</Form.Label>
-          <GameSelect
-            selectedGame={selectedGame}
-            selectGame={selectGame}
-            games={games}
-            firstOption={"Wszystkie gry"}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Liczba wyświetlanych wyników</Form.Label>
-          <Form.Control
-            type="number"
-            value={numberOfResults}
-            onChange={(e) => setNumberOfResults(e.target.value)}
-          />
-        </Form.Group>
-      </Form>
-
+    <>
       <Table responsive striped bordered hover>
         <thead>
           <tr>
             <td>Gra</td>
             <td>1. Gracz</td>
-            <td onClick={() => sortDate()}>Data</td>
+            <td>Data</td>
             <td>Zwycięzca</td>
           </tr>
         </thead>
@@ -149,14 +94,7 @@ function ResultsTable() {
         handleClose={() => setShowResultModal(false)}
         result={selectedResult}
       />
-      <DeleteModal
-        show={showDeleteModal}
-        handleClose={() => setShowDeleteModal(false)}
-        handleDelete={deleteResult}
-        id={selectedResult._id}
-        warningText={"Czy chcesz usunąć ten wynik?"}
-      />
-    </div>
+    </>
   );
 }
 
