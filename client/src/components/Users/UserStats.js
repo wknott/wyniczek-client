@@ -17,7 +17,6 @@ const UserStats = () => {
       date,
       score: scores.filter(score => score.user.id === userId)[0].points.reduce((a, b) => a + b, 0),
     }));
-    console.log(filteredResults.map((result, index) => [index + 1, result.score]))
     return filteredResults;
   }
 
@@ -62,7 +61,6 @@ const UserStats = () => {
           <p>Nazwa gry: {games[numberOfGame].name}</p>
           <select onChange={(e) => {
             setNumberOfGame(e.target.value);
-            console.log(e.target.value);
             setPlotData(getResultsOfGame(games[e.target.value]._id, results, getCurrentUserId()));
           }} value={numberOfGame}>
             {games.map((game, index) => <option value={index} key={index}>{game.name}</option>)}

@@ -7,9 +7,12 @@ import { fetchGames, selectGames, selectLoading } from "../../../games/gamesSlic
 import { theme } from "../../../../theme";
 import { compareObjects } from "../../../../logic/utilities";
 
-const ResultsTableSettingsForm = () => {
-  const [selectedGame, setSelectedGame] = useState();
-  const [numberOfResults, setNumberOfResults] = useState(15);
+const ResultsTableSettingsForm = ({
+  selectedGame,
+  setSelectedGame,
+  numberOfResults,
+  setNumberOfResults
+}) => {
   const games = useSelector(selectGames);
   const loading = useSelector(selectLoading);
   const sortedGames = [...games].sort(compareObjects("name"));
