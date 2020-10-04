@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Section from "../../../common/Section";
 import ResultsTableSettingsForm from "./ResultsTableSettingsForm";
-
+import ResultsTable from "./ResultsTable"
+import { useSelector } from "react-redux";
+import { selectLoading } from "../../games/gamesSlice";
 const ResultsPage = () => {
   const [selectedGame, setSelectedGame] = useState();
   const [numberOfResults, setNumberOfResults] = useState(15);
+  const loading = useSelector(selectLoading);
 
   return (
     <>
@@ -19,6 +22,7 @@ const ResultsPage = () => {
           numberOfResults={numberOfResults}
           setNumberOfResults={setNumberOfResults}
         />
+        {loading || <ResultsTable numberOfResults={numberOfResults} selectedGame={selectedGame} />}
       </Section>
     </>
   )

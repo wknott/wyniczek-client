@@ -1,64 +1,56 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
+import ReactLoading from "react-loading";
 import ResultModal from "./ResultModal";
 import {
   formatDateStringShort,
   calculateWinners,
-  compareObjects,
 } from "../../../../logic/utilities.js";
-import { getAllSortedGames, getResults } from "../../../../proxy/api"
+import { getResults } from "../../../../proxy/api";
+import { theme } from "../../../../theme";
 
 const ResultsTable = ({ selectedGame, numberOfResults }) => {
   const [results, setResults] = useState([]);
   const [showResultModal, setShowResultModal] = useState(false);
   const [selectedResult, setSelectedResult] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  async function loadResults() {
-    try {
-      const results = await getResults();
-      const sortedResults = results.sort(compareObjects("date", "desc"));
-      const resultsWithWinners = sortedResults.map((result) => ({
+  const handleShowResultModal = (result) => {
+    setSelectedResult(result);
+    setShowResultModal(true);
+  };
+
+  useEffect(() => {
+    const loadResults = async () => {
+      setLoading(true);
+      const results = await getResults(numberOfResults, selectedGame);
+      const resultsWithWinners = results.map((result) => ({
         ...result,
         winners: calculateWinners(result),
       }));
+      setLoading(false);
       setResults(resultsWithWinners);
-    } catch (err) {
-      return err;
-    }
-  }
+    };
 
-  function handleShowResultModal(result) {
-    setSelectedResult(result);
-    setShowResultModal(true);
-  }
+    loadResults();
 
-  useEffect(() => {
-    (async () => {
-      setGames(await getAllSortedGames());
-      loadResults();
-    })();
-  }, []);
+  }, [selectedGame, numberOfResults]);
+
   return (
-    <>
-      <Table responsive striped bordered hover>
-        <thead>
-          <tr>
-            <td>Gra</td>
-            <td>1. Gracz</td>
-            <td>Data</td>
-            <td>Zwycięzca</td>
-          </tr>
-        </thead>
-        <tbody>
-          {results
-            .filter((result) =>
-              selectedGame === undefined
-                ? 1
-                : result.game._id === selectedGame._id
-            )
-            .slice(0, numberOfResults)
-            .map((result, index) => (
+    loading ?
+      <ReactLoading color={theme.colors.violet} /> :
+      <>
+        < Table responsive striped bordered hover >
+          <thead>
+            <tr>
+              <td>Gra</td>
+              <td>1. Gracz</td>
+              <td>Data</td>
+              <td>Zwycięzca</td>
+            </tr>
+          </thead>
+          <tbody>
+            {results.map((result, index) => (
               <tr key={index} onClick={() => handleShowResultModal(result)}>
                 <td className="hidden-lg">
                   {result.game.name.length > 10
@@ -71,30 +63,16 @@ const ResultsTable = ({ selectedGame, numberOfResults }) => {
                 </td>
                 <td>{formatDateStringShort(result.date)}</td>
                 <td>{result.winners.map((winner) => winner + " ")}</td>
-                {0 ? (
-                  <td>
-                    <Button
-                      size="sm"
-                      disabled
-                      variant="danger"
-                      onClick={() => handleShowDeleteModal(result)}
-                    >
-                      X
-                    </Button>
-                  </td>
-                ) : (
-                    <></>
-                  )}
               </tr>
             ))}
-        </tbody>
-      </Table>
-      <ResultModal
-        show={showResultModal}
-        handleClose={() => setShowResultModal(false)}
-        result={selectedResult}
-      />
-    </>
+          </tbody>
+        </Table >
+        <ResultModal
+          show={showResultModal}
+          handleClose={() => setShowResultModal(false)}
+          result={selectedResult}
+        />
+      </>
   );
 }
 
