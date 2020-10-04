@@ -1,6 +1,6 @@
 import axios from "axios";
 import { compareObjects } from "../logic/utilities";
-import { authHeader, getCurrentUserId } from "../helpers/auth-header";
+import { authHeader } from "../helpers/auth-header";
 
 export const getGames = async () => {
   try {
@@ -57,13 +57,12 @@ export const getUser = async (userId) => {
   }
 }
 
-export const getResults = async () => {
+export const getResults = async (numberOfResults, selectedGame) => {
   try {
-    const currentUserId = getCurrentUserId()
-    const url = `/api/results${currentUserId ? '?users=' + currentUserId : ''}`
-    const res = await fetch(url);
-    const results = await res.json();
-    return results;
+    const url = `/api/results${numberOfResults ? '?numberOfResults=' + numberOfResults : ''}` +
+      `${selectedGame ? '&gameId=' + selectedGame._id : ''}`;
+    const response = await axios.get(url);
+    return response.data;
   } catch (err) {
     return err;
   }
