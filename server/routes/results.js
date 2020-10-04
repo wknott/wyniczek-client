@@ -7,6 +7,7 @@ router.get('/', async (req, res) => {
     const gameId = req.query.gameId
     const onlyLast = req.query.last
     const userIds = req.query.users
+    const numberOfResults = req.query.numberOfResults
 
     let query
 
@@ -20,6 +21,10 @@ router.get('/', async (req, res) => {
         query = Results.findOne({ game: gameId }).sort({ date: -1 })
       else
         query = Results.find({ game: gameId })
+    }
+
+    if (numberOfResults) {
+      query = query.limit(+numberOfResults)
     }
 
     const results = await query.populate('game').populate({ path: 'scores.user' })
