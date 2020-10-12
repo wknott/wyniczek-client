@@ -10,7 +10,9 @@ export const StyledNavigation = styled.nav`
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "logo burger"
+      "list list";
   }
 `;
 
@@ -19,17 +21,21 @@ export const List = styled.ul`
   height: 100%;
   padding: 0px;
   margin: 0px;
+  text-transform: uppercase;
 `;
 
 export const StyledList = styled(List)`
   display: flex;
   justify-content: flex-start;
+
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     display: none;
   }
 `;
 
 export const MobileList = styled(List)`
+  grid-area: list;
+  
   @media (min-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     display: none;
   }
@@ -53,6 +59,7 @@ export const LeftAlignItem = styled(Item)`
 
 export const HamburgerItem = styled(Item)`
   margin-left: auto;
+  
   @media (min-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     display: none;
   }

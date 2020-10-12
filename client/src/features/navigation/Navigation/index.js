@@ -71,7 +71,7 @@ const Navigation = () => {
   return (
     <StyledNavigation>
       <div>
-        <NavLink to={toHomePage()}>
+        <NavLink to={toHomePage()} onClick={() => dispatch(handleClose())}>
           <Image src={logo} alt="Logo" />
         </NavLink>
       </div>
