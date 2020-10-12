@@ -15,6 +15,7 @@ const ResultsPage = () => {
         <p>
           W poniższym formularzu wybierz grę, której wyniki chcesz
           zobaczyć oraz podaj liczbę wyników, która ma zostać wyświetlona w tabeli.
+          Jeśli chcesz zobaczyć szczegóły danego wyniku, kliknij w odpowiedni wiersz.
         </p>
         <ResultsTableSettingsForm
           selectedGame={selectedGame}
