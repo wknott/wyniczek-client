@@ -6,6 +6,7 @@ import Input from "../../../../common/Input";
 import { fetchGames, selectGames, selectLoading } from "../../../games/gamesSlice";
 import { theme } from "../../../../theme";
 import { compareObjects } from "../../../../logic/utilities";
+import { Label, LabelText } from "./styled";
 
 const ResultsTableSettingsForm = ({
   selectedGame,
@@ -32,25 +33,29 @@ const ResultsTableSettingsForm = ({
       <ReactLoading color={theme.colors.violet} /> :
       <form>
         <p>
-          <label>
-            Gra:
+          <Label>
+            <LabelText>
+              Gra:
+            </LabelText>
             <Select
               value={selectedGame}
               onChange={onChange}
               options={sortedGames}
               firstOption={"Wszystkie gry"}
             />
-          </label>
+          </Label>
         </p>
         <p>
-          <label>
-            Liczba wyników:
+          <Label>
+            <LabelText>
+              Liczba wyników:
+            </LabelText>
             <Input
               type="number"
               value={numberOfResults}
               onChange={({ target }) => setNumberOfResults(target.value)}
             />
-          </label>
+          </Label>
         </p>
       </form>
   );
