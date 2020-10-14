@@ -23,8 +23,8 @@ const ResultsPage = () => {
           numberOfResults={numberOfResults}
           setNumberOfResults={setNumberOfResults}
         />
-        {loading || <ResultsTable numberOfResults={numberOfResults} selectedGame={selectedGame} />}
       </Section>
+      {loading || <ResultsTable numberOfResults={numberOfResults} selectedGame={selectedGame} />}
     </>
   )
 };
