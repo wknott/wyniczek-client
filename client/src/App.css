@@ -9,9 +9,7 @@
   .scores {
     white-space: nowrap;
   }
-  thead {
-    font-weight: bold;
-  }
+
   .scores-form-group {
     margin-bottom: 0;
   }
@@ -20,9 +18,7 @@
     padding: 0.5rem 0.3rem;
     font-size: 1rem;
   }
-  thead {
-    white-space: nowrap;
-  }
+
   .select {
     -webkit-appearance: none;
   }
