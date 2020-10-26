@@ -5,6 +5,11 @@ export const StyledSection = styled.section`
   border: 2px solid ${({ theme }) => theme.colors.violet};
   border-radius: 5px;
   box-shadow: 5px 5px 5px 0px ${({ theme }) => theme.colors.dark};
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  max-width: 100%;
 
   @media(min-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     padding: 30px;
