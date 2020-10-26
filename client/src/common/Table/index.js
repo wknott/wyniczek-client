@@ -22,7 +22,7 @@ export const TableCell = styled.td`
   }
 `;
 
-export const TableHead = styled.th`
+export const TableHeader = styled.th`
   padding: 16px;
   border: 1px solid black;
   background-color: ${({ theme }) => theme.colors.violet};
@@ -33,7 +33,6 @@ export const TableHead = styled.th`
     padding: 8px 4px;
     font-weight: normal;
   }
-  
 `;
 
 export const TableRow = styled.tr`

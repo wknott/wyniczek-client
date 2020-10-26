@@ -3,11 +3,12 @@ import ReactLoading from "react-loading";
 import ResultModal from "./ResultModal";
 import {
   formatDateStringShort,
+  formatDateString,
   calculateWinners,
 } from "../../../../logic/utilities.js";
 import { getResults } from "../../../../proxy/api";
 import { theme } from "../../../../theme";
-import { Table, TableContainer, TableHead, TableRow, TableCell } from "../../../../common/Table";
+import { Table, TableContainer, TableHeader, TableRow, TableCell } from "../../../../common/Table";
 
 const ResultsTable = ({ selectedGame, numberOfResults }) => {
   const [results, setResults] = useState([]);
@@ -39,10 +40,10 @@ const ResultsTable = ({ selectedGame, numberOfResults }) => {
           <Table>
             <thead>
               <TableRow>
-                <TableHead>Gra</TableHead>
-                <TableHead>1. Gracz</TableHead>
-                <TableHead>Data</TableHead>
-                <TableHead>Zwycięzca</TableHead>
+                <TableHeader>Gra</TableHeader>
+                <TableHeader>1. Gracz</TableHeader>
+                <TableHeader>Data</TableHeader>
+                <TableHeader>Zwycięzca</TableHeader>
               </TableRow>
             </thead>
             <tbody>
@@ -52,7 +53,7 @@ const ResultsTable = ({ selectedGame, numberOfResults }) => {
                   <TableCell>
                     {result.scores.find((score, index) => index === 0).user.name}
                   </TableCell>
-                  <TableCell>{formatDateStringShort(result.date)}</TableCell>
+                  <TableCell>{window.innerWidth > 800 ? formatDateString(result.date) : formatDateStringShort(result.date)}</TableCell>
                   <TableCell>{calculateWinners(result).join(" ")}</TableCell>
                 </TableRow>
               ))}

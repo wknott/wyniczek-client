@@ -1,45 +1,46 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import Table from "react-bootstrap/Table";
+import { TableContainer, Table, TableHeader, TableCell } from "../../../../../common/Table/";
 import { formatDateString } from "../../../../../logic/utilities.js";
+
 function ResultModal(props) {
   const { show, handleClose, result } = props;
   return result.game !== undefined ? (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <h2>
-          {result.game.name}, {formatDateString(result.date)}
-        </h2>
+        {result.game.name}, {formatDateString(result.date)}
       </Modal.Header>
       <Modal.Body>
-        <Table responsive striped bordered hover>
-          <thead>
-            <tr>
-              <th>Kategoria</th>
-              {result.scores.map((score, index) => (
-                <td key={index}>{score.user.name}</td>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {result.game.pointFields.map((kategory, indexk) => (
-              <tr key={indexk}>
-                <td>{kategory}</td>
+        <TableContainer>
+          <Table>
+            <thead>
+              <tr>
+                <TableHeader>Kategoria</TableHeader>
                 {result.scores.map((score, index) => (
-                  <td key={index}>{score.points[indexk] || "0"}</td>
+                  <TableHeader key={index}>{score.user.name}</TableHeader>
                 ))}
               </tr>
-            ))}
-            <tr>
-              <td className="bold">Wynik</td>
-              {result.scores.map((score, index) => (
-                <td key={index} className="bold">
-                  {Object.values(score.points).reduce((x, y) => x + y, 0)}
-                </td>
+            </thead>
+            <tbody>
+              {result.game.pointFields.map((kategory, indexk) => (
+                <tr key={indexk}>
+                  <TableCell>{kategory}</TableCell>
+                  {result.scores.map((score, index) => (
+                    <TableCell key={index}>{score.points[indexk] || "0"}</TableCell>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          </tbody>
-        </Table>
+              <tr>
+                <TableCell className="bold">Wynik</TableCell>
+                {result.scores.map((score, index) => (
+                  <TableCell key={index} className="bold">
+                    {Object.values(score.points).reduce((x, y) => x + y, 0)}
+                  </TableCell>
+                ))}
+              </tr>
+            </tbody>
+          </Table>
+        </TableContainer>
       </Modal.Body>
     </Modal>
   ) : (
