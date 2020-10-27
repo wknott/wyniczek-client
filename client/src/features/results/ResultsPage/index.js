@@ -14,7 +14,7 @@ const ResultsPage = () => {
       <Section sectionHeader="Historia wyników">
         <p>
           W poniższym formularzu wybierz grę, której wyniki chcesz
-          zobaczyć oraz podaj liczbę wyników, która ma zostać wyświetlona w tabeli.
+          zobaczyć, a następnie podaj liczbę wyników, która ma zostać wyświetlona w tabeli.
           Jeśli chcesz zobaczyć szczegóły danego wyniku, kliknij w odpowiedni wiersz.
         </p>
         <ResultsTableSettingsForm
@@ -23,8 +23,8 @@ const ResultsPage = () => {
           numberOfResults={numberOfResults}
           setNumberOfResults={setNumberOfResults}
         />
+        {loading || <ResultsTable numberOfResults={numberOfResults} selectedGame={selectedGame} />}
       </Section>
-      {loading || <ResultsTable numberOfResults={numberOfResults} selectedGame={selectedGame} />}
     </>
   )
 };
