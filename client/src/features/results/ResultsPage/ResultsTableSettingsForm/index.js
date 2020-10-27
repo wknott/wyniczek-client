@@ -52,6 +52,7 @@ const ResultsTableSettingsForm = ({
             </LabelText>
             <Input
               type="number"
+              min={1}
               value={numberOfResults}
               onChange={({ target }) => setNumberOfResults(target.value)}
             />
