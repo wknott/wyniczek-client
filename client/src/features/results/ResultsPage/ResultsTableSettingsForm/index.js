@@ -6,7 +6,7 @@ import Input from "../../../../common/Input";
 import { fetchGames, selectGames, selectLoading } from "../../../games/gamesSlice";
 import { theme } from "../../../../theme";
 import { compareObjects } from "../../../../logic/utilities";
-import { Label, LabelText } from "./styled";
+import Label from "../../../../common/Label";
 
 const ResultsTableSettingsForm = ({
   selectedGame,
@@ -33,10 +33,7 @@ const ResultsTableSettingsForm = ({
       <ReactLoading color={theme.colors.violet} /> :
       <form>
         <p>
-          <Label>
-            <LabelText>
-              Gra:
-            </LabelText>
+          <Label labelText="Gra">
             <Select
               value={selectedGame}
               onChange={onChange}
@@ -46,10 +43,7 @@ const ResultsTableSettingsForm = ({
           </Label>
         </p>
         <p>
-          <Label>
-            <LabelText>
-              Liczba wyników:
-            </LabelText>
+          <Label labelText="Liczba wyników">
             <Input
               type="number"
               min={1}
