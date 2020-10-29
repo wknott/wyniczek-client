@@ -11,9 +11,10 @@ import UserStats from "./components/Users/UserStats";
 import Container from "./components/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { toNewResult, toUserStats, toResults, toGames, toUsers, toStats, toLogin, toHomePage } from "./routes";
+import { toNewResult, toUserStats, toResults, toGames, toUsers, toStats, toLogin, toHomePage, toNewGame } from "./routes";
 import HomePage from "./features/homepage/HomePage";
 import ResultsPage from "./features/results/ResultsPage";
+import NewGamePage from "./features/games/NewGamePage";
 
 const App = () => (
   <BrowserRouter>
@@ -36,6 +37,7 @@ const App = () => (
           <LoginForm />
         </Route>
         <PrivateRoute path={toNewResult()} component={NewResultForm} />
+        <PrivateRoute path={toNewGame()} component={NewGamePage} />
         <PrivateRoute path={toUserStats()} component={UserStats} />
         <Route exact path={toHomePage()}>
           <HomePage />
