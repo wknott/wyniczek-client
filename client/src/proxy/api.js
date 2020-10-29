@@ -1,4 +1,5 @@
 import axios from "axios";
+import { xml2js } from "xml-js";
 import { compareObjects } from "../logic/utilities";
 import { authHeader } from "../helpers/auth-header";
 
@@ -80,3 +81,56 @@ export const getLastResults = async () => {
   }
 }
 
+export const getGamesFromQuery = async (query) => {
+  try {
+    const response = await fetch(`https://api.geekdo.com/xmlapi2/search?query=${query}&type=boardgame`);
+    const data = await response.text();
+    const parsedData = await xml2js(data, { compact: true, spaces: 4 });
+    switch (+parsedData.items._attributes.total) {
+      case 0:
+        return [];
+      case 1:
+        const game = [
+          {
+            id: parsedData.items.item._attributes.id,
+            name: parsedData.items.item.name._attributes.value,
+            yearPublished: parsedData.items.item.yearpublished._attributes.value
+          }
+        ];
+        return game;
+      default:
+        const games = parsedData.items.item.map(game => (
+          {
+            id: game._attributes.id,
+            name: game.name._attributes.value,
+            yearPublished: game.yearpublished ? game.yearpublished._attributes.value : 0,
+          }
+        ));
+        return games;
+    }
+  } catch (err) {
+    return err;
+  }
+}
+
+export const getGameDetails = async (id) => {
+  try {
+    const response = await fetch(`https://api.geekdo.com/xmlapi2/thing?id=${id}`);
+    const data = await response.text();
+    const parsedData = await xml2js(data, { compact: true, spaces: 4 });
+    const name = Array.isArray(parsedData.items.item.name) ?
+      parsedData.items.item.name.map(name => name._attributes.value) :
+      [parsedData.items.item.name._attributes.value];
+    const gameDetails = {
+      name,
+      img: parsedData.items.item.image._text,
+      thumbnail: parsedData.items.item.thumbnail._text,
+      minPlayers: parsedData.items.item.minplayers._attributes.value,
+      maxPlayers: parsedData.items.item.maxplayers._attributes.value,
+      id,
+    }
+    return gameDetails;
+  } catch (error) {
+    return error;
+  }
+}
