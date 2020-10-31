@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Navigation from "./features/navigation/Navigation"
-import Games from "./components/Games/Games";
 import NewResultForm from "./features/results/NewResultPage/NewResultForm";
 import LoginForm from "./components/LoginForm/LoginForm";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -15,6 +14,7 @@ import { toNewResult, toUserStats, toResults, toGames, toUsers, toStats, toLogin
 import HomePage from "./features/homepage/HomePage";
 import ResultsPage from "./features/results/ResultsPage";
 import NewGamePage from "./features/games/NewGamePage";
+import GamesPage from "./features/games/GamesPage";
 
 const App = () => (
   <BrowserRouter>
@@ -25,7 +25,7 @@ const App = () => (
           <ResultsPage />
         </Route>
         <Route path={toGames()}>
-          <Games />
+          <GamesPage />
         </Route>
         <Route path={toUsers()}>
           <AllUsersTable />
