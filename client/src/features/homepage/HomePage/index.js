@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { StyledLink } from "./styled";
+import Link from "../../../common/Link";
 import { toNewResult, toResults, toStats } from "../../../routes"
 import { selectAuth } from "../../../authSlice";
 import Section from "../../../common/Section";
@@ -13,16 +13,16 @@ const HomePage = () => {
       {isAuthenticated &&
         <Section sectionHeader="Nowy wynik">
           <p>Właśnie rozegrałeś kolejną partię w ulubioną planszówkę?</p>
-          <StyledLink to={toNewResult()}>Dodaj nowy wynik</StyledLink>
+          <Link to={toNewResult()}>Dodaj nowy wynik</Link>
         </Section>
       }
       <Section sectionHeader="Wyniki">
         <p>Zobacz wyniki gier planszowych:</p>
-        <StyledLink to={toResults()}>Przejdź do historii wyników</StyledLink>
+        <Link to={toResults()}>Przejdź do historii wyników</Link>
       </Section>
       <Section sectionHeader="Statystyki">
         <p>Chcesz wiedzieć kto ma najwięcej zwycięstw?</p>
-        <StyledLink to={toStats()}>Zobacz statystyki</StyledLink>
+        <Link to={toStats()}>Zobacz statystyki</Link>
       </Section>
     </>
   )
