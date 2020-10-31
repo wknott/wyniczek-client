@@ -7,3 +7,5 @@ export const toNewResult = () => "/nowy-wynik";
 export const toNewGame = () => "/nowa-gra";
 export const toUserStats = () => "/moje-statystyki";
 export const toHomePage = () => "/";
+export const toGameList = () => "/gry/lista";
+export const toLastGameResults = () => "/gry/ostatnie-wyniki"
