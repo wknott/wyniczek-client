@@ -33,6 +33,9 @@ const App = () => (
     <Navigation />
     <Container>
       <Switch>
+        <PrivateRoute path={toNewResult()} component={NewResultForm} />
+        <PrivateRoute path={toNewGame()} component={NewGamePage} />
+        <PrivateRoute path={toUserStats()} component={UserStats} />
         <Route path={toResults()} >
           <ResultsPage />
         </Route>
@@ -51,9 +54,6 @@ const App = () => (
         <Route path={toLogin()}>
           <LoginForm />
         </Route>
-        <PrivateRoute path={toNewResult()} component={NewResultForm} />
-        <PrivateRoute path={toNewGame()} component={NewGamePage} />
-        <PrivateRoute path={toUserStats()} component={UserStats} />
         <Route exact path={toHomePage()}>
           <HomePage />
         </Route>
