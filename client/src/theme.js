@@ -1,13 +1,11 @@
 export const theme = {
   colors: {
-    lightText: "#fff",
-    lightGrey: "#eee",
-    grey: "#ddd",
-    darkGrey: "#ccc",
-    dark: "#555",
-    violet: "#5f0a87",
-    pink: "#a4508b",
-    black: "#000",
+    white: "#FFFFFF",
+    gallery: "#EEEEEE",
+    alto: "#DDDDDD",
+    silver: "#CCCCCC",
+    windsor: "#5F0A87",
+    black: "#000000",
   },
   breakpoints: {
     mobileMax: 767,

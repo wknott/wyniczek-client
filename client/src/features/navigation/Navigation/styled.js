@@ -4,7 +4,7 @@ import styled from "styled-components";
 const activeClassName = "link-active";
 
 export const StyledNavigation = styled.nav`
-  background-color: ${({ theme }) => theme.colors.violet};
+  background-color: ${({ theme }) => theme.colors.windsor};
   display: grid;
   grid-template-columns: auto 5fr auto;
 
@@ -69,10 +69,10 @@ export const StyledLink = styled(NavLink).attrs(() => ({ activeClassName }))`
     font-weight: bold;
   };
 
-  color: ${({ theme }) => theme.colors.lightText};
+  color: ${({ theme }) => theme.colors.white};
   
   &:hover {
-    color: ${({ theme }) => theme.colors.lightText};
+    color: ${({ theme }) => theme.colors.white};
     text-decoration: none;
     border-bottom: 1px solid;
   }

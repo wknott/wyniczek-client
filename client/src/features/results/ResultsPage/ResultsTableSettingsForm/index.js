@@ -30,7 +30,7 @@ const ResultsTableSettingsForm = ({
 
   return (
     loading ?
-      <ReactLoading color={theme.colors.violet} /> :
+      <ReactLoading color={theme.colors.windsor} /> :
       <form>
         <p>
           <Label labelText="Gra">

@@ -26,8 +26,8 @@ export const TableCell = styled.td`
 export const TableHeader = styled.th`
   padding: 16px;
   border: 1px solid black;
-  background-color: ${({ theme }) => theme.colors.violet};
-  color: ${({ theme }) => theme.colors.lightText};
+  background-color: ${({ theme }) => theme.colors.windsor};
+  color: ${({ theme }) => theme.colors.white};
   
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     font-size: 12px;

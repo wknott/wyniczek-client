@@ -36,7 +36,7 @@ const ResultsTable = ({ selectedGame, numberOfResults }) => {
     <TableContainer>
       {
         loading ?
-          <ReactLoading color={theme.colors.violet} /> :
+          <ReactLoading color={theme.colors.windsor} /> :
           <Table>
             <thead>
               <TableRow>

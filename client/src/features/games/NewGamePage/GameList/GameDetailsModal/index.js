@@ -70,7 +70,7 @@ function GameDetailsModal({ show, handleClose, gameId }) {
       </Modal.Header>
       <Modal.Body>
         {loading || !gameDetails ?
-          <ReactLoading color={theme.colors.violet} /> :
+          <ReactLoading color={theme.colors.windsor} /> :
           <>
             <GameImage src={gameDetails.img} alt="game-image" />
             <h2>{gameDetails.name[0]}</h2>

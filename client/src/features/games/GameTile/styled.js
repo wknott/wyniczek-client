@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Tile = styled.div`
-  box-shadow: 0px 4px 12px ${({ theme }) => theme.colors.violet};
-  border: 1px solid ${({ theme }) => theme.colors.grey};
+  box-shadow: 0px 4px 12px ${({ theme }) => theme.colors.windsor};
+  border: 1px solid ${({ theme }) => theme.colors.alto};
   border-radius: 6px;
   padding: 12px;
   display: grid;
@@ -31,7 +31,7 @@ export const DefaultImage = styled.img`
 export const DefaultImageContainer = styled.div`
   width: 200px;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.darkGrey};
+  background-color: ${({ theme }) => theme.colors.silver};
   border-radius: 5px;
   object-fit: contain;
   display: flex;

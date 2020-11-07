@@ -14,7 +14,7 @@ export const DefaultImage = styled.img`
 export const DefaultImageContainer = styled.div`
   width: 200px;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.darkGrey};
+  background-color: ${({ theme }) => theme.colors.silver};
   border-radius: 5px;
   object-fit: contain;
   display: flex;

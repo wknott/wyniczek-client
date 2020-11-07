@@ -43,7 +43,7 @@ const GamePage = () => {
           </LinkToWebsite> : "brak linku"}
         </p>
       </Section> :
-      <ReactLoading color={theme.colors.violet} />
+      <ReactLoading color={theme.colors.windsor} />
   )
 }
 
