@@ -7,7 +7,15 @@ export const Tile = styled.div`
   padding: 12px;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-gap: 10px;
+  grid-gap: 12px;
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.black};
+
+  &:hover {
+    opacity: 0.9;
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.black};
+  }
 `;
 
 export const Image = styled.img`

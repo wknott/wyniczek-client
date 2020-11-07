@@ -37,7 +37,6 @@ const gamesSlice = createSlice({
     fetchError: state => {
       state.loading = false;
     },
-
   },
 });
 
@@ -58,5 +57,7 @@ export const selectLoading = state => selectGamesState(state).loading;
 export const selectQuery = state => selectGamesState(state).query;
 export const selectFoundGames = state => selectGamesState(state).foundGames;
 export const selectGameDetails = state => selectGamesState(state).gameDetails;
+
+export const getGameById = (state, GameId) => selectGames(state).find(({ _id }) => _id === GameId);
 
 export default gamesSlice.reducer;
