@@ -4,8 +4,7 @@ export const toUsers = () => "/uzytkownicy";
 export const toStats = () => "/statystyki-gier";
 export const toLogin = () => "/logowanie";
 export const toNewResult = () => "/nowy-wynik";
-export const toNewGame = () => "/nowa-gra";
+export const toNewGame = () => "/gry/nowa";
 export const toUserStats = () => "/moje-statystyki";
 export const toHomePage = () => "/";
-export const toGameList = () => "/gry/lista";
-export const toLastGameResults = () => "/gry/ostatnie-wyniki"
+export const toGame = ({ id } = { id: ":id" }) => `/gry/${id}`;

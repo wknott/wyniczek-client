@@ -10,12 +10,23 @@ import UserStats from "./components/Users/UserStats";
 import Container from "./components/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { toNewResult, toUserStats, toResults, toGames, toUsers, toStats, toLogin, toHomePage, toNewGame, toGameList } from "./routes";
+import {
+  toNewResult,
+  toUserStats,
+  toResults,
+  toGames,
+  toUsers,
+  toStats,
+  toLogin,
+  toHomePage,
+  toNewGame,
+  toGame
+} from "./routes";
 import HomePage from "./features/homepage/HomePage";
 import ResultsPage from "./features/results/ResultsPage";
 import NewGamePage from "./features/games/NewGamePage";
 import GamesPage from "./features/games/GamesPage";
-import GameListPage from "./features/games/GameListPage";
+import GamePage from "./features/games/GamePage";
 
 const App = () => (
   <BrowserRouter>
@@ -25,8 +36,8 @@ const App = () => (
         <Route path={toResults()} >
           <ResultsPage />
         </Route>
-        <Route path={toGameList()}>
-          <GameListPage />
+        <Route path={toGame()}>
+          <GamePage />
         </Route>
         <Route path={toGames()}>
           <GamesPage />
