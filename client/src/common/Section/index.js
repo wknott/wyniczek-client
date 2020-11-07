@@ -3,7 +3,7 @@ import { StyledSection, SectionHeader } from "./styled";
 
 const Section = ({ sectionHeader, children }) => (
   <StyledSection>
-    <SectionHeader>{sectionHeader}</SectionHeader>
+    {sectionHeader && <SectionHeader>{sectionHeader}</SectionHeader>}
     {children}
   </StyledSection>
 );
