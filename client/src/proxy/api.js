@@ -81,6 +81,18 @@ export const getLastResults = async () => {
   }
 }
 
+export const getNumberOfResultsPerGame = async () => {
+  try {
+    const res = await fetch("/api/games/numberOfResults", {
+      headers: authHeader(),
+    });
+    const numberOfResults = await res.json();
+    return numberOfResults;
+  } catch (err) {
+    return err;
+  }
+}
+
 export const getGamesFromQuery = async (query) => {
   try {
     const response = await fetch(`https://api.geekdo.com/xmlapi2/search?query=${query}&type=boardgame`);
