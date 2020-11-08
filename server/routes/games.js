@@ -35,6 +35,23 @@ router.get('/last', async (req, res) => {
   }
 })
 
+router.get('/numberOfResults', async (req, res) => {
+  try {
+    const numberOfResultsPerGame = await Results.aggregate([
+      {
+        $group:
+        {
+          _id: "$game",
+          numberOfResults: { $sum: 1 },
+        }
+      }
+    ])
+    res.json(numberOfResultsPerGame)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+})
+
 router.get('/:id', getGame, (req, res) => {
   res.json(res.game)
 })
