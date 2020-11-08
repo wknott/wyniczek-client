@@ -1,5 +1,5 @@
 import { takeLatest, call, put, debounce } from "redux-saga/effects";
-import { getGameDetails, getGames, getGamesFromQuery } from "../../proxy/api";
+import { getGameDetails, getGames, getGamesFromQuery, getLastResults, getNumberOfResultsPerGame } from "../../proxy/api";
 import {
   fetchGames,
   fetchGamesByQuery,
@@ -13,7 +13,15 @@ import {
 function* fetchGamesHandler() {
   try {
     const games = yield call(getGames);
-    yield put(fetchGamesSuccess(games));
+    const lastResults = yield call(getLastResults);
+    const numberOfResults = yield call(getNumberOfResultsPerGame);
+    const updatedGames = yield games.map(game => (
+      {
+        ...game,
+        lastResultDate: lastResults.find(({ _id }) => _id === game._id)?.lastGameDate,
+        numberOfResults: numberOfResults.find(({ _id }) => _id === game._id)?.numberOfResults,
+      }))
+    yield put(fetchGamesSuccess(updatedGames));
   } catch (error) {
     yield call(alert, "Nie udało się wczytać gier, spróbuj odświeżyć stronę.");
     yield put(fetchError());
