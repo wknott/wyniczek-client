@@ -6,26 +6,27 @@ router.get('/', async (req, res) => {
   try {
     const gameId = req.query.gameId
     const onlyLast = req.query.last
-    const numberOfResults = req.query.numberOfResults
+    const page = req.query.page
 
-    let query
-
-    if (gameId === undefined) {
-      query = Results.find().sort({ date: -1 })
+    if (onlyLast === 'true') {
+      const result = await Results
+        .findOne({ game: gameId })
+        .sort({ date: -1 })
+        .populate('game')
+        .populate({ path: 'scores.user' })
+      res.json({ results: result, numberOfResults: 1 })
     }
     else {
-      if (onlyLast === 'true')
-        query = Results.findOne({ game: gameId }).sort({ date: -1 })
-      else
-        query = Results.find({ game: gameId }).sort({ date: -1 })
+      const numberOfResults = await Results.find(gameId === undefined ? {} : { game: gameId }).countDocuments()
+      const results = await Results
+        .find(gameId === undefined ? {} : { game: gameId })
+        .sort({ date: -1 })
+        .populate('game')
+        .populate({ path: 'scores.user' })
+        .skip((page - 1) * 10 > numberOfResults ? 0 : (page - 1) * 10)
+        .limit(10)
+      res.json({ results, numberOfResults })
     }
-
-    if (numberOfResults) {
-      query = query.limit(+numberOfResults)
-    }
-
-    const results = await query.populate('game').populate({ path: 'scores.user' })
-    res.json(results)
   } catch (err) {
     res.status(500).json({ message: err.message })
   }

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import LinkToWebsite from "../../../common/LinkToWebsite";
 import Section from "../../../common/Section";
-import { selectAuth } from "../../../authSlice";
 import { useParams } from "react-router-dom";
 import { fetchGames, getGameById, selectGames } from "../gamesSlice";
 import { theme } from "../../../theme";
@@ -11,7 +10,6 @@ import meeple from "../../../images/meeple.svg";
 import { Image, DefaultImage, DefaultImageContainer } from "./styled";
 
 const GamePage = () => {
-  const { isAuthenticated } = useSelector(selectAuth);
   const { id } = useParams();
   const games = useSelector(selectGames);
   const dispatch = useDispatch();

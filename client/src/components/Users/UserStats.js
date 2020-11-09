@@ -29,7 +29,7 @@ const UserStats = () => {
   useEffect(() => {
     const loadUsersAndResults = async () => {
       const user = await getUser(getCurrentUserId());
-      const results = await getResults();
+      const { results } = await getResults();
       setResults(results);
       const numberOfResults = await getNumberOfResults(user, results);
       const games = getGameIds(results);

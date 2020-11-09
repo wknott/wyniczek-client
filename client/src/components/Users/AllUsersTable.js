@@ -8,7 +8,8 @@ export default function AllUsersTable() {
   useEffect(() => {
     (async () => {
       setUsers(await getAllSortedUsers());
-      setResults(await getResults());
+      const { results } = await getResults();
+      setResults(results);
     })();
 
   }, []);

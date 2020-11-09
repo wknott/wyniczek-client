@@ -27,7 +27,8 @@ export default function Stats() {
   useEffect(() => {
     (async () => {
       setGames(await getAllSortedGames());
-      setResults(await getResults());
+      const { results } = await getResults();
+      setResults(results);
       setUsers(await getAllSortedUsers());
     })();
   }, []);

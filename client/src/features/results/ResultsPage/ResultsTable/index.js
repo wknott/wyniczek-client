@@ -10,12 +10,12 @@ import { getResults } from "../../../../proxy/api";
 import { theme } from "../../../../theme";
 import { Table, TableContainer, TableHeader, TableRow, TableCell } from "../../../../common/Table";
 
-const ResultsTable = ({ selectedGame, numberOfResults }) => {
+const ResultsTable = ({ selectedGame }) => {
   const [results, setResults] = useState([]);
   const [showResultModal, setShowResultModal] = useState(false);
   const [selectedResult, setSelectedResult] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const [numberOfResults, setNumberOfResults] = useState(0);
   const handleShowResultModal = (result) => {
     setSelectedResult(result);
     setShowResultModal(true);
@@ -24,13 +24,14 @@ const ResultsTable = ({ selectedGame, numberOfResults }) => {
   useEffect(() => {
     const loadResults = async () => {
       setLoading(true);
-      const results = await getResults(numberOfResults, selectedGame);
+      const { results, numberOfResults } = await getResults(1, selectedGame);
       setLoading(false);
       setResults(results);
+      setNumberOfResults(numberOfResults);
     };
 
     loadResults();
-  }, [selectedGame, numberOfResults]);
+  }, [selectedGame]);
 
   return (
     <TableContainer>
