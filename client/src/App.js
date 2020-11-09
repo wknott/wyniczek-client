@@ -23,7 +23,6 @@ import {
   toGame,
   toNewGameSearch
 } from "./routes";
-import HomePage from "./features/homepage/HomePage";
 import ResultsPage from "./features/results/ResultsPage";
 import NewGameSearchPage from "./features/games/NewGameSearchPage";
 import GamesPage from "./features/games/GamesPage";
@@ -58,10 +57,10 @@ const App = () => (
           <LoginForm />
         </Route>
         <Route exact path={toHomePage()}>
-          <HomePage />
+          <ResultsPage />
         </Route>
         <Route>
-          <Redirect to={toHomePage()} />
+          <Redirect to={ResultsPage()} />
         </Route>
       </Switch>
     </Container>
