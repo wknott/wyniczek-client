@@ -111,7 +111,7 @@ export const getGamesFromQuery = async (query) => {
         ];
         return game;
       default:
-        const games = parsedData.items.item.map(game => (
+        const games = parsedData.items.item.slice(0, 6).map(game => (
           {
             id: game._attributes.id,
             name: game.name._attributes.value,
