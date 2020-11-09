@@ -5,7 +5,7 @@ module.exports = jwt;
 
 function jwt() {
     const secret = process.env.JWT_SECRET;
-    return expressJwt({ secret, , algorithms: ['sha1', 'RS256', 'HS256'], isRevoked }).unless({
+    return expressJwt({ secret, algorithms: ['sha1', 'RS256', 'HS256'], isRevoked }).unless({
         path: [
             // public routes that don't require authentication
             '/api/users/authenticate',
