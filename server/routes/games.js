@@ -57,11 +57,23 @@ router.get('/:id', getGame, (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+  const {
+    name,
+    minPlayers,
+    maxPlayers,
+    pointFields,
+    bggId,
+    imgUrl,
+    thumbnailUrl,
+  } = req.body;
   const game = new Game({
-    name: req.body.name,
-    minPlayers: req.body.minPlayers,
-    maxPlayers: req.body.maxPlayers,
-    pointFields: req.body.pointFields
+    name,
+    minPlayers,
+    maxPlayers,
+    pointFields,
+    bggId,
+    imgUrl,
+    thumbnailUrl,
   })
   try {
     const newGame = await game.save()
@@ -72,17 +84,26 @@ router.post('/', async (req, res) => {
 })
 
 router.patch('/:id', getGame, async (req, res) => {
-  if (req.body.name != null) {
-    res.user.name = req.body.name
+  if (req.body.name !== null) {
+    res.game.name = req.body.name
   }
-  if (req.body.minPlayers != null) {
-    res.user.minPlayers = req.body.minPlayers
+  if (req.body.minPlayers !== null) {
+    res.game.minPlayers = req.body.minPlayers
   }
-  if (req.body.maxPlayers != null) {
-    res.user.maxPlayers = req.body.maxPlayers
+  if (req.body.maxPlayers !== null) {
+    res.game.maxPlayers = req.body.maxPlayers
   }
-  if (req.body.pointFields != null) {
-    res.user.pointFields = req.body.pointFields
+  if (req.body.pointFields !== null) {
+    res.game.pointFields = req.body.pointFields
+  }
+  if (req.body.bggId !== null) {
+    res.game.bggId = req.body.bggId
+  }
+  if (req.body.imgUrl !== null) {
+    res.game.imgUrl = req.body.imgUrl
+  }
+  if (req.body.thumbnailUrl !== null) {
+    res.game.thumbnailUrl = req.body.thumbnailUrl
   }
   try {
     const updatedGame = await res.game.save()
