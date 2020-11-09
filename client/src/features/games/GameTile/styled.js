@@ -1,13 +1,7 @@
 import styled from "styled-components";
+import Tile from "../../../common/Tile";
 
-export const Tile = styled.div`
-  box-shadow: 0px 4px 12px ${({ theme }) => theme.colors.windsor};
-  border: 1px solid ${({ theme }) => theme.colors.alto};
-  border-radius: 6px;
-  padding: 12px;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 12px;
+export const StyledTile = styled(Tile)`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.black};
 

@@ -1,13 +1,13 @@
 import React from "react";
 import meeple from "../../../images/meeple.svg";
-import { Tile, Image, DefaultImage, DefaultImageContainer, GameName } from "./styled";
+import { StyledTile, Image, DefaultImage, DefaultImageContainer, GameName } from "./styled";
 import { Link } from "react-router-dom";
 import { toGame } from "../../../routes";
 
 const GameTile = ({ game }) => {
   return (
     game ?
-      <Tile as={Link} to={toGame({ id: game._id })}>
+      <StyledTile as={Link} to={toGame({ id: game._id })}>
         {
           game.imgUrl ?
             <Image src={game.imgUrl} alt="game" /> :
@@ -22,7 +22,7 @@ const GameTile = ({ game }) => {
           <p>Data ostatniego wyniku: {game.lastResultDate}</p>
           <p>Liczba wyników: {game.numberOfResults}</p>
         </div>
-      </Tile> :
+      </StyledTile> :
       <>
       </>
   );
