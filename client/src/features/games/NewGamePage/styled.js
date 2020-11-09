@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const GameImage = styled.img`
-  width: 100%;
-  margin-bottom: 10px;
+  max-width: 400px;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -10,4 +9,9 @@ export const ButtonsContainer = styled.div`
   grid-gap: 20px;
   margin-bottom: 10px;
   grid-template-columns: 1fr 1fr;
+`;
+
+export const GameDetails = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

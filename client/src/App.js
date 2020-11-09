@@ -20,13 +20,15 @@ import {
   toLogin,
   toHomePage,
   toNewGame,
-  toGame
+  toGame,
+  toNewGameSearch
 } from "./routes";
 import HomePage from "./features/homepage/HomePage";
 import ResultsPage from "./features/results/ResultsPage";
-import NewGamePage from "./features/games/NewGamePage";
+import NewGameSearchPage from "./features/games/NewGameSearchPage";
 import GamesPage from "./features/games/GamesPage";
 import GamePage from "./features/games/GamePage";
+import NewGamePage from "./features/games/NewGamePage";
 
 const App = () => (
   <BrowserRouter>
@@ -34,6 +36,7 @@ const App = () => (
     <Container>
       <Switch>
         <PrivateRoute path={toNewResult()} component={NewResultForm} />
+        <PrivateRoute path={toNewGameSearch()} component={NewGameSearchPage} />
         <PrivateRoute path={toNewGame()} component={NewGamePage} />
         <PrivateRoute path={toUserStats()} component={UserStats} />
         <Route path={toResults()} >
