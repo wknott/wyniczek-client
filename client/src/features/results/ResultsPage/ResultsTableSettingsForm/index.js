@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import Select from "../../../../common/Select";
-import Input from "../../../../common/Input";
 import { fetchGames, selectGames, selectLoading } from "../../../games/gamesSlice";
 import { theme } from "../../../../theme";
 import { compareObjects } from "../../../../logic/utilities";
@@ -11,8 +10,6 @@ import Label from "../../../../common/Label";
 const ResultsTableSettingsForm = ({
   selectedGame,
   setSelectedGame,
-  numberOfResults,
-  setNumberOfResults
 }) => {
   const games = useSelector(selectGames);
   const loading = useSelector(selectLoading);
@@ -39,16 +36,6 @@ const ResultsTableSettingsForm = ({
               onChange={onChange}
               options={sortedGames}
               firstOption={"Wszystkie gry"}
-            />
-          </Label>
-        </p>
-        <p>
-          <Label labelText="Liczba wyników">
-            <Input
-              type="number"
-              min={1}
-              value={numberOfResults}
-              onChange={({ target }) => setNumberOfResults(target.value)}
             />
           </Label>
         </p>

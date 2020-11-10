@@ -9,6 +9,8 @@ import {
 import { getResults } from "../../../../proxy/api";
 import { theme } from "../../../../theme";
 import { Table, TableContainer, TableHeader, TableRow, TableCell } from "../../../../common/Table";
+import { useQueryParameter } from "../../../../queryParameters";
+import Pager from "../../../../common/Pager";
 
 const ResultsTable = ({ selectedGame }) => {
   const [results, setResults] = useState([]);
@@ -20,47 +22,51 @@ const ResultsTable = ({ selectedGame }) => {
     setSelectedResult(result);
     setShowResultModal(true);
   };
+  const page = useQueryParameter("page") || 1;
 
   useEffect(() => {
     const loadResults = async () => {
       setLoading(true);
-      const { results, numberOfResults } = await getResults(1, selectedGame);
+      const { results, numberOfResults } = await getResults(page, selectedGame);
       setLoading(false);
       setResults(results);
       setNumberOfResults(numberOfResults);
     };
 
     loadResults();
-  }, [selectedGame]);
+  }, [selectedGame, page]);
 
   return (
     <TableContainer>
+
       {
         loading ?
           <ReactLoading color={theme.colors.windsor} /> :
-          <Table>
-            <thead>
-              <TableRow>
-                <TableHeader>Gra</TableHeader>
-                <TableHeader>1. Gracz</TableHeader>
-                <TableHeader>Data</TableHeader>
-                <TableHeader>Zwycięzca</TableHeader>
-              </TableRow>
-            </thead>
-            <tbody>
-              {results.map((result, index) => (
-                <TableRow key={index} onClick={() => handleShowResultModal(result)}>
-                  <TableCell>{result.game.name}</TableCell>
-                  <TableCell>
-                    {result.scores.find((score, index) => index === 0).user.name}
-                  </TableCell>
-                  <TableCell>{window.innerWidth > 800 ? formatDateString(result.date) : formatDateStringShort(result.date)}</TableCell>
-                  <TableCell>{calculateWinners(result).join(" ")}</TableCell>
+          <>
+            <Table>
+              <thead>
+                <TableRow>
+                  <TableHeader>Gra</TableHeader>
+                  <TableHeader>1. Gracz</TableHeader>
+                  <TableHeader>Data</TableHeader>
+                  <TableHeader>Zwycięzca</TableHeader>
                 </TableRow>
-              ))}
-            </tbody>
-          </Table>
-
+              </thead>
+              <tbody>
+                {results.map((result, index) => (
+                  <TableRow key={index} onClick={() => handleShowResultModal(result)}>
+                    <TableCell>{result.game.name}</TableCell>
+                    <TableCell>
+                      {result.scores.find((score, index) => index === 0).user.name}
+                    </TableCell>
+                    <TableCell>{window.innerWidth > 800 ? formatDateString(result.date) : formatDateStringShort(result.date)}</TableCell>
+                    <TableCell>{calculateWinners(result).join(" ")}</TableCell>
+                  </TableRow>
+                ))}
+              </tbody>
+            </Table>
+            {numberOfResults > 10 && <Pager numberOfResults={numberOfResults} />}
+          </>
       }
       <ResultModal
         show={showResultModal}
