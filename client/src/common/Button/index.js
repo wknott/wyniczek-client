@@ -17,7 +17,9 @@ export default styled.button`
   }
 
   &:disabled {
-    color: ${({ theme }) => theme.colors.alto};
+    background-color: ${({ theme }) => theme.colors.alto};
+    color: ${({ theme }) => theme.colors.grey};
+
     &:hover {
       filter: none;
     }
