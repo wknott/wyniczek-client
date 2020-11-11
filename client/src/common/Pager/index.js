@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useQueryParameter, useReplaceQueryParameter } from "../../queryParameters";
+import { PageQueryParamName, useQueryParameter, useReplaceQueryParameter } from "../../queryParameters";
 import { Paragraph, StyledPager, PagerButton } from "./styled";
 import first from "../../images/first.svg";
 import previous from "../../images/previous.svg";
@@ -7,13 +7,13 @@ import next from "../../images/next.svg";
 import last from "../../images/last.svg";
 
 const Pager = ({ numberOfResults }) => {
-  const page = useQueryParameter("page") || 1;
+  const page = useQueryParameter(PageQueryParamName) || 1;
   const replaceQueryParam = useReplaceQueryParameter();
   const numberOfPages = Math.ceil(numberOfResults / 10);
 
   useEffect(() => {
     if (page > numberOfPages) {
-      replaceQueryParam({ key: "page" })
+      replaceQueryParam({ key: PageQueryParamName })
     }
   }, [replaceQueryParam, numberOfPages, page])
   return (
@@ -21,12 +21,12 @@ const Pager = ({ numberOfResults }) => {
       <PagerButton
         disabled={page < 2}
         src={first}
-        onClick={() => replaceQueryParam({ key: "page" })}
+        onClick={() => replaceQueryParam({ key: PageQueryParamName })}
       />
       <PagerButton
         disabled={page < 2}
         src={previous}
-        onClick={() => replaceQueryParam({ key: "page", value: +page === 2 ? null : page - 1 })}
+        onClick={() => replaceQueryParam({ key: PageQueryParamName, value: +page === 2 ? null : page - 1 })}
       />
       <Paragraph>
         Strona <strong>{page}</strong> z <strong>{numberOfPages}</strong>
@@ -34,12 +34,12 @@ const Pager = ({ numberOfResults }) => {
       <PagerButton
         disabled={page > numberOfPages - 1}
         src={next}
-        onClick={() => replaceQueryParam({ key: "page", value: page > numberOfPages - 1 ? +numberOfPages : +page + 1 })}
+        onClick={() => replaceQueryParam({ key: PageQueryParamName, value: page > numberOfPages - 1 ? +numberOfPages : +page + 1 })}
       />
       <PagerButton
         disabled={page > numberOfPages - 1}
         src={last}
-        onClick={() => replaceQueryParam({ key: "page", value: +numberOfPages })}
+        onClick={() => replaceQueryParam({ key: PageQueryParamName, value: +numberOfPages })}
       />
     </StyledPager>
   )

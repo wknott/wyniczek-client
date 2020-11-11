@@ -21,3 +21,6 @@ export const useReplaceQueryParameter = () => {
       history.push(`${location.pathname}`);
   }
 }
+
+export const PageQueryParamName = "strona";
+export const GameQueryParamName = "gra";

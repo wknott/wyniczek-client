@@ -5,13 +5,13 @@ import Select from "../../../../common/Select";
 import { fetchGames, selectGames, selectLoading } from "../../../games/gamesSlice";
 import { theme } from "../../../../theme";
 import { compareObjects } from "../../../../logic/utilities";
-import { useQueryParameter, useReplaceQueryParameter } from "../../../../queryParameters";
+import { GameQueryParamName, PageQueryParamName, useQueryParameter, useReplaceQueryParameter } from "../../../../queryParameters";
 
 const ResultsTableSettingsForm = () => {
   const games = useSelector(selectGames);
   const loading = useSelector(selectLoading);
   const sortedGames = [...games].sort(compareObjects("name"));
-  const selectedGameId = useQueryParameter("gra");
+  const selectedGameId = useQueryParameter(GameQueryParamName);
   const replaceQueryParam = useReplaceQueryParameter();
   const dispatch = useDispatch();
 
@@ -20,10 +20,10 @@ const ResultsTableSettingsForm = () => {
   }, [dispatch]);
 
   const onChange = (selectedGameId) => {
-    replaceQueryParam({ key: "page" });
+    replaceQueryParam({ key: PageQueryParamName });
     replaceQueryParam(
       {
-        key: "gra",
+        key: GameQueryParamName,
         value: selectedGameId,
       }
     );

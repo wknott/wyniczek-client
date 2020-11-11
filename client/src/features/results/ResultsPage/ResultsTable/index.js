@@ -8,7 +8,7 @@ import {
 } from "../../../../logic/utilities.js";
 import { theme } from "../../../../theme";
 import { Table, TableContainer, TableHeader, TableRow, TableCell } from "../../../../common/Table";
-import { useQueryParameter } from "../../../../queryParameters";
+import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../../../../queryParameters";
 import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
@@ -17,8 +17,8 @@ const ResultsTable = () => {
   const { results, numberOfResults, loading } = useSelector(selectResultsState);
   const [showResultModal, setShowResultModal] = useState(false);
   const [selectedResult, setSelectedResult] = useState({});
-  const page = useQueryParameter("page") || 1;
-  const selectedGameId = useQueryParameter("gra");
+  const page = useQueryParameter(PageQueryParamName) || 1;
+  const selectedGameId = useQueryParameter(GameQueryParamName);
   const dispatch = useDispatch();
 
   const handleShowResultModal = (result) => {
