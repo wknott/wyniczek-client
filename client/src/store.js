@@ -3,7 +3,8 @@ import createSagaMiddleware from "redux-saga";
 import authReducer from "./authSlice";
 import navReducer from "./features/navigation/Navigation/navSlice";
 import gamesReducer from "./features/games/gamesSlice";
-import { watchFetchGames } from "./features/games/gamesSaga";
+import resultsReducer from "./features/results/resultsSlice";
+import rootSaga from "./rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -12,10 +13,11 @@ const store = configureStore({
     auth: authReducer,
     nav: navReducer,
     games: gamesReducer,
+    results: resultsReducer,
   },
   middleware: [sagaMiddleware],
 });
 
-sagaMiddleware.run(watchFetchGames);
+sagaMiddleware.run(rootSaga);
 
 export default store;
