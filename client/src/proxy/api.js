@@ -58,10 +58,10 @@ export const getUser = async (userId) => {
   }
 }
 
-export const getResults = async (page, selectedGame) => {
+export const getResults = async (page, selectedGameId) => {
   try {
     const url = `/api/results${page ? '?page=' + page : ''}` +
-      `${selectedGame ? '&gameId=' + selectedGame._id : ''}`;
+      `${selectedGameId ? '&gameId=' + selectedGameId : ''}`;
     const response = await axios.get(url);
     return response.data;
   } catch (err) {

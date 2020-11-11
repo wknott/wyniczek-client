@@ -13,20 +13,22 @@ import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
 
-const ResultsTable = ({ selectedGame }) => {
+const ResultsTable = () => {
   const { results, numberOfResults, loading } = useSelector(selectResultsState);
   const [showResultModal, setShowResultModal] = useState(false);
   const [selectedResult, setSelectedResult] = useState({});
   const page = useQueryParameter("page") || 1;
+  const selectedGameId = useQueryParameter("gra");
   const dispatch = useDispatch();
+
   const handleShowResultModal = (result) => {
     setSelectedResult(result);
     setShowResultModal(true);
   };
 
   useEffect(() => {
-    dispatch(fetchResults({ page, selectedGame }));
-  }, [dispatch, selectedGame, page]);
+    dispatch(fetchResults({ page, selectedGameId }));
+  }, [dispatch, selectedGameId, page]);
 
   return (
     <TableContainer>

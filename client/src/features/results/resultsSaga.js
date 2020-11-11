@@ -4,7 +4,7 @@ import { fetchResults, fetchError, fetchResultsSuccess } from "./resultsSlice";
 
 function* fetchResultsHandler({ payload }) {
   try {
-    const { results, numberOfResults } = yield call(getResults, payload.page, payload.selectedGame);
+    const { results, numberOfResults } = yield call(getResults, payload.page, payload.selectedGameId);
     yield put(fetchResultsSuccess({ results, numberOfResults }));
   } catch (error) {
     yield call(alert, "Nie udało się wczytać wyników.");

@@ -5,16 +5,14 @@ import Select from "../../../../common/Select";
 import { fetchGames, selectGames, selectLoading } from "../../../games/gamesSlice";
 import { theme } from "../../../../theme";
 import { compareObjects } from "../../../../logic/utilities";
-import Label from "../../../../common/Label";
+import { useQueryParameter, useReplaceQueryParameter } from "../../../../queryParameters";
 
-const ResultsTableSettingsForm = ({
-  selectedGame,
-  setSelectedGame,
-}) => {
+const ResultsTableSettingsForm = () => {
   const games = useSelector(selectGames);
   const loading = useSelector(selectLoading);
   const sortedGames = [...games].sort(compareObjects("name"));
-
+  const selectedGameId = useQueryParameter("gra");
+  const replaceQueryParam = useReplaceQueryParameter();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,24 +20,24 @@ const ResultsTableSettingsForm = ({
   }, [dispatch]);
 
   const onChange = (selectedGameId) => {
-    setSelectedGame(games.find((game) => game._id === selectedGameId));
+    replaceQueryParam({ key: "page" });
+    replaceQueryParam(
+      {
+        key: "gra",
+        value: selectedGameId,
+      }
+    );
   };
 
   return (
     loading ?
       <ReactLoading color={theme.colors.windsor} /> :
-      <form>
-        <p>
-          <Label labelText="Gra">
-            <Select
-              value={selectedGame}
-              onChange={onChange}
-              options={sortedGames}
-              firstOption={"Wszystkie gry"}
-            />
-          </Label>
-        </p>
-      </form>
+      <Select
+        value={games.find(game => game._id === selectedGameId)}
+        onChange={onChange}
+        options={sortedGames}
+        firstOption={"Wszystkie gry"}
+      />
   );
 };
 
