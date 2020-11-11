@@ -4,7 +4,6 @@ import { fetchResults, fetchError, fetchResultsSuccess } from "./resultsSlice";
 
 function* fetchResultsHandler({ payload }) {
   try {
-    console.log(payload);
     const { results, numberOfResults } = yield call(getResults, payload.page, payload.selectedGame);
     yield put(fetchResultsSuccess({ results, numberOfResults }));
   } catch (error) {

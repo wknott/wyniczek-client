@@ -6,35 +6,27 @@ import {
   formatDateString,
   calculateWinners,
 } from "../../../../logic/utilities.js";
-import { getResults } from "../../../../proxy/api";
 import { theme } from "../../../../theme";
 import { Table, TableContainer, TableHeader, TableRow, TableCell } from "../../../../common/Table";
 import { useQueryParameter } from "../../../../queryParameters";
 import Pager from "../../../../common/Pager";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchResults, selectResultsState } from "../../resultsSlice";
 
 const ResultsTable = ({ selectedGame }) => {
-  const [results, setResults] = useState([]);
+  const { results, numberOfResults, loading } = useSelector(selectResultsState);
   const [showResultModal, setShowResultModal] = useState(false);
   const [selectedResult, setSelectedResult] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [numberOfResults, setNumberOfResults] = useState(0);
+  const page = useQueryParameter("page") || 1;
+  const dispatch = useDispatch();
   const handleShowResultModal = (result) => {
     setSelectedResult(result);
     setShowResultModal(true);
   };
-  const page = useQueryParameter("page") || 1;
 
   useEffect(() => {
-    const loadResults = async () => {
-      setLoading(true);
-      const { results, numberOfResults } = await getResults(page, selectedGame);
-      setLoading(false);
-      setResults(results);
-      setNumberOfResults(numberOfResults);
-    };
-
-    loadResults();
-  }, [selectedGame, page]);
+    dispatch(fetchResults({ page, selectedGame }));
+  }, [dispatch, selectedGame, page]);
 
   return (
     <TableContainer>

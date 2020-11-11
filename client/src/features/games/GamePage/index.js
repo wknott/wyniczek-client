@@ -14,7 +14,6 @@ const GamePage = () => {
   const games = useSelector(selectGames);
   const dispatch = useDispatch();
   const game = useSelector(state => getGameById(state, id));
-  console.log(games);
   useEffect(() => {
     if (games.length < 1) {
       dispatch(fetchGames())
