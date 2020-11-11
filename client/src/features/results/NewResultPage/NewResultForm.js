@@ -49,7 +49,8 @@ function NewResultForm() {
     const res = await fetch(`/api/results?gameId=${gameId}&last=true`, {
       headers: authHeader(),
     });
-    return res !== null ? await res.json() : null;
+    const data = await res.json();
+    return data.results;
   }
 
   async function selectGame(e) {
