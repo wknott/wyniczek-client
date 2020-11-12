@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { TableCell } from "../../../../common/Table";
 
@@ -22,4 +23,13 @@ export const TableCellThumbnail = styled(TableCell)`
 export const Icon = styled.img`
   height: 24px;
   filter: invert(100%)
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.black};
+
+  &:hover{
+    text-decoration: none;
+  }
 `;

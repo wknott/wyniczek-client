@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ReactLoading from "react-loading";
-import ResultModal from "./ResultModal";
 import {
   formatDateStringShort,
   formatDateString,
@@ -12,24 +11,18 @@ import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../..
 import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
-import { Icon, TableCellThumbnail, Thumbnail } from "./styled";
+import { Icon, TableCellThumbnail, Thumbnail, StyledLink } from "./styled";
 import firstPlayer from "../../../../images/firstPlayer.svg";
 import gameImage from "../../../../images/game.svg";
 import dateImage from "../../../../images/date.svg";
 import winner from "../../../../images/winner.svg";
+import { toResult } from "../../../../routes";
 
 const ResultsTable = () => {
   const { results, numberOfResults, loading } = useSelector(selectResultsState);
-  const [showResultModal, setShowResultModal] = useState(false);
-  const [selectedResult, setSelectedResult] = useState({});
   const page = useQueryParameter(PageQueryParamName) || 1;
   const selectedGameId = useQueryParameter(GameQueryParamName);
   const dispatch = useDispatch();
-
-  const handleShowResultModal = (result) => {
-    setSelectedResult(result);
-    setShowResultModal(true);
-  };
 
   useEffect(() => {
     dispatch(fetchResults({ page, selectedGameId }));
@@ -53,16 +46,32 @@ const ResultsTable = () => {
               </thead>
               <tbody>
                 {results.map((result, index) => (
-                  <TableRow key={index} onClick={() => handleShowResultModal(result)}>
+                  <TableRow key={index}>
                     <TableCellThumbnail>
-                      <Thumbnail src={result.game.thumbnailUrl} alt="" />
+                      <StyledLink to={toResult({ id: result._id })}>
+                        <Thumbnail src={result.game.thumbnailUrl} alt="" />
+                      </StyledLink>
                     </TableCellThumbnail>
-                    <TableCell>{result.game.name}</TableCell>
                     <TableCell>
-                      {result.scores.find((score, index) => index === 0).user.name}
+                      <StyledLink to={toResult({ id: result._id })}>
+                        {result.game.name}
+                      </StyledLink>
                     </TableCell>
-                    <TableCell>{window.innerWidth > 800 ? formatDateString(result.date) : formatDateStringShort(result.date)}</TableCell>
-                    <TableCell>{calculateWinners(result).join(" ")}</TableCell>
+                    <TableCell>
+                      <StyledLink to={toResult({ id: result._id })}>
+                        {result.scores.find((score, index) => index === 0).user.name}
+                      </StyledLink>
+                    </TableCell>
+                    <TableCell>
+                      <StyledLink to={toResult({ id: result._id })}>
+                        {window.innerWidth > 800 ? formatDateString(result.date) : formatDateStringShort(result.date)}
+                      </StyledLink>
+                    </TableCell>
+                    <TableCell>
+                      <StyledLink to={toResult({ id: result._id })}>
+                        {calculateWinners(result).join(" ")}
+                      </StyledLink>
+                    </TableCell>
                   </TableRow>
                 ))}
               </tbody>
@@ -70,11 +79,6 @@ const ResultsTable = () => {
             {numberOfResults > 10 && <Pager numberOfResults={numberOfResults} />}
           </>
       }
-      <ResultModal
-        show={showResultModal}
-        handleClose={() => setShowResultModal(false)}
-        result={selectedResult}
-      />
     </TableContainer >
   );
 }
