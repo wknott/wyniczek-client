@@ -6,8 +6,16 @@ const resultsSlice = createSlice({
     results: [],
     numberOfResults: null,
     loading: false,
+    result: null,
   },
   reducers: {
+    fetchResult: state => {
+      state.loading = true;
+    },
+    fetchResultSuccess: (state, { payload: result }) => {
+      state.result = result;
+      state.loading = false;
+    },
     fetchResults: state => {
       state.loading = true;
     },
@@ -22,10 +30,17 @@ const resultsSlice = createSlice({
   },
 });
 
-export const { fetchResults, fetchError, fetchResultsSuccess } = resultsSlice.actions;
+export const {
+  fetchResult,
+  fetchResultSuccess,
+  fetchResults,
+  fetchError,
+  fetchResultsSuccess
+} = resultsSlice.actions;
 
 export const selectResultsState = state => state.results;
 export const selectResults = state => selectResultsState(state).results;
 export const selectLoading = state => selectResultsState(state).loading;
+export const selectResult = state => selectResultsState(state).result;
 
 export default resultsSlice.reducer;
