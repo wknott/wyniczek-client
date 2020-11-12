@@ -1,5 +1,6 @@
 import React from "react";
 import { TableContainer, Table, TableHeader, TableCell } from "../../../../common/Table/";
+import { StyledTableCell } from "./styled";
 
 const ResultTable = ({ result }) => (
   <TableContainer>
@@ -15,18 +16,18 @@ const ResultTable = ({ result }) => (
       <tbody>
         {result.game.pointFields.map((kategory, indexk) => (
           <tr key={indexk}>
-            <TableCell>{kategory}</TableCell>
+            <TableHeader>{kategory}</TableHeader>
             {result.scores.map((score, index) => (
               <TableCell key={index}>{score.points[indexk] || "0"}</TableCell>
             ))}
           </tr>
         ))}
         <tr>
-          <TableCell className="bold">Wynik</TableCell>
+          <StyledTableCell>Wynik</StyledTableCell>
           {result.scores.map((score, index) => (
-            <TableCell key={index} className="bold">
+            <StyledTableCell key={index}>
               {Object.values(score.points).reduce((x, y) => x + y, 0)}
-            </TableCell>
+            </StyledTableCell>
           ))}
         </tr>
       </tbody>
