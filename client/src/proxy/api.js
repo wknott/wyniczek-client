@@ -146,3 +146,14 @@ export const getGameDetails = async (id) => {
     return error;
   }
 }
+
+export const getResult = async (id) => {
+  try {
+    const url = `/api/results/${id}`;
+    const response = await axios.get(url);
+    console.log(response);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
