@@ -15,7 +15,6 @@ export const TableCell = styled.td`
   color: black;
   padding: 16px;
   border: 1px solid black;
-  cursor: pointer;
   text-align: center;
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
