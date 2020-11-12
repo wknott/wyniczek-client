@@ -12,6 +12,7 @@ import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../..
 import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
+import { TableCellThumbnail, Thumbnail } from "./styled";
 
 const ResultsTable = () => {
   const { results, numberOfResults, loading } = useSelector(selectResultsState);
@@ -32,7 +33,6 @@ const ResultsTable = () => {
 
   return (
     <TableContainer>
-
       {
         loading ?
           <ReactLoading color={theme.colors.windsor} /> :
@@ -40,6 +40,7 @@ const ResultsTable = () => {
             <Table>
               <thead>
                 <TableRow>
+                  <TableHeader></TableHeader>
                   <TableHeader>Gra</TableHeader>
                   <TableHeader>1. Gracz</TableHeader>
                   <TableHeader>Data</TableHeader>
@@ -49,6 +50,9 @@ const ResultsTable = () => {
               <tbody>
                 {results.map((result, index) => (
                   <TableRow key={index} onClick={() => handleShowResultModal(result)}>
+                    <TableCellThumbnail>
+                      <Thumbnail src={result.game.thumbnailUrl} alt="" />
+                    </TableCellThumbnail>
                     <TableCell>{result.game.name}</TableCell>
                     <TableCell>
                       {result.scores.find((score, index) => index === 0).user.name}
