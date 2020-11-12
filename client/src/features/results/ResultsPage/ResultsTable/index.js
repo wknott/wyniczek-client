@@ -12,7 +12,11 @@ import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../..
 import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
-import { TableCellThumbnail, Thumbnail } from "./styled";
+import { Icon, TableCellThumbnail, Thumbnail } from "./styled";
+import firstPlayer from "../../../../images/firstPlayer.svg";
+import gameImage from "../../../../images/game.svg";
+import dateImage from "../../../../images/date.svg";
+import winner from "../../../../images/winner.svg";
 
 const ResultsTable = () => {
   const { results, numberOfResults, loading } = useSelector(selectResultsState);
@@ -41,10 +45,10 @@ const ResultsTable = () => {
               <thead>
                 <TableRow>
                   <TableHeader></TableHeader>
-                  <TableHeader>Gra</TableHeader>
-                  <TableHeader>1. Gracz</TableHeader>
-                  <TableHeader>Data</TableHeader>
-                  <TableHeader>Zwycięzca</TableHeader>
+                  <TableHeader><Icon src={gameImage} /></TableHeader>
+                  <TableHeader><Icon src={firstPlayer} /></TableHeader>
+                  <TableHeader><Icon src={dateImage} /></TableHeader>
+                  <TableHeader><Icon src={winner} /></TableHeader>
                 </TableRow>
               </thead>
               <tbody>

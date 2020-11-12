@@ -18,3 +18,8 @@ export const TableCellThumbnail = styled(TableCell)`
     padding: 4px;
   }
 `;
+
+export const Icon = styled.img`
+  height: 24px;
+  filter: invert(100%)
+`;

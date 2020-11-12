@@ -16,6 +16,7 @@ export const TableCell = styled.td`
   padding: 16px;
   border: 1px solid black;
   cursor: pointer;
+  text-align: center;
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     font-size: 12px;
@@ -28,6 +29,7 @@ export const TableHeader = styled.th`
   border: 1px solid black;
   background-color: ${({ theme }) => theme.colors.windsor};
   color: ${({ theme }) => theme.colors.white};
+  text-align: center;
   
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     font-size: 12px;
