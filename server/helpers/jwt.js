@@ -1,5 +1,6 @@
 const expressJwt = require('express-jwt');
 const userService = require('../services/users');
+const pathToRegexp = require('path-to-regexp');
 
 module.exports = jwt;
 
@@ -10,9 +11,9 @@ function jwt() {
             // public routes that don't require authentication
             '/api/users/authenticate',
             '/api/users/register',
+            pathToRegexp('/api/results*'),
             { url: '/api/games', methods: ['GET'] },
             { url: '/api/games/last', methods: ['GET'] },
-            { url: '/api/results', methods: ['GET'] },
             { url: '/api/results/last', methods: ['GET'] },
             { url: '/api/users', methods: ['GET'] },
         ]
