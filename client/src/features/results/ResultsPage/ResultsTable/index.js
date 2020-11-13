@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import ReactLoading from "react-loading";
 import {
-  formatDateStringShort,
   formatDateString,
   calculateWinners,
 } from "../../../../logic/utilities.js";
@@ -11,7 +10,7 @@ import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../..
 import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
-import { Icon, TableCellThumbnail, Thumbnail, StyledLink } from "./styled";
+import { Icon, TableCellThumbnail, Thumbnail, StyledLink, DesktopDate, MobileDate } from "./styled";
 import firstPlayer from "../../../../images/firstPlayer.svg";
 import gameImage from "../../../../images/game.svg";
 import dateImage from "../../../../images/date.svg";
@@ -64,7 +63,8 @@ const ResultsTable = () => {
                     </TableCell>
                     <TableCell>
                       <StyledLink to={toResult({ id: result._id })}>
-                        {window.innerWidth > 800 ? formatDateString(result.date) : formatDateStringShort(result.date)}
+                        <DesktopDate>{formatDateString(result.date)}</DesktopDate>
+                        <MobileDate>{formatDateString(result.date, "short")}</MobileDate>
                       </StyledLink>
                     </TableCell>
                     <TableCell>

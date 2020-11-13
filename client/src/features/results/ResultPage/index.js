@@ -14,7 +14,8 @@ const ResultPage = () => {
 
   useEffect(() => {
     dispatch(fetchResult({ id }));
-  }, [dispatch, id])
+  }, [dispatch, id]);
+
   return (
     result &&
     <Container>
@@ -23,10 +24,11 @@ const ResultPage = () => {
           <Image width={150} src={result.game.imgUrl} alt="game" />
         </Link>
         <GameName to={toGame({ id: result.game._id })}>{result.game.name}</GameName>
-        <Date>{formatDateString(result.date)}</Date>
+        <Date>{formatDateString(result.date, "long")}</Date>
       </Info>
       <ResultTable result={result} />
     </Container>
   )
 }
+
 export default ResultPage;
