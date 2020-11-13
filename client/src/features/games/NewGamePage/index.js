@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import { fetchGameDetails, selectGameDetails, selectLoading } from "../gamesSlice";
 import { theme } from "../../../theme";
-import { GameImage, ButtonsContainer, GameDetails } from "./styled";
+import { GameImage, ButtonsContainer, GameDetails, StyledTile } from "./styled";
 import Button from "../../../common/Button";
 import Label from "../../../common/Label";
 import Input from "../../../common/Input";
@@ -11,7 +11,6 @@ import { StyledSelect } from "../../../common/Select/styled";
 import { nanoid } from "@reduxjs/toolkit";
 import { authHeader } from "../../../helpers/auth-header";
 import { useParams } from "react-router-dom";
-import Tile from "../../../common/Tile";
 
 const NewGamePage = () => {
   const { id: gameId } = useParams();
@@ -73,7 +72,7 @@ const NewGamePage = () => {
     <div>
       {loading || !gameDetails ?
         <ReactLoading color={theme.colors.windsor} /> :
-        <Tile>
+        <StyledTile>
           <GameImage src={gameDetails.img} alt="game-image" />
           <GameDetails>
             <h2>{gameDetails.name[0]}</h2>
@@ -135,7 +134,7 @@ const NewGamePage = () => {
               <Button disabled={!selectedName} type="submit">Dodaj do listy gier</Button>
             </form>
           </GameDetails>
-        </Tile>
+        </StyledTile>
       }
     </div>
   )
