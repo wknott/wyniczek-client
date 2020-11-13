@@ -7,7 +7,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AllUsersTable from "./components/Users/AllUsersTable";
 import Stats from "./components/Stats/Stats";
 import UserStats from "./components/Users/UserStats";
-import Container from "./components/Container";
+import Container from "./common/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import {
