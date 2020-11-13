@@ -16,6 +16,10 @@ export const Image = styled.img`
   width: 200px;
   border-radius: 5px;
   object-fit: contain;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
+    width: 100px;
+  }
 `;
 
 export const DefaultImage = styled.img`
@@ -34,6 +38,5 @@ export const DefaultImageContainer = styled.div`
 `;
 
 export const GameName = styled.h2`
-  font-size: 32px;
-  overflow-wrap: anywhere;
+  font-size: 24px;
 `;

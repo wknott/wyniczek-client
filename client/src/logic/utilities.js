@@ -16,6 +16,18 @@ export function formatDateString(dateString) {
   });
 }
 
+export function formatDateStringLong(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("pl-pl", {
+    second: "numeric",
+    minute: "numeric",
+    hour: "numeric",
+    day: "2-digit",
+    month: "numeric",
+    year: "numeric",
+  });
+}
+
 export function calculateWinners(result) {
   const sumOfPoints = Math.max(
     ...result.scores.map((score) =>
