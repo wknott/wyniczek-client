@@ -33,11 +33,6 @@ const Navigation = () => {
 
   const Menu = (
     <>
-      <Item onClick={() => dispatch(handleClose())}>
-        <StyledLink to={toResults()}>
-          Wyniki
-        </StyledLink>
-      </Item>
       {isAuthenticated &&
         <>
           <Item onClick={() => dispatch(handleClose())}>
