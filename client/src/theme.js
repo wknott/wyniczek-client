@@ -4,6 +4,7 @@ export const theme = {
     gallery: "#EEEEEE",
     alto: "#DDDDDD",
     silver: "#CCCCCC",
+    red: "#E60010",
     amber: "#FFBF00",
     windsor: "#5F0A87",
     pink: "#FFC7F4",
