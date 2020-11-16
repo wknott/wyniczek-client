@@ -8,14 +8,7 @@ function jwt() {
     const secret = process.env.JWT_SECRET;
     return expressJwt({ secret, algorithms: ['sha1', 'RS256', 'HS256'], isRevoked }).unless({
         path: [
-            // public routes that don't require authentication
-            '/api/users/authenticate',
-            '/api/users/register',
-            pathToRegexp('/api/results*'),
-            { url: '/api/games', methods: ['GET'] },
-            { url: '/api/games/last', methods: ['GET'] },
-            { url: '/api/results/last', methods: ['GET'] },
-            { url: '/api/users', methods: ['GET'] },
+                { url: /^\/api\/.*/, methods: ['GET'] }
         ]
     });
 }

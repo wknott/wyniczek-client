@@ -1,9 +1,11 @@
 import React from "react";
 import { Label, LabelText } from "./styled";
 
-export default ({ children, labelText }) => (
+const StyledLabel = ({ children, labelText }) => (
   <Label>
     <LabelText>{labelText}: </LabelText>
     {children}
   </Label>
 );
+
+export default StyledLabel;
