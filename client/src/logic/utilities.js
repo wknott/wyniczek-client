@@ -1,19 +1,34 @@
-export function formatDateStringShort(dateString) {
+export function formatDateString(dateString, length) {
   const date = new Date(dateString);
-  return date.toLocaleDateString("pl-pl", {
-    //weekday: 'short',
-    day: "2-digit",
-    month: "2-digit",
-  });
-}
+  let option
+  switch (length) {
+    case "short":
+      option = {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+      };
+      return date.toLocaleDateString("pl-pl", option);
 
-export function formatDateString(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("pl-pl", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
+    case "long":
+      option = {
+        second: "numeric",
+        minute: "numeric",
+        hour: "numeric",
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      };
+      return date.toLocaleDateString("pl-pl", option);
+
+    default:
+      option = {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      };
+      return date.toLocaleDateString("pl-pl", option);
+  }
 }
 
 export function calculateWinners(result) {

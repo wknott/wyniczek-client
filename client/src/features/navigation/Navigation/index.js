@@ -3,13 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { selectAuth, handleLogout } from "../../../authSlice";
 import {
-  toResults,
   toNewResult,
   toGames,
   toUsers,
   toStats,
   toLogin,
-  toHomePage,
+  toResults,
   toNewGameSearch
 } from "../../../routes";
 import {
@@ -33,11 +32,6 @@ const Navigation = () => {
 
   const Menu = (
     <>
-      <Item onClick={() => dispatch(handleClose())}>
-        <StyledLink to={toResults()}>
-          Wyniki
-        </StyledLink>
-      </Item>
       {isAuthenticated &&
         <>
           <Item onClick={() => dispatch(handleClose())}>
@@ -87,7 +81,7 @@ const Navigation = () => {
   return (
     <StyledNavigation>
       <div>
-        <NavLink to={toHomePage()} onClick={() => dispatch(handleClose())}>
+        <NavLink to={toResults()} onClick={() => dispatch(handleClose())}>
           <Image src={logo} alt="Logo" />
         </NavLink>
       </div>

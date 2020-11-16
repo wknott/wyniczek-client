@@ -7,7 +7,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AllUsersTable from "./components/Users/AllUsersTable";
 import Stats from "./components/Stats/Stats";
 import UserStats from "./components/Users/UserStats";
-import Container from "./components/Container";
+import Container from "./common/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import {
@@ -30,6 +30,7 @@ import GamesPage from "./features/games/GamesPage";
 import GamePage from "./features/games/GamePage";
 import NewGamePage from "./features/games/NewGamePage";
 import ResultPage from "./features/results/ResultPage";
+import LoginPage from "./features/users/LoginPage";
 
 const App = () => (
   <BrowserRouter>
@@ -59,7 +60,7 @@ const App = () => (
           <Stats />
         </Route>
         <Route path={toLogin()}>
-          <LoginForm />
+          <LoginPage />
         </Route>
         <Route exact path={toHomePage()}>
           <ResultsPage />

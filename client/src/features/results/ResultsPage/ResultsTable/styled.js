@@ -33,3 +33,19 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
   }
 `;
+
+export const DesktopDate = styled.p`
+  margin: 0px;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
+    display: none;
+  }
+`;
+
+export const MobileDate = styled.p`
+  margin: 0px;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
+    display: none;
+  }
+`;
