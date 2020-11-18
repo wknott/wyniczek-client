@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
         .populate('game')
         .populate({ path: 'scores.user' })
         .skip((page - 1) * 10 > numberOfResults ? 0 : (page - 1) * 10)
-        .limit(10)
+        .limit(page ? 10 : numberOfResults)
       res.json({ results, numberOfResults })
     }
   } catch (err) {
