@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Navigation from "./features/navigation/Navigation"
 import NewResultForm from "./features/results/NewResultPage/NewResultForm";
-import LoginForm from "./components/LoginForm/LoginForm";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AllUsersTable from "./components/Users/AllUsersTable";
 import Stats from "./components/Stats/Stats";
