@@ -10,9 +10,10 @@ import {
 } from "./styled";
 import { Link } from "react-router-dom";
 import { toGame } from "../../../routes";
-import { formatDateString } from "../../../logic/utilities";
+import LastResult from "./LastResult";
 
 const GameTile = ({ game }) => {
+
   return (
     game ?
       <StyledTile as={Link} to={toGame({ id: game._id })}>
@@ -24,12 +25,7 @@ const GameTile = ({ game }) => {
         }
         <div>
           <GameName>{game.name}</GameName>
-          {game.lastResultDate &&
-            <StyledParagraph>
-              {`Data ostatniego wyniku:
-              ${formatDateString(game.lastResultDate)}`}
-            </StyledParagraph>
-          }
+          <LastResult lastResultDate={game.lastResultDate} />
           {game.numberOfResults &&
             <StyledParagraph>
               Liczba wyników:
