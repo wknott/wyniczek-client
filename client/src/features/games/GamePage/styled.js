@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import Section from "../../../common/Section";
+import Tile from "../../../common/Tile";
 
 export const Image = styled.img`
-  width: 300px;
+  width: 100%;
   border-radius: 5px;
   object-fit: contain;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+  /* @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     width: 100px;
-  };
+  }; */
 `;
 
 export const DefaultImage = styled.img`
@@ -77,4 +78,12 @@ export const Title = styled.h1`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 18px;
   };
+`;
+
+export const GameTile = styled(Tile)`
+  grid-template-columns: 1fr 1fr;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
+    grid-template-columns: 1fr;
+  }
 `;

@@ -10,7 +10,7 @@ import {
 } from "./styled";
 import { Link } from "react-router-dom";
 import { toGame } from "../../../routes";
-import LastResult from "./LastResult";
+import LastResult from "../LastResult";
 
 const GameTile = ({ game }) => {
 
@@ -28,7 +28,7 @@ const GameTile = ({ game }) => {
           <LastResult lastResultDate={game.lastResultDate} />
           {game.numberOfResults &&
             <StyledParagraph>
-              Liczba wyników:
+              Liczba wyników:{" "}
               <strong>{game.numberOfResults}</strong>
             </StyledParagraph>
           }
