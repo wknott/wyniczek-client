@@ -8,7 +8,8 @@ export default styled(Link)`
   text-align: center;
   color: ${({ theme }) => theme.colors.white};
   display: block;
-
+  text-transform: uppercase;
+  
   &:hover {
     color: ${({ theme }) => theme.colors.white};
     text-decoration: none;

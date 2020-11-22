@@ -8,6 +8,7 @@ export const theme = {
     red: "#FF0000",
     amber: "#FFBF00",
     windsor: "#5F0A87",
+    denim: "#0C4DBB",
     pink: "#FFC7F4",
     black: "#000000",
   },
