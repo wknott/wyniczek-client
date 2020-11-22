@@ -8,7 +8,7 @@ const ResultsPage = () => (
     <Header>
       Historia wyników
     </Header>
-    <GameSelect />
+    <GameSelect firstOption="Wszystkie gry" />
     <ResultsTable />
   </>
 )

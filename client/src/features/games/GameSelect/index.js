@@ -7,7 +7,7 @@ import { theme } from "../../../theme";
 import { compareObjects } from "../../../logic/utilities";
 import { GameQueryParamName, PageQueryParamName, useQueryParameter, useReplaceQueryParameter } from "../../../queryParameters";
 
-const ResultsTableSettingsForm = () => {
+const SelectGame = ({ firstOption }) => {
   const games = useSelector(selectGames);
   const loading = useSelector(selectLoading);
   const sortedGames = [...games].sort(compareObjects("numberOfResults", "desc"));
@@ -36,9 +36,9 @@ const ResultsTableSettingsForm = () => {
         value={games.find(game => game._id === selectedGameId)}
         onChange={onChange}
         options={sortedGames}
-        firstOption={"Wszystkie gry"}
+        firstOption={firstOption}
       />
   );
 };
 
-export default ResultsTableSettingsForm;
+export default SelectGame;
