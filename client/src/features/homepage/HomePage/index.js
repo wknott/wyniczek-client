@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Link from "../../../common/Link";
 import { toNewResult, toResults, toStats } from "../../../routes"
-import { selectAuth } from "../../../authSlice";
+import { selectAuth } from "../../../common/authSlice";
 import Section from "../../../common/Section";
 
 const HomePage = () => {

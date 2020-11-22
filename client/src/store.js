@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import authReducer from "./authSlice";
+import authReducer from "./common/authSlice";
 import navReducer from "./features/navigation/Navigation/navSlice";
 import gamesReducer from "./features/games/gamesSlice";
 import resultsReducer from "./features/results/resultsSlice";

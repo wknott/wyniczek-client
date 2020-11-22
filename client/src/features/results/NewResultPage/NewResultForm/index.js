@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import addButton from "./add-user-button.png";
 import deleteButton from "./delete-user-button.png";
 import { getLastResult } from "../../../../proxy/api";
-import { GameQueryParamName, useQueryParameter } from "../../../../queryParameters";
+import { GameQueryParamName, useQueryParameter } from "../../../../common/queryParameters";
 import { fetchGames, selectGames } from "../../../games/gamesSlice";
 import { selectUsers, fetchUsers, selectLoading } from "../../../users/usersSlice";
 import Input from "../../../../common/Input";

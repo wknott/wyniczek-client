@@ -5,7 +5,7 @@ import Select from "../../../common/Select";
 import { fetchGames, selectGames, selectLoading } from "../gamesSlice";
 import { theme } from "../../../theme";
 import { compareObjects } from "../../../logic/utilities";
-import { GameQueryParamName, PageQueryParamName, useQueryParameter, useReplaceQueryParameter } from "../../../queryParameters";
+import { GameQueryParamName, PageQueryParamName, useQueryParameter, useReplaceQueryParameter } from "../../../common/queryParameters";
 
 const SelectGame = ({ firstOption }) => {
   const games = useSelector(selectGames);

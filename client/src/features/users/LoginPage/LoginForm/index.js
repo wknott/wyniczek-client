@@ -3,7 +3,7 @@ import Input from "../../../../common/Input";
 import Label from "../../../../common/Label";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { handleLogin } from "../../../../authSlice";
+import { handleLogin } from "../../../../common/authSlice";
 import { toResults } from "../../../../routes";
 import { ErrorMessage, Form, FormContainer, SubmitButton } from "./styled";
 

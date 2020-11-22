@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { PageQueryParamName, useQueryParameter, useReplaceQueryParameter } from "../../queryParameters";
+import { PageQueryParamName, useQueryParameter, useReplaceQueryParameter } from "../queryParameters";
 import { Paragraph, StyledPager, PagerButton } from "./styled";
 import first from "../../images/first.svg";
 import previous from "../../images/previous.svg";

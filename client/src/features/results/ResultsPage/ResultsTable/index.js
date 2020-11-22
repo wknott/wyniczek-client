@@ -6,7 +6,7 @@ import {
 } from "../../../../logic/utilities.js";
 import { theme } from "../../../../theme";
 import { Table, TableContainer, TableHeader, TableRow, TableCell } from "../../../../common/Table";
-import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../../../../queryParameters";
+import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../../../../common/queryParameters";
 import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";

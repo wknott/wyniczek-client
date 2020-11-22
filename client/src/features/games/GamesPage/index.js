@@ -8,7 +8,7 @@ import GameTile from "../GameTile";
 import { GamePageHeader, GameTilesContainer, SortButton, SortButtons, StyledLink } from "./styled";
 import Header from "../../../common/Header";
 import { toNewGameSearch } from "../../../routes";
-import { selectAuth } from "../../../authSlice";
+import { selectAuth } from "../../../common/authSlice";
 
 function GamesPage() {
   const [sortOption, setSortOption] = useState("numberOfResults");
