@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { selectAuth, handleLogout } from "../../../common/authSlice";
+import { selectAuth, handleLogout } from "../../common/authSlice";
 import {
   toNewResult,
   toGames,
@@ -9,7 +9,7 @@ import {
   toStats,
   toLogin,
   toResults,
-} from "../../../routes";
+} from "../../routes";
 import {
   StyledNavigation,
   StyledList,

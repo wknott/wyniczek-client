@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Navigation from "../../features/navigation/Navigation"
+import Navigation from "../Navigation"
 import NewResultForm from "../../features/results/NewResultPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Container from "../../common/Container";
