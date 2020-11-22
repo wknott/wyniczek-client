@@ -1,6 +1,32 @@
 const express = require('express')
 const router = express.Router()
 const userService = require('../services/users');
+const Results = require('../models/results')
+const User = require('../models/user')
+
+const countNumberOfResults = async (userId) => {
+  const numberOfResults = await Results.find(
+    {
+      "scores.user": userId,
+    }
+  ).countDocuments()
+  return numberOfResults;
+}
+
+router.get('/numberOfResults', async (req, res) => {
+  try {
+    const users = await User.find();
+    const usersWithNumberOfResults = await Promise.all(users.map(async ({ name, _id }) => {
+      const numberOfResults = await countNumberOfResults(_id);
+      return (
+        { name, _id, numberOfResults }
+      )
+    }));
+    res.json(usersWithNumberOfResults)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+})
 
 router.post('/authenticate', authenticate);
 router.post('/register', register);
