@@ -7,7 +7,8 @@ export default styled.button`
   color: ${({ theme }) => theme.colors.white};
   transition: 0.5s;
   border-radius: 5px;
-
+  text-transform: uppercase;
+  
   &:hover {
     filter: brightness(115%);
   }

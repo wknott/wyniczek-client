@@ -13,5 +13,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "Roboto", sans-serif;
     background-color: ${({ theme }) => theme.colors.gallery};
     overflow-y: scroll;
+    padding-bottom: 100px;
   }
 `;
