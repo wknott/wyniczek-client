@@ -9,7 +9,6 @@ import {
   toStats,
   toLogin,
   toResults,
-  toNewGameSearch
 } from "../../../routes";
 import {
   StyledNavigation,
@@ -33,18 +32,11 @@ const Navigation = () => {
   const Menu = (
     <>
       {isAuthenticated &&
-        <>
-          <Item onClick={() => dispatch(handleClose())}>
-            <StyledLink to={toNewResult()}>
-              Nowy wynik
-          </StyledLink>
-          </Item>
-          <Item onClick={() => dispatch(handleClose())}>
-            <StyledLink to={toNewGameSearch()}>
-              Nowa gra
-          </StyledLink>
-          </Item>
-        </>
+        <Item onClick={() => dispatch(handleClose())}>
+          <StyledLink to={toNewResult()}>
+            Nowy wynik
+            </StyledLink>
+        </Item>
       }
       <Item onClick={() => dispatch(handleClose())}>
         <StyledLink to={toGames()}>
