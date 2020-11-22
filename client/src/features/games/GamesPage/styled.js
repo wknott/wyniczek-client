@@ -16,7 +16,9 @@ export const GamePageHeader = styled.div`
 
 export const StyledLink = styled(Link)`
   margin: 24px 0 8px;
-
+  display: flex;
+  align-items: center;
+  
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
     font-size: 13px;
   }

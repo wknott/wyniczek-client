@@ -4,7 +4,9 @@ export const Label = styled.label`
   padding: 10px;
   background-color: ${({ theme }) => theme.colors.windsor}; 
   color: ${({ theme }) => theme.colors.black};
-  border-radius: 16px; 
+  border-radius: 16px;
+  display: flex;
+  align-items: center; 
 `;
 
 export const Icon = styled.img`
