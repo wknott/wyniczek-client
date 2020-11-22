@@ -7,4 +7,12 @@ export default styled.main`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
+
+  @media(max-width: 1132px){
+    max-width: calc(100% - 2 * 16px);
+  }
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    max-width: calc(100% - 2 * 4px);
+  }
 `;
