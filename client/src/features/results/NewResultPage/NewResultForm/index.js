@@ -1,0 +1,219 @@
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import addButton from "../../../../images/add-user-button.png";
+import deleteButton from "../../../../images/delete-user-button.png";
+import { getLastResult } from "../../../../proxy/api";
+import { GameQueryParamName, useQueryParameter } from "../../../../queryParameters";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGames, selectGames } from "../../../games/gamesSlice";
+import { selectUsers, fetchUsers, selectLoading } from "../../../users/usersSlice";
+import { compareObjects } from "../../../../logic/utilities";
+import Input from "../../../../common/Input";
+import { FieldName, Form, StyledButton, SubmitButton, Result } from "./styled";
+import Select from "../../../../common/Select";
+import { authHeader } from "../../../../helpers/auth-header";
+import { toResults } from "../../../../routes";
+
+function NewResultForm() {
+  const users = useSelector(selectUsers);
+  const sortedUsers = [...users].sort(compareObjects("numberOfResults", "desc"));
+  const loading = useSelector(selectLoading);
+  const [lastUsers, setLastUsers] = useState([]);
+  const [numberOfPlayers, setNumberOfPlayers] = useState(2);
+  const [scores, setScores] = useState([]);
+  const history = useHistory();
+  const selectedGameId = useQueryParameter(GameQueryParamName);
+  const games = useSelector(selectGames);
+  const dispatch = useDispatch();
+  const selectedGame = games.find((game) => game._id === selectedGameId);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+    if (!games) {
+      dispatch(fetchGames());
+    }
+  }, [dispatch, games]);
+
+  useEffect(() => {
+    (async () => {
+      if (selectedGame !== undefined) {
+        const lastResult = await getLastResult(selectedGame._id);
+        if (lastResult.scores !== undefined) {
+          const lastResultUsers = lastResult.scores.map((score) => score.user);
+          const reversedUsers = lastResultUsers.slice().reverse();
+          setLastUsers(reversedUsers);
+          createScores(2, selectedGame.pointFields.length, reversedUsers);
+        } else {
+          createScores(2, selectedGame.pointFields.length);
+        }
+      }
+      setNumberOfPlayers(2);
+    })();
+    // eslint-disable-next-line
+  }, [selectedGame])
+
+  function createScores(numberOfScores, numberOfFields, reversedUsers) {
+    const emptyScores = Array.from({ length: numberOfScores }, (x, index) => ({
+      user:
+        reversedUsers !== undefined
+          ? reversedUsers.length > index
+            ? reversedUsers[index].id
+            : null
+          : null,
+      points: Array.from({ length: numberOfFields }, () => null),
+    }));
+    if (reversedUsers === undefined || reversedUsers.length < 2) {
+      setScores(scores.concat(emptyScores).slice(0, numberOfScores));
+    } else {
+      setScores(emptyScores.slice(0, numberOfScores));
+    }
+  }
+
+  function onChangePoints(e, index, selectedScore) {
+    const newValue = parseInt(e.target.value, 10) || null;
+    const newPoints = selectedScore.points.map((s, i) =>
+      i === index ? newValue : s
+    );
+    const newScore = { user: selectedScore.user, points: newPoints };
+    const newScores = scores.map((s) => (s === selectedScore ? newScore : s));
+    setScores(newScores);
+  }
+
+  function onChangeResult(e, selectedScore) {
+    const newValue = parseInt(e.target.value, 10) || null;
+    const newScore = { user: selectedScore.user, points: [newValue] };
+    const newScores = scores.map((s) => (s === selectedScore ? newScore : s));
+    setScores(newScores);
+  }
+
+  function addPlayer() {
+    if (lastUsers.length > numberOfPlayers)
+      createScores(numberOfPlayers + 1, selectedGame.pointFields.length, [
+        lastUsers[numberOfPlayers],
+      ]);
+    else createScores(numberOfPlayers + 1, selectedGame.pointFields.length);
+    setNumberOfPlayers(numberOfPlayers + 1);
+  }
+
+  function deletePlayer() {
+    setScores(scores.slice(0, numberOfPlayers - 1));
+    setNumberOfPlayers(numberOfPlayers - 1);
+  }
+
+  function isValid() {
+    const users = scores.map((score) => score.user);
+    return (
+      users.length > 0 &&
+      JSON.stringify(users) === JSON.stringify([...new Set(users)]) &&
+      scores.every((score) => score.user) &&
+      !scores.every(
+        (score) => Object.values(score.points).reduce((x, y) => x + y, 0) === 0
+      )
+    );
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    const authToken = authHeader()["Authorization"];
+    const newResult = {
+      game: selectedGame._id,
+      scores: scores,
+      author: JSON.parse(localStorage.user).id,
+    };
+
+    try {
+      const res = await fetch("/api/results", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: authToken,
+        },
+        body: JSON.stringify(newResult),
+      });
+      const data = await res.json();
+      history.push(toResults());
+      return data;
+    } catch (err) {
+      return err;
+    }
+  }
+
+  const onUserSelect = (UserId, score) => {
+    const newScore = { user: UserId, points: score.points };
+    const newScores = scores.map((s) => (s === score ? newScore : s));
+    setScores(newScores);
+  }
+
+  return (
+    !loading && selectedGame ?
+      <Form numberOfScores={scores.length} onSubmit={(e) => onSubmit(e)}>
+        <div>
+          <StyledButton
+            type="button"
+            color="green"
+            onClick={() => addPlayer()}
+            disabled={numberOfPlayers === selectedGame.maxPlayers}
+          >
+            <img src={addButton} width="auto" height="15" alt="" />
+          </StyledButton>
+          <StyledButton
+            type="button"
+            color="red"
+            onClick={() => deletePlayer()}
+            disabled={numberOfPlayers === selectedGame.minPlayers}
+          >
+            <img src={deleteButton} width="auto" height="15" alt="" />
+          </StyledButton>
+        </div>
+        {scores.map((score, index) => (
+          <Select
+            key={index}
+            value={users.find((user) => user._id === score.user)?.name}
+            onChange={(UserId) => onUserSelect(UserId, score)}
+            options={sortedUsers}
+            firstOption={`${index + 1}. Gracz`}
+          />
+        ))}
+        {selectedGame.pointFields.map((field, pointFieldIndex) => (
+          <>
+            <FieldName>{field}</FieldName>
+            {scores.map((score, index) => (
+              <Input
+                type="number"
+                key={index}
+                value={score.points[pointFieldIndex] || ""}
+                onChange={(e) => onChangePoints(e, pointFieldIndex, score)}
+              />
+            ))}
+          </>
+        ))}
+
+        {selectedGame.pointFields.length === 0 ? (
+          <>
+            <FieldName>Wynik</FieldName>
+            {scores.map((score, index) => (
+              <Input
+                type="number"
+                value={score.points[0] || ""}
+                key={index}
+                onChange={(e) => onChangeResult(e, score)}
+              />
+            ))}
+          </>
+        ) : (
+            <>
+              <FieldName>Wynik</FieldName>
+              {scores.map((score, index) => (
+                <Result key={index}>{Object.values(score.points).reduce((x, y) => x + y, 0)}</Result>
+              ))}
+            </>
+          )}
+        <SubmitButton disabled={!isValid()} variant="primary" type="submit">
+          Dodaj wynik
+        </SubmitButton>
+      </Form > :
+      <></>
+  );
+}
+export default NewResultForm;

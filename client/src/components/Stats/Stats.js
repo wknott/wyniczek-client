@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GameSelect from "../Games/GameSelect";
+import GameSelect from "../../features/games/GameSelect";
 import { getNumberOfGameResults } from "../../logic/utilities";
 import { getAllSortedGames, getAllSortedUsers, getResults } from "../../proxy/api";
 import UsersTable from "../Users/UsersTable";
@@ -35,15 +35,7 @@ export default function Stats() {
   return (
     <div>
       <h3>Statystyki</h3>
-      <GameSelect
-        selectedGame={selectedGame}
-        selectGame={selectGame}
-        games={games.filter(game => getNumberOfGameResults(
-          game,
-          results
-        ))}
-        firstOption={"Wybierz grę"}
-      />
+      <GameSelect firstOption={"Wybierz grę"} />
       {selectedGame !== undefined && selectGame !== "" ? (
         <div>
           <h4>{selectedGame.name}</h4>
