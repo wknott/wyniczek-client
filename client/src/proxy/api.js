@@ -161,3 +161,12 @@ export const getLastResult = async (gameId) => {
   const response = await axios(`/api/results?gameId=${gameId}&last=true`);
   return await response.data;
 }
+
+export const getUsers = async (numberOfResults) => {
+  try {
+    const response = await axios.get(`/api/users/${numberOfResults}`);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
