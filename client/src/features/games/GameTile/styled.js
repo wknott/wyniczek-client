@@ -20,6 +20,7 @@ export const StyledTile = styled(Tile)`
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     padding: 16px;
     grid-gap: 8px;
+    grid-template-columns: auto 1fr;
   }
 `;
 
@@ -28,10 +29,19 @@ export const Image = styled.img`
   max-width: 200px;
   border-radius: 5px;
   object-fit: contain;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
+    height: 100px;
+    width: 100px;
+  }
 `;
 
 export const DefaultImage = styled.img`
   height: 200px;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
+    height: 100px;
+  }
 `;
 
 export const DefaultImageContainer = styled.div`
@@ -44,6 +54,11 @@ export const DefaultImageContainer = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
+    height: 100px;
+    width: 100px;
+  }
 `;
 
 export const GameName = styled.h2`

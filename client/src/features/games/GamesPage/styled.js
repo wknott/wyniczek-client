@@ -3,13 +3,9 @@ import Link from "../../../common/Link";
 
 export const GameTilesContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat( auto-fit, 250px);
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;
   justify-content: space-between; 
-
-  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
-    grid-template-columns: 250px;
-  }
 `;
 
 export const GamePageHeader = styled.div`
