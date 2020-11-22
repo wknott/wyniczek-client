@@ -13,7 +13,7 @@ export const Form = styled.form`
 `;
 
 export const StyledButton = styled(Button)`
-  width: 50%;
+  width: 100%;
   background-color: ${({ theme, color }) => theme.colors[color]};
 `;
 
@@ -43,4 +43,10 @@ export const FieldName = styled(Paragraph)`
 export const Result = styled(Paragraph)`
   text-align: center;
   background-color: ${({ theme }) => theme.colors.amber};
+`;
+
+export const ButtonsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 4px;
 `;

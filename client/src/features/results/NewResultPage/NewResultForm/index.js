@@ -12,7 +12,7 @@ import Select from "../../../../common/Select";
 import { authHeader } from "../../../../helpers/auth-header";
 import { toResults } from "../../../../routes";
 import { compareObjects } from "../../../../logic/utilities";
-import { FieldName, Form, StyledButton, SubmitButton, Result } from "./styled";
+import { FieldName, Form, StyledButton, SubmitButton, Result, ButtonsContainer } from "./styled";
 
 function NewResultForm() {
   const [lastUsers, setLastUsers] = useState([]);
@@ -152,7 +152,7 @@ function NewResultForm() {
   return (
     !loading && !lastResultLoading && selectedGame ?
       <Form numberOfScores={scores.length} onSubmit={(e) => onSubmit(e)}>
-        <div>
+        <ButtonsContainer>
           <StyledButton
             type="button"
             color="green"
@@ -169,7 +169,7 @@ function NewResultForm() {
           >
             <img src={deleteButton} width="auto" height="15" alt="" />
           </StyledButton>
-        </div>
+        </ButtonsContainer>
         {scores.map((score, index) => (
           <Select
             key={index}
