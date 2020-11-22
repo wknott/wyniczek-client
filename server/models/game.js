@@ -5,7 +5,7 @@ const gameSchema = new mongoose.Schema({
   minPlayers: { type: Number, required: true, min: 1, max: 99 },
   maxPlayers: { type: Number, required: true, min: 1, max: 99 },
   pointFields: { type: [{ type: String }], required: true },
-  bggId: { type: Number, required: true, unique: true },
+  bggId: { type: Number },
   imgUrl: { type: String },
   thumbnailUrl: { type: String },
 })

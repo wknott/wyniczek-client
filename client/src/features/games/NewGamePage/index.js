@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import { fetchGameDetails, selectGameDetails, selectLoading } from "../gamesSlice";
 import { theme } from "../../../theme";
-import { GameImage, ButtonsContainer, GameDetails, StyledTile } from "./styled";
+import { GameImage, ButtonsContainer, GameDetails, StyledTile, ErrorMessage } from "./styled";
 import Button from "../../../common/Button";
 import Label from "../../../common/Label";
 import Input from "../../../common/Input";
 import { StyledSelect } from "../../../common/Select/styled";
 import { nanoid } from "@reduxjs/toolkit";
 import { authHeader } from "../../../helpers/auth-header";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { toGames } from "../../../routes";
 
 const NewGamePage = () => {
   const { id: gameId } = useParams();
@@ -18,7 +19,12 @@ const NewGamePage = () => {
   const loading = useSelector(selectLoading);
   const dispatch = useDispatch();
   const [pointFields, setPointFields] = useState([]);
-  const [selectedName, setSelectedName] = useState("");
+  const [selectedName, setSelectedName] = useState(gameDetails?.name[0]);
+  const [newGameLoading, setNewGameLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const history = useHistory();
+
   const addField = () => {
     setPointFields([...pointFields, ""]);
   }
@@ -34,7 +40,7 @@ const NewGamePage = () => {
     const { minPlayers, maxPlayers, img: imgUrl, thumbnail: thumbnailUrl } = gameDetails;
 
     const newGame = {
-      name: selectedName,
+      name: selectedName || gameDetails?.name[0],
       minPlayers,
       maxPlayers,
       pointFields,
@@ -44,6 +50,7 @@ const NewGamePage = () => {
     };
     const authToken = authHeader()["Authorization"];
     try {
+      setNewGameLoading(true);
       const res = await fetch("/api/games", {
         method: "POST",
         headers: {
@@ -54,8 +61,14 @@ const NewGamePage = () => {
         body: JSON.stringify(newGame),
       });
       const data = await res.json();
-      setSelectedName("");
-      setPointFields([]);
+      setNewGameLoading(false);
+      if (res.status === 201) {
+        history.push(toGames());
+      } else {
+        const errorMessage = `Nie udało się dodać gry!
+        Sprawdź, czy nie dodałeś jej wcześniej…`
+        setErrorMessage(errorMessage);
+      }
       return data;
     } catch (err) {
       return err;
@@ -96,10 +109,10 @@ const NewGamePage = () => {
             <ButtonsContainer>
               <Button onClick={addField}>
                 Dodaj kategorię
-                </Button>
+              </Button>
               <Button disabled={pointFields.length === 0} onClick={deleteField}>
                 Usuń kategorię
-                </Button>
+              </Button>
             </ButtonsContainer>
             <form onSubmit={onSubmit}>
               {pointFields.map((field, key) => (
@@ -124,14 +137,14 @@ const NewGamePage = () => {
                   value={selectedName}
                   onChange={({ target }) => setSelectedName(target.value)}
                 >
-                  <option>Wybierz nazwę gry</option>
                   {gameDetails.name.map(name =>
                     <option key={nanoid()} value={name}>
                       {name}
                     </option>)}
                 </StyledSelect>
               </Label>
-              <Button disabled={!selectedName} type="submit">Dodaj do listy gier</Button>
+              <Button disabled={newGameLoading} type="submit">Dodaj do listy gier</Button>
+              {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             </form>
           </GameDetails>
         </StyledTile>

@@ -24,3 +24,11 @@ export const GameDetails = styled.div`
 export const StyledTile = styled(Tile)`
   grid-template-columns: 1fr;
 `;
+
+export const ErrorMessage = styled.p`
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.red};
+  color: ${({ theme }) => theme.colors.white};
+`;
