@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import addButton from "../../../../images/add-user-button.png";
-import deleteButton from "../../../../images/delete-user-button.png";
+import { useDispatch, useSelector } from "react-redux";
+import addButton from "./add-user-button.png";
+import deleteButton from "./delete-user-button.png";
 import { getLastResult } from "../../../../proxy/api";
 import { GameQueryParamName, useQueryParameter } from "../../../../queryParameters";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchGames, selectGames } from "../../../games/gamesSlice";
 import { selectUsers, fetchUsers, selectLoading } from "../../../users/usersSlice";
-import { compareObjects } from "../../../../logic/utilities";
 import Input from "../../../../common/Input";
-import { FieldName, Form, StyledButton, SubmitButton, Result } from "./styled";
 import Select from "../../../../common/Select";
 import { authHeader } from "../../../../helpers/auth-header";
 import { toResults } from "../../../../routes";
+import { compareObjects } from "../../../../logic/utilities";
+import { FieldName, Form, StyledButton, SubmitButton, Result } from "./styled";
 
 function NewResultForm() {
-  const users = useSelector(selectUsers);
-  const sortedUsers = [...users].sort(compareObjects("numberOfResults", "desc"));
-  const loading = useSelector(selectLoading);
   const [lastUsers, setLastUsers] = useState([]);
   const [numberOfPlayers, setNumberOfPlayers] = useState(2);
   const [scores, setScores] = useState([]);
-  const history = useHistory();
+  const [lastResultLoading, setLastResultLoading] = useState(false);
+  const users = useSelector(selectUsers);
+  const sortedUsers = [...users].sort(compareObjects("numberOfResults", "desc"));
+  const loading = useSelector(selectLoading);
   const selectedGameId = useQueryParameter(GameQueryParamName);
   const games = useSelector(selectGames);
-  const dispatch = useDispatch();
   const selectedGame = games.find((game) => game._id === selectedGameId);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -36,17 +37,20 @@ function NewResultForm() {
 
   useEffect(() => {
     (async () => {
+      setLastResultLoading(true);
       if (selectedGame !== undefined) {
-        const lastResult = await getLastResult(selectedGame._id);
+        const { results: lastResult } = await getLastResult(selectedGame._id);
         if (lastResult.scores !== undefined) {
           const lastResultUsers = lastResult.scores.map((score) => score.user);
-          const reversedUsers = lastResultUsers.slice().reverse();
+          const reversedUsers = await lastResultUsers.slice().reverse();
           setLastUsers(reversedUsers);
+
           createScores(2, selectedGame.pointFields.length, reversedUsers);
         } else {
           createScores(2, selectedGame.pointFields.length);
         }
       }
+      setLastResultLoading(false);
       setNumberOfPlayers(2);
     })();
     // eslint-disable-next-line
@@ -146,7 +150,7 @@ function NewResultForm() {
   }
 
   return (
-    !loading && selectedGame ?
+    !loading && !lastResultLoading && selectedGame ?
       <Form numberOfScores={scores.length} onSubmit={(e) => onSubmit(e)}>
         <div>
           <StyledButton
@@ -169,14 +173,14 @@ function NewResultForm() {
         {scores.map((score, index) => (
           <Select
             key={index}
-            value={users.find((user) => user._id === score.user)?.name}
+            value={users.find((user) => user._id === score.user)}
             onChange={(UserId) => onUserSelect(UserId, score)}
             options={sortedUsers}
             firstOption={`${index + 1}. Gracz`}
           />
         ))}
         {selectedGame.pointFields.map((field, pointFieldIndex) => (
-          <>
+          <React.Fragment key={pointFieldIndex}>
             <FieldName>{field}</FieldName>
             {scores.map((score, index) => (
               <Input
@@ -186,7 +190,7 @@ function NewResultForm() {
                 onChange={(e) => onChangePoints(e, pointFieldIndex, score)}
               />
             ))}
-          </>
+          </React.Fragment>
         ))}
 
         {selectedGame.pointFields.length === 0 ? (
