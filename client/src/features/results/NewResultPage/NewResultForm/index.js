@@ -40,7 +40,7 @@ function NewResultForm() {
       setLastResultLoading(true);
       if (selectedGame !== undefined) {
         const { results: lastResult } = await getLastResult(selectedGame._id);
-        if (lastResult.scores !== undefined) {
+        if (lastResult?.scores !== undefined) {
           const lastResultUsers = lastResult.scores.map((score) => score.user);
           const reversedUsers = await lastResultUsers.slice().reverse();
           setLastUsers(reversedUsers);
