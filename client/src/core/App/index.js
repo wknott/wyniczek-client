@@ -13,7 +13,8 @@ import {
   toNewGame,
   toGame,
   toNewGameSearch,
-  toResult
+  toResult,
+  toUsers
 } from "../../routes";
 import ResultsPage from "../../features/results/ResultsPage";
 import NewGameSearchPage from "../../features/games/NewGameSearchPage";
@@ -22,6 +23,7 @@ import GamePage from "../../features/games/GamePage";
 import NewGamePage from "../../features/games/NewGamePage";
 import ResultPage from "../../features/results/ResultPage";
 import LoginPage from "../../features/users/LoginPage";
+import UsersPage from "../../features/users/UsersPage";
 
 const App = () => (
   <BrowserRouter>
@@ -48,6 +50,9 @@ const App = () => (
         </Route>
         <Route exact path={toHomePage()}>
           <ResultsPage />
+        </Route>
+        <Route path={toUsers()} >
+          <UsersPage />
         </Route>
         <Route>
           <Redirect to={ResultsPage()} />
