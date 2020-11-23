@@ -4,25 +4,48 @@ const userService = require('../services/users');
 const Results = require('../models/results')
 const User = require('../models/user')
 
-const countNumberOfResults = async (userId) => {
-  const numberOfResults = await Results.find(
-    {
-      "scores.user": userId,
-    }
-  ).countDocuments()
-  return numberOfResults;
+const getWinners = (result) => {
+  const sumOfPoints = (points) => Object.values(points).reduce((x, y) => x + y, 0);
+  const maxSumOfPoints = Math.max(
+    ...result.scores.map((score) =>
+      sumOfPoints(score.points)
+    )
+  );
+
+  const winners = result.scores
+    .filter(
+      (score) =>
+        sumOfPoints(score.points) === maxSumOfPoints &&
+        sumOfPoints(score.points) > 0
+    )
+    .map((score) => score.user);
+  return winners;
+}
+
+const groupArray = (array) => {
+  return array.reduce((prev, item) => {
+    if (item in prev) prev[item]++;
+    else prev[item] = 1;
+    return prev;
+  }, {});
 }
 
 router.get('/numberOfResults', async (req, res) => {
   try {
     const users = await User.find();
-    const usersWithNumberOfResults = await Promise.all(users.map(async ({ name, _id }) => {
-      const numberOfResults = await countNumberOfResults(_id);
+    const results = await Results.find();
+    const winners = await results.map(result => getWinners(result)).flat();
+    const players = await results.map(result => result.scores.map(score => score.user)).flat();
+    const wins = await groupArray(winners);
+    const plays = await groupArray(players);
+    const usersWithDetails = await users.map(({ name, _id }) => {
+      const numberOfResults = plays[_id] || 0;
+      const numberOfWins = wins[_id] || 0;
       return (
-        { name, _id, numberOfResults }
+        { name, _id, numberOfResults, numberOfWins }
       )
-    }));
-    res.json(usersWithNumberOfResults)
+    });
+    res.json(usersWithDetails);
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
