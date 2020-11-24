@@ -6,33 +6,29 @@ import {
   DefaultImage,
   DefaultImageContainer,
   GameName,
-  StyledParagraph
+  StyledParagraph,
+  GameDetails
 } from "./styled";
 import { Link } from "react-router-dom";
 import { toGame } from "../../../routes";
 import LastResult from "../LastResult";
 
-const GameTile = ({ game }) => {
+const GameTile = ({ game, withoutLastResult }) => {
 
   return (
     game ?
       <StyledTile as={Link} to={toGame({ id: game._id })}>
-        {game.imgUrl ?
-          <Image src={game.imgUrl} alt="game" /> :
-          <DefaultImageContainer>
-            <DefaultImage src={meeple} alt="meeple" />
-          </DefaultImageContainer>
-        }
-        <div>
+        <Image url={game.imgUrl || meeple} />
+        <GameDetails>
           <GameName>{game.name}</GameName>
-          <LastResult lastResultDate={game.lastResultDate} />
+          {!withoutLastResult && <LastResult lastResultDate={game.lastResultDate} />}
           {game.numberOfResults &&
             <StyledParagraph>
               Liczba wyników:{" "}
               <strong>{game.numberOfResults}</strong>
             </StyledParagraph>
           }
-        </div>
+        </GameDetails>
       </StyledTile> :
       <></>
   );

@@ -20,48 +20,21 @@ export const StyledTile = styled(Tile)`
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     padding: 16px;
     grid-gap: 8px;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr 2fr;
   }
 `;
 
-export const Image = styled.img`
-  height: 200px;
-  max-width: 200px;
-  border-radius: 5px;
-  object-fit: contain;
-
-  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
-    height: 100px;
-    width: 100px;
-  }
-`;
-
-export const DefaultImage = styled.img`
-  height: 200px;
-
-  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
-    height: 100px;
-  }
-`;
-
-export const DefaultImageContainer = styled.div`
-  height: 200px;
-  width: 200px;
-  background-color: ${({ theme }) => theme.colors.silver};
-  border-radius: 5px;
-  object-fit: contain;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-
-  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
-    height: 100px;
-    width: 100px;
-  }
+export const Image = styled.div`
+  padding-top: calc(100% * 100 / 100);
+  width: 100%;
+  background-image: url("${({ url }) => url}");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 export const GameName = styled.h2`
+  margin: 0;
   font-size: 24px;
   
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
@@ -72,4 +45,10 @@ export const GameName = styled.h2`
 
 export const StyledParagraph = styled.p`
   margin: 0px;
+`;
+
+export const GameDetails = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
 `;

@@ -7,5 +7,5 @@ export default styled.div`
   padding: 24px;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-gap: 24px;
+  grid-gap: 10px;
 `;
