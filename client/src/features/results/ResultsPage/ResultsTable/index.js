@@ -10,18 +10,20 @@ import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../..
 import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
-import { Icon, TableCellThumbnail, Thumbnail, StyledLink, DesktopDate, MobileDate } from "./styled";
+import { Icon, TableCellThumbnail, Thumbnail, ResultRow, DesktopDate, MobileDate } from "./styled";
 import firstPlayer from "../../../../images/firstPlayer.svg";
 import gameImage from "../../../../images/game.svg";
 import dateImage from "../../../../images/date.svg";
 import winner from "../../../../images/winner.svg";
 import { toResult } from "../../../../routes";
+import { useHistory } from "react-router-dom";
 
 const ResultsTable = () => {
   const { results, numberOfResults, loading } = useSelector(selectResultsState);
   const page = useQueryParameter(PageQueryParamName) || 1;
   const selectedGameId = useQueryParameter(GameQueryParamName);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(fetchResults({ page, selectedGameId }));
@@ -45,34 +47,24 @@ const ResultsTable = () => {
               </thead>
               <tbody>
                 {results.map((result, index) => (
-                  <TableRow key={index}>
+                  <ResultRow onClick={() => history.push(toResult({ id: result._id }))} key={index}>
                     <TableCellThumbnail>
-                      <StyledLink to={toResult({ id: result._id })}>
-                        <Thumbnail src={result.game.thumbnailUrl} alt="" />
-                      </StyledLink>
+                      <Thumbnail src={result.game.thumbnailUrl} alt="" />
                     </TableCellThumbnail>
                     <TableCell>
-                      <StyledLink to={toResult({ id: result._id })}>
-                        {result.game.name}
-                      </StyledLink>
+                      {result.game.name}
                     </TableCell>
                     <TableCell>
-                      <StyledLink to={toResult({ id: result._id })}>
-                        {result.scores.find((score, index) => index === 0).user.name}
-                      </StyledLink>
+                      {result.scores.find((score, index) => index === 0).user.name}
                     </TableCell>
                     <TableCell>
-                      <StyledLink to={toResult({ id: result._id })}>
-                        <DesktopDate>{formatDateString(result.date)}</DesktopDate>
-                        <MobileDate>{formatDateString(result.date, "short")}</MobileDate>
-                      </StyledLink>
+                      <DesktopDate>{formatDateString(result.date)}</DesktopDate>
+                      <MobileDate>{formatDateString(result.date, "short")}</MobileDate>
                     </TableCell>
                     <TableCell>
-                      <StyledLink to={toResult({ id: result._id })}>
-                        {calculateWinners(result).join(" ")}
-                      </StyledLink>
+                      {calculateWinners(result).join(" ")}
                     </TableCell>
-                  </TableRow>
+                  </ResultRow>
                 ))}
               </tbody>
             </Table>

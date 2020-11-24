@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { TableCell } from "../../../../common/Table";
+import { TableCell, TableRow } from "../../../../common/Table";
 
 export const Thumbnail = styled.img`
   width: 64px;
@@ -22,7 +22,7 @@ export const TableCellThumbnail = styled(TableCell)`
 
 export const Icon = styled.img`
   height: 24px;
-  filter: invert(100%)
+  filter: invert(100%);
 `;
 
 export const StyledLink = styled(Link)`
@@ -48,4 +48,8 @@ export const MobileDate = styled.p`
   @media (min-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     display: none;
   }
+`;
+
+export const ResultRow = styled(TableRow)`
+  cursor: pointer;
 `;

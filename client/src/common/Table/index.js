@@ -11,10 +11,8 @@ export const Table = styled.table`
 `;
 
 export const TableCell = styled.td`
-  background-color: white;
-  color: black;
   padding: 16px;
-  border: 1px solid black;
+  border: 1px solid ${({ theme }) => theme.colors.black};
   text-align: center;
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
@@ -25,7 +23,7 @@ export const TableCell = styled.td`
 
 export const TableHeader = styled.th`
   padding: 16px;
-  border: 1px solid black;
+  border: 1px solid ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.windsor};
   color: ${({ theme }) => theme.colors.white};
   text-align: center;
@@ -38,5 +36,9 @@ export const TableHeader = styled.th`
 `;
 
 export const TableRow = styled.tr`
+  background-color: ${({ theme }) => theme.colors.white};
 
+  &:hover{
+    background-color: ${({ theme }) => theme.colors.pink};
+  }
 `;
