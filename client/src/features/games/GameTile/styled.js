@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Tile from "../../../common/Tile";
 
 export const StyledTile = styled(Tile)`
@@ -20,7 +20,9 @@ export const StyledTile = styled(Tile)`
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
     padding: 16px;
     grid-gap: 8px;
-    grid-template-columns: 1fr 2fr;
+    ${({ small }) => !small && css`
+     grid-template-columns: 1fr 2fr;
+    `}
   }
 `;
 

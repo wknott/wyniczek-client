@@ -3,8 +3,6 @@ import meeple from "../../../images/meeple.svg";
 import {
   StyledTile,
   Image,
-  DefaultImage,
-  DefaultImageContainer,
   GameName,
   StyledParagraph,
   GameDetails
@@ -13,11 +11,11 @@ import { Link } from "react-router-dom";
 import { toGame } from "../../../routes";
 import LastResult from "../LastResult";
 
-const GameTile = ({ game, withoutLastResult }) => {
+const GameTile = ({ game, withoutLastResult, small }) => {
 
   return (
     game ?
-      <StyledTile as={Link} to={toGame({ id: game._id })}>
+      <StyledTile as={Link} to={toGame({ id: game._id })} small={small ? 1 : 0}>
         <Image url={game.imgUrl || meeple} />
         <GameDetails>
           <GameName>{game.name}</GameName>
