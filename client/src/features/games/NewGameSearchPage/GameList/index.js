@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { nanoid } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { selectFoundGames } from "../../gamesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGamesByQuery, selectFoundGames } from "../../gamesSlice";
 import List, { ListItem } from "../../../../common/List";
 import LinkToWebsite from "../../../../common/LinkToWebsite";
 import { Link } from "react-router-dom";
 import { toNewGame } from "../../../../routes";
+import { useQueryParameter } from "../../../../common/queryParameters";
 
 const GameList = () => {
   const foundGames = useSelector(selectFoundGames);
+  const dispatch = useDispatch();
+  const query = useQueryParameter("query") || "";
+
+  useEffect(() => {
+    if (query.length > 2) {
+      dispatch(fetchGamesByQuery(query))
+    }
+  }, [dispatch, query])
 
   return (
     <>

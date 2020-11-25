@@ -39,6 +39,7 @@ export const SortButton = styled(Button)`
   translate: 0.3s 0.3s;
 
   ${({ active }) => !active && css`
+    outline: none;
     transform: scale(1.03, 1.1);  
     background-color: ${({ theme }) => theme.colors.denim};
 `};
