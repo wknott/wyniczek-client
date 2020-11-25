@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import { fetchGameDetails, selectGameDetails, selectLoading } from "../gamesSlice";
 import { theme } from "../../../theme";
-import { GameImage, ButtonsContainer, GameDetails, StyledTile, ErrorMessage } from "./styled";
+import {
+  GameImage,
+  ButtonsContainer,
+  GameDetails,
+  StyledTile,
+  ErrorMessage,
+  GameHeader,
+} from "./styled";
 import Button from "../../../common/Button";
 import Label from "../../../common/Label";
 import Input from "../../../common/Input";
@@ -12,6 +19,12 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useHistory, useParams } from "react-router-dom";
 import { toGames } from "../../../routes";
 import { addGame } from "../../../proxy/api";
+import {
+  Description,
+  DescriptionList,
+  Details,
+  Term,
+} from "../../results/ResultPage/styled";
 
 const NewGamePage = () => {
   const { id: gameId } = useParams();
@@ -78,24 +91,31 @@ const NewGamePage = () => {
         <StyledTile>
           <GameImage src={gameDetails.img} alt="game-image" />
           <GameDetails>
-            <h2>{gameDetails.name[0]}</h2>
-            <p>
-              <strong>Liczba graczy:</strong> {gameDetails.minPlayers} - {gameDetails.maxPlayers}
-            </p>
-            <p>
-              <strong>Link do BGG:</strong>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`https://boardgamegeek.com/boardgame/${gameDetails.id}`}
-              >
-                {" "}{gameDetails.name[0]}
-              </a>
-            </p>
-            <p>
-              Jeśli chcesz dodać kategorie punktów kliknij przycisk "Dodaj kategorię",
-              a następnie wpisz nazwę kategorii w odpowiednim polu formularza.
-            </p>
+            <GameHeader>{gameDetails.name[0]}</GameHeader>
+            <Details>
+              <DescriptionList>
+                <Term>Liczba graczy:</Term>
+                <Description>{gameDetails.minPlayers} - {gameDetails.maxPlayers}</Description>
+              </DescriptionList>
+              <DescriptionList>
+                <Term>Link do opisu gry na BGG:</Term>
+                <Description>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`https://boardgamegeek.com/boardgame/${gameDetails.id}`}
+                  >
+                    {gameDetails.name[0]}
+                  </a>
+                </Description>
+              </DescriptionList>
+              <DescriptionList>
+                <Description>
+                  Jeśli chcesz dodać kategorie punktów kliknij przycisk "Dodaj kategorię",
+                  a następnie wpisz nazwę kategorii w odpowiednim polu formularza.
+              </Description>
+              </DescriptionList>
+            </Details>
             <ButtonsContainer>
               <Button onClick={addField}>
                 Dodaj kategorię

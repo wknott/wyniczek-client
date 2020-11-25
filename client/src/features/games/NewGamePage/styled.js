@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import Tile from "../../../common/Tile";
+import Header from "../../../common/Header";
 
 export const GameImage = styled.img`
-  max-width: 400px;
+  width: 100%;
 
-  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
-    width: 100%;
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
+    max-height: 300px;
+    object-fit: contain;
   }
 `;
 
@@ -22,7 +24,11 @@ export const GameDetails = styled.div`
 `;
 
 export const StyledTile = styled(Tile)`
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 2fr;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
+    grid-template-columns: 1fr; 
+  }
 `;
 
 export const ErrorMessage = styled.p`
@@ -31,4 +37,8 @@ export const ErrorMessage = styled.p`
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.red};
   color: ${({ theme }) => theme.colors.white};
+`;
+
+export const GameHeader = styled(Header)`
+  margin: 0;
 `;

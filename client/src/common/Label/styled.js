@@ -4,6 +4,7 @@ export const Label = styled.label`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin-bottom: 12px;
 `;
 
 export const LabelText = styled.span`

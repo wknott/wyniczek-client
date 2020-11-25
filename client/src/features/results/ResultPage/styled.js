@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   padding: 10px;
   display: grid;
-  /* grid-template-columns: repeat(3, 1fr); */
   grid-template-areas: 
     "table table table"
     "game details details";
