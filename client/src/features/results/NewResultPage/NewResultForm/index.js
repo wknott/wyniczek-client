@@ -9,10 +9,10 @@ import { fetchGames, selectGames } from "../../../games/gamesSlice";
 import { selectUsers, fetchUsers, selectLoading } from "../../../users/usersSlice";
 import Input from "../../../../common/Input";
 import Select from "../../../../common/Select";
-import { authHeader } from "../../../../helpers/auth-header";
 import { toResults } from "../../../../routes";
 import { compareObjects } from "../../../../logic/utilities";
 import { FieldName, Form, StyledButton, SubmitButton, Result, ButtonsContainer } from "./styled";
+import { addResult } from "../../../../proxy/api";
 
 function NewResultForm() {
   const [lastUsers, setLastUsers] = useState([]);
@@ -118,7 +118,6 @@ function NewResultForm() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    const authToken = authHeader()["Authorization"];
     const newResult = {
       game: selectedGame._id,
       scores: scores,
@@ -126,16 +125,8 @@ function NewResultForm() {
     };
 
     try {
-      const res = await fetch("/api/results", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: authToken,
-        },
-        body: JSON.stringify(newResult),
-      });
-      const data = await res.json();
+      const response = await addResult(newResult);
+      const data = response.data;
       history.push(toResults());
       return data;
     } catch (err) {

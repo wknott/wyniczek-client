@@ -50,6 +50,15 @@ export const addGame = async (newGame) => {
   return response;
 }
 
+export const addResult = async (newResult) => {
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": authToken,
+  };
+  const response = await axios.post("/api/results", newResult, { headers: headers });
+  return response;
+}
+
 const BGG_API_URL = "https://api.geekdo.com/xmlapi2";
 
 export const getGamesFromQuery = async (query) => {
