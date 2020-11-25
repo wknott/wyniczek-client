@@ -34,6 +34,11 @@ export const getUsers = async (numberOfResults) =>
     path: `/api/users/${numberOfResults}`,
   })
 
+export const postLogin = async (body) => {
+  const response = await axios.post("/api/users/authenticate", body);
+  return response.data;
+}
+
 const BGG_API_URL = "https://api.geekdo.com/xmlapi2";
 
 export const getGamesFromQuery = async (query) => {

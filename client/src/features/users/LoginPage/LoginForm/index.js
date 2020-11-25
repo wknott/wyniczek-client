@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { handleLogin } from "../../../../common/authSlice";
 import { toResults } from "../../../../routes";
 import { ErrorMessage, Form, FormContainer, SubmitButton } from "./styled";
+import { postLogin } from "../../../../proxy/api";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -19,28 +20,20 @@ const LoginForm = () => {
     inputRef.current.focus();
   }, []);
 
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const newUser = { username: name, password: password };
+    const user = { username: name, password: password };
 
     try {
-      const res = await fetch("/api/users/authenticate", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
-
-      const data = await res.json();
+      const data = await postLogin(user);
       if (data.token != null) {
         localStorage.setItem("user", JSON.stringify(data));
         dispatch(handleLogin());
         history.push(toResults());
+        console.log("zlezlezl")
       }
       else {
-        setMessage("Wpisz prawidłowy login i hasło!")
+        setMessage(data.message)
         setName("")
         setPassword("")
       }
@@ -71,7 +64,7 @@ const LoginForm = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Label>
-        <ErrorMessage>{message}</ErrorMessage>
+        {message && <ErrorMessage>{message}</ErrorMessage>}
         <SubmitButton>Zaloguj</SubmitButton>
       </Form>
     </FormContainer>
