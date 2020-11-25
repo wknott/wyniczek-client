@@ -1,9 +1,9 @@
 import React from "react";
 import { Icon, Label, Input } from "./styled";
-import search from "../../../../images/search.svg";
-import { useQueryParameter, useReplaceQueryParameter } from "../../../../common/queryParameters";
+import search from "./search.svg";
+import { useQueryParameter, useReplaceQueryParameter, } from "../queryParameters";
 
-const GamesSearch = () => {
+const Search = () => {
   const replaceQueryParam = useReplaceQueryParameter();
   const query = useQueryParameter("query") || "";
 
@@ -23,4 +23,4 @@ const GamesSearch = () => {
   )
 }
 
-export default GamesSearch;
+export default Search;

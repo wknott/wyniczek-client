@@ -1,10 +1,10 @@
 import React from "react";
 import GameList from "./GameList";
-import GamesSearch from "./GamesSearch";
+import Search from "../../../common/Search";
 
 const NewGamePage = () => (
   <>
-    <GamesSearch />
+    <Search />
     <GameList />
   </>
 );
