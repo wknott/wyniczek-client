@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { calculateWinners, formatDateString } from "../../../logic/utilities.js";
 import { fetchResult, selectResult } from "../resultsSlice";
 import ResultTable from "./ResultTable";
-import { Container, Info, Image, GameName, Date, FirstPlayer, Winner, Icon, Game } from "./styled.js";
-import { toGame } from "../../../routes";
-import firstPlayerUrl from "../../../images/firstPlayer.svg";
-import winnerUrl from "../../../images/winner.svg";
+import {
+  Container,
+  Term,
+  DescriptionList,
+  Description,
+  Game, Details,
+  TableContainer
+} from "./styled.js";
+import GameTile from "../../games/GameTile";
+import Header from "../../../common/Header";
 
 const ResultPage = () => {
   const { id } = useParams();
@@ -22,23 +28,32 @@ const ResultPage = () => {
 
   return (
     result &&
-    <Container>
-      <Info>
+    <>
+      <Header>Tabela wyniku</Header>
+      <Container>
+        <TableContainer>
+          <ResultTable result={result} />
+        </TableContainer>
+        <Details>
+          <DescriptionList>
+            <Term>Data:</Term>
+            <Description>{formatDateString(result.date, "long")}</Description>
+          </DescriptionList>
+          <DescriptionList>
+            <Term>{`Zwycięzc${winners?.indexOf(" ") !== -1 ? "y" : "a"}:`}</Term>
+            <Description>{winners}</Description>
+          </DescriptionList>
+          <DescriptionList>
+            <Term>Rozpoczynający:</Term>
+            <Description>{firstPlayer}</Description>
+          </DescriptionList>
+        </Details>
         <Game>
-          <Link to={toGame({ id: result.game._id })}>
-            <Image width={150} src={result.game.imgUrl} alt="game" />
-          </Link>
-          <GameName to={toGame({ id: result.game._id })}>{result.game.name}</GameName>
+          <GameTile game={result.game} withoutLastResult small />
         </Game>
-        <div>
-          <Winner><Icon src={winnerUrl} />1. Miejsce - {winners}</Winner>
-          <Date>{formatDateString(result.date, "long")}</Date>
-          <FirstPlayer><Icon src={firstPlayerUrl} />{firstPlayer}</FirstPlayer>
-        </div>
-      </Info>
-      <ResultTable result={result} />
-    </Container>
-  )
-}
+      </Container>
+    </>
+  );
+};
 
 export default ResultPage;
