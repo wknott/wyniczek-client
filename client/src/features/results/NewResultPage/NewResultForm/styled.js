@@ -15,6 +15,14 @@ export const Form = styled.form`
 export const StyledButton = styled(Button)`
   width: 100%;
   background-color: ${({ theme, color }) => theme.colors[color]};
+
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &:active {
+    filter: brightness(80%);
+  }
 `;
 
 export const SubmitButton = styled(Button)`

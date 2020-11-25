@@ -8,6 +8,7 @@ export default styled.button`
   transition: 0.5s;
   border-radius: 5px;
   text-transform: uppercase;
+  cursor: pointer;
   
   &:hover {
     filter: brightness(115%);
@@ -20,6 +21,7 @@ export default styled.button`
   &:disabled {
     background-color: ${({ theme }) => theme.colors.alto};
     color: ${({ theme }) => theme.colors.grey};
+    cursor: not-allowed;
 
     &:hover {
       filter: none;
