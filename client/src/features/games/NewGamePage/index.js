@@ -9,9 +9,9 @@ import Label from "../../../common/Label";
 import Input from "../../../common/Input";
 import { StyledSelect } from "../../../common/Select/styled";
 import { nanoid } from "@reduxjs/toolkit";
-import { authHeader } from "../../../helpers/auth-header";
 import { useHistory, useParams } from "react-router-dom";
 import { toGames } from "../../../routes";
+import { addGame } from "../../../proxy/api";
 
 const NewGamePage = () => {
   const { id: gameId } = useParams();
@@ -48,28 +48,18 @@ const NewGamePage = () => {
       imgUrl,
       thumbnailUrl,
     };
-    const authToken = authHeader()["Authorization"];
     try {
       setNewGameLoading(true);
-      const res = await fetch("/api/games", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: authToken,
-        },
-        body: JSON.stringify(newGame),
-      });
-      const data = await res.json();
+      const response = await addGame(newGame);
       setNewGameLoading(false);
-      if (res.status === 201) {
+      if (response.status === 201) {
         history.push(toGames());
       } else {
         const errorMessage = `Nie udało się dodać gry!
         Sprawdź, czy nie dodałeś jej wcześniej…`
         setErrorMessage(errorMessage);
       }
-      return data;
+      return response.data;
     } catch (err) {
       return err;
     }

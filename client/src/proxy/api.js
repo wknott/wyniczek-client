@@ -3,6 +3,8 @@ import { xml2js } from "xml-js";
 import { authHeader } from "../helpers/auth-header";
 import { buildQueryString } from "./buildQueryString";
 
+const authToken = authHeader()["Authorization"];
+
 const fetchFromServerApi = async ({ path, parameters }) => {
   const response = await axios.get(`${path}?${buildQueryString(parameters)}`);
   return response.data;
@@ -39,6 +41,15 @@ export const postLogin = async (body) => {
   return response.data;
 }
 
+export const addGame = async (newGame) => {
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": authToken,
+  };
+  const response = await axios.post("/api/games", newGame, { headers: headers });
+  return response;
+}
+
 const BGG_API_URL = "https://api.geekdo.com/xmlapi2";
 
 export const getGamesFromQuery = async (query) => {
@@ -64,7 +75,7 @@ export const getGamesFromQuery = async (query) => {
         ];
         return game;
       default:
-        const games = parsedData.items.item.slice(0, 6).map(game => (
+        const games = parsedData.items.item.slice(0, 10).map(game => (
           {
             id: game._attributes.id,
             name: game.name._attributes.value,
