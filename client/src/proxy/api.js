@@ -1,101 +1,50 @@
 import axios from "axios";
 import { xml2js } from "xml-js";
-import { compareObjects } from "../logic/utilities";
 import { authHeader } from "../helpers/auth-header";
+import { buildQueryString } from "./buildQueryString";
 
-export const getGames = async () => {
-  try {
-    const response = await axios.get("/api/games");
-    return await response.data;
-  }
-  catch (err) {
-    return err;
-  }
-};
-
-export const getAllSortedGames = async () => {
-  try {
-    const res = await fetch("/api/games");
-    const games = await res.json();
-    const sortedGames = await games.sort(compareObjects("name"));
-    return sortedGames;
-  } catch (err) {
-    return err;
-  }
+const fetchFromServerApi = async ({ path, parameters }) => {
+  const response = await axios.get(`${path}?${buildQueryString(parameters)}`);
+  return response.data;
 }
 
-export const deleteGame = async (gameId) => {
-  try {
-    const res = await fetch("/api/games/" + gameId, {
-      method: "DELETE",
-      headers: authHeader(),
-    });
-    return res;
-  } catch (err) {
-    return err;
-  }
+export const getGames = async () => fetchFromServerApi({ path: "/api/games", });
+export const getResults = async (page, selectedGameId) =>
+  fetchFromServerApi({
+    path: "/api/results",
+    parameters: { page, gameId: selectedGameId, },
+  });
+export const getLastResults = async () => fetchFromServerApi({ path: "/api/games/last", });
+export const getNumberOfResultsPerGame = async () =>
+  fetchFromServerApi({ path: "/api/games/numberOfResults", });
+
+export const getResult = async (id) =>
+  fetchFromServerApi({
+    path: `/api/results/${id}`,
+  });
+
+export const getLastResult = async (gameId) =>
+  fetchFromServerApi({
+    path: `/api/results`,
+    parameters: { last: "true", gameId, },
+  });
+
+export const getUsers = async (numberOfResults) => {
+  fetchFromServerApi({
+    path: `/api/users/${numberOfResults}`,
+  })
 }
 
-export const getAllSortedUsers = async () => {
-  try {
-    const res = await fetch("/api/users");
-    const users = await res.json();
-    const sortedUsers = users.sort(compareObjects("name"));
-    return sortedUsers;
-  } catch (err) {
-    return err;
-  }
-}
-
-export const getUser = async (userId) => {
-  try {
-    const res = await fetch("/api/users");
-    const users = await res.json();
-    const user = users.filter(({ id }) => id === userId)[0];
-    return user;
-  } catch (err) {
-    return err;
-  }
-}
-
-export const getResults = async (page, selectedGameId) => {
-  try {
-    const url = `/api/results${page ? '?page=' + page : ''}` +
-      `${selectedGameId ? '&gameId=' + selectedGameId : ''}`;
-    const response = await axios.get(url);
-    return response.data;
-  } catch (err) {
-    return err;
-  }
-}
-
-export const getLastResults = async () => {
-  try {
-    const res = await fetch("/api/games/last", {
-      headers: authHeader(),
-    });
-    const lastResults = await res.json();
-    return lastResults;
-  } catch (err) {
-    return err;
-  }
-}
-
-export const getNumberOfResultsPerGame = async () => {
-  try {
-    const res = await fetch("/api/games/numberOfResults", {
-      headers: authHeader(),
-    });
-    const numberOfResults = await res.json();
-    return numberOfResults;
-  } catch (err) {
-    return err;
-  }
-}
+const BGG_API_URL = "https://api.geekdo.com/xmlapi2";
 
 export const getGamesFromQuery = async (query) => {
   try {
-    const response = await fetch(`https://api.geekdo.com/xmlapi2/search?query=${query}&type=boardgame`);
+    const response = await fetch(`${BGG_API_URL}/search?${buildQueryString({ query, type: "boardgame" })}`);
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
     const data = await response.text();
     const parsedData = await xml2js(data, { compact: true, spaces: 4 });
     switch (+parsedData.items._attributes.total) {
@@ -127,7 +76,7 @@ export const getGamesFromQuery = async (query) => {
 
 export const getGameDetails = async (id) => {
   try {
-    const response = await fetch(`https://api.geekdo.com/xmlapi2/thing?id=${id}`);
+    const response = await fetch(`${BGG_API_URL}/thing?id=${id}`);
     const data = await response.text();
     const parsedData = await xml2js(data, { compact: true, spaces: 4 });
     const name = Array.isArray(parsedData.items.item.name) ?
@@ -144,29 +93,5 @@ export const getGameDetails = async (id) => {
     return gameDetails;
   } catch (error) {
     return error;
-  }
-}
-
-export const getResult = async (id) => {
-  try {
-    const url = `/api/results/${id}`;
-    const response = await axios.get(url);
-    return response.data;
-  } catch (err) {
-    return err;
-  }
-}
-
-export const getLastResult = async (gameId) => {
-  const response = await axios(`/api/results?gameId=${gameId}&last=true`);
-  return await response.data;
-}
-
-export const getUsers = async (numberOfResults) => {
-  try {
-    const response = await axios.get(`/api/users/${numberOfResults}`);
-    return response.data;
-  } catch (err) {
-    return err;
   }
 }

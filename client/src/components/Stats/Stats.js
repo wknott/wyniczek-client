@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GameSelect from "../../features/games/GameSelect";
 import { getNumberOfGameResults } from "../../logic/utilities";
-import { getAllSortedGames, getAllSortedUsers, getResults } from "../../proxy/api";
+import { getGames, getResults, getUsers } from "../../proxy/api";
 import UsersTable from "../Users/UsersTable";
 import GameWinnersPieChart from "./GameWinnersPieChart";
 
@@ -26,10 +26,10 @@ export default function Stats() {
   }
   useEffect(() => {
     (async () => {
-      setGames(await getAllSortedGames());
+      setGames(await getGames());
       const { results } = await getResults();
       setResults(results);
-      setUsers(await getAllSortedUsers());
+      setUsers(await getUsers());
     })();
   }, []);
   return (
