@@ -12,7 +12,8 @@ export const GameTilesContainer = styled.div`
 export const GamePageHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const StyledLink = styled(Link)`
@@ -21,6 +22,7 @@ export const StyledLink = styled(Link)`
   align-items: center;
   
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
+    width: 100%;
     font-size: 13px;
     margin: 12px 0 2px;
   }

@@ -5,10 +5,18 @@ import { compareObjects } from "../../../logic/utilities";
 import { theme } from "../../../theme";
 import { fetchGames, selectGames, selectLoading } from "../gamesSlice";
 import GameTile from "../GameTile";
-import { GamePageHeader, GameTilesContainer, SortButton, SortButtons, StyledLink } from "./styled";
+import {
+  GamePageHeader,
+  GameTilesContainer,
+  SortButton,
+  SortButtons,
+  StyledLink
+} from "./styled";
 import Header from "../../../common/Header";
 import { toNewGameSearch } from "../../../routes";
 import { selectAuth } from "../../../common/authSlice";
+import Search from "../../../common/Search";
+import { useQueryParameter } from "../../../common/queryParameters";
 
 function GamesPage() {
   const [sortOption, setSortOption] = useState("numberOfResults");
@@ -17,7 +25,9 @@ function GamesPage() {
   const dispatch = useDispatch();
   const games = useSelector(selectGames);
   const loading = useSelector(selectLoading);
-  const sortedGames = [...games].sort(compareObjects(sortOption, sortDirection));
+  const query = useQueryParameter("query")?.toUpperCase();
+  const filteredGames = [...games].filter(game => query ? game.name.toUpperCase().includes(query) : 1);
+  const sortedGames = [...filteredGames].sort(compareObjects(sortOption, sortDirection));
   const sortOptions = [
     { id: "name", label: "Nazwa", },
     { id: "lastResultDate", label: "Ostatni wynik", },
@@ -43,6 +53,7 @@ function GamesPage() {
       <>
         <GamePageHeader>
           <Header>Lista gier</Header>
+          <Search />
           {isAuthenticated &&
             <StyledLink to={toNewGameSearch()}>Dodaj nową grę</StyledLink>
           }
