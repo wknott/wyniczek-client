@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import addButton from "./add-user-button.png";
 import deleteButton from "./delete-user-button.png";
-import { getLastResult } from "../../../../proxy/api";
+import { getLastResultOfGame } from "../../../../proxy/api";
 import { GameQueryParamName, useQueryParameter } from "../../../../common/queryParameters";
 import { fetchGames, selectGames } from "../../../games/gamesSlice";
 import { selectUsers, fetchUsers, selectLoading } from "../../../users/usersSlice";
@@ -39,7 +39,7 @@ function NewResultForm() {
     (async () => {
       setLastResultLoading(true);
       if (selectedGame !== undefined) {
-        const { results: lastResult } = await getLastResult(selectedGame._id);
+        const { results: lastResult } = await getLastResultOfGame(selectedGame._id);
         if (lastResult?.scores !== undefined) {
           const lastResultUsers = lastResult.scores.map((score) => score.user);
           const reversedUsers = await lastResultUsers.slice().reverse();

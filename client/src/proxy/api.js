@@ -14,7 +14,7 @@ export const getResults = async (page, selectedGameId) =>
     path: "/api/results",
     parameters: { page, gameId: selectedGameId, },
   });
-export const getLastResults = async () => fetchFromServerApi({ path: "/api/games/last", });
+export const getLastResultsOfEachGames = async () => fetchFromServerApi({ path: "/api/games/last", });
 export const getNumberOfResultsPerGame = async () =>
   fetchFromServerApi({ path: "/api/games/numberOfResults", });
 
@@ -23,17 +23,16 @@ export const getResult = async (id) =>
     path: `/api/results/${id}`,
   });
 
-export const getLastResult = async (gameId) =>
+export const getLastResultOfGame = async (gameId) =>
   fetchFromServerApi({
     path: `/api/results`,
     parameters: { last: "true", gameId, },
   });
 
-export const getUsers = async (numberOfResults) => {
+export const getUsers = async (numberOfResults) =>
   fetchFromServerApi({
     path: `/api/users/${numberOfResults}`,
   })
-}
 
 const BGG_API_URL = "https://api.geekdo.com/xmlapi2";
 
