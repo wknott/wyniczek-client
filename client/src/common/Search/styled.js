@@ -7,6 +7,7 @@ export const Label = styled.label`
   border-radius: 16px;
   display: flex;
   align-items: center; 
+  width: 100%;
 `;
 
 export const Icon = styled.img`

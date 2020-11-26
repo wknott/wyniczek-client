@@ -4,7 +4,7 @@ import Link from "../../../common/Link";
 
 export const GameTilesContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat( ${({ numberOfTiles }) => numberOfTiles < 2 ? 2 : "auto-fit"}, minmax(250px, 1fr));
   grid-gap: 20px;
   justify-content: space-between; 
 `;
@@ -13,7 +13,6 @@ export const GamePageHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
 `;
 
 export const StyledLink = styled(Link)`
@@ -22,7 +21,6 @@ export const StyledLink = styled(Link)`
   align-items: center;
   
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
-    width: 100%;
     font-size: 13px;
     margin: 12px 0 2px;
   }

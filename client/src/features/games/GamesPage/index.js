@@ -53,11 +53,11 @@ function GamesPage() {
       <>
         <GamePageHeader>
           <Header>Lista gier</Header>
-          <Search placeholder="Wpisz nazwę gry…" />
           {isAuthenticated &&
             <StyledLink to={toNewGameSearch()}>Dodaj nową grę</StyledLink>
           }
         </GamePageHeader>
+        <Search placeholder="Wpisz nazwę gry…" />
         <SortButtons>
           {sortOptions.map(option =>
             <SortButton
@@ -69,7 +69,7 @@ function GamesPage() {
             </SortButton>
           )}
         </SortButtons>
-        <GameTilesContainer>
+        <GameTilesContainer numberOfTiles={sortedGames.length}>
           {sortedGames?.map((game, index) =>
             <GameTile key={index} game={game} />
           )}
