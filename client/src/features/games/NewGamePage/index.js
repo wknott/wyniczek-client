@@ -19,12 +19,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useHistory, useParams } from "react-router-dom";
 import { toGames } from "../../../routes";
 import { addGame } from "../../../proxy/api";
-import {
-  Description,
-  DescriptionList,
-  Details,
-  Term,
-} from "../../results/ResultPage/styled";
+import MetaData from "../../../common/MetaData";
 
 const NewGamePage = () => {
   const { id: gameId } = useParams();
@@ -84,6 +79,31 @@ const NewGamePage = () => {
     }
   }, [dispatch, gameId])
 
+  const linkToBgg = (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href={`https://boardgamegeek.com/boardgame/${gameDetails?.id}`}
+    >
+      {gameDetails?.name[0]}
+    </a>
+  );
+
+  const details = [
+    {
+      key: "Liczba graczy",
+      value: `${gameDetails?.minPlayers} - ${gameDetails?.maxPlayers}`,
+    },
+    {
+      key: "Link do opisu gry na BGG",
+      value: linkToBgg,
+    },
+    {
+      key: "",
+      value: `Jeśli chcesz dodać kategorie punktów kliknij przycisk "Dodaj kategorię", a następnie wpisz nazwę kategorii w odpowiednim polu formularza.`
+    },
+  ];
+
   return (
     <div>
       {loading || !gameDetails ?
@@ -92,30 +112,7 @@ const NewGamePage = () => {
           <GameImage src={gameDetails.img} alt="game-image" />
           <GameDetails>
             <GameHeader>{gameDetails.name[0]}</GameHeader>
-            <Details>
-              <DescriptionList>
-                <Term>Liczba graczy:</Term>
-                <Description>{gameDetails.minPlayers} - {gameDetails.maxPlayers}</Description>
-              </DescriptionList>
-              <DescriptionList>
-                <Term>Link do opisu gry na BGG:</Term>
-                <Description>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://boardgamegeek.com/boardgame/${gameDetails.id}`}
-                  >
-                    {gameDetails.name[0]}
-                  </a>
-                </Description>
-              </DescriptionList>
-              <DescriptionList>
-                <Description>
-                  Jeśli chcesz dodać kategorie punktów kliknij przycisk "Dodaj kategorię",
-                  a następnie wpisz nazwę kategorii w odpowiednim polu formularza.
-              </Description>
-              </DescriptionList>
-            </Details>
+            <MetaData metaData={details} />
             <ButtonsContainer>
               <Button onClick={addField}>
                 Dodaj kategorię
@@ -157,9 +154,9 @@ const NewGamePage = () => {
               {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             </form>
           </GameDetails>
-        </StyledTile>
+        </StyledTile >
       }
-    </div>
+    </div >
   )
 };
 export default NewGamePage;

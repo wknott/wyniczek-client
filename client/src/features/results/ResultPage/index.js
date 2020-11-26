@@ -6,14 +6,13 @@ import { fetchResult, selectResult } from "../resultsSlice";
 import ResultTable from "./ResultTable";
 import {
   Container,
-  Term,
-  DescriptionList,
-  Description,
-  Game, Details,
+  Game,
+  Details,
   TableContainer
 } from "./styled.js";
 import GameTile from "../../games/GameTile";
 import Header from "../../../common/Header";
+import MetaData from "../../../common/MetaData/index.js";
 
 const ResultPage = () => {
   const { id } = useParams();
@@ -26,6 +25,21 @@ const ResultPage = () => {
     dispatch(fetchResult({ id }));
   }, [dispatch, id]);
 
+  const details = [
+    {
+      key: "Data",
+      value: formatDateString(result?.date, "long"),
+    },
+    {
+      key: `Zwycięzc${winners?.indexOf(" ") !== -1 ? "y" : "a"}`,
+      value: winners,
+    },
+    {
+      key: "Rozpoczynający",
+      value: firstPlayer,
+    },
+  ];
+
   return (
     result &&
     <>
@@ -35,18 +49,8 @@ const ResultPage = () => {
           <ResultTable result={result} />
         </TableContainer>
         <Details>
-          <DescriptionList>
-            <Term>Data:</Term>
-            <Description>{formatDateString(result.date, "long")}</Description>
-          </DescriptionList>
-          <DescriptionList>
-            <Term>{`Zwycięzc${winners?.indexOf(" ") !== -1 ? "y" : "a"}:`}</Term>
-            <Description>{winners}</Description>
-          </DescriptionList>
-          <DescriptionList>
-            <Term>Rozpoczynający:</Term>
-            <Description>{firstPlayer}</Description>
-          </DescriptionList>
+          <MetaData metaData={details}
+          />
         </Details>
         <Game>
           <GameTile game={result.game} withoutLastResult small />

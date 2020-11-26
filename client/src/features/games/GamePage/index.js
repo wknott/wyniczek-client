@@ -8,6 +8,7 @@ import { theme } from "../../../theme";
 import meeple from "../../../images/meeple.svg";
 import { Image, DefaultImage, DefaultImageContainer, Tags, Tag, Title, GameTile } from "./styled";
 import LastResult from "../LastResult";
+import MetaData from "../../../common/MetaData";
 
 const GamePage = () => {
   const { id } = useParams();
@@ -21,6 +22,27 @@ const GamePage = () => {
     }
   }, [dispatch, games]);
 
+  const linkToBgg = (
+    <LinkToWebsite
+      target="_blank"
+      rel="noopener noreferrer"
+      href={`https://boardgamegeek.com/boardgame/${game?.bggId}`}
+    >
+      {game?.name}
+    </LinkToWebsite>
+  );
+
+  const details = [
+    {
+      key: "Link do BGG",
+      value: linkToBgg,
+    },
+    {
+      key: "Liczba wyników",
+      value: game?.numberOfResults,
+    },
+  ];
+
   return (
     game ?
       <GameTile>
@@ -33,17 +55,7 @@ const GamePage = () => {
         }
         <div>
           <Title>{game.name}</Title>
-          {game.bggId &&
-            <p>Link do opisu gry w serwisie BGG:{" "}
-              <LinkToWebsite
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`https://boardgamegeek.com/boardgame/${game.bggId}`}
-              >
-                {game.name}
-              </LinkToWebsite>
-            </p>
-          }
+          <MetaData metaData={details} />
           {game.pointFields.length > 0 &&
             <>
               <p>Kategorie punktów:</p>
@@ -52,7 +64,6 @@ const GamePage = () => {
               </Tags>
             </>
           }
-          <p>Liczba wyników: {game.numberOfResults}</p>
           <LastResult lastResultDate={game.lastResultDate} />
         </div>
       </GameTile> :
