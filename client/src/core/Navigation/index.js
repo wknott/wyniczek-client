@@ -19,6 +19,7 @@ import {
   HamburgerItem,
   MobileList,
   Image,
+  ItemName,
 } from "./styled";
 import Burger from "./Burger";
 import { selectOpen, handleClose } from "./navSlice";
@@ -32,38 +33,41 @@ const Navigation = () => {
   const Menu = (
     <>
       {isAuthenticated &&
-        <Item onClick={() => dispatch(handleClose())}>
-          <StyledLink to={toNewResult()}>
+        <Item as={StyledLink} to={toNewResult()}>
+          <ItemName>
             Nowy wynik
-            </StyledLink>
+          </ItemName>
         </Item>
       }
-      <Item onClick={() => dispatch(handleClose())}>
-        <StyledLink to={toGames()}>
+      <Item as={StyledLink} to={toGames()}>
+        <ItemName>
           Gry
-        </StyledLink>
+        </ItemName>
       </Item>
-      <Item onClick={() => dispatch(handleClose())}>
-        <StyledLink to={toUsers()}>
+      <Item as={StyledLink} to={toUsers()}>
+        <ItemName>
           Użytkownicy
-        </StyledLink>
+        </ItemName>
       </Item>
-      <Item onClick={() => dispatch(handleClose())}>
-        <StyledLink to={toStats()}>
+      <Item as={StyledLink} to={toStats()}>
+        <ItemName>
           Statystyki
-        </StyledLink>
+        </ItemName>
       </Item>
       {isAuthenticated ? (
-        <LeftAlignItem onClick={() => dispatch(handleLogout())}>
-          <StyledLink to="/wyloguj">
+        <LeftAlignItem
+          as={StyledLink} to={"/wyloguj"}
+          onClick={() => dispatch(handleLogout())}
+        >
+          <ItemName>
             Wyloguj
-          </StyledLink>
+          </ItemName>
         </LeftAlignItem>
       ) : (
-          <LeftAlignItem onClick={() => dispatch(handleClose())}>
-            <StyledLink to={toLogin()}>
+          <LeftAlignItem as={StyledLink} to={toLogin()}>
+            <ItemName>
               Logowanie
-            </StyledLink>
+            </ItemName>
           </LeftAlignItem>
         )
       }
@@ -77,14 +81,14 @@ const Navigation = () => {
           <Image src={logo} alt="Logo" />
         </NavLink>
       </div>
-      <StyledList>
+      <StyledList onClick={() => dispatch(handleClose())}>
         {Menu}
       </StyledList>
       <HamburgerItem>
         <Burger />
       </HamburgerItem>
       { open &&
-        <MobileList open={open}>
+        <MobileList open={open} onClick={() => dispatch(handleClose())}>
           {Menu}
         </MobileList>
       }

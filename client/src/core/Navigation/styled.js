@@ -70,7 +70,9 @@ export const StyledLink = styled(NavLink).attrs(() => ({ activeClassName }))`
   };
 
   color: ${({ theme }) => theme.colors.white};
-  
+`;
+
+export const ItemName = styled.span`
   &:hover {
     color: ${({ theme }) => theme.colors.white};
     text-decoration: none;
