@@ -30,7 +30,6 @@ const LoginForm = () => {
         localStorage.setItem("user", JSON.stringify(data));
         dispatch(handleLogin());
         history.push(toResults());
-        console.log("zlezlezl")
       }
       else {
         setMessage(data.message)
