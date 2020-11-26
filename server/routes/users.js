@@ -33,7 +33,6 @@ const groupArray = (array) => {
 router.get('/numberOfResults', async (req, res) => {
   try {
     const gameId = req.query.gameId
-    console.log(gameId)
     const users = await User.find();
     const results = await Results.find(gameId === undefined ? {} : { game: gameId });
     const winners = await results.map(result => getWinners(result)).flat();
