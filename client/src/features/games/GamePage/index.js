@@ -64,7 +64,7 @@ const GamePage = () => {
               </Tags>
             </>
           }
-          <LastResult lastResultDate={game.lastResultDate} />
+          <LastResult lastResultDate={game.lastResultDate} gameId={game._id} />
         </div>
       </GameTile> :
       <ReactLoading color={theme.colors.windsor} />

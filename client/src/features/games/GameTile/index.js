@@ -19,7 +19,9 @@ const GameTile = ({ game, withoutLastResult, small }) => {
         <Image url={game.imgUrl || meeple} />
         <GameDetails>
           <GameName>{game.name}</GameName>
-          {!withoutLastResult && <LastResult lastResultDate={game.lastResultDate} />}
+          {!withoutLastResult &&
+            <LastResult lastResultDate={game.lastResultDate} gameId={game._id} />
+          }
           {game.numberOfResults &&
             <StyledParagraph>
               Liczba wyników:{" "}

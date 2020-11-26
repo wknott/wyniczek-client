@@ -1,7 +1,8 @@
 import React from "react";
+import { toResults } from "../../../routes";
 import { StyledParagraph } from "./styled";
 
-const LastResult = ({ lastResultDate }) => {
+const LastResult = ({ lastResultDate, gameId }) => {
   const calculateDaysDifference = (date) => {
     if (!date) return 0;
     const today = new Date();
@@ -43,7 +44,7 @@ const LastResult = ({ lastResultDate }) => {
   }
 
   return (
-    <StyledParagraph color={selectColor(differenceInDays)}>
+    <StyledParagraph to={toResults({ gameId })} color={selectColor(differenceInDays)}>
       {lastResultString}
     </StyledParagraph>
   )
