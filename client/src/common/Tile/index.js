@@ -7,5 +7,9 @@ export default styled.div`
   padding: 24px;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-gap: 10px;
+  grid-gap: 24px;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    grid-gap: 12px;
+  }
 `;
