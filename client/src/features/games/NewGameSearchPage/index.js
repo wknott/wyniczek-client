@@ -4,7 +4,7 @@ import Search from "../../../common/Search";
 
 const NewGamePage = () => (
   <>
-    <Search />
+    <Search placeholder="Wpisz nazwę gry…" />
     <GameList />
   </>
 );

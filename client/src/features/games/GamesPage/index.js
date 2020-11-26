@@ -53,7 +53,7 @@ function GamesPage() {
       <>
         <GamePageHeader>
           <Header>Lista gier</Header>
-          <Search />
+          <Search placeholder="Wpisz nazwę gry…" />
           {isAuthenticated &&
             <StyledLink to={toNewGameSearch()}>Dodaj nową grę</StyledLink>
           }
