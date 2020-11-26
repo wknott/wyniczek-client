@@ -1,8 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { toResults } from "../../../routes";
 import { StyledParagraph } from "./styled";
 
 const LastResult = ({ lastResultDate, gameId }) => {
+  const history = useHistory();
+
   const calculateDaysDifference = (date) => {
     if (!date) return 0;
     const today = new Date();
@@ -44,7 +47,10 @@ const LastResult = ({ lastResultDate, gameId }) => {
   }
 
   return (
-    <StyledParagraph to={toResults({ gameId })} color={selectColor(differenceInDays)}>
+    <StyledParagraph
+      onClick={() => history.push(toResults({ gameId }))}
+      color={selectColor(differenceInDays)}
+    >
       {lastResultString}
     </StyledParagraph>
   )
