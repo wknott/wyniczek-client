@@ -6,14 +6,15 @@ import { compareObjects } from "../../../../logic/utilities";
 import { theme } from "../../../../theme";
 import { fetchUsers, selectLoading, selectUsers } from "../../usersSlice";
 
-const UsersTable = () => {
+const UsersTable = ({ gameId }) => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const users = useSelector(selectUsers);
-  const sortedUsers = [...users].sort(compareObjects("numberOfResults", "desc"));
+  const filteredUsers = [...users].filter(user => user.numberOfResults > 0);
+  const sortedUsers = [...filteredUsers].sort(compareObjects("numberOfResults", "desc"));
 
   useEffect(() => {
-    dispatch(fetchUsers())
+    dispatch(fetchUsers(gameId))
     //eslint-disable-next-line
   }, []);
 

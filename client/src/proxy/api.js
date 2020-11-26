@@ -31,9 +31,10 @@ export const getLastResultOfGame = async (gameId) =>
     parameters: { last: "true", gameId, },
   });
 
-export const getUsers = async (numberOfResults) =>
+export const getUsers = async (numberOfResults, gameId) =>
   fetchFromServerApi({
     path: `/api/users/${numberOfResults}`,
+    parameters: { gameId },
   })
 
 export const postLogin = async (body) => {
