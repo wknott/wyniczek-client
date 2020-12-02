@@ -1,15 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { selectAuth, handleLogout } from "../../common/authSlice";
+import { selectAuth, handleLogout } from "../../../common/authSlice";
 import {
   toNewResult,
   toGames,
   toUsers,
-  toStats,
   toLogin,
   toResults,
-} from "../../routes";
+} from "../../../routes";
 import {
   StyledNavigation,
   StyledList,
@@ -47,11 +46,6 @@ const Navigation = () => {
       <Item as={StyledLink} to={toUsers()}>
         <ItemName>
           Użytkownicy
-        </ItemName>
-      </Item>
-      <Item as={StyledLink} to={toStats()}>
-        <ItemName>
-          Statystyki
         </ItemName>
       </Item>
       {isAuthenticated ? (
