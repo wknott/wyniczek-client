@@ -35,7 +35,7 @@ const ResultPage = () => {
       value: winners,
     },
     {
-      key: "Rozpoczynający",
+      key: "Gracz rozpoczynający:",
       value: firstPlayer,
     },
   ];
