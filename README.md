@@ -1,5 +1,5 @@
 # Wyniczek
-![Wyniczek](wyniczek.png)
+[![Wyniczek](wyniczek.png)](https://wyniczek.herokuapp.com/)
 ## Table of contents
 
 - [Demo](#demo)
