@@ -35,7 +35,7 @@ const ResultPage = () => {
       value: winners,
     },
     {
-      key: "Gracz rozpoczynający:",
+      key: "Gracz rozpoczynający",
       value: firstPlayer,
     },
   ];
@@ -49,8 +49,7 @@ const ResultPage = () => {
           <ResultTable result={result} />
         </TableContainer>
         <Details>
-          <MetaData metaData={details}
-          />
+          <MetaData metaData={details} />
         </Details>
         <Game>
           <GameTile game={result.game} withoutLastResult small />
