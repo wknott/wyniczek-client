@@ -32,3 +32,6 @@ Wyniczek is a web application for adding board game results. It allows you to cr
 - MongoDB (Mongoose)
 - JWT
 
+### Authors:
+- [Wojciech Knott](https://github.com/wknott)
+- [Hobosoccer](https://github.com/hobosoccer)
