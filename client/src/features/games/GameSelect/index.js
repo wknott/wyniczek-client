@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactLoading from "react-loading";
 import Select from "../../../common/Select";
 import { fetchGames, selectGames, selectLoading } from "../gamesSlice";
-import { theme } from "../../../theme";
 import { compareObjects } from "../../../logic/utilities";
 import { GameQueryParamName, PageQueryParamName, useQueryParameter, useReplaceQueryParameter } from "../../../common/queryParameters";
+import Loading from "../../../common/Loading";
 
 const SelectGame = ({ firstOption }) => {
   const games = useSelector(selectGames);
@@ -31,7 +30,7 @@ const SelectGame = ({ firstOption }) => {
 
   return (
     loading ?
-      <ReactLoading color={theme.colors.windsor} /> :
+      <Loading size={48} /> :
       <Select
         value={games.find(game => game._id === selectedGameId)}
         onChange={onChange}
