@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import ReactLoading from "react-loading";
 import {
   formatDateString,
   calculateWinners,
 } from "../../../../logic/utilities.js";
-import { theme } from "../../../../theme";
 import { Table, TableContainer, TableHeader, TableRow, TableCell } from "../../../../common/Table";
 import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../../../../common/queryParameters";
 import Pager from "../../../../common/Pager";
@@ -17,6 +15,7 @@ import dateImage from "../../../../images/date.svg";
 import winner from "../../../../images/winner.svg";
 import { toResult } from "../../../../routes";
 import { useHistory } from "react-router-dom";
+import Loading from "../../../../common/Loading";
 
 const ResultsTable = () => {
   const { results, numberOfResults, loading } = useSelector(selectResultsState);
@@ -33,7 +32,7 @@ const ResultsTable = () => {
     <TableContainer>
       {
         loading ?
-          <ReactLoading color={theme.colors.windsor} /> :
+          <Loading message="Trwa ładowanie danych, proszę czekać…" /> :
           <>
             <Table>
               <thead>
