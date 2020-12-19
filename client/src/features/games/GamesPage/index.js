@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactLoading from "react-loading";
 import { compareObjects } from "../../../logic/utilities";
-import { theme } from "../../../theme";
 import { fetchGames, selectGames, selectLoading } from "../gamesSlice";
 import GameTile from "../GameTile";
 import {
@@ -17,6 +15,7 @@ import { toNewGameSearch } from "../../../routes";
 import { selectAuth } from "../../../common/authSlice";
 import Search from "../../../common/Search";
 import { useQueryParameter } from "../../../common/queryParameters";
+import Loading from "../../../common/Loading";
 
 function GamesPage() {
   const [sortOption, setSortOption] = useState("numberOfResults");
@@ -47,7 +46,7 @@ function GamesPage() {
 
   return loading ?
     (
-      <ReactLoading color={theme.colors.windsor} />
+      <Loading message="Trwa ładowanie danych, proszę czekać…" />
     ) :
     (
       <>
