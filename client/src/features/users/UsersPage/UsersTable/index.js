@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import ReactLoading from "react-loading";
 import { useDispatch, useSelector } from "react-redux";
+import Loading from "../../../../common/Loading";
 import { Table, TableCell, TableContainer, TableHeader, TableRow } from "../../../../common/Table";
 import { compareObjects } from "../../../../logic/utilities";
-import { theme } from "../../../../theme";
 import { fetchUsers, selectLoading, selectUsers } from "../../usersSlice";
 
 const UsersTable = ({ gameId }) => {
@@ -21,7 +20,7 @@ const UsersTable = ({ gameId }) => {
 
   return loading ?
     (
-      <ReactLoading color={theme.colors.windsor} />
+      <Loading message="Trwa ładowanie danych, proszę czekać…" />
     ) :
     (
       <TableContainer>
