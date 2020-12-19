@@ -9,8 +9,9 @@ export const Container = styled.div`
 `;
 
 export const Message = styled.p`
+  text-align: center;
   font-size: 20px;
   line-height: 140%;
   letter-spacing: 0.05em;
-  margin: 0 0 48px;
+  margin: 48px 0;
 `;

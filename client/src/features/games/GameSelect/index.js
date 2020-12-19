@@ -30,7 +30,7 @@ const SelectGame = ({ firstOption }) => {
 
   return (
     loading ?
-      <Loading size={48} /> :
+      <Loading size={38} /> :
       <Select
         value={games.find(game => game._id === selectedGameId)}
         onChange={onChange}
