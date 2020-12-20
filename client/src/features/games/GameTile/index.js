@@ -8,7 +8,7 @@ import {
   GameDetails
 } from "./styled";
 import { Link } from "react-router-dom";
-import { toGame } from "../../../routes";
+import { toGame } from "../../../common/routes";
 import LastResult from "../LastResult";
 
 const GameTile = ({ game, withoutLastResult, small }) => {

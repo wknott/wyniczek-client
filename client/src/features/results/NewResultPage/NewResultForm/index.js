@@ -9,7 +9,7 @@ import { fetchGames, selectGames } from "../../../games/gamesSlice";
 import { selectUsers, fetchUsers, selectLoading } from "../../../users/usersSlice";
 import Input from "../../../../common/Input";
 import Select from "../../../../common/Select";
-import { toResults } from "../../../../routes";
+import { toResults } from "../../../../common/routes";
 import { compareObjects } from "../../../../logic/utilities";
 import { FieldName, Form, StyledButton, SubmitButton, Result, ButtonsContainer } from "./styled";
 import { addResult } from "../../../../proxy/api";

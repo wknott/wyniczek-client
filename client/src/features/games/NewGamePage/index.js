@@ -17,7 +17,7 @@ import Input from "../../../common/Input";
 import { StyledSelect } from "../../../common/Select/styled";
 import { nanoid } from "@reduxjs/toolkit";
 import { useHistory, useParams } from "react-router-dom";
-import { toGames } from "../../../routes";
+import { toGames } from "../../../common/routes";
 import { addGame } from "../../../proxy/api";
 import MetaData from "../../../common/MetaData";
 

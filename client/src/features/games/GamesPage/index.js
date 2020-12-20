@@ -11,7 +11,7 @@ import {
   StyledLink
 } from "./styled";
 import Header from "../../../common/Header";
-import { toNewGameSearch } from "../../../routes";
+import { toNewGameSearch } from "../../../common/routes";
 import { selectAuth } from "../../../common/authSlice";
 import Search from "../../../common/Search";
 import { useQueryParameter } from "../../../common/queryParameters";

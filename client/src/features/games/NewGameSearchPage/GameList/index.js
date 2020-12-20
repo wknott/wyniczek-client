@@ -5,7 +5,7 @@ import { fetchGamesByQuery, selectFoundGames } from "../../gamesSlice";
 import List, { ListItem } from "../../../../common/List";
 import LinkToWebsite from "../../../../common/LinkToWebsite";
 import { Link } from "react-router-dom";
-import { toNewGame } from "../../../../routes";
+import { toNewGame } from "../../../..//common/routes";
 import { useQueryParameter } from "../../../../common/queryParameters";
 
 const GameList = () => {

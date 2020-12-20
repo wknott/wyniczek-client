@@ -13,7 +13,7 @@ import firstPlayer from "../../../../images/firstPlayer.svg";
 import gameImage from "../../../../images/game.svg";
 import dateImage from "../../../../images/date.svg";
 import winner from "../../../../images/winner.svg";
-import { toResult } from "../../../../routes";
+import { toResult } from "../../../../common/routes";
 import { useHistory } from "react-router-dom";
 import Loading from "../../../../common/Loading";
 

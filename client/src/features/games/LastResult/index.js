@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { toResults } from "../../../routes";
+import { toResults } from "../../../common/routes";
 import { StyledParagraph } from "./styled";
 
 const LastResult = ({ lastResultDate, gameId }) => {

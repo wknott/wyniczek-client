@@ -15,7 +15,7 @@ import {
   toNewGameSearch,
   toResult,
   toUsers
-} from "../../routes";
+} from "../../common/routes";
 import ResultsPage from "../../features/results/ResultsPage";
 import NewGameSearchPage from "../../features/games/NewGameSearchPage";
 import GamesPage from "../../features/games/GamesPage";

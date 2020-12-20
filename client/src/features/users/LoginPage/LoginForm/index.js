@@ -4,7 +4,7 @@ import Label from "../../../../common/Label";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { handleLogin } from "../../../../common/authSlice";
-import { toResults } from "../../../../routes";
+import { toResults } from "../../../../common/routes";
 import { ErrorMessage, Form, FormContainer, SubmitButton } from "./styled";
 import { postLogin } from "../../../../proxy/api";
 

@@ -8,7 +8,7 @@ import {
   toUsers,
   toLogin,
   toResults,
-} from "../../../routes";
+} from "../../../common/routes";
 import {
   StyledNavigation,
   StyledList,
