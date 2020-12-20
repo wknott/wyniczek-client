@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export default styled.a`
   display: inline;
-  color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.windsor};
-  padding: 4px;
-  border-radius: 2px;
-  transition: 0.3s;
-  
+  color: ${({ theme }) => theme.colors.windsor};
+
   &:hover {
-    filter: brightness(120%);
+    filter: brightness(130%);
+    border-bottom: 1px solid ${({ theme }) => theme.colors.windsor};
+  }
+
+  &:active {
+    filter: brightness(150%);
   }
 `;
