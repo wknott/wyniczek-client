@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import Button from "../../../common/Button";
-import Link from "../../../common/Link";
 
 export const GameTilesContainer = styled.div`
   display: grid;
@@ -10,23 +9,6 @@ export const GameTilesContainer = styled.div`
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     grid-template-columns: 1fr;
-  }
-`;
-
-export const GamePageHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const StyledLink = styled(Link)`
-  margin: 24px 0 14px;
-  display: flex;
-  align-items: center;
-  
-  @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
-    font-size: 13px;
-    margin: 12px 0 2px;
   }
 `;
 
