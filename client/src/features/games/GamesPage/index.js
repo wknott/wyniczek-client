@@ -4,11 +4,9 @@ import { compareObjects } from "../../../logic/utilities";
 import { fetchGames, selectGames, selectLoading } from "../gamesSlice";
 import GameTile from "../GameTile";
 import {
-  GamePageHeader,
   GameTilesContainer,
   SortButton,
   SortButtons,
-  StyledLink
 } from "./styled";
 import Header from "../../../common/Header";
 import { toNewGameSearch } from "../../../common/routes";
@@ -16,6 +14,8 @@ import { selectAuth } from "../../../common/authSlice";
 import Search from "../../../common/Search";
 import { useQueryParameter } from "../../../common/queryParameters";
 import Loading from "../../../common/Loading";
+import PageHeader from "../../../common/PageHeader";
+import StyledLink from "../../../common/StyledLink";
 
 function GamesPage() {
   const [sortOption, setSortOption] = useState("numberOfResults");
@@ -50,12 +50,12 @@ function GamesPage() {
     ) :
     (
       <>
-        <GamePageHeader>
+        <PageHeader>
           <Header>Lista gier</Header>
           {isAuthenticated &&
             <StyledLink to={toNewGameSearch()}>Dodaj nową grę</StyledLink>
           }
-        </GamePageHeader>
+        </PageHeader>
         <Search placeholder="Wpisz nazwę gry…" />
         <SortButtons>
           {sortOptions.map(option =>
