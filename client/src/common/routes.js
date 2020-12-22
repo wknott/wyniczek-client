@@ -11,3 +11,4 @@ export const toUserStats = () => "/moje-statystyki";
 export const toHomePage = () => "/";
 export const toGame = ({ id } = { id: ":id" }) => `/gry/${id}`;
 export const toResult = ({ id } = { id: ":id" }) => `/wyniki/${id}`;
+export const toNewUserPage = () => "/nowy-uzytkownik";
