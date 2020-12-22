@@ -42,6 +42,11 @@ export const postLogin = async (body) => {
   return response.data;
 }
 
+export const postRegister = async (body) => {
+  const response = await axios.post("/api/users/register", body);
+  return response.data;
+}
+
 export const addGame = async (newGame) => {
   const headers = {
     "Content-Type": "application/json",
