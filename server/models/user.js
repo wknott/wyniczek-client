@@ -6,9 +6,8 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  hash: { 
+  hash: {
     type: String,
-    required: true
   },
 })
 
@@ -16,8 +15,8 @@ userSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,
   transform: function (doc, ret) {
-      delete ret._id;
-      delete ret.hash;
+    delete ret._id;
+    delete ret.hash;
   }
 });
 
