@@ -55,7 +55,7 @@ const SelectGame = ({ firstOption }) => {
       <Autocomplete
         options={sortedGames}
         getOptionLabel={(option) => option.name}
-        value={games.find(game => game._id === selectedGameId)}
+        value={games.find(game => game._id === selectedGameId) || null}
         onChange={(event, newValue) => {
           onChange(newValue?._id);
         }}
