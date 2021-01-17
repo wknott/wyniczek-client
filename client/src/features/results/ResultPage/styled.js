@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import StyledLink from "../../../common/StyledLink";
 
 export const Container = styled.div`
   padding: 10px;
@@ -28,4 +29,9 @@ export const TableContainer = styled.div`
 
 export const Details = styled.div`
   grid-area: details;
+`;
+
+export const Link = styled(StyledLink)`
+  justify-content: center;
+  padding: 16px;
 `;
