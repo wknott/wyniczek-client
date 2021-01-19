@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { fetchGames, getGameById, selectGames } from "../gamesSlice";
 import { theme } from "../../../theme";
 import meeple from "../../../images/meeple.svg";
-import { Image, DefaultImage, DefaultImageContainer, Tags, Tag, Title, GameTile } from "./styled";
+import { Image, DefaultImage, DefaultImageContainer, Tags, Tag, Title, GameTile, Subtitle } from "./styled";
 import LastResult from "../LastResult";
 import MetaData from "../../../common/MetaData";
 import UsersTable from "../../users/UsersPage/UsersTable";
@@ -39,7 +39,7 @@ const GamePage = () => {
       value: linkToBgg,
     },
     {
-      key: "Liczba wyników",
+      key: "Liczba dodanych wyników",
       value: game?.numberOfResults,
     },
   ];
@@ -69,9 +69,8 @@ const GamePage = () => {
             <LastResult lastResultDate={game.lastResultDate} gameId={game._id} />
           </div>
         </GameTile>
-        <UsersTable
-          gameId={game._id}
-        />
+        <Subtitle>Statystyki wyników <q>{game.name}</q></Subtitle>
+        <UsersTable gameId={game._id} />
       </> :
       <ReactLoading color={theme.colors.windsor} />
   )

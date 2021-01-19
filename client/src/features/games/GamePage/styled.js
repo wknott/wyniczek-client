@@ -80,6 +80,15 @@ export const Title = styled.h1`
   };
 `;
 
+export const Subtitle = styled.h2`
+  font-size: 24px;
+  font-weight: 700;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 16px;
+  };
+`;
+
 export const GameTile = styled(Tile)`
   grid-template-columns: 1fr 1fr;
 
