@@ -47,7 +47,6 @@ const ResultPage = () => {
   return (
     result &&
     <>
-      <Header>Tabela wyniku</Header>
       <Container>
         <TableContainer>
           <ResultTable result={result} />
