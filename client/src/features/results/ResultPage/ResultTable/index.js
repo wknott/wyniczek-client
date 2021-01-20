@@ -1,10 +1,10 @@
 import React from "react";
-import { TableContainer, Table, TableHeader, TableCell, TableRow } from "../../../../common/Table/";
-import { StyledTableCell } from "./styled";
+import { TableContainer, TableHeader, TableCell, TableRow } from "../../../../common/Table/";
+import { StyledTable, StyledTableCell } from "./styled";
 
 const ResultTable = ({ result }) => (
   <TableContainer>
-    <Table>
+    <StyledTable>
       <thead>
         <TableRow>
           <TableHeader>Kategoria</TableHeader>
@@ -31,7 +31,7 @@ const ResultTable = ({ result }) => (
           ))}
         </TableRow>
       </tbody>
-    </Table>
+    </StyledTable>
   </TableContainer>
 )
 

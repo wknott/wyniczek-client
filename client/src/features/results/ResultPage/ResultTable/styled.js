@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TableCell } from "../../../../common/Table";
+import { Table, TableCell } from "../../../../common/Table";
 
 export const StyledTableCell = styled(TableCell)`
   font-size: 20px;
@@ -9,4 +9,10 @@ export const StyledTableCell = styled(TableCell)`
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 14px;
   }
+`;
+
+export const StyledTable = styled(Table)`
+  @media(min-width: ${({ theme }) => theme.breakpoints.mobileMax}px ){
+    width: auto;
+  };
 `;
