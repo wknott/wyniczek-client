@@ -12,7 +12,6 @@ import {
   Link
 } from "./styled.js";
 import GameTile from "../../games/GameTile";
-import Header from "../../../common/Header";
 import MetaData from "../../../common/MetaData/index.js";
 import { selectAuth } from "../../../common/authSlice.js";
 import { toNewResult } from "../../../common/routes.js";
