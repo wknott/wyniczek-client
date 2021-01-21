@@ -12,6 +12,9 @@ const resultsSlice = createSlice({
     fetchResult: state => {
       state.loading = true;
     },
+    changeResult: (state, { payload: result }) => {
+      state.result = result;
+    },
     fetchResultSuccess: (state, { payload: result }) => {
       state.result = result;
       state.loading = false;
@@ -35,7 +38,8 @@ export const {
   fetchResultSuccess,
   fetchResults,
   fetchError,
-  fetchResultsSuccess
+  fetchResultsSuccess,
+  changeResult,
 } = resultsSlice.actions;
 
 export const selectResultsState = state => state.results;
