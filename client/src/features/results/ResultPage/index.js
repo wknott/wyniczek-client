@@ -43,12 +43,16 @@ const ResultPage = () => {
     },
   ];
 
+  const isUserResultAuthor = () => {
+    return isAuthenticated && result.author === JSON.parse(localStorage.user).id;
+  }
+
   return (
     result &&
     <>
       <Container>
         <TableContainer>
-          <ResultTable result={result} />
+          <ResultTable isUserResultAuthor={isUserResultAuthor} result={result} />
         </TableContainer>
         <Details>
           <MetaData metaData={details} />
