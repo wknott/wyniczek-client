@@ -65,6 +65,19 @@ export const addResult = async (newResult) => {
   return response;
 }
 
+export const updateResult = async (updatedResult) => {
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": authToken,
+  };
+  const response = await axios.patch(
+    `/api/results/${updatedResult._id}`,
+    { scores: updatedResult.scores.map(({ _id, points, user }) => ({ _id, points, user: user.id })) },
+    { headers: headers }
+  );
+  return response;
+}
+
 const BGG_API_URL = "https://api.geekdo.com/xmlapi2";
 
 export const getGamesFromQuery = async (query) => {
