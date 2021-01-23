@@ -53,10 +53,10 @@ const ResultTable = ({ result, isUserResultAuthor }) => {
                     indexk={0}
                   /> :
                   <StyledTableCell key={index} onClick={() => handleCellChange(index, 0)}>
-                    {Object.values(score.points).reduce((x, y) => x + y, 0)}
+                    {score.points[0]}
                   </StyledTableCell> :
-                <StyledTableCell key={index} >
-                  {score.points[0]}
+                <StyledTableCell key={index}>
+                  {Object.values(score.points).reduce((x, y) => x + y, 0)}
                 </StyledTableCell>
             ))}
           </TableRow>
