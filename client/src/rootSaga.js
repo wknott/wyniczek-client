@@ -1,7 +1,7 @@
 import { all } from "redux-saga/effects";
 import { watchHandleLogout } from "./common/authSaga";
 import { watchFetchGames } from "./features/games/gamesSaga";
-import { watchFetchResults, watchFetchResult } from "./features/results/resultsSaga";
+import { watchFetchResults, watchFetchResult, watchChangeResult } from "./features/results/resultsSaga";
 import { watchFetchUsers } from "./features/users/usersSaga";
 
 export default function* rootSaga() {
@@ -11,5 +11,6 @@ export default function* rootSaga() {
     watchFetchResult(),
     watchHandleLogout(),
     watchFetchUsers(),
+    watchChangeResult(),
   ]);
 }

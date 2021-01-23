@@ -1,11 +1,12 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { getResult, getResults } from "../../proxy/api";
+import { getResult, getResults, updateResult } from "../../proxy/api";
 import {
   fetchResult,
   fetchResultSuccess,
   fetchResults,
   fetchError,
-  fetchResultsSuccess
+  fetchResultsSuccess,
+  changeResult
 } from "./resultsSlice";
 
 function* fetchResultsHandler({ payload }) {
@@ -28,10 +29,24 @@ function* fetchResultHandler({ payload }) {
   }
 }
 
+function* changeResultHandler({ payload }) {
+  try {
+    yield call(updateResult, payload);
+
+  } catch (error) {
+    yield call(alert, "Nie udało się aktualizować wyniku.");
+    yield put(fetchError);
+  }
+}
+
 export function* watchFetchResults() {
   yield takeLatest(fetchResults.type, fetchResultsHandler);
 }
 
 export function* watchFetchResult() {
   yield takeLatest(fetchResult.type, fetchResultHandler);
+}
+
+export function* watchChangeResult() {
+  yield takeLatest(changeResult.type, changeResultHandler);
 }
