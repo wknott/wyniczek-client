@@ -44,15 +44,19 @@ const ResultTable = ({ result, isUserResultAuthor }) => {
           <TableRow>
             <StyledTableCell>Wynik</StyledTableCell>
             {result.scores.map((score, index) => (
-              editCell?.index === index && editCell?.indexk === 0 ?
-                <Edit
-                  key={index}
-                  setEditCell={setEditCell}
-                  score={score}
-                  indexk={0}
-                /> :
-                <StyledTableCell key={index} onClick={() => handleCellChange(index, 0)}>
-                  {Object.values(score.points).reduce((x, y) => x + y, 0)}
+              result.game.pointFields.length === 0 ?
+                editCell?.index === index && editCell?.indexk === 0 ?
+                  <Edit
+                    key={index}
+                    setEditCell={setEditCell}
+                    score={score}
+                    indexk={0}
+                  /> :
+                  <StyledTableCell key={index} onClick={() => handleCellChange(index, 0)}>
+                    {Object.values(score.points).reduce((x, y) => x + y, 0)}
+                  </StyledTableCell> :
+                <StyledTableCell key={index} >
+                  {score.points[0]}
                 </StyledTableCell>
             ))}
           </TableRow>
