@@ -29,7 +29,7 @@ const Edit = ({ setEditCell, score, indexk }) => {
 
   return (
     <Container>
-      <StyledInput type="number" onChange={(event) => onChange(event)} value={newScore.points[indexk] || "0"} />
+      <StyledInput type="number" onChange={(event) => onChange(event)} value={newScore.points[indexk] || ""} />
       <Button onClick={onSubmit}><Image src={confirmImage} /></Button>
       <Button onClick={() => setEditCell(null)}><Image src={denyImage} /></Button>
     </Container>
