@@ -19,7 +19,6 @@ const Edit = ({ setEditCell, score, indexk }) => {
   }
 
   const onSubmit = () => {
-    console.log(newScore)
     const newResult = {
       ...result,
       scores: result.scores.map(score => score._id === newScore._id ? newScore : score),
