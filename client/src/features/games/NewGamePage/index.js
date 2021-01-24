@@ -23,11 +23,11 @@ import MetaData from "../../../common/MetaData";
 
 const NewGamePage = () => {
   const { id: gameId } = useParams();
-  const gameDetails = useSelector(selectGameDetails);
+  const newGameDetails = useSelector(selectGameDetails);
   const loading = useSelector(selectLoading);
   const dispatch = useDispatch();
   const [pointFields, setPointFields] = useState([]);
-  const [selectedName, setSelectedName] = useState(gameDetails?.name[0]);
+  const [selectedName, setSelectedName] = useState(newGameDetails?.name[0]);
   const [newGameLoading, setNewGameLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -45,10 +45,10 @@ const NewGamePage = () => {
 
   async function onSubmit(e) {
     e.preventDefault();
-    const { minPlayers, maxPlayers, img: imgUrl, thumbnail: thumbnailUrl } = gameDetails;
+    const { minPlayers, maxPlayers, img: imgUrl, thumbnail: thumbnailUrl } = newGameDetails;
 
     const newGame = {
-      name: selectedName || gameDetails?.name[0],
+      name: selectedName || newGameDetails?.name[0],
       minPlayers,
       maxPlayers,
       pointFields,
@@ -83,16 +83,16 @@ const NewGamePage = () => {
     <a
       target="_blank"
       rel="noopener noreferrer"
-      href={`https://boardgamegeek.com/boardgame/${gameDetails?.id}`}
+      href={`https://boardgamegeek.com/boardgame/${newGameDetails?.id}`}
     >
-      {gameDetails?.name[0]}
+      {newGameDetails?.name[0]}
     </a>
   );
 
   const details = [
     {
       key: "Liczba graczy",
-      value: `${gameDetails?.minPlayers} - ${gameDetails?.maxPlayers}`,
+      value: `${newGameDetails?.minPlayers} - ${newGameDetails?.maxPlayers}`,
     },
     {
       key: "Link do opisu gry na BGG",
@@ -106,12 +106,12 @@ const NewGamePage = () => {
 
   return (
     <div>
-      {loading || !gameDetails ?
+      {loading || !newGameDetails ?
         <ReactLoading color={theme.colors.windsor} /> :
         <StyledTile>
-          <GameImage src={gameDetails.img} alt="game-image" />
+          <GameImage src={newGameDetails.img} alt="game-image" />
           <GameDetails>
-            <GameHeader>{gameDetails.name[0]}</GameHeader>
+            <GameHeader>{newGameDetails.name[0]}</GameHeader>
             <MetaData metaData={details} />
             <ButtonsContainer>
               <Button onClick={addField}>
@@ -144,7 +144,7 @@ const NewGamePage = () => {
                   value={selectedName}
                   onChange={({ target }) => setSelectedName(target.value)}
                 >
-                  {gameDetails.name.map(name =>
+                  {newGameDetails.name.map(name =>
                     <option key={nanoid()} value={name}>
                       {name}
                     </option>)}

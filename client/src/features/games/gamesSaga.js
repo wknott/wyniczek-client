@@ -34,8 +34,8 @@ function* fetchGamesHandler({ payload }) {
 
 function* fetchNewGameDetailsHandler({ payload: gameId }) {
   try {
-    const gameDetails = yield call(getNewGameDetails, gameId);
-    yield put(fetchNewGameDetailsSuccess(gameDetails));
+    const newGameDetails = yield call(getNewGameDetails, gameId);
+    yield put(fetchNewGameDetailsSuccess(newGameDetails));
   } catch (error) {
     yield call(alert, "Nie udało się wczytać gier, spróbuj odświeżyć stronę.");
     yield put(fetchError());

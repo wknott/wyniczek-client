@@ -125,7 +125,7 @@ export const getNewGameDetails = async (id) => {
     const name = Array.isArray(parsedData.items.item.name) ?
       parsedData.items.item.name.map(name => name._attributes.value) :
       [parsedData.items.item.name._attributes.value];
-    const gameDetails = {
+    const newGameDetails = {
       name,
       img: parsedData.items.item.image._text,
       thumbnail: parsedData.items.item.thumbnail._text,
@@ -133,7 +133,7 @@ export const getNewGameDetails = async (id) => {
       maxPlayers: parsedData.items.item.maxplayers._attributes.value,
       id,
     }
-    return gameDetails;
+    return newGameDetails;
   } catch (error) {
     return error;
   }

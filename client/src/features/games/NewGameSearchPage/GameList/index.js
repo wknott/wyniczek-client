@@ -9,7 +9,7 @@ import { toNewGame } from "../../../..//common/routes";
 import { useQueryParameter } from "../../../../common/queryParameters";
 
 const GameList = () => {
-  const foundGames = useSelector(selectFoundGames);
+  const newGamesFromQuery = useSelector(selectFoundGames);
   const dispatch = useDispatch();
   const query = useQueryParameter("query") || "";
 
@@ -22,13 +22,13 @@ const GameList = () => {
   return (
     <>
       <List>
-        {foundGames && foundGames.map(game =>
+        {newGamesFromQuery && newGamesFromQuery.map(game =>
           <ListItem as={Link} to={toNewGame({ id: game.id })} key={nanoid()} >
             <strong>{game.name}</strong> ({game.yearPublished})
           </ListItem>
         )}
       </List>
-      {foundGames.length > 0 && <p>
+      {newGamesFromQuery.length > 0 && <p>
         Tytuły wyszukiwanych gier pochodzą z serwisu{" "}
         <LinkToWebsite
           target="_blank"
