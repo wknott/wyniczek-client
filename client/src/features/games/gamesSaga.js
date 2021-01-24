@@ -1,13 +1,13 @@
 import { takeLatest, call, put, debounce } from "redux-saga/effects";
-import { getGameDetails, getGames, getGamesFromQuery, getLastResultsOfEachGames, getNumberOfResultsPerGame } from "../../proxy/api";
+import { getNewGameDetails, getGames, getNewGamesFromQuery, getLastResultsOfEachGames, getNumberOfResultsPerGame } from "../../proxy/api";
 import {
   fetchGames,
-  fetchGamesByQuery,
+  fetchNewGamesByQuery,
   fetchError,
-  fetchGamesByQuerySuccess,
+  fetchNewGamesByQuerySuccess,
   fetchGamesSuccess,
-  fetchGameDetails,
-  fetchGameDetailsSuccess
+  fetchNewGameDetails,
+  fetchNewGameDetailsSuccess
 } from "./gamesSlice";
 
 function* fetchGamesHandler({ payload }) {
@@ -32,20 +32,20 @@ function* fetchGamesHandler({ payload }) {
   }
 }
 
-function* fetchGameDetailsHandler({ payload: gameId }) {
+function* fetchNewGameDetailsHandler({ payload: gameId }) {
   try {
-    const gameDetails = yield call(getGameDetails, gameId);
-    yield put(fetchGameDetailsSuccess(gameDetails));
+    const gameDetails = yield call(getNewGameDetails, gameId);
+    yield put(fetchNewGameDetailsSuccess(gameDetails));
   } catch (error) {
     yield call(alert, "Nie udało się wczytać gier, spróbuj odświeżyć stronę.");
     yield put(fetchError());
   }
 }
 
-function* fetchGamesByQueryHandler({ payload: query }) {
+function* fetchNewGamesByQueryHandler({ payload: query }) {
   try {
-    const games = yield call(getGamesFromQuery, query);
-    yield put(fetchGamesByQuerySuccess(games));
+    const games = yield call(getNewGamesFromQuery, query);
+    yield put(fetchNewGamesByQuerySuccess(games));
   } catch (error) {
     yield call(alert, "Nie udało się wczytać gier, spróbuj odświeżyć stronę.");
     yield put(fetchError());
@@ -54,6 +54,6 @@ function* fetchGamesByQueryHandler({ payload: query }) {
 
 export function* watchFetchGames() {
   yield takeLatest(fetchGames.type, fetchGamesHandler);
-  yield takeLatest(fetchGameDetails.type, fetchGameDetailsHandler);
-  yield debounce(500, fetchGamesByQuery.type, fetchGamesByQueryHandler);
+  yield takeLatest(fetchNewGameDetails.type, fetchNewGameDetailsHandler);
+  yield debounce(500, fetchNewGamesByQuery.type, fetchNewGamesByQueryHandler);
 };

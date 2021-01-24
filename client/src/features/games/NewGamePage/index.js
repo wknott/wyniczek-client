@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
-import { fetchGameDetails, selectGameDetails, selectLoading } from "../gamesSlice";
+import { fetchNewGameDetails, selectGameDetails, selectLoading } from "../gamesSlice";
 import { theme } from "../../../theme";
 import {
   GameImage,
@@ -75,7 +75,7 @@ const NewGamePage = () => {
 
   useEffect(() => {
     if (gameId) {
-      dispatch(fetchGameDetails(gameId))
+      dispatch(fetchNewGameDetails(gameId))
     }
   }, [dispatch, gameId])
 

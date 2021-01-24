@@ -80,7 +80,7 @@ export const updateResult = async (updatedResult) => {
 
 const BGG_API_URL = "https://api.geekdo.com/xmlapi2";
 
-export const getGamesFromQuery = async (query) => {
+export const getNewGamesFromQuery = async (query) => {
   try {
     const response = await fetch(`${BGG_API_URL}/search?${buildQueryString({ query, type: "boardgame" })}`);
 
@@ -117,7 +117,7 @@ export const getGamesFromQuery = async (query) => {
   }
 }
 
-export const getGameDetails = async (id) => {
+export const getNewGameDetails = async (id) => {
   try {
     const response = await fetch(`${BGG_API_URL}/thing?id=${id}`);
     const data = await response.text();

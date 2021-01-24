@@ -16,17 +16,17 @@ const gamesSlice = createSlice({
       state.games = games;
       state.loading = false;
     },
-    fetchGameDetails: state => {
+    fetchNewGameDetails: state => {
       state.loading = true;
     },
-    fetchGameDetailsSuccess: (state, { payload: gameDetails }) => {
+    fetchNewGameDetailsSuccess: (state, { payload: gameDetails }) => {
       state.gameDetails = gameDetails;
       state.loading = false;
     },
-    fetchGamesByQuery: state => {
+    fetchNewGamesByQuery: state => {
       state.loading = true;
     },
-    fetchGamesByQuerySuccess: (state, { payload: foundGames }) => {
+    fetchNewGamesByQuerySuccess: (state, { payload: foundGames }) => {
       state.foundGames = foundGames;
       state.loading = false;
     },
@@ -40,10 +40,10 @@ export const {
   fetchGames,
   fetchError,
   fetchGamesSuccess,
-  fetchGamesByQuery,
-  fetchGamesByQuerySuccess,
-  fetchGameDetails,
-  fetchGameDetailsSuccess,
+  fetchNewGamesByQuery,
+  fetchNewGamesByQuerySuccess,
+  fetchNewGameDetails,
+  fetchNewGameDetailsSuccess,
 } = gamesSlice.actions;
 
 export const selectGamesState = state => state.games;

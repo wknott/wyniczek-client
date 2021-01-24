@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGamesByQuery, selectFoundGames } from "../../gamesSlice";
+import { fetchNewGamesByQuery, selectFoundGames } from "../../gamesSlice";
 import List, { ListItem } from "../../../../common/List";
 import LinkToWebsite from "../../../../common/LinkToWebsite";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ const GameList = () => {
 
   useEffect(() => {
     if (query.length > 2) {
-      dispatch(fetchGamesByQuery(query))
+      dispatch(fetchNewGamesByQuery(query))
     }
   }, [dispatch, query])
 
