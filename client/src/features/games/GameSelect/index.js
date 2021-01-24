@@ -36,7 +36,7 @@ const SelectGame = ({ firstOption }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchGames());
+    dispatch(fetchGames({ withoutStats: true }));
   }, [dispatch]);
 
   const onChange = (selectedGameId) => {

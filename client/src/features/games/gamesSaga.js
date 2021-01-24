@@ -10,18 +10,22 @@ import {
   fetchGameDetailsSuccess
 } from "./gamesSlice";
 
-function* fetchGamesHandler() {
+function* fetchGamesHandler({ payload }) {
   try {
     const games = yield call(getGames);
-    const lastResults = yield call(getLastResultsOfEachGames);
-    const numberOfResults = yield call(getNumberOfResultsPerGame);
-    const updatedGames = yield games.map(game => (
-      {
-        ...game,
-        lastResultDate: lastResults.find(({ _id }) => _id === game._id)?.lastGameDate,
-        numberOfResults: numberOfResults.find(({ _id }) => _id === game._id)?.numberOfResults,
-      }))
-    yield put(fetchGamesSuccess(updatedGames));
+    if (!payload?.withoutStats) {
+      const lastResults = yield call(getLastResultsOfEachGames);
+      const numberOfResults = yield call(getNumberOfResultsPerGame);
+      const updatedGames = yield games.map(game => (
+        {
+          ...game,
+          lastResultDate: lastResults.find(({ _id }) => _id === game._id)?.lastGameDate,
+          numberOfResults: numberOfResults.find(({ _id }) => _id === game._id)?.numberOfResults,
+        }))
+      yield put(fetchGamesSuccess(updatedGames));
+    } else {
+      yield put(fetchGamesSuccess(games));
+    }
   } catch (error) {
     yield call(alert, "Nie udało się wczytać gier, spróbuj odświeżyć stronę.");
     yield put(fetchError());
