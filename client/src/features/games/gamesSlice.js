@@ -7,6 +7,7 @@ const gamesSlice = createSlice({
     loading: false,
     newGamesFromQuery: [],
     newGameDetails: null,
+    game: null,
   },
   reducers: {
     fetchGames: state => {
@@ -30,6 +31,13 @@ const gamesSlice = createSlice({
       state.newGamesFromQuery = newGamesFromQuery;
       state.loading = false;
     },
+    fetchGame: state => {
+      state.loading = true;
+    },
+    fetchGameSuccess: (state, { payload: game }) => {
+      state.game = game;
+      state.loading = false;
+    },
     fetchError: state => {
       state.loading = false;
     },
@@ -44,6 +52,8 @@ export const {
   fetchNewGamesByQuerySuccess,
   fetchNewGameDetails,
   fetchNewGameDetailsSuccess,
+  fetchGame,
+  fetchGameSuccess,
 } = gamesSlice.actions;
 
 export const selectGamesState = state => state.games;
@@ -51,6 +61,7 @@ export const selectGames = state => selectGamesState(state).games;
 export const selectLoading = state => selectGamesState(state).loading;
 export const selectFoundGames = state => selectGamesState(state).newGamesFromQuery;
 export const selectGameDetails = state => selectGamesState(state).newGameDetails;
+export const selectGame = state => selectGamesState(state).game;
 
 export const getGameById = (state, GameId) => selectGames(state).find(({ _id }) => _id === GameId);
 
