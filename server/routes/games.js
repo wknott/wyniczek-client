@@ -52,6 +52,15 @@ router.get('/numberOfResults', async (req, res) => {
   }
 })
 
+router.get("/numberOfResults/:id", async (req, res) => {
+  try {
+    const numberOfResults = await Results.find({ game: req.params.id }).countDocuments();
+    res.json(numberOfResults);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+})
+
 router.get('/:id', getGame, (req, res) => {
   res.json(res.game)
 })
