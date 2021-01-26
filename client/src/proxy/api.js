@@ -11,6 +11,9 @@ const fetchFromServerApi = async ({ path, parameters }) => {
 }
 
 export const getGames = async () => fetchFromServerApi({ path: "/api/games", });
+
+export const getGame = async (id) => fetchFromServerApi({ path: `/api/games/${id}`, });
+
 export const getResults = async (page, selectedGameId) =>
   fetchFromServerApi({
     path: "/api/results",
@@ -19,6 +22,9 @@ export const getResults = async (page, selectedGameId) =>
 export const getLastResultsOfEachGames = async () => fetchFromServerApi({ path: "/api/games/last", });
 export const getNumberOfResultsPerGame = async () =>
   fetchFromServerApi({ path: "/api/games/numberOfResults", });
+
+export const getNumberOfResults = async (id) =>
+  fetchFromServerApi({ path: `/api/games/numberOfResults/${id}` });
 
 export const getResult = async (id) =>
   fetchFromServerApi({
