@@ -9,12 +9,13 @@ import {
   Game,
   Details,
   TableContainer,
-  Link
+  Link,
 } from "./styled.js";
 import GameTile from "../../games/GameTile";
 import MetaData from "../../../common/MetaData/index.js";
 import { selectAuth } from "../../../common/authSlice.js";
 import { toNewResult } from "../../../common/routes.js";
+import Header from "../../../common/Header";
 
 const ResultPage = () => {
   const { id } = useParams();
@@ -29,10 +30,6 @@ const ResultPage = () => {
   }, [dispatch, id]);
 
   const details = [
-    {
-      key: "Data",
-      value: formatDateString(result?.date, "long"),
-    },
     {
       key: `Zwycięzc${winners?.indexOf(" ") !== -1 ? "y" : "a"}`,
       value: winners,
@@ -52,18 +49,20 @@ const ResultPage = () => {
     <>
       <Container>
         <TableContainer>
+          <Header>Wynik dodany {formatDateString(result?.date, "long")}</Header>
           <ResultTable isUserResultAuthor={isUserResultAuthor} result={result} />
         </TableContainer>
         <Details>
           <MetaData metaData={details} />
+          {isAuthenticated &&
+            <Link to={toNewResult({ game: result.game._id })}>Rewanż</Link>
+          }
         </Details>
         <Game>
           <GameTile game={result.game} withoutLastResult small />
         </Game>
+
       </Container>
-      {isAuthenticated &&
-        <Link to={toNewResult({ game: result.game._id })}>Rewanż</Link>
-      }
     </>
   );
 };

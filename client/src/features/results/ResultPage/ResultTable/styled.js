@@ -12,7 +12,7 @@ export const StyledTableCell = styled(TableCell)`
 `;
 
 export const StyledTable = styled(Table)`
-  @media(min-width: ${({ theme }) => theme.breakpoints.mobileMax}px ){
+  /* @media(min-width: ${({ theme }) => theme.breakpoints.mobileMax}px ){
     width: auto;
-  };
+  }; */
 `;
