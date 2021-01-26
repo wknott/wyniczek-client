@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { TableCell, TableRow } from "../../../../common/Table";
+import { TableCell, TableRow, TableContainer } from "../../../../common/Table";
+
+export const StyledTableContainer = styled(TableContainer)`
+  margin-top: 24px;
+`;
 
 export const Thumbnail = styled.img`
   width: 64px;

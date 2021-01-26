@@ -3,12 +3,12 @@ import {
   formatDateString,
   calculateWinners,
 } from "../../../../logic/utilities.js";
-import { Table, TableContainer, TableHeader, TableRow, TableCell } from "../../../../common/Table";
+import { Table, TableHeader, TableRow, TableCell } from "../../../../common/Table";
 import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../../../../common/queryParameters";
 import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
-import { Icon, TableCellThumbnail, Thumbnail, ResultRow, DesktopDate, MobileDate } from "./styled";
+import { Icon, TableCellThumbnail, Thumbnail, ResultRow, DesktopDate, MobileDate, StyledTableContainer } from "./styled";
 import firstPlayer from "../../../../images/firstPlayer.svg";
 import gameImage from "../../../../images/game.svg";
 import dateImage from "../../../../images/date.svg";
@@ -29,7 +29,7 @@ const ResultsTable = () => {
   }, [dispatch, selectedGameId, page]);
 
   return (
-    <TableContainer>
+    <StyledTableContainer>
       {
         loading ?
           <Loading message="Trwa ładowanie danych, proszę czekać…" /> :
@@ -70,7 +70,7 @@ const ResultsTable = () => {
             {numberOfResults > 10 && <Pager numberOfResults={numberOfResults} />}
           </>
       }
-    </TableContainer >
+    </StyledTableContainer >
   );
 }
 
