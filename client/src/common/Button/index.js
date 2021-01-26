@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export default styled.button`
-  padding: 10px;
+  padding: 16px 24px;
+  font-size: 14px;
   border: none;
   background-color: ${({ theme }) => theme.colors.windsor};
   color: ${({ theme }) => theme.colors.white};
