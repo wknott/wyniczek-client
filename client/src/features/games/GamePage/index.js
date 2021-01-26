@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import LinkToWebsite from "../../../common/LinkToWebsite";
 import { useParams } from "react-router-dom";
-import { fetchGame, fetchGames, getGameById, selectGame, selectGames } from "../gamesSlice";
+import { fetchGame, selectGame } from "../gamesSlice";
 import { theme } from "../../../theme";
 import meeple from "../../../images/meeple.svg";
 import { Image, DefaultImage, DefaultImageContainer, Tags, Tag, Title, GameTile, Subtitle } from "./styled";
