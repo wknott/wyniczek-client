@@ -1,5 +1,5 @@
 import { takeLatest, call, put, debounce } from "redux-saga/effects";
-import { getNewGameDetails, getGames, getNewGamesFromQuery, getLastResultsOfEachGames, getNumberOfResultsPerGame } from "../../proxy/api";
+import { getNewGameDetails, getGames, getNewGamesFromQuery, getLastResultsOfEachGames, getNumberOfResultsPerGame, getGame, getLastResultOfGame, getNumberOfResults } from "../../proxy/api";
 import {
   fetchGames,
   fetchNewGamesByQuery,
@@ -7,7 +7,9 @@ import {
   fetchNewGamesByQuerySuccess,
   fetchGamesSuccess,
   fetchNewGameDetails,
-  fetchNewGameDetailsSuccess
+  fetchNewGameDetailsSuccess,
+  fetchGame,
+  fetchGameSuccess
 } from "./gamesSlice";
 
 function* fetchGamesHandler({ payload }) {
@@ -52,8 +54,27 @@ function* fetchNewGamesByQueryHandler({ payload: query }) {
   }
 }
 
+function* fetchGameHandler({ payload: id }) {
+  try {
+    console.log(id);
+    const game = yield call(getGame, id);
+    const lastResult = yield call(getLastResultOfGame, id);
+    const numberOfResults = yield call(getNumberOfResults, id);
+    const gameWithResultsStats = {
+      ...game,
+      lastResultDate: lastResult.results.date,
+      numberOfResults,
+    };
+    yield put(fetchGameSuccess(gameWithResultsStats));
+  } catch (error) {
+    yield call(alert, "Nie udało się wczytać gry, spróbuj odświeżyć stronę.");
+    yield put(fetchError());
+  }
+}
+
 export function* watchFetchGames() {
   yield takeLatest(fetchGames.type, fetchGamesHandler);
   yield takeLatest(fetchNewGameDetails.type, fetchNewGameDetailsHandler);
   yield debounce(500, fetchNewGamesByQuery.type, fetchNewGamesByQueryHandler);
+  yield takeLatest(fetchGame.type, fetchGameHandler);
 };
