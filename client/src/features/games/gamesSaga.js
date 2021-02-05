@@ -56,7 +56,6 @@ function* fetchNewGamesByQueryHandler({ payload: query }) {
 
 function* fetchGameHandler({ payload: id }) {
   try {
-    console.log(id);
     const game = yield call(getGame, id);
     const lastResult = yield call(getLastResultOfGame, id);
     const numberOfResults = yield call(getNumberOfResults, id);
