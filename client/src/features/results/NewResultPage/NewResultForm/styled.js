@@ -13,15 +13,18 @@ export const Form = styled.form`
 `;
 
 export const StyledButton = styled(Button)`
-  width: 100%;
   background-color: ${({ theme, color }) => theme.colors[color]};
-
+  
   &:hover {
     filter: brightness(90%);
   }
 
   &:active {
     filter: brightness(80%);
+  }
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    padding: unset;
   }
 `;
 
@@ -55,6 +58,6 @@ export const Result = styled(Paragraph)`
 
 export const ButtonsContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
   grid-gap: 4px;
 `;
