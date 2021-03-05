@@ -3,24 +3,24 @@ let User = require('./user');
 let Game = require('./game');
 const Schema = mongoose.Schema;
 const resultSchema = new Schema({
-    game: { 
-        type: Schema.Types.ObjectId, 
-        required: true, 
-        ref: 'Game'
+    game: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'Game',
     },
-    scores: { 
+    scores: {
         type: [{
-        user:{ type:Schema.Types.ObjectId, ref: 'User'},
-        points:{ type: [{ type: Number }]}
+            user: { type: Schema.Types.ObjectId, ref: 'User' },
+            points: { type: [{ type: Number }] },
         }],
-        required: true
     },
     author: {
-      type: Schema.Types.ObjectId, 
-      required: true,
-      ref: 'User'
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
     },
-    date: { type: Date }
+    date: { type: Date },
+    playingTime: { type: Number },
 });
 const Result = mongoose.model('Result', resultSchema);
 module.exports = Result;
