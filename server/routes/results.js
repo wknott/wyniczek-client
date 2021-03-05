@@ -46,7 +46,8 @@ router.post('/', async (req, res) => {
     game: req.body.game,
     scores: req.body.scores,
     author: req.body.author,
-    date: new Date()
+    date: new Date(),
+    playingTime: req.body.playingTime,
   })
   try {
     const newResults = await results.save()
@@ -68,6 +69,9 @@ router.patch('/:id', getResults, async (req, res) => {
   }
   if (req.body.date != null) {
     res.results.date = req.body.date
+  }
+  if (req.body.playingTime != null) {
+    res.results.playingTime = req.body.playingTime
   }
   try {
     const updatedResults = await res.results.save()
