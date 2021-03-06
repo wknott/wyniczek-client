@@ -11,14 +11,26 @@ import Input from "../../../../common/Input";
 import Select from "../../../../common/Select";
 import { toResults } from "../../../../common/routes";
 import { compareObjects } from "../../../../logic/utilities";
-import { FieldName, Form, StyledButton, SubmitButton, Result, ButtonsContainer } from "./styled";
+import {
+  FieldName,
+  Form,
+  StyledButton,
+  SubmitButton,
+  Result,
+  ButtonsContainer,
+  GridContainer,
+  Checkbox,
+} from "./styled";
 import { addResult } from "../../../../proxy/api";
+import Label from "../../../../common/Label";
 
 function NewResultForm() {
   const [lastUsers, setLastUsers] = useState([]);
   const [numberOfPlayers, setNumberOfPlayers] = useState(2);
   const [scores, setScores] = useState([]);
   const [lastResultLoading, setLastResultLoading] = useState(false);
+  const [playingTime, setPlayingTime] = useState("");
+  const [hideResults, setHideResults] = useState(true);
   const users = useSelector(selectUsers);
   const sortedUsers = [...users].sort(compareObjects("numberOfResults", "desc"));
   const loading = useSelector(selectLoading);
@@ -120,8 +132,9 @@ function NewResultForm() {
     e.preventDefault();
     const newResult = {
       game: selectedGame._id,
-      scores: scores,
+      scores: hideResults ? scores.map(score => ({ user: score.user })) : scores,
       author: JSON.parse(localStorage.user).id,
+      playingTime,
     };
 
     try {
@@ -142,61 +155,62 @@ function NewResultForm() {
 
   return (
     !loading && !lastResultLoading && selectedGame ?
-      <Form numberOfScores={scores.length} onSubmit={(e) => onSubmit(e)}>
-        <ButtonsContainer>
-          <StyledButton
-            type="button"
-            color="green"
-            onClick={() => addPlayer()}
-            disabled={numberOfPlayers === selectedGame.maxPlayers}
-          >
-            <img src={addButton} width="auto" height="15" alt="" />
-          </StyledButton>
-          <StyledButton
-            type="button"
-            color="red"
-            onClick={() => deletePlayer()}
-            disabled={numberOfPlayers === selectedGame.minPlayers}
-          >
-            <img src={deleteButton} width="auto" height="15" alt="" />
-          </StyledButton>
-        </ButtonsContainer>
-        {scores.map((score, index) => (
-          <Select
-            key={index}
-            value={users.find((user) => user._id === score.user)}
-            onChange={(UserId) => onUserSelect(UserId, score)}
-            options={sortedUsers}
-            firstOption={`${index + 1}. Gracz`}
-          />
-        ))}
-        {selectedGame.pointFields.map((field, pointFieldIndex) => (
-          <React.Fragment key={pointFieldIndex}>
-            <FieldName>{field}</FieldName>
-            {scores.map((score, index) => (
-              <Input
-                type="number"
-                key={index}
-                value={score.points[pointFieldIndex] || ""}
-                onChange={(e) => onChangePoints(e, pointFieldIndex, score)}
-              />
-            ))}
-          </React.Fragment>
-        ))}
+      <Form onSubmit={(e) => onSubmit(e)}>
+        <GridContainer columns={scores.length + 1}>
+          <ButtonsContainer>
+            <StyledButton
+              type="button"
+              color="green"
+              onClick={() => addPlayer()}
+              disabled={numberOfPlayers === selectedGame.maxPlayers}
+            >
+              <img src={addButton} width="auto" height="15" alt="" />
+            </StyledButton>
+            <StyledButton
+              type="button"
+              color="red"
+              onClick={() => deletePlayer()}
+              disabled={numberOfPlayers === selectedGame.minPlayers}
+            >
+              <img src={deleteButton} width="auto" height="15" alt="" />
+            </StyledButton>
+          </ButtonsContainer>
+          {scores.map((score, index) => (
+            <Select
+              key={index}
+              value={users.find((user) => user._id === score.user)}
+              onChange={(UserId) => onUserSelect(UserId, score)}
+              options={sortedUsers}
+              firstOption={`${index + 1}. Gracz`}
+            />
+          ))}
+          {selectedGame.pointFields.map((field, pointFieldIndex) => (
+            <React.Fragment key={pointFieldIndex}>
+              <FieldName>{field}</FieldName>
+              {scores.map((score, index) => (
+                <Input
+                  type="number"
+                  key={index}
+                  value={score.points[pointFieldIndex] || ""}
+                  onChange={(e) => onChangePoints(e, pointFieldIndex, score)}
+                />
+              ))}
+            </React.Fragment>
+          ))}
 
-        {selectedGame.pointFields.length === 0 ? (
-          <>
-            <FieldName>Wynik</FieldName>
-            {scores.map((score, index) => (
-              <Input
-                type="number"
-                value={score.points[0] || ""}
-                key={index}
-                onChange={(e) => onChangeResult(e, score)}
-              />
-            ))}
-          </>
-        ) : (
+          {selectedGame.pointFields.length === 0 ? (
+            <>
+              <FieldName>Wynik</FieldName>
+              {scores.map((score, index) => (
+                <Input
+                  type="number"
+                  value={score.points[0] || ""}
+                  key={index}
+                  onChange={(e) => onChangeResult(e, score)}
+                />
+              ))}
+            </>
+          ) : (
             <>
               <FieldName>Wynik</FieldName>
               {scores.map((score, index) => (
@@ -204,6 +218,22 @@ function NewResultForm() {
               ))}
             </>
           )}
+        </GridContainer>
+        <GridContainer columns={2}>
+          <FieldName>Ukryj wyniki</FieldName>
+          <Checkbox
+            name="hideResults"
+            type="checkbox"
+            checked={hideResults}
+            onChange={({ target }) => setHideResults(target.checked)}
+          />
+          <FieldName>Czas rozgrywki (w&nbsp;minutach)</FieldName>
+          <Input
+            type="number"
+            value={playingTime}
+            onChange={({ target }) => setPlayingTime(+target.value)}
+          />
+        </GridContainer>
         <SubmitButton disabled={!isValid()} variant="primary" type="submit">
           Dodaj wynik
         </SubmitButton>
