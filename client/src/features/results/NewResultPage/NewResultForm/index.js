@@ -118,13 +118,11 @@ function NewResultForm() {
 
   function isValid() {
     const users = scores.map((score) => score.user);
+    const isUsersNotEmpty = () => users.length > 0;
+    const areUsersDifferent = () => JSON.stringify(users) === JSON.stringify([...new Set(users)]);
+    const didEveryScoreHaveUser = () => scores.every((score) => score.user);
     return (
-      users.length > 0 &&
-      JSON.stringify(users) === JSON.stringify([...new Set(users)]) &&
-      scores.every((score) => score.user) &&
-      !scores.every(
-        (score) => Object.values(score.points).reduce((x, y) => x + y, 0) === 0
-      )
+      isUsersNotEmpty() && areUsersDifferent() && didEveryScoreHaveUser() && playingTime
     );
   }
 
