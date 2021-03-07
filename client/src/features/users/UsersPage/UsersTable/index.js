@@ -30,7 +30,6 @@ const UsersTable = ({ gameId }) => {
               <TableHeader>#</TableHeader>
               <TableHeader>Nazwa</TableHeader>
               <TableHeader>Liczba wyników</TableHeader>
-              <TableHeader>Liczba zwycięstw</TableHeader>
             </TableRow>
           </thead>
           <tbody>
@@ -40,12 +39,11 @@ const UsersTable = ({ gameId }) => {
                   <TableHeader className={"tableHeader"}>{index + 1}</TableHeader>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.numberOfResults}</TableCell>
-                  <TableCell>{user.numberOfWins}</TableCell>
                 </TableRow>
               ))
             ) : (
-                <></>
-              )}
+              <></>
+            )}
           </tbody>
         </Table>
       </TableContainer>
