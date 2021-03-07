@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   formatDateString,
   calculateWinners,
@@ -10,11 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
 import { Icon, TableCellThumbnail, Thumbnail, ResultRow, DesktopDate, MobileDate, StyledTableContainer } from "./styled";
 import firstPlayer from "../../../../images/firstPlayer.svg";
-import gameImage from "../../../../images/game.svg";
 import dateImage from "../../../../images/date.svg";
-import winner from "../../../../images/winner.svg";
+import hourglass from "../../../../images/hourglass.svg";
+import numberOfPlayersImage from "../../../../images/numberOfPlayers.svg";
 import { toResult } from "../../../../common/routes";
-import { useHistory } from "react-router-dom";
 import Loading from "../../../../common/Loading";
 
 const ResultsTable = () => {
@@ -38,10 +38,11 @@ const ResultsTable = () => {
               <thead>
                 <TableRow>
                   <TableHeader></TableHeader>
-                  <TableHeader><Icon src={gameImage} /></TableHeader>
+                  <TableHeader>Nazwa gry</TableHeader>
                   <TableHeader><Icon src={firstPlayer} /></TableHeader>
+                  <TableHeader><Icon src={numberOfPlayersImage} /></TableHeader>
                   <TableHeader><Icon src={dateImage} /></TableHeader>
-                  <TableHeader><Icon src={winner} /></TableHeader>
+                  <TableHeader><Icon src={hourglass} /></TableHeader>
                 </TableRow>
               </thead>
               <tbody>
@@ -57,11 +58,14 @@ const ResultsTable = () => {
                       {result.scores.find((score, index) => index === 0).user.name}
                     </TableCell>
                     <TableCell>
+                      {result.scores.length}
+                    </TableCell>
+                    <TableCell>
                       <DesktopDate>{formatDateString(result.date)}</DesktopDate>
                       <MobileDate>{formatDateString(result.date, "short")}</MobileDate>
                     </TableCell>
                     <TableCell>
-                      {calculateWinners(result).join(" ")}
+                      {result.playingTime ? `${result.playingTime}min.` : "-"}
                     </TableCell>
                   </ResultRow>
                 ))}
