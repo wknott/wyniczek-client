@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  formatDateString,
-  calculateWinners,
-} from "../../../../logic/utilities.js";
+import ReactTooltip from 'react-tooltip';
+import { formatDateString } from "../../../../logic/utilities.js";
 import { Table, TableHeader, TableRow, TableCell } from "../../../../common/Table";
 import { GameQueryParamName, PageQueryParamName, useQueryParameter } from "../../../../common/queryParameters";
 import Pager from "../../../../common/Pager";
@@ -39,10 +37,22 @@ const ResultsTable = () => {
                 <TableRow>
                   <TableHeader></TableHeader>
                   <TableHeader>Nazwa gry</TableHeader>
-                  <TableHeader><Icon src={firstPlayer} /></TableHeader>
-                  <TableHeader><Icon src={numberOfPlayersImage} /></TableHeader>
-                  <TableHeader><Icon src={dateImage} /></TableHeader>
-                  <TableHeader><Icon src={hourglass} /></TableHeader>
+                  <TableHeader>
+                    <Icon src={firstPlayer} data-tip="Pierwszy gracz" />
+                    <ReactTooltip place="top" type="dark" effect="solid" />
+                  </TableHeader>
+                  <TableHeader>
+                    <Icon src={numberOfPlayersImage} data-tip="Liczba graczy" />
+                    <ReactTooltip place="top" type="dark" effect="solid" />
+                  </TableHeader>
+                  <TableHeader>
+                    <Icon src={dateImage} data-tip="Data wyniku" />
+                    <ReactTooltip place="top" type="dark" effect="solid" />
+                  </TableHeader>
+                  <TableHeader>
+                    <Icon src={hourglass} data-tip="Czas rozgrywki" />
+                    <ReactTooltip place="top" type="dark" effect="solid" />
+                  </TableHeader>
                 </TableRow>
               </thead>
               <tbody>
