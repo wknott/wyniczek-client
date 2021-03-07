@@ -71,7 +71,7 @@ const ResultsTable = () => {
                       <MobileDate>{formatDateString(result.date, "short")}</MobileDate>
                     </TableCell>
                     <TableCell>
-                      {result.playingTime ? `${result.playingTime}min.` : "-"}
+                      {result.playingTime ? `${result.playingTime} min.` : "-"}
                     </TableCell>
                   </ResultRow>
                 ))}

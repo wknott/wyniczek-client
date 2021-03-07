@@ -4,12 +4,12 @@ import { Description, DescriptionList, Term } from "./styled";
 const MetaData = ({ metaData = [] }) => (
   <div>
     {metaData.map(({ key, value }) => (
-      <DescriptionList key={key}>
+      value && <DescriptionList DescriptionList key={key} >
         {key && <Term>{key}:</Term>}
         <Description>{value}</Description>
       </DescriptionList>
     ))}
-  </div>
+  </div >
 )
 
 export default MetaData

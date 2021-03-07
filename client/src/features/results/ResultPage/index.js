@@ -10,6 +10,7 @@ import {
   Details,
   TableContainer,
   Link,
+  StyledHeader,
 } from "./styled.js";
 import GameTile from "../../games/GameTile";
 import MetaData from "../../../common/MetaData/index.js";
@@ -38,20 +39,25 @@ const ResultPage = () => {
       key: "Gracz rozpoczynający",
       value: firstPlayer,
     },
+    {
+      key: "Czas rozgrywki",
+      value: result?.playingTime ? `${result.playingTime} min.` : undefined,
+    },
   ];
 
-  const isUserResultAuthor = () => {
-    return isAuthenticated && result.author === JSON.parse(localStorage.user).id;
-  }
+  const isUserResultAuthor = () => isAuthenticated && result.author === JSON.parse(localStorage.user).id;
 
+  const isResultHidden = () => result.scores.every(score => score.points.length > 0);
+  console.log(result?.scores.every(score => score.points.length > 0));
   return (
     result &&
     <>
       <Container>
-        <TableContainer>
+        {isResultHidden() && <TableContainer>
           <Header>Wynik dodany {formatDateString(result?.date, "long")}</Header>
           <ResultTable isUserResultAuthor={isUserResultAuthor} result={result} />
-        </TableContainer>
+        </TableContainer>}
+        {!isResultHidden() && <StyledHeader>Wynik dodany {formatDateString(result?.date, "long")}</StyledHeader>}
         <Details>
           <MetaData metaData={details} />
           {isAuthenticated &&

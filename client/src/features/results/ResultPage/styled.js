@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import StyledLink from "../../../common/StyledLink";
+import Header from "../../../common/Header";
 
 export const Container = styled.div`
   width: 100%;
@@ -40,4 +41,8 @@ export const Details = styled.div`
 export const Link = styled(StyledLink)`
   justify-content: center;
   padding: 16px;
+`;
+
+export const StyledHeader = styled(Header)`
+  grid-column: span 2;
 `;
