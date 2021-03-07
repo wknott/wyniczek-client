@@ -22,7 +22,6 @@ import {
   Checkbox,
 } from "./styled";
 import { addResult } from "../../../../proxy/api";
-import Label from "../../../../common/Label";
 
 function NewResultForm() {
   const [lastUsers, setLastUsers] = useState([]);

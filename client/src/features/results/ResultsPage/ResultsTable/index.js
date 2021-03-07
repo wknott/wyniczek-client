@@ -8,10 +8,10 @@ import Pager from "../../../../common/Pager";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResults, selectResultsState } from "../../resultsSlice";
 import { Icon, TableCellThumbnail, Thumbnail, ResultRow, DesktopDate, MobileDate, StyledTableContainer } from "./styled";
-import firstPlayer from "../../../../images/firstPlayer.svg";
-import dateImage from "../../../../images/date.svg";
-import hourglass from "../../../../images/hourglass.svg";
+import firstPlayerImage from "../../../../images/firstPlayer.svg";
 import numberOfPlayersImage from "../../../../images/numberOfPlayers.svg";
+import dateImage from "../../../../images/date.svg";
+import hourglassImage from "../../../../images/hourglass.svg";
 import { toResult } from "../../../../common/routes";
 import Loading from "../../../../common/Loading";
 
@@ -21,6 +21,12 @@ const ResultsTable = () => {
   const selectedGameId = useQueryParameter(GameQueryParamName);
   const dispatch = useDispatch();
   const history = useHistory();
+  const tableHeadersIcons = [
+    { icon: firstPlayerImage, description: "Pierwszy gracz" },
+    { icon: numberOfPlayersImage, description: "Liczba graczy" },
+    { icon: dateImage, description: "Data wyniku" },
+    { icon: hourglassImage, description: "Czas rozgrywki" },
+  ];
 
   useEffect(() => {
     dispatch(fetchResults({ page, selectedGameId }));
@@ -37,22 +43,12 @@ const ResultsTable = () => {
                 <TableRow>
                   <TableHeader></TableHeader>
                   <TableHeader>Nazwa gry</TableHeader>
-                  <TableHeader>
-                    <Icon src={firstPlayer} data-tip="Pierwszy gracz" />
-                    <ReactTooltip place="top" type="dark" effect="solid" />
-                  </TableHeader>
-                  <TableHeader>
-                    <Icon src={numberOfPlayersImage} data-tip="Liczba graczy" />
-                    <ReactTooltip place="top" type="dark" effect="solid" />
-                  </TableHeader>
-                  <TableHeader>
-                    <Icon src={dateImage} data-tip="Data wyniku" />
-                    <ReactTooltip place="top" type="dark" effect="solid" />
-                  </TableHeader>
-                  <TableHeader>
-                    <Icon src={hourglass} data-tip="Czas rozgrywki" />
-                    <ReactTooltip place="top" type="dark" effect="solid" />
-                  </TableHeader>
+                  {tableHeadersIcons.map(tableHeader => (
+                    <TableHeader>
+                      <Icon src={tableHeader.icon} data-tip={tableHeader.description} />
+                      <ReactTooltip place="top" type="info" effect="solid" />
+                    </TableHeader>
+                  ))}
                 </TableRow>
               </thead>
               <tbody>
