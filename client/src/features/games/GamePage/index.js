@@ -3,17 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
 import LinkToWebsite from "../../../common/LinkToWebsite";
 import { useParams } from "react-router-dom";
-import { fetchGame, selectGame } from "../gamesSlice";
+import { fetchGame, selectGame, selectLoading } from "../gamesSlice";
 import { theme } from "../../../theme";
 import meeple from "../../../images/meeple.svg";
 import { Image, DefaultImage, DefaultImageContainer, Tags, Tag, Title, GameTile, Subtitle } from "./styled";
 import LastResult from "../LastResult";
 import MetaData from "../../../common/MetaData";
 import UsersTable from "../../users/UsersPage/UsersTable";
+import Loading from "../../../common/Loading";
 
 const GamePage = () => {
   const { id } = useParams();
   const game = useSelector(selectGame);
+  const loading = useSelector(selectLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,7 +52,7 @@ const GamePage = () => {
   ];
 
   return (
-    game ?
+    !loading && game ?
       <>
         <GameTile>
           {
@@ -77,7 +79,7 @@ const GamePage = () => {
         <Subtitle>Statystyki wyników <q>{game.name}</q></Subtitle>
         <UsersTable gameId={game._id} />
       </> :
-      <ReactLoading color={theme.colors.windsor} />
+      <Loading />
   )
 }
 
