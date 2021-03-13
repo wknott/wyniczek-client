@@ -144,3 +144,17 @@ export const getNewGameDetails = async (id) => {
     return error;
   }
 }
+
+export const getGameDetailsFromBGG = async (id) => {
+  try {
+    const response = await fetch(`${BGG_API_URL}/thing?id=${id}&stats=1`);
+    const data = await response.text();
+    const parsedData = await xml2js(data, { compact: true, spaces: 4 });
+    const bggRank = parsedData.items.item.statistics.ratings.ranks.rank[0]._attributes.value;
+    const weight = parsedData.items.item.statistics.ratings.averageweight._attributes.value;
+    const gameStats = { bggRank, weight };
+    return gameStats;
+  } catch (error) {
+    return error;
+  }
+}
