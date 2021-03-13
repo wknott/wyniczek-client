@@ -1,5 +1,5 @@
 import { takeLatest, call, put, debounce } from "redux-saga/effects";
-import { getNewGameDetails, getGames, getNewGamesFromQuery, getLastResultsOfEachGames, getNumberOfResultsPerGame, getGame, getLastResultOfGame, getNumberOfResults } from "../../proxy/api";
+import { getNewGameDetails, getGames, getNewGamesFromQuery, getLastResultsOfEachGames, getNumberOfResultsPerGame, getGame, getLastResultOfGame, getNumberOfResults, getGameDetailsFromBGG } from "../../proxy/api";
 import {
   fetchGames,
   fetchNewGamesByQuery,
@@ -59,10 +59,12 @@ function* fetchGameHandler({ payload: id }) {
     const game = yield call(getGame, id);
     const lastResult = yield call(getLastResultOfGame, id);
     const numberOfResults = yield call(getNumberOfResults, id);
+    const gameStats = yield call(getGameDetailsFromBGG, game.bggId);
     const gameWithResultsStats = {
       ...game,
       lastResultDate: lastResult.results.date,
       numberOfResults,
+      ...gameStats,
     };
     yield put(fetchGameSuccess(gameWithResultsStats));
   } catch (error) {

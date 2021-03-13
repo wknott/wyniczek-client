@@ -39,6 +39,14 @@ const GamePage = () => {
       key: "Liczba dodanych wyników",
       value: game?.numberOfResults,
     },
+    {
+      key: "Ranking BGG",
+      value: game?.bggRank,
+    },
+    {
+      key: "Poziom trudności",
+      value: parseFloat(game?.weight).toFixed(2),
+    }
   ];
 
   return (
