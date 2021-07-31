@@ -120,8 +120,9 @@ function NewResultForm() {
     const isUsersNotEmpty = () => users.length > 0;
     const areUsersDifferent = () => JSON.stringify(users) === JSON.stringify([...new Set(users)]);
     const didEveryScoreHaveUser = () => scores.every((score) => score.user);
+
     return (
-      isUsersNotEmpty() && areUsersDifferent() && didEveryScoreHaveUser() && playingTime
+      isUsersNotEmpty() && areUsersDifferent() && didEveryScoreHaveUser() && +playingTime > 0
     );
   }
 
@@ -131,7 +132,7 @@ function NewResultForm() {
       game: selectedGame._id,
       scores: hideResults ? scores.map(score => ({ user: score.user })) : scores,
       author: JSON.parse(localStorage.user).id,
-      playingTime,
+      playingTime: +playingTime,
     };
 
     try {
@@ -228,7 +229,7 @@ function NewResultForm() {
           <Input
             type="number"
             value={playingTime}
-            onChange={({ target }) => setPlayingTime(+target.value)}
+            onChange={({ target }) => setPlayingTime(target.value)}
           />
         </GridContainer>
         <SubmitButton disabled={!isValid()} variant="primary" type="submit">
