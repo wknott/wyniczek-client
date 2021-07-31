@@ -31,6 +31,8 @@ function GamesPage() {
     { id: "name", label: "Nazwa", },
     { id: "lastResultDate", label: "Ostatni wynik", },
     { id: "numberOfResults", label: "Liczba wyników", },
+    { id: "bggRank", label: "Ranking BGG", },
+    { id: "weight", label: "Poziom trudności", },
   ];
 
   useEffect(() => {

@@ -28,6 +28,18 @@ const GameTile = ({ game, withoutLastResult, small }) => {
               <strong>{game.numberOfResults}</strong>
             </StyledParagraph>
           }
+          {game.bggRank &&
+            <StyledParagraph>
+              Ranking BGG:{" "}
+              <strong>{game.bggRank}</strong>
+            </StyledParagraph>
+          }
+          {game.bggRank &&
+            <StyledParagraph>
+              Poziom trudności:{" "}
+              <strong>{parseFloat(game.weight).toFixed(2)}</strong>
+            </StyledParagraph>
+          }
         </GameDetails>
       </StyledTile> :
       <></>

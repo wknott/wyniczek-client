@@ -1,4 +1,4 @@
-import { takeLatest, call, put, debounce } from "redux-saga/effects";
+import { takeLatest, call, put, debounce, all } from "redux-saga/effects";
 import { getNewGameDetails, getGames, getNewGamesFromQuery, getLastResultsOfEachGames, getNumberOfResultsPerGame, getGame, getLastResultOfGame, getNumberOfResults, getGameDetailsFromBGG } from "../../proxy/api";
 import {
   fetchGames,
@@ -18,12 +18,18 @@ function* fetchGamesHandler({ payload }) {
     if (!payload?.withoutStats) {
       const lastResults = yield call(getLastResultsOfEachGames);
       const numberOfResults = yield call(getNumberOfResultsPerGame);
-      const updatedGames = yield games.map(game => (
-        {
-          ...game,
-          lastResultDate: lastResults.find(({ _id }) => _id === game._id)?.lastGameDate,
-          numberOfResults: numberOfResults.find(({ _id }) => _id === game._id)?.numberOfResults,
-        }))
+      const gamesStats = yield all(games.map(game => call(getGameDetailsFromBGG, game.bggId) || { bggRank: 99999, weight: 0 }));
+
+      const updatedGames = games.map((game, index) => {
+
+        return (
+          {
+            ...game,
+            lastResultDate: lastResults.find(({ _id }) => _id === game._id)?.lastGameDate,
+            numberOfResults: numberOfResults.find(({ _id }) => _id === game._id)?.numberOfResults,
+            ...gamesStats[index]
+          })
+      })
       yield put(fetchGamesSuccess(updatedGames));
     } else {
       yield put(fetchGamesSuccess(games));
