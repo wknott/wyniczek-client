@@ -14,8 +14,12 @@ export const GameTilesContainer = styled.div`
 
 export const SortButtons = styled.div`
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(5,1fr);
   grid-gap: 10px;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const SortButton = styled(Button)`
@@ -26,11 +30,11 @@ export const SortButton = styled(Button)`
 
   ${({ active }) => !active && css`
     outline: none;
-    transform: scale(1.03, 1.1);  
     background-color: ${({ theme }) => theme.colors.denim};
 `};
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
     font-size: 13px;
+    padding: 8px;
   }
 `;
