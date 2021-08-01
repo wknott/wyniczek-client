@@ -14,9 +14,10 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: "Roboto", sans-serif;
-    background-color: ${({ theme }) => theme.colors.gallery};
+    background-color: ${({ theme }) => theme.colors.body};
     overflow-y: scroll;
     padding-bottom: 100px;
+    color: ${({ theme }) => theme.colors.text};
   }
 
   a {
