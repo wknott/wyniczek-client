@@ -16,13 +16,14 @@ import { theme } from "../../../theme";
 
 const CssTextField = withStyles({
   root: {
-    "& label.Mui-focused": {
-      color: theme.colors.windsor,
+    '& input': {
+      color: theme.colors.text,
     },
-    '& .MuiOutlinedInput-root': {
-      '&.Mui-focused fieldset': {
-        borderColor: theme.colors.windsor,
-      },
+    '& label.Mui-focused': {
+      color: theme.colors.primary,
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: theme.colors.primary,
     },
   },
 })(TextField);
@@ -63,7 +64,10 @@ const SelectGame = ({ firstOption }) => {
           <CssTextField
             {...params}
             label={firstOption}
-            variant="outlined"
+            InputLabelProps={{
+              style: {
+                color: theme.colors.primary,
+              } }}
           />
         }
       />
