@@ -48,7 +48,7 @@ const ResultPage = () => {
   const isUserResultAuthor = () => isAuthenticated && result.author === JSON.parse(localStorage.user).id;
 
   const isResultHidden = () => result.scores.every(score => score.points.length > 0);
-  console.log(result?.scores.every(score => score.points.length > 0));
+
   return (
     result &&
     <>

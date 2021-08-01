@@ -86,6 +86,7 @@ export const theme = {
     imageBackground: colorNames.silver,
     red: colorNames.red,
     secondary: colorNames.amber,
+    sectionBackground: colorNames.lighterMineShaft,
   },
   breakpoints,
 };
