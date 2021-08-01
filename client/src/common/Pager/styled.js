@@ -12,19 +12,32 @@ export const Paragraph = styled.p`
   font-size: 12px;
 `;
 
-export const PagerButton = styled.img`
-  width: 40px;
-  margin: 0px 10px; 
-  filter: invert(12%) sepia(71%) saturate(4450%) hue-rotate(276deg) brightness(81%) contrast(107%);
+export const PagerButton = styled.button`
+  color: ${({theme}) => theme.colors.primary};
+  background: none;
+  border: none;
+  cursor: pointer;
   
-  &:hover{
-    filter: invert(12%) sepia(71%) saturate(4450%) hue-rotate(276deg) brightness(100%) contrast(107%);
+  & svg {
+    width: 32px;
+    height: 32px;
   }
+
+  &:hover{
+    filter: brightness(1.3);
+  }
+
+  &:active{
+    filter: brightness(1.5);
+  }
+
   ${({ disabled }) => disabled && css`
-    filter: invert(83%) sepia(20%) saturate(14%) hue-rotate(347deg) brightness(86%) contrast(96%);
-    
-    &:hover{
-      filter: invert(83%) sepia(20%) saturate(14%) hue-rotate(347deg) brightness(86%) contrast(96%);
+    color: ${({theme}) => theme.colors.disabled};
+
+    &:hover,
+    &:active {
+      filter: unset;
+      cursor: unset;
     }
   `} 
 `;
