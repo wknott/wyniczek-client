@@ -16,6 +16,18 @@ import { theme } from "../../../theme";
 
 const CssTextField = withStyles({
   root: {
+    '& .MuiFilledInput-root':{
+      backgroundColor: theme.colors.sectionBackground,
+    },
+    '& .MuiSvgIcon-root': {
+      fill: theme.colors.text,
+    },
+    '& .MuiFilledInput-underline:before': {
+      borderBottomColor: theme.colors.text,
+    },
+    '& .MuiInputLabel-filled': {
+      color: theme.colors.text,
+    },
     '& input': {
       color: theme.colors.text,
     },
@@ -64,10 +76,7 @@ const SelectGame = ({ firstOption }) => {
           <CssTextField
             {...params}
             label={firstOption}
-            InputLabelProps={{
-              style: {
-                color: theme.colors.primary,
-              } }}
+            variant="filled"
           />
         }
       />
