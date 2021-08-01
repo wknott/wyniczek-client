@@ -9,7 +9,7 @@ const Loading = ({ message, size }) => (
     <div>
       <ReactLoading
         type="spinningBubbles"
-        color={theme.colors.windsor}
+        color={theme.colors.primary}
         height={`${size || 128}px`}
         width={`${size || 128}px`}
       />

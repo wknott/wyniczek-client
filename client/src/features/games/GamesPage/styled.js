@@ -30,7 +30,7 @@ export const SortButton = styled(Button)`
 
   ${({ active }) => !active && css`
     outline: none;
-    background-color: ${({ theme }) => theme.colors.denim};
+    background-color: ${({theme}) => theme.colors.secondary};
 `};
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){

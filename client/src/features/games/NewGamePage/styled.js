@@ -36,7 +36,7 @@ export const ErrorMessage = styled.p`
   margin-top: 5px;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.red};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.brightText};
 `;
 
 export const GameHeader = styled(Header)`

@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Label = styled.label`
   padding: 10px;
-  background-color: ${({ theme }) => theme.colors.windsor}; 
-  color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.primary}; 
+  color: ${({ theme }) => theme.colors.text};
   border-radius: 16px;
   display: flex;
   align-items: center; 
@@ -19,12 +19,12 @@ export const Icon = styled.img`
 
 export const Input = styled.input`
   padding: 12px;
-  background-color: ${({ theme }) => theme.colors.windsor}; 
-  color: ${({ theme }) => theme.colors.white}; 
+  background-color: ${({ theme }) => theme.colors.primary}; 
+  color: ${({ theme }) => theme.colors.brightText}; 
   border: none;
   outline: none;
   border-radius: 16px;
   &::placeholder {
-    color: ${({ theme }) => theme.colors.gallery}; 
+    color: ${({ theme }) => theme.colors.brightText}; 
   }
 `;

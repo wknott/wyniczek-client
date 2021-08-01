@@ -23,7 +23,7 @@ export const DefaultImage = styled.img`
 export const DefaultImageContainer = styled.div`
   width: 300px;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.silver};
+  background-color: ${({ theme }) => theme.colors.imageBackground};
   border-radius: 5px;
   object-fit: contain;
   display: flex;
@@ -56,7 +56,7 @@ export const Tags = styled.ul`
 `;
 
 export const Tag = styled.li`
-  background-color: ${({ theme }) => theme.colors.pink};
+  background-color: ${({ theme }) => theme.colors.secondaryary};
   font-size: 14px;
   line-height: 140%;
   border-radius: 5px;

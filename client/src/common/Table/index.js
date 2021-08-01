@@ -12,7 +12,8 @@ export const Table = styled.table`
 
 export const TableCell = styled.td`
   padding: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  border: 1px solid ${({ theme }) => theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.body};
   text-align: center;
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
@@ -23,9 +24,9 @@ export const TableCell = styled.td`
 
 export const TableHeader = styled.th`
   padding: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.black};
-  background-color: ${({ theme }) => theme.colors.windsor};
-  color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.brightText};
   text-align: center;
   
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px){
@@ -36,9 +37,9 @@ export const TableHeader = styled.th`
 `;
 
 export const TableRow = styled.tr`
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.brightText};
 
   &:hover{
-    background-color: ${({ theme }) => theme.colors.pink};
+    background-color: ${({ theme }) => theme.colors.secondaryary};
   }
 `;

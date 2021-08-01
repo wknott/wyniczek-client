@@ -4,6 +4,6 @@ export default styled.input`
   width: 100%;
   max-width: 400px;
   padding: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.windsor};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 5px;
 `;

@@ -4,8 +4,8 @@ export default styled.button`
   padding: 16px 24px;
   font-size: 14px;
   border: none;
-  background-color: ${({ theme }) => theme.colors.windsor};
-  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.brightText};
   transition: 0.5s;
   border-radius: 5px;
   text-transform: uppercase;
@@ -20,7 +20,7 @@ export default styled.button`
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.alto};
+    background-color: ${({ theme }) => theme.colors.disabled};
     color: ${({ theme }) => theme.colors.grey};
     cursor: not-allowed;
 

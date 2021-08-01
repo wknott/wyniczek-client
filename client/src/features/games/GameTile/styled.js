@@ -3,14 +3,14 @@ import Tile from "../../../common/Tile";
 
 export const StyledTile = styled(Tile)`
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.text};
   transition: 0.3s;
   
   &:hover {
     transform: scale(1.03);
     opacity: 0.9;
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.text};
   }
   
   grid-template-columns: 1fr;

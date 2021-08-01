@@ -11,7 +11,7 @@ export const Container = styled.div`
     "table table"
     "game details";
   grid-gap: 40px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.brightText};
   box-shadow: rgba(186, 199, 213, 0.5) 0px 4px 12px;
   
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {

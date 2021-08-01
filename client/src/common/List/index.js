@@ -7,12 +7,12 @@ export default styled.ul`
 
 export const ListItem = styled.li`
   padding: 10px 0px;
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
   display: block;
   cursor: pointer;
 
   &:hover{
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.text};
   }
 `;

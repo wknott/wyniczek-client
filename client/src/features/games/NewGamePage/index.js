@@ -107,7 +107,7 @@ const NewGamePage = () => {
   return (
     <div>
       {loading || !newGameDetails ?
-        <ReactLoading color={theme.colors.windsor} /> :
+        <ReactLoading color={theme.colors.primary} /> :
         <StyledTile>
           <GameImage src={newGameDetails.img} alt="game-image" />
           <GameDetails>

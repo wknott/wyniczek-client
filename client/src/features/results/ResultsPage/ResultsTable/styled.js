@@ -31,7 +31,7 @@ export const Icon = styled.img`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.text};
 
   &:hover{
     text-decoration: none;

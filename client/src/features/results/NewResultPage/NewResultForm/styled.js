@@ -51,7 +51,7 @@ export const Paragraph = styled.p`
   font-weight: 600;
   padding: 10px;
   border-radius: 5px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.brightText};
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 13px;
@@ -59,12 +59,12 @@ export const Paragraph = styled.p`
 `;
 
 export const FieldName = styled(Paragraph)`
-  background-color: ${({ theme }) => theme.colors.windsor};
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const Result = styled(Paragraph)`
   text-align: center;
-  background-color: ${({ theme }) => theme.colors.amber};
+  background-color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const ButtonsContainer = styled.div`
