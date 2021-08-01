@@ -44,7 +44,7 @@ const ResultsTable = () => {
                   <TableHeader></TableHeader>
                   <TableHeader>Nazwa gry</TableHeader>
                   {tableHeadersIcons.map(tableHeader => (
-                    <TableHeader>
+                    <TableHeader key={tableHeader.description}>
                       <Icon src={tableHeader.icon} data-tip={tableHeader.description} />
                       <ReactTooltip place="top" type="info" effect="solid" />
                     </TableHeader>
@@ -53,7 +53,7 @@ const ResultsTable = () => {
               </thead>
               <tbody>
                 {results.map((result, index) => (
-                  <ResultRow onClick={() => history.push(toResult({ id: result._id }))} key={index}>
+                  <ResultRow onClick={() => history.push(toResult({ id: result._id }))} key={result._id}>
                     <TableCellThumbnail>
                       <Thumbnail src={result.game.thumbnailUrl} alt="" />
                     </TableCellThumbnail>
