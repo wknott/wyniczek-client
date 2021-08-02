@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactLoading from "react-loading";
 import { fetchNewGameDetails, selectGameDetails, selectLoading } from "../gamesSlice";
-import { theme } from "../../../theme";
 import {
   GameImage,
   ButtonsContainer,
@@ -20,6 +18,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { toGames } from "../../../common/routes";
 import { addGame } from "../../../proxy/api";
 import MetaData from "../../../common/MetaData";
+import Loading from "../../../common/Loading";
 
 const NewGamePage = () => {
   const { id: gameId } = useParams();
@@ -30,7 +29,6 @@ const NewGamePage = () => {
   const [selectedName, setSelectedName] = useState(newGameDetails?.name[0]);
   const [newGameLoading, setNewGameLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-
   const history = useHistory();
 
   const addField = () => {
@@ -107,7 +105,7 @@ const NewGamePage = () => {
   return (
     <div>
       {loading || !newGameDetails ?
-        <ReactLoading color={theme.colors.primary} /> :
+        <Loading /> :
         <StyledTile>
           <GameImage src={newGameDetails.img} alt="game-image" />
           <GameDetails>

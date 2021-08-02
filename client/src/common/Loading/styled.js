@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ReactLoading from "react-loading";
 
 export const Container = styled.div`
   display: flex;
@@ -14,4 +15,8 @@ export const Message = styled.p`
   line-height: 140%;
   letter-spacing: 0.05em;
   margin: 48px 0;
+`;
+
+export const StyledReactLoading = styled(ReactLoading)`
+  fill: ${({ theme }) => theme.colors.primary} !important;
 `;
