@@ -27,56 +27,6 @@ const colorNames = {
 };
 
 export const lightTheme = {
-  color: {
-    primary: colorNames.scienceBlue,
-    body: colorNames.whiteLilac,
-    text: colorNames.slateGray,
-    link: {
-      text: colorNames.white,
-      shadow: colorNames.anakiwa,
-    },
-    themeButton: {
-      iconWrapper: colorNames.slateGray,
-      icon: colorNames.white,
-    },
-    title: colorNames.mineShaft,
-    background: colorNames.slateGray,
-    buttonBackground: colorNames.mercury,
-    sectionBackground: colorNames.white,
-    divider: colorNames.mercury,
-    tileActiveBorder: colorNames.tropicalBlue,
-    projectTitle: colorNames.scienceBlue,
-    linkUnderline: colorNames.tropicalBlue,
-  },
-  breakpoints
-};
-
-export const darkTheme = {
-  color: {
-    primary: colorNames.dodgerBlue,
-    body: colorNames.mineShaft,
-    text: colorNames.white,
-    link: {
-      text: colorNames.white,
-      shadow: colorNames.shipCove,
-    },
-    themeButton: {
-      iconWrapper: colorNames.white,
-      icon: colorNames.mineShaft,
-    },
-    title: colorNames.white,
-    background: colorNames.shipGray,
-    buttonBackground: colorNames.doveGray,
-    sectionBackground: colorNames.lighterMineShaft,
-    divider: colorNames.tundora,
-    tileActiveBorder: colorNames.azure,
-    projectTitle: colorNames.white,
-    linkUnderline: colorNames.wedgeWood,
-  },
-  breakpoints
-};
-
-export const theme = {
   colors: {
     primary: colorNames.dodgerBlue,
     body: colorNames.mineShaft,
@@ -87,6 +37,21 @@ export const theme = {
     red: colorNames.red,
     secondary: colorNames.amber,
     sectionBackground: colorNames.lighterMineShaft,
+  },
+  breakpoints,
+};
+
+export const darkTheme = {
+  colors: {
+    primary: colorNames.scienceBlue,
+    body: colorNames.whiteLilac,
+    text: colorNames.slateGray,
+    brightText: colorNames.white,
+    disabled: colorNames.alto,
+    imageBackground: colorNames.silver,
+    red: colorNames.red,
+    secondary: colorNames.amber,
+    sectionBackground: colorNames.white,
   },
   breakpoints,
 };

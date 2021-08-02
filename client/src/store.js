@@ -5,6 +5,7 @@ import navReducer from "./core/App/Navigation/navSlice";
 import gamesReducer from "./features/games/gamesSlice";
 import resultsReducer from "./features/results/resultsSlice";
 import usersReducer from "./features/users/usersSlice";
+import themeReducer from "./themeSlice"; 
 import rootSaga from "./rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -16,6 +17,7 @@ const store = configureStore({
     games: gamesReducer,
     results: resultsReducer,
     users: usersReducer,
+    theme: themeReducer,
   },
   middleware: [sagaMiddleware],
 });
