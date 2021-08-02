@@ -55,6 +55,8 @@ export const Item = styled.li`
 
 export const LeftAlignItem = styled(Item)`
   margin-left: auto;
+  color: ${({ theme }) => theme.colors.brightText};
+  cursor: pointer;
 `;
 
 export const HamburgerItem = styled(Item)`

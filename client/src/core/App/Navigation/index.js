@@ -22,12 +22,14 @@ import {
 } from "./styled";
 import Burger from "./Burger";
 import { selectOpen, handleClose } from "./navSlice";
+import { selectTheme, toggleTheme } from "../../../themeSlice";
 import logo from "./logo.png";
 
 const Navigation = () => {
   const open = useSelector(selectOpen);
   const { isAuthenticated } = useSelector(selectAuth);
   const dispatch = useDispatch();
+  const theme = useSelector(selectTheme);
 
   const Menu = (
     <>
@@ -48,6 +50,13 @@ const Navigation = () => {
           Użytkownicy
         </ItemName>
       </Item>
+      <LeftAlignItem
+        onClick={() => dispatch(toggleTheme())}
+      >
+        <ItemName>
+          Włącz {theme === "light" ? "jasny" : "ciemny"} motyw
+        </ItemName>
+      </LeftAlignItem>
       {isAuthenticated ? (
         <LeftAlignItem
           as={StyledLink} to={"/wyloguj"}
@@ -58,12 +67,12 @@ const Navigation = () => {
           </ItemName>
         </LeftAlignItem>
       ) : (
-          <LeftAlignItem as={StyledLink} to={toLogin()}>
-            <ItemName>
-              Logowanie
-            </ItemName>
-          </LeftAlignItem>
-        )
+        <LeftAlignItem as={StyledLink} to={toLogin()}>
+          <ItemName>
+            Logowanie
+          </ItemName>
+        </LeftAlignItem>
+      )
       }
     </>
   );
@@ -81,7 +90,7 @@ const Navigation = () => {
       <HamburgerItem>
         <Burger />
       </HamburgerItem>
-      { open &&
+      {open &&
         <MobileList open={open} onClick={() => dispatch(handleClose())}>
           {Menu}
         </MobileList>
