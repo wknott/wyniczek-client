@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withStyles } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { fetchGames, selectGames, selectLoading } from "../gamesSlice";
 import { compareObjects } from "../../../logic/utilities";
@@ -12,33 +10,7 @@ import {
   useReplaceQueryParameter
 } from "../../../common/queryParameters";
 import Loading from "../../../common/Loading";
-import { theme } from "../../../theme";
-
-const CssTextField = withStyles({
-  root: {
-    '& .MuiFilledInput-root':{
-      backgroundColor: theme.colors.sectionBackground,
-    },
-    '& .MuiSvgIcon-root': {
-      fill: theme.colors.text,
-    },
-    '& .MuiFilledInput-underline:before': {
-      borderBottomColor: theme.colors.text,
-    },
-    '& .MuiInputLabel-filled': {
-      color: theme.colors.text,
-    },
-    '& input': {
-      color: theme.colors.text,
-    },
-    '& label.Mui-focused': {
-      color: theme.colors.primary,
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: theme.colors.primary,
-    },
-  },
-})(TextField);
+import { StyledTextField } from "./styled";
 
 const SelectGame = ({ firstOption }) => {
   const games = useSelector(selectGames);
@@ -73,7 +45,7 @@ const SelectGame = ({ firstOption }) => {
           onChange(newValue?._id);
         }}
         renderInput={(params) =>
-          <CssTextField
+          <StyledTextField
             {...params}
             label={firstOption}
             variant="filled"
