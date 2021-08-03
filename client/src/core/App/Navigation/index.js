@@ -19,17 +19,18 @@ import {
   MobileList,
   Image,
   ItemName,
+  ThemeSwitcherItem,
+  MobileThemeSwitcherItem,
 } from "./styled";
 import Burger from "./Burger";
 import { selectOpen, handleClose } from "./navSlice";
-import { selectTheme, toggleTheme } from "../../../themeSlice";
 import logo from "./logo.png";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Navigation = () => {
   const open = useSelector(selectOpen);
   const { isAuthenticated } = useSelector(selectAuth);
   const dispatch = useDispatch();
-  const theme = useSelector(selectTheme);
 
   const Menu = (
     <>
@@ -50,13 +51,9 @@ const Navigation = () => {
           Użytkownicy
         </ItemName>
       </Item>
-      <LeftAlignItem
-        onClick={() => dispatch(toggleTheme())}
-      >
-        <ItemName>
-          Włącz {theme === "light" ? "jasny" : "ciemny"} motyw
-        </ItemName>
-      </LeftAlignItem>
+      <ThemeSwitcherItem>
+        <ThemeSwitcher />
+      </ThemeSwitcherItem>
       {isAuthenticated ? (
         <LeftAlignItem
           as={StyledLink} to={"/wyloguj"}
@@ -87,6 +84,9 @@ const Navigation = () => {
       <StyledList onClick={() => dispatch(handleClose())}>
         {Menu}
       </StyledList>
+      <MobileThemeSwitcherItem>
+        <ThemeSwitcher />
+      </MobileThemeSwitcherItem>
       <HamburgerItem>
         <Burger />
       </HamburgerItem>
@@ -97,6 +97,6 @@ const Navigation = () => {
       }
     </StyledNavigation >
   );
-}
+};
 
 export default Navigation;

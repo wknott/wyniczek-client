@@ -56,8 +56,20 @@ export const Item = styled.li`
 export const LeftAlignItem = styled(Item)`
   margin-left: auto;
   color: ${({ theme }) => theme.colors.brightText};
-  cursor: pointer;
 `;
+
+export const ThemeSwitcherItem = styled(LeftAlignItem)`
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    display: none;
+  }
+`;
+
+export const MobileThemeSwitcherItem = styled(LeftAlignItem)`
+  @media (min-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    display: none;
+  }
+`;
+
 
 export const HamburgerItem = styled(Item)`
   margin-left: auto;
