@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     overflow-y: scroll;
     padding-bottom: 100px;
     color: ${({ theme }) => theme.colors.text};
+    transition: all 0.25s linear;
   }
 
   a {
