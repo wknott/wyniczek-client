@@ -24,9 +24,10 @@ const colorNames = {
   silver: "#CCCCCC",
   red: "#FF0000",
   amber: "#FFBF00",
+  darkBlue: "#27173A",
 };
 
-export const lightTheme = {
+export const darkTheme = {
   colors: {
     primary: colorNames.dodgerBlue,
     body: colorNames.mineShaft,
@@ -37,11 +38,12 @@ export const lightTheme = {
     red: colorNames.red,
     secondary: colorNames.amber,
     sectionBackground: colorNames.lighterMineShaft,
+    themeSwitcherBackground: colorNames.darkBlue,
   },
   breakpoints,
 };
 
-export const darkTheme = {
+export const lightTheme = {
   colors: {
     primary: colorNames.scienceBlue,
     body: colorNames.whiteLilac,
@@ -52,6 +54,7 @@ export const darkTheme = {
     red: colorNames.red,
     secondary: colorNames.amber,
     sectionBackground: colorNames.white,
+    themeSwitcherBackground: colorNames.darkBlue,
   },
   breakpoints,
 };
