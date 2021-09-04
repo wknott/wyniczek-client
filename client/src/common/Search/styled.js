@@ -4,7 +4,6 @@ export const Label = styled.label`
   padding: 10px;
   background-color: ${({ theme }) => theme.colors.primary}; 
   color: ${({ theme }) => theme.colors.text};
-  border-radius: 16px;
   display: flex;
   align-items: center; 
   width: 100%;
@@ -23,7 +22,7 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.colors.brightText}; 
   border: none;
   outline: none;
-  border-radius: 16px;
+  
   &::placeholder {
     color: ${({ theme }) => theme.colors.brightText}; 
   }

@@ -50,7 +50,6 @@ export const Paragraph = styled.p`
   font-size: 16px;
   font-weight: 600;
   padding: 10px;
-  border-radius: 5px;
   color: ${({ theme }) => theme.colors.brightText};
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {

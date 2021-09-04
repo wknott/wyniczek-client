@@ -7,7 +7,6 @@ export default styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.brightText};
   transition: 0.5s;
-  border-radius: 5px;
   text-transform: uppercase;
   cursor: pointer;
   

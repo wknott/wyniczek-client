@@ -5,7 +5,6 @@ export default styled(Link)`
   background-color: ${({ theme }) => theme.colors.primary};
   padding: 16px 32px;
   font-size: 14px;
-  border-radius: 5px;
   text-align: center;
   color: ${({ theme }) => theme.colors.brightText};
   display: block;

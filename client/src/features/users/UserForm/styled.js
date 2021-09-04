@@ -5,7 +5,6 @@ export const Form = styled.form`
   max-width: 400px;
   width: 100%;
   border: 2px solid ${({ theme }) => theme.colors.primary};
-  border-radius: 16px;
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr;
