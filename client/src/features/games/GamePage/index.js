@@ -36,7 +36,7 @@ const GamePage = () => {
       value: linkToBgg,
     },
     {
-      key: "Liczba dodanych wyników",
+      key: "Liczba wyników",
       value: game?.numberOfResults,
     },
     {
@@ -65,7 +65,7 @@ const GamePage = () => {
             <MetaData metaData={details} />
             {game.pointFields.length > 0 &&
               <>
-                <p>Kategorie punktów:</p>
+                <Subtitle>Kategorie punktów:</Subtitle>
                 <Tags>
                   {game.pointFields.map(field => <Tag key={field}>{field}</Tag>)}
                 </Tags>

@@ -3,13 +3,13 @@ import Section from "../../../common/Section";
 import Tile from "../../../common/Tile";
 
 export const Image = styled.img`
-  width: 100%;
-  border-radius: 5px;
+  width: 20vw;
+  max-width: 300px;
   object-fit: contain;
 
-  /* @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    width: 100px;
-  }; */
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    width: 100%;
+  };
 `;
 
 export const DefaultImage = styled.img`
@@ -48,7 +48,7 @@ export const Tags = styled.ul`
   flex-wrap: wrap;
   list-style: none;
   margin-left: -8px;
-  margin-bottom: 45px;
+  margin-bottom: 16px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     margin-bottom: 16px;
@@ -56,7 +56,8 @@ export const Tags = styled.ul`
 `;
 
 export const Tag = styled.li`
-  background-color: ${({ theme }) => theme.colors.secondaryary};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({theme}) => theme.colors.brightText};
   font-size: 14px;
   line-height: 140%;
   border-radius: 5px;
@@ -72,6 +73,7 @@ export const Tag = styled.li`
 `;
 
 export const Title = styled.h1`
+  margin-top: 0;
   font-size: 32px;
   font-weight: 700;
 
@@ -90,9 +92,11 @@ export const Subtitle = styled.h2`
 `;
 
 export const GameTile = styled(Tile)`
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
+  grid-gap: 32px;
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileVertical}px){
     grid-template-columns: 1fr;
+    grid-gap: 16px;
   }
 `;

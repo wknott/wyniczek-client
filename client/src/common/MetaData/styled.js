@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DescriptionList = styled.dl`
   font-size: 24px;
-  margin-top: 10px;
+  margin: 0 0 8px;
 
   @media(max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 16px;

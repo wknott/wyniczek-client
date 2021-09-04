@@ -40,7 +40,7 @@ const LastResult = ({ lastResultDate, gameId }) => {
       case days < 21:
         return "green";
       case days < 42:
-        return "amber";
+        return "secondary";
       default:
         return "red";
     }
