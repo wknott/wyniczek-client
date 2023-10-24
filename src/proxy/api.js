@@ -46,12 +46,12 @@ export const getUsers = async (numberOfResults, gameId) =>
   })
 
 export const postLogin = async (body) => {
-  const response = await axios.post("/api/users/authenticate", body);
+  const response = await axios.post(`${API_URL}/api/users/authenticate`, body);
   return response.data;
 }
 
 export const postRegister = async (body) => {
-  const response = await axios.post("/api/users/register", body);
+  const response = await axios.post(`${API_URL}/api/users/register`, body);
   return response.data;
 }
 
@@ -60,7 +60,7 @@ export const addGame = async (newGame) => {
     "Content-Type": "application/json",
     "Authorization": authToken,
   };
-  const response = await axios.post("/api/games", newGame, { headers: headers });
+  const response = await axios.post(`${API_URL}/api/games`, newGame, { headers: headers });
   return response;
 }
 
@@ -69,7 +69,7 @@ export const addResult = async (newResult) => {
     "Content-Type": "application/json",
     "Authorization": authToken,
   };
-  const response = await axios.post("/api/results", newResult, { headers: headers });
+  const response = await axios.post(`${API_URL}/api/results`, newResult, { headers: headers });
   return response;
 }
 
@@ -79,7 +79,7 @@ export const updateResult = async (updatedResult) => {
     "Authorization": authToken,
   };
   const response = await axios.patch(
-    `/api/results/${updatedResult._id}`,
+    `${API_URL}/api/results/${updatedResult._id}`,
     { scores: updatedResult.scores.map(({ _id, points, user }) => ({ _id, points, user: user.id })) },
     { headers: headers }
   );
