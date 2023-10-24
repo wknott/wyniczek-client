@@ -5,8 +5,10 @@ import { buildQueryString } from "./buildQueryString";
 
 const authToken = authHeader()["Authorization"];
 
+const API_URL = "https://api-wyniczek.onrender.com";
+
 const fetchFromServerApi = async ({ path, parameters }) => {
-  const response = await axios.get(`${path}?${buildQueryString(parameters)}`);
+  const response = await axios.get(`${API_URL}${path}${buildQueryString(parameters) ? "?" : ""}${buildQueryString(parameters)}`);
   return response.data;
 }
 
@@ -152,7 +154,7 @@ export const getGameDetailsFromBGG = async (id) => {
     const parsedData = await xml2js(data, { compact: true, spaces: 4 });
     const bggRank = parseInt(parsedData.items.item.statistics.ratings.ranks.rank[0]._attributes.value) || 99999;
     const weight = parsedData.items.item.statistics.ratings.averageweight._attributes.value || 0;
-   
+
     const gameStats = { bggRank, weight };
     return gameStats;
   } catch (error) {
