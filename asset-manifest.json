@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.js": "/wyniczek-client/static/js/main.4ddf3d95.chunk.js",
+    "main.js.map": "/wyniczek-client/static/js/main.4ddf3d95.chunk.js.map",
+    "runtime-main.js": "/wyniczek-client/static/js/runtime-main.e04393b5.js",
+    "runtime-main.js.map": "/wyniczek-client/static/js/runtime-main.e04393b5.js.map",
+    "static/js/2.733db077.chunk.js": "/wyniczek-client/static/js/2.733db077.chunk.js",
+    "static/js/2.733db077.chunk.js.map": "/wyniczek-client/static/js/2.733db077.chunk.js.map",
+    "index.html": "/wyniczek-client/index.html",
+    "static/js/2.733db077.chunk.js.LICENSE.txt": "/wyniczek-client/static/js/2.733db077.chunk.js.LICENSE.txt",
+    "static/media/confirm.4b6aa430.svg": "/wyniczek-client/static/media/confirm.4b6aa430.svg",
+    "static/media/date.41853813.svg": "/wyniczek-client/static/media/date.41853813.svg",
+    "static/media/deny.a118e9c6.svg": "/wyniczek-client/static/media/deny.a118e9c6.svg",
+    "static/media/first.a84f965a.svg": "/wyniczek-client/static/media/first.a84f965a.svg",
+    "static/media/firstPlayer.04d77bfa.svg": "/wyniczek-client/static/media/firstPlayer.04d77bfa.svg",
+    "static/media/hourglass.47dd2316.svg": "/wyniczek-client/static/media/hourglass.47dd2316.svg",
+    "static/media/last.778af7f4.svg": "/wyniczek-client/static/media/last.778af7f4.svg",
+    "static/media/logo.cf59f2d6.png": "/wyniczek-client/static/media/logo.cf59f2d6.png",
+    "static/media/meeple.cc451552.svg": "/wyniczek-client/static/media/meeple.cc451552.svg",
+    "static/media/next.b6918733.svg": "/wyniczek-client/static/media/next.b6918733.svg",
+    "static/media/numberOfPlayers.65b0bd8e.svg": "/wyniczek-client/static/media/numberOfPlayers.65b0bd8e.svg",
+    "static/media/previous.ade7d76c.svg": "/wyniczek-client/static/media/previous.ade7d76c.svg",
+    "static/media/search.dcc917b4.svg": "/wyniczek-client/static/media/search.dcc917b4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e04393b5.js",
+    "static/js/2.733db077.chunk.js",
+    "static/js/main.4ddf3d95.chunk.js"
+  ]
+}
