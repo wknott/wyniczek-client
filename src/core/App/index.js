@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { HashRouter, Redirect, Route, Switch} from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Navigation from "./Navigation"
 import NewResultForm from "../../features/results/NewResultPage";
@@ -33,12 +33,12 @@ import {selectTheme} from "../../themeSlice";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const theme = useSelector(selectTheme);  
+  const theme = useSelector(selectTheme);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyle />
-      <BrowserRouter>
+      <HashRouter>
         <Navigation />
         <Container>
           <Switch>
@@ -69,12 +69,12 @@ const App = () => {
             <Route path={toNewUserPage()} >
               <NewUserPage />
             </Route>
-            <Route>
+            <Route path="/">
               <Redirect to={ResultsPage()} />
             </Route>
           </Switch>
         </Container>
-      </BrowserRouter >
+      </HashRouter >
     </ThemeProvider>
   )
 };
