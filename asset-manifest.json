@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/wyniczek-client/static/js/main.4ddf3d95.chunk.js",
-    "main.js.map": "/wyniczek-client/static/js/main.4ddf3d95.chunk.js.map",
+    "main.js": "/wyniczek-client/static/js/main.729bc4cd.chunk.js",
+    "main.js.map": "/wyniczek-client/static/js/main.729bc4cd.chunk.js.map",
     "runtime-main.js": "/wyniczek-client/static/js/runtime-main.e04393b5.js",
     "runtime-main.js.map": "/wyniczek-client/static/js/runtime-main.e04393b5.js.map",
     "static/js/2.733db077.chunk.js": "/wyniczek-client/static/js/2.733db077.chunk.js",
@@ -25,6 +25,6 @@
   "entrypoints": [
     "static/js/runtime-main.e04393b5.js",
     "static/js/2.733db077.chunk.js",
-    "static/js/main.4ddf3d95.chunk.js"
+    "static/js/main.729bc4cd.chunk.js"
   ]
 }
