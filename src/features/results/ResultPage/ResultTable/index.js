@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Edit from "../../../../common/Edit";
-import { TableContainer, TableHeader, TableCell, TableRow } from "../../../../common/Table/";
+import { TableContainer, TableHeader, TableCell, TableRow } from "../../../../common/Table";
 import { StyledTable, StyledTableCell } from "./styled";
 
 const ResultTable = ({ result, isUserResultAuthor }) => {

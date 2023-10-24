@@ -13,7 +13,7 @@ import {
   StyledHeader,
 } from "./styled.js";
 import GameTile from "../../games/GameTile";
-import MetaData from "../../../common/MetaData/index.js";
+import MetaData from "../../../common/MetaData";
 import { selectAuth } from "../../../common/authSlice.js";
 import { toNewResult } from "../../../common/routes.js";
 import Header from "../../../common/Header";
