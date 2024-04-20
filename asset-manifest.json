@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/wyniczek-client/static/js/main.bdfb126e.chunk.js",
-    "main.js.map": "/wyniczek-client/static/js/main.bdfb126e.chunk.js.map",
+    "main.js": "/wyniczek-client/static/js/main.8f12f653.chunk.js",
+    "main.js.map": "/wyniczek-client/static/js/main.8f12f653.chunk.js.map",
     "runtime-main.js": "/wyniczek-client/static/js/runtime-main.e04393b5.js",
     "runtime-main.js.map": "/wyniczek-client/static/js/runtime-main.e04393b5.js.map",
-    "static/js/2.7243a6ec.chunk.js": "/wyniczek-client/static/js/2.7243a6ec.chunk.js",
-    "static/js/2.7243a6ec.chunk.js.map": "/wyniczek-client/static/js/2.7243a6ec.chunk.js.map",
+    "static/js/2.6d34a25b.chunk.js": "/wyniczek-client/static/js/2.6d34a25b.chunk.js",
+    "static/js/2.6d34a25b.chunk.js.map": "/wyniczek-client/static/js/2.6d34a25b.chunk.js.map",
     "index.html": "/wyniczek-client/index.html",
-    "static/js/2.7243a6ec.chunk.js.LICENSE.txt": "/wyniczek-client/static/js/2.7243a6ec.chunk.js.LICENSE.txt",
+    "static/js/2.6d34a25b.chunk.js.LICENSE.txt": "/wyniczek-client/static/js/2.6d34a25b.chunk.js.LICENSE.txt",
     "static/media/confirm.4b6aa430.svg": "/wyniczek-client/static/media/confirm.4b6aa430.svg",
     "static/media/date.41853813.svg": "/wyniczek-client/static/media/date.41853813.svg",
     "static/media/deny.a118e9c6.svg": "/wyniczek-client/static/media/deny.a118e9c6.svg",
@@ -24,7 +24,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.e04393b5.js",
-    "static/js/2.7243a6ec.chunk.js",
-    "static/js/main.bdfb126e.chunk.js"
+    "static/js/2.6d34a25b.chunk.js",
+    "static/js/main.8f12f653.chunk.js"
   ]
 }
