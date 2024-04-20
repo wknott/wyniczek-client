@@ -19,7 +19,6 @@ import {
   Result,
   ButtonsContainer,
   GridContainer,
-  Checkbox,
 } from "./styled";
 import { addResult } from "../../../../proxy/api";
 
@@ -29,7 +28,6 @@ function NewResultForm() {
   const [scores, setScores] = useState([]);
   const [lastResultLoading, setLastResultLoading] = useState(false);
   const [playingTime, setPlayingTime] = useState("");
-  const [hideResults, setHideResults] = useState(true);
   const users = useSelector(selectUsers);
   const sortedUsers = [...users].sort(compareObjects("numberOfResults", "desc"));
   const loading = useSelector(selectLoading);
@@ -130,7 +128,7 @@ function NewResultForm() {
     e.preventDefault();
     const newResult = {
       game: selectedGame._id,
-      scores: hideResults ? scores.map(score => ({ user: score.user })) : scores,
+      scores: scores,
       author: JSON.parse(localStorage.user).id,
       playingTime: +playingTime,
     };
@@ -218,13 +216,6 @@ function NewResultForm() {
           )}
         </GridContainer>
         <GridContainer columns={2}>
-          <FieldName>Ukryj wyniki</FieldName>
-          <Checkbox
-            name="hideResults"
-            type="checkbox"
-            checked={hideResults}
-            onChange={({ target }) => setHideResults(target.checked)}
-          />
           <FieldName>Czas rozgrywki (w&nbsp;minutach)</FieldName>
           <Input
             type="number"
