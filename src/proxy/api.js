@@ -5,7 +5,7 @@ import { buildQueryString } from "./buildQueryString";
 
 const authToken = authHeader()["Authorization"];
 
-const API_URL = "https://wyniczekapi.bieda.it/";
+const API_URL = "https://wyniczekapi.bieda.it";
 
 const fetchFromServerApi = async ({ path, parameters }) => {
   const response = await axios.get(`${API_URL}${path}${buildQueryString(parameters) ? "?" : ""}${buildQueryString(parameters)}`);
