@@ -47,17 +47,15 @@ const ResultPage = () => {
 
   const isUserResultAuthor = () => isAuthenticated && result.author === JSON.parse(localStorage.user).id;
 
-  const isResultHidden = () => result.scores.every(score => score.points.length > 0);
 
   return (
     result &&
     <>
       <Container>
-        {isResultHidden() && <TableContainer>
-          <Header>Wynik dodany {formatDateString(result?.date, "long")}</Header>
+        <TableContainer>
+          <Header>Wynik dodany {formatDateString(result?.date, "short")}</Header>
           <ResultTable isUserResultAuthor={isUserResultAuthor} result={result} />
-        </TableContainer>}
-        {!isResultHidden() && <StyledHeader>Wynik dodany {formatDateString(result?.date, "long")}</StyledHeader>}
+        </TableContainer>
         <Details>
           <MetaData metaData={details} />
           {isAuthenticated &&
